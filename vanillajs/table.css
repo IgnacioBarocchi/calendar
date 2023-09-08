@@ -12,6 +12,7 @@ td {
 
 thead {
   position: sticky;
+  text-align: center;
 }
 
 thead,
@@ -19,6 +20,13 @@ tr {
   height: 50px;
 }
 
+thead > td {
+  width: 60px;
+}
+
+td {
+  max-width: 60px;
+}
 .entry-column {
   width: 40px;
   text-align: right;
