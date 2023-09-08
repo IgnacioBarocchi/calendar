@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <title>Calendar</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li>a</li>
+          <li>b</li>
+          <li>c</li>
+          <li>d</li>
+        </ul>
+      </nav>
+    </header>
+    <div open>
+      <form>
+        <label for="title">Add a title</label>
+        <input type="text" id="title" name="title" required /><br /><br />
+
+        <label for="datetime">Date and Time</label>
+        <input
+          type="datetime-local"
+          id="datetime"
+          name="datetime"
+          required
+        /><br /><br />
+
+        <label for="guest">Add guests</label>
+        <input type="text" id="guest" name="guest" /><br /><br />
+
+        <label for="location">Add rooms or locations</label>
+        <input type="text" id="location" name="location" /><br /><br />
+
+        <label for="description">Add Description</label><br />
+        <textarea
+          id="description"
+          name="description"
+          rows="4"
+          cols="50"
+        ></textarea
+        ><br /><br />
+
+        <input type="submit" value="Create Event" />
+      </form>
+    </div>
+    <main>
+      <aside>
+        <ul>
+          <li>1</li>
+          <li>minicalendar</li>
+          <li>3</li>
+          <li>4</li>
+        </ul>
+      </aside>
+      <table id="week-table">
+        <thead id="days-row"></thead>
+      </table>
+    </main>
+  </body>
+  <script src="calendarConstants.js"></script>
+  <script src="index.js"></script>
+</html>
