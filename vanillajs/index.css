@@ -3,6 +3,9 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
+  color: white;
+  background: #030712;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
 nav > ul {
@@ -13,7 +16,6 @@ nav > ul {
 main {
   display: flex;
   width: 100%;
-  background: lightblue;
   position: relative;
 }
 
@@ -22,28 +24,15 @@ aside {
   width: 25%;
 }
 
-td {
-  border: 1px solid green;
-}
-
 ul {
   list-style: none;
 }
 
-#week-table {
-  width: 100%;
-  height: 100%;
-}
-
-thead {
-  position: sticky;
-}
-
-thead,
-tr {
-  height: 50px;
-}
-
 header {
   width: 50px;
+}
+
+.time-slot-event {
+  background: #e4e4e7;
+  color: black;
 }

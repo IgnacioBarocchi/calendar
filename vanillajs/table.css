@@ -1,0 +1,25 @@
+#week-table {
+  width: 100%;
+  height: 100%;
+}
+
+td {
+  border-bottom: 1px solid #52525b;
+  border-left: 1px solid #52525b;
+  margin: 0;
+  padding: 0;
+}
+
+thead {
+  position: sticky;
+}
+
+thead,
+tr {
+  height: 50px;
+}
+
+.entry-column {
+  width: 40px;
+  text-align: right;
+}

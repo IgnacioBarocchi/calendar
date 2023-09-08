@@ -1,0 +1,12 @@
+dialog {
+  z-index: 2;
+  position: absolute;
+  color: white;
+  background: #030712;
+  border: 1px solid #71717a;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
