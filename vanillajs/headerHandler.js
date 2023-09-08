@@ -1,3 +1,14 @@
-const createHeaderDateTextContent = () => {
-  String(date.getDate()).padStart(2, "0");
+const createHeaderDateTextContent = (selectedDate) => {
+  const header = document.querySelector("#header-menu");
+  const currentDateElement = document.createElement("li");
+  const today = selectedDate ?? new Date();
+  const internationalization = new Intl.DateTimeFormat("en-us", {
+    dateStyle: "full",
+  });
+  currentDateElement.appendChild(
+    document.createTextNode(internationalization.format(today))
+  );
+  header.appendChild(currentDateElement);
 };
+
+createHeaderDateTextContent(null);

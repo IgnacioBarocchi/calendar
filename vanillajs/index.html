@@ -6,17 +6,19 @@
     <link rel="stylesheet" href="index.css" />
     <link rel="stylesheet" href="table.css" />
     <link rel="stylesheet" href="eventModal.css" />
+    <link rel="stylesheet" href="header.css" />
     <title>Calendar</title>
   </head>
   <body>
     <header>
-      <nav>
-        <ul>
-          <li>b</li>
-          <li>c</li>
-          <li>d</li>
-        </ul>
-      </nav>
+      <ul id="header-menu">
+        <li>
+          <nav>
+            <button>-</button>
+            <button>+</button>
+          </nav>
+        </li>
+      </ul>
     </header>
     <dialog id="event-modal">
       <form>
@@ -50,6 +52,7 @@
       </table>
     </main>
   </body>
+  <script src="headerHandler.js"></script>
   <script src="localStorageService.js"></script>
   <script src="calendarConstants.js"></script>
   <script src="index.js"></script>

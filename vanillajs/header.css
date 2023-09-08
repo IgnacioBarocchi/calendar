@@ -1,0 +1,9 @@
+header {
+  width: 100%;
+  background: #27272a;
+}
+
+#header-menu {
+  display: flex;
+  width: 100%;
+}
