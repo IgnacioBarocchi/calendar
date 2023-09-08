@@ -1,13 +1,17 @@
-const mapDaysRow = () => {
+const createEntryColumn = () => {
   const timeOffset = { 480: "UTC-8", 0: "UTC", 180: "UTC+3" }[
     Math.abs(new Date().getTimezoneOffset())
   ];
-  // separar
+
   const daysRows = document.querySelector("#days-row");
   const timeOffsetCell = document.createElement("td");
   timeOffsetCell.appendChild(document.createTextNode(timeOffset));
   timeOffsetCell.classList.add("entry-column");
   daysRows.appendChild(timeOffsetCell);
+};
+
+const mapDaysRow = () => {
+  const daysRows = document.querySelector("#days-row");
 
   DAYS_ABBREVIATIONS.forEach((day) => {
     const tableData = document.createElement("td");
@@ -15,8 +19,6 @@ const mapDaysRow = () => {
     daysRows.appendChild(tableData);
   });
 };
-
-mapDaysRow();
 
 const mapTimeRow = () => {
   const weekTable = document.querySelector("#week-table");
@@ -42,4 +44,10 @@ const mapTimeRow = () => {
   });
 };
 
-mapTimeRow();
+const createWeekView = () => {
+  createEntryColumn();
+  mapDaysRow();
+  mapTimeRow();
+};
+
+createWeekView();
