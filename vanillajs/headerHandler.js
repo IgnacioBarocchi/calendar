@@ -12,3 +12,7 @@ const createHeaderDateTextContent = (selectedDate) => {
 };
 
 createHeaderDateTextContent(null);
+
+document.querySelector("#prev-week").addEventListener("click", function (e) {
+  localStorageService.ge;
+});

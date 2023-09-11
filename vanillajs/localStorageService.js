@@ -9,8 +9,7 @@
 const createStorage = () => {
   if (!localStorage.getItem("events")) {
     localStorage.setItem("events", [].toString());
-    // debe venir de new Date();
-    localStorage.setItem("events", 1 + "");
+    localStorage.setItem("weekNavigationIndex", 0 + "");
   }
 };
 
@@ -23,7 +22,8 @@ const localStorageService = () => {
     localStorage.setItem("events", JSON.stringify(events));
   };
 
+  getWeekIndex = () => {};
+  setWeekIndex = () => {};
+
   return [getEvents, setEvent];
 };
-
-const navigateMonths = () => {};
