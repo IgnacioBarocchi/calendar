@@ -1,6 +1,3 @@
-/*
-crear todo el anyo?
-*/
 const createEntryColumn = () => {
   const timeOffset = { 480: "UTC-8", 0: "UTC", 180: "UTC+3" }[
     Math.abs(new Date().getTimezoneOffset())
