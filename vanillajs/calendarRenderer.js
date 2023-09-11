@@ -1,3 +1,6 @@
+/*
+crear todo el anyo?
+*/
 const createEntryColumn = () => {
   const timeOffset = { 480: "UTC-8", 0: "UTC", 180: "UTC+3" }[
     Math.abs(new Date().getTimezoneOffset())
@@ -10,17 +13,40 @@ const createEntryColumn = () => {
   daysRows.appendChild(timeOffsetCell);
 };
 
-const mapDaysRow = () => {
+const mapDaysRow = (date) => {
   const daysRows = document.querySelector("#days-row");
+
+  const today = new Date();
+  const todayName = today
+    .toLocaleDateString("en-us", { weekday: "short" })
+    .toUpperCase();
+
+  // const todayNumber = today.getDay();
+
+  if (!date) {
+    date = today;
+  }
 
   DAYS_ABBREVIATIONS.forEach((day) => {
     const tableData = document.createElement("td");
-    tableData.appendChild(document.createTextNode(day.toUpperCase()));
+    const dayName = document.createElement("span");
+    const dayNumber = document.createElement("span");
+
+    dayName.appendChild(document.createTextNode(day.toUpperCase()));
+    dayNumber.appendChild(document.createTextNode(1));
+
+    tableData.appendChild(dayName);
+    tableData.appendChild(dayNumber);
     daysRows.appendChild(tableData);
   });
 };
 
-const mapTimeRow = () => {
+const mapTimeRow = (date) => {
+  // if(!date) date = new Date();
+
+  // date.getDay()
+  // date.getDay()
+
   const weekTable = document.querySelector("#week-table");
   [...Array(24).keys()].forEach((hour) => {
     const timeRow = document.createElement("tr");

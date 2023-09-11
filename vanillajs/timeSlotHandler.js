@@ -9,11 +9,14 @@ const styleModal = (clientY, clientX) => {
         clientX + modal.offsetWidth > window.innerWidth ? "right" : "left"
       }:${clientX}px`}
     `;
-
+  // ! account modal w
   modal.style.cssText = modalCss;
 };
 
 const createEvent = (timeSlotElement, dateTimeData) => {
+  const modal = document.querySelector("#event-modal");
+  // ! add event commitment logic.
+  if (modal.open) return;
   const eventElement = document.createElement("div");
   eventElement.classList.add("time-slot-event");
   eventElement.appendChild(
