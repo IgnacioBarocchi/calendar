@@ -22,8 +22,13 @@ const localStorageService = () => {
     localStorage.setItem("events", JSON.stringify(events));
   };
 
-  getWeekIndex = () => {};
-  setWeekIndex = () => {};
+  getWeekIndex = () => {
+    return Number(localStorage.getItem("weekIndex"));
+  };
 
-  return [getEvents, setEvent];
+  setWeekIndex = (weekIndex) => {
+    localStorage.setItem("weekIndex", weekIndex + "");
+  };
+
+  return { getEvents, setEvent, getWeekIndex, setWeekIndex };
 };

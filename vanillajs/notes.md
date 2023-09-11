@@ -97,8 +97,8 @@ So we can have something like this:
 ```TypeScript
  const navigateWeeks = (target: 'prev'|'next'|'current', index = 0) => {
   const weekFactor = {current: 0, next:7, prev:-7}[target]
-    var today = new Date();
-    var nextweek = new Date(today.getFullYear(), today.getMonth(), today.getDate() + (weekFactor * Math.abs(index)));
+    const today = new Date();
+    const nextweek = new Date(today.getFullYear(), today.getMonth(), today.getDate() + (weekFactor * Math.abs(index)));
     return nextweek;
 }
 ```
