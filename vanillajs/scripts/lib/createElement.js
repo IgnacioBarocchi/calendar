@@ -1,6 +1,11 @@
 const createElement = (tagName, options) => {
   const element = document.createElement(tagName);
-  const { className } = options;
+  const { className, innerHTML } = options || {};
+  if (innerHTML) {
+    element.innerHTML = innerHTML.trim();
+    return element;
+  }
+
   if (className) {
     element.classList.add("days-of-week");
   }

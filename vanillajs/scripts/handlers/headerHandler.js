@@ -11,11 +11,6 @@
 //   header.appendChild(currentDateElement);
 // };
 
-const styleHeaderDreadfulWay = () => {
-  const aside = document.getElementsByTagName("aside");
-  console.log(aside);
-};
-styleHeaderDreadfulWay();
 const navigateWeeks = (target) => {
   const index = sessionStorageService().getWeekIndex();
   const weekFactor = { current: 0, next: 7, prev: -7 }[target];
