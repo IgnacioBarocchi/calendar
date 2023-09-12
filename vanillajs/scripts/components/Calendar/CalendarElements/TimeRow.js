@@ -1,6 +1,12 @@
 const TimeRow = () => {
   const weekTable = document.querySelector("#week-table");
   [...Array(24).keys()].forEach((hour) => {
+    const timeRow2 = createElement2(`
+        <tr id="time-row-${hour}">
+            <span>${hour}</span>
+        </tr>
+    `);
+
     const timeRow = document.createElement("tr");
     timeRow.id = "time-row-" + hour;
     const celHead = document.createElement("th");

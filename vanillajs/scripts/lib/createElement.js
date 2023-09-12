@@ -12,3 +12,11 @@ const createElement = (tagName, options) => {
 
   return element;
 };
+
+const createElement2 = (html) => {
+  // const node = document.createRange().createContextualFragment(html);
+  // return node;
+  const node = new DOMParser().parseFromString(html, "text/html").body
+    .firstElementChild;
+  return node;
+};

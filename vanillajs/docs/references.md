@@ -17,3 +17,7 @@
 * Populate date fields [https://stackoverflow.com/questions/14245339/pre-populating-date-input-field-with-javascript]
 
 * CSS variables [https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties]
+
+* DOM parser [https://stackoverflow.com/questions/3103962/converting-html-string-into-dom-elements]
+
+* String to html [https://grrr.tech/posts/create-dom-node-from-html-string/]
