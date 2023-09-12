@@ -1,30 +1,40 @@
+const mapDaysFrom =
+  (weekMap, isOngoingWeek, date) => (dayTextValue, dayNumericValue) => {
+    const dateNumericValue = weekMap.get(String(dayNumericValue));
+    const tableDataElement = createElement("td");
+    const dayContainer = createElement("div", { className: "days-of-week" });
+
+    const dayTextValueContainerElement = createElement("span");
+    const dayNumberContainerElement = createElement("span");
+
+    dayTextValueContainerElement.appendChild(
+      document.createTextNode(dayTextValue.toUpperCase())
+    );
+
+    dayNumberContainerElement.appendChild(
+      document.createTextNode(dateNumericValue)
+    );
+
+    [dayTextValueContainerElement, dayNumberContainerElement].map((c) =>
+      dayContainer.appendChild(c)
+    );
+
+    tableDataElement.appendChild(dayContainer);
+
+    if (isOngoingWeek && date.getDate() === Number(dateNumericValue)) {
+      dayNumberContainerElement.classList.add("today-day");
+    }
+    return tableDataElement;
+  };
+
 const DaysRow = (date) => {
   const daysRows = document.querySelector("#days-row");
-  if (!date) {
-    date = new Date();
-  }
-
   const isOngoingWeek = new Date().toDateString() === date.toDateString();
 
-  const weekMap = getWeekDateByDayMap(date);
-  DAYS_ABBREVIATIONS.forEach((day, i) => {
-    const dateNumber = weekMap.get(String(i));
-    const tableData = document.createElement("td");
-    const dayContainer = document.createElement("div");
-    dayContainer.classList.add("days-of-week");
-
-    const dayName = document.createElement("span");
-    const dayNumber = document.createElement("span");
-    dayName.appendChild(document.createTextNode(day.toUpperCase()));
-    dayNumber.appendChild(document.createTextNode(dateNumber));
-
-    dayContainer.appendChild(dayName);
-    dayContainer.appendChild(dayNumber);
-    tableData.appendChild(dayContainer);
-    daysRows.appendChild(tableData);
-
-    if (isOngoingWeek && date.getDate() === Number(dateNumber)) {
-      dayNumber.classList.add("today-day");
-    }
+  return DAYS_ABBREVIATIONS.map(
+    mapDaysFrom(getWeekDateByDayMap(date), isOngoingWeek, date)
+  ).map((tableDataElement) => {
+    daysRows.appendChild(tableDataElement);
+    return tableDataElement;
   });
 };

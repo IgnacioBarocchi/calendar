@@ -6,7 +6,7 @@ const clearCalendar = () => {
   });
 };
 
-const Calendar = (date) => {
+const Calendar = (date = new Date()) => {
   clearCalendar();
   EntryColumn();
   DaysRow(date);
