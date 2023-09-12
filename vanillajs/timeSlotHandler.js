@@ -13,24 +13,44 @@ const styleModal = (clientY, clientX) => {
   modal.style.cssText = modalCss;
 };
 
-const createEvent = (timeSlotElement, dateTimeData) => {
-  const modal = document.querySelector("#event-modal");
-  // ! add event commitment logic.
-  if (modal.open) return;
+const populateEventRecordOnSlotClick = () => {
+  // !clear first
+  const startDate = document.querySelector("#start-datetime");
+  // get date from params
+  startDate.value = new Date();
+};
+
+const getDraftEvent = (timeSlotElement) => {
+  const { time } = JSON.parse(timeSlotElement.dataset.dayTime);
+  const eventThumbnailPlaceHolder = `(no title), ${time}`;
+
   const eventElement = document.createElement("div");
   eventElement.classList.add("time-slot-event");
-  eventElement.appendChild(
-    document.createTextNode(timeSlotElement.dataset.dayTime)
-  );
+  eventElement.appendChild(document.createTextNode(eventThumbnailPlaceHolder));
+
   timeSlotElement.appendChild(eventElement);
+  return eventElement;
+};
+
+// ! add event commitment logic.
+// ? draft > pending > approved
+const createEvent = (timeSlotElement) => {
+  // const modal = document.querySelector("#event-modal");
+  // // if (modal.open) return;
+  // const eventElement = document.createElement("div");
+  // eventElement.classList.add("time-slot-event");
+  // eventElement.appendChild(
+  //   document.createTextNode(timeSlotElement.dataset.dayTime)
+  // );
+  // timeSlotElement.appendChild(eventElement);
 };
 
 const deleteEvent = () => {};
 document.querySelectorAll("[data-day-time]").forEach((element) => {
   element.addEventListener("click", function (event) {
-    const timeSlotData = this.dataset.dayTime;
     const { clientY, clientX } = event;
     styleModal(clientY, clientX);
-    createEvent(this, timeSlotData);
+    const draftEvent = getDraftEvent(this);
+    // populateEventRecordOnSlotClick
   });
 });
