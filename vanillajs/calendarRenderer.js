@@ -5,6 +5,7 @@ const clearCalendar = () => {
     node.remove();
   });
 };
+
 const createEntryColumn = () => {
   const timeOffset = { 480: "UTC-8", 0: "UTC", 180: "UTC+3" }[
     Math.abs(new Date().getTimezoneOffset())
@@ -19,22 +20,32 @@ const createEntryColumn = () => {
 
 const mapDaysRow = (date) => {
   const daysRows = document.querySelector("#days-row");
-
   if (!date) {
     date = new Date();
   }
+
+  const isOngoingWeek = new Date().toDateString() === date.toDateString();
+
   const weekMap = getWeekDateByDayMap(date);
   DAYS_ABBREVIATIONS.forEach((day, i) => {
+    const dateNumber = weekMap.get(String(i));
     const tableData = document.createElement("td");
+    const dayContainer = document.createElement("div");
+    dayContainer.classList.add("days-of-week");
+
     const dayName = document.createElement("span");
     const dayNumber = document.createElement("span");
-
     dayName.appendChild(document.createTextNode(day.toUpperCase()));
-    dayNumber.appendChild(document.createTextNode(weekMap.get(String(i))));
+    dayNumber.appendChild(document.createTextNode(dateNumber));
 
-    tableData.appendChild(dayName);
-    tableData.appendChild(dayNumber);
+    dayContainer.appendChild(dayName);
+    dayContainer.appendChild(dayNumber);
+    tableData.appendChild(dayContainer);
     daysRows.appendChild(tableData);
+
+    if (isOngoingWeek && date.getDate() === Number(dateNumber)) {
+      dayNumber.classList.add("today-day");
+    }
   });
 };
 

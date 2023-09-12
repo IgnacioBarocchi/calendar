@@ -11,3 +11,5 @@
 * Calculate the current week number [https://www.geeksforgeeks.org/calculate-current-week-number-in-javascript/]
 
 * Current week number [https://www.calconi.com/es/numero_de_semanas/info/semanas_calendario_2023.php#:~:text=2023%20s%C3%B3lo%20tiene%2052%20semanas,con%20la%20norma%20internacional%20ISO.]
+
+* Date comparison [https://bobbyhadz.com/blog/javascript-check-if-date-is-today]
