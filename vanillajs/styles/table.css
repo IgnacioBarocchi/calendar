@@ -1,15 +1,16 @@
 #week-table {
-  /* header */
-  margin-top: 60px;
+  margin-top: var(--header-height);
   width: 100%;
   height: 100%;
 }
 
-td {
+td,
+th {
   border-bottom: 1px solid #52525b;
   border-left: 1px solid #52525b;
   margin: 0;
   padding: 0;
+  height: 50px;
 }
 
 #days-row {
@@ -20,18 +21,10 @@ td {
   border-bottom: 1px solid #52525b;
 }
 
-thead,
-tr {
-  height: 50px;
-}
-
-thead > td {
-  width: 60px;
-}
-
 td {
   max-width: 60px;
 }
+
 .entry-column {
   width: 20px !important;
   font-size: 1rem;

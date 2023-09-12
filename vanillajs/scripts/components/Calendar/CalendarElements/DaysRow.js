@@ -1,8 +1,8 @@
 const mapDaysFrom =
-  (weekMap, isOngoingWeek, date) => (dayTextValue, dayNumericValue) => {
+  (weekMap, todayIsVisible, date) => (dayTextValue, dayNumericValue) => {
     const dateNumericValue = weekMap.get(String(dayNumericValue));
     const dayNumericElementClassName =
-      isOngoingWeek && date.getDate() === Number(dateNumericValue)
+      todayIsVisible && date.getDate() === Number(dateNumericValue)
         ? "today-day"
         : "";
 
@@ -17,10 +17,15 @@ const mapDaysFrom =
   };
 
 const DaysRow = (date) => {
-  const weekMap = getWeekDateByDayMap(date);
-
   const daysRows = document.querySelector("#days-row");
-  const isOngoingWeek = new Date().toDateString() === date.toDateString();
-  const mapCallback = mapDaysFrom(weekMap, isOngoingWeek, date);
-  appendElements(DAYS_ABBREVIATIONS.map(mapCallback), daysRows);
+  appendElements(
+    DAYS_ABBREVIATIONS.map(
+      mapDaysFrom(
+        getWeekDateByDayMap(date),
+        new Date().toDateString() === date.toDateString(),
+        date
+      )
+    ),
+    daysRows
+  );
 };

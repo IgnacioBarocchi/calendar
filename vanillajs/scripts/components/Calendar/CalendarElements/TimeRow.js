@@ -3,7 +3,7 @@ const TimeRow = () => {
   [...Array(24).keys()].forEach((hour) => {
     const timeRow = document.createElement("tr");
     timeRow.id = "time-row-" + hour;
-    const celHead = document.createElement("td");
+    const celHead = document.createElement("th");
     celHead.classList.add("entry-column");
     celHead.appendChild(document.createTextNode(hour));
     timeRow.appendChild(celHead);

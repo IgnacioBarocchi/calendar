@@ -15,3 +15,5 @@
 * Date comparison [https://bobbyhadz.com/blog/javascript-check-if-date-is-today]
 
 * Populate date fields [https://stackoverflow.com/questions/14245339/pre-populating-date-input-field-with-javascript]
+
+* CSS variables [https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties]
