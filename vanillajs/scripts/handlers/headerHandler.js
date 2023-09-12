@@ -41,21 +41,21 @@ document.querySelector("#prev-week").addEventListener("click", function () {
   // !why to pass param if the data is in memory.
   updateWeekIndex(-1);
   const weekOffset = navigateWeeks("prev");
-  createWeekView(weekOffset);
+  Calendar(weekOffset);
 });
 
 document.querySelector("#next-week").addEventListener("click", function () {
   // !why to pass param if the data is in memory.
   updateWeekIndex(1);
   const weekOffset = navigateWeeks("next");
-  createWeekView(weekOffset);
+  Calendar(weekOffset);
 });
 
 document.querySelector("#ongoing-week").addEventListener("click", function () {
   // !bad naming current !== ongoing
   sessionStorageService().setWeekIndex(0);
   const weekOffset = navigateWeeks("current");
-  createWeekView(weekOffset);
+  Calendar(weekOffset);
 });
 
 // createHeaderDateTextContent(null);
