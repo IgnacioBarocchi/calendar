@@ -11,50 +11,54 @@ const createHeaderDateTextContent = (selectedDate) => {
   header.appendChild(currentDateElement);
 };
 
-const navigateWeeks = (target, index = 0) => {
+const navigateWeeks = (target) => {
+  const index = sessionStorageService().getWeekIndex();
   const weekFactor = { current: 0, next: 7, prev: -7 }[target];
   if (!weekFactor) return;
   const today = new Date();
-  const nextweek = new Date(
+  const weekOffset = new Date(
     today.getFullYear(),
     today.getMonth(),
     today.getDate() + weekFactor * Math.abs(index)
   );
 
-  console.log(nextweek);
-  return nextweek;
+  getWeekDateByDayMap(weekOffset);
+  return weekOffset;
 };
 
 const updateWeekIndex = (index) => {
-  localStorageService().setWeekIndex(
-    localStorageService().getWeekIndex() + index
+  sessionStorageService().setWeekIndex(
+    sessionStorageService().getWeekIndex() + index
   );
 };
 
 const debugWeekIndex = () => {
   document.querySelector("#debug").textContent =
-    localStorageService().getWeekIndex();
+    sessionStorageService().getWeekIndex();
 };
 
 document.querySelector("#prev-week").addEventListener("click", function () {
   // !why to pass param if the data is in memory.
   updateWeekIndex(-1);
-  navigateWeeks("prev", localStorageService().getWeekIndex());
+  const weekOffset = navigateWeeks("prev");
   debugWeekIndex();
+  createWeekView(weekOffset);
 });
 
 document.querySelector("#next-week").addEventListener("click", function () {
   // !why to pass param if the data is in memory.
   updateWeekIndex(1);
-  navigateWeeks("next", localStorageService().getWeekIndex());
+  const weekOffset = navigateWeeks("next");
   debugWeekIndex();
+  createWeekView(weekOffset);
 });
 
 document.querySelector("#ongoing-week").addEventListener("click", function () {
   // !bad naming current !== ongoing
-  localStorageService().setWeekIndex(0);
-  navigateWeeks("current", localStorageService().getWeekIndex());
+  sessionStorageService().setWeekIndex(0);
+  const weekOffset = navigateWeeks("current");
   debugWeekIndex();
+  createWeekView(weekOffset);
 });
 
 createHeaderDateTextContent(null);

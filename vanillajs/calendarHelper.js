@@ -31,22 +31,28 @@ const ONGOING_WEEK_NUMBER = (() => {
   return getWeekNumber(today.getFullYear(), today.getMonth());
 })();
 
-const createWeekMap = (weekNumber, year, month) => {
-  if (!weekNumber) weekNumber = ONGOING_WEEK_NUMBER;
-  if (!year) year = new Date().getFullYear();
-  if (!month) month = new Date().getMonth() + 1;
+// todo refactor this
+const getWeekDateByDayMap = (weekOffset /*: Date*/) => {
+  const weekMap = new Map /*<string, string>*/();
+  let dateResult = weekOffset;
 
-  const startDate = getStartDateOfWeek(weekNumber, year, month);
+  for (let i = weekOffset.getDay(); i < 6; i++) {
+    const nextDate = dateResult.getDate() + 1;
+    dateResult = new Date(dateResult.setDate(nextDate));
+    weekMap.set(
+      dateResult.getDay().toString(),
+      dateResult.getDate().toString()
+    );
+  }
 
-  const weekMap = new Map();
-  //7
-  for (let i = 0; i < 7; i++) {
-    const dayOfWeek = startDate.toLocaleDateString("en-US", {
-      weekday: "short",
-    });
-    const dayOfMonth = startDate.getDate();
-    weekMap.set(dayOfWeek, dayOfMonth);
-    startDate.setDate(startDate.getDate() + 1);
+  dateResult = weekOffset;
+  for (let i = weekOffset.getDay(); i > 0; i--) {
+    const prevDate = dateResult.getDate() - 1;
+    dateResult = new Date(dateResult.setDate(prevDate));
+    weekMap.set(
+      dateResult.getDay().toString(),
+      dateResult.getDate().toString()
+    );
   }
 
   return weekMap;
@@ -57,5 +63,3 @@ const saveWeekData = (weekNumber, year, month, result) => {
   //   memoize this data in local storage
   record = { [key]: result };
 };
-
-createWeekMap();

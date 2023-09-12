@@ -1,3 +1,10 @@
+const clearCalendar = () => {
+  const daysRows = document.querySelector("#days-row");
+  daysRows.innerHTML = "";
+  document.querySelectorAll("tr").forEach((node) => {
+    node.remove();
+  });
+};
 const createEntryColumn = () => {
   const timeOffset = { 480: "UTC-8", 0: "UTC", 180: "UTC+3" }[
     Math.abs(new Date().getTimezoneOffset())
@@ -13,24 +20,17 @@ const createEntryColumn = () => {
 const mapDaysRow = (date) => {
   const daysRows = document.querySelector("#days-row");
 
-  const today = new Date();
-  const todayName = today
-    .toLocaleDateString("en-us", { weekday: "short" })
-    .toUpperCase();
-
-  // const todayNumber = today.getDay();
-
   if (!date) {
-    date = today;
+    date = new Date();
   }
-
-  DAYS_ABBREVIATIONS.forEach((day) => {
+  const weekMap = getWeekDateByDayMap(date);
+  DAYS_ABBREVIATIONS.forEach((day, i) => {
     const tableData = document.createElement("td");
     const dayName = document.createElement("span");
     const dayNumber = document.createElement("span");
 
     dayName.appendChild(document.createTextNode(day.toUpperCase()));
-    dayNumber.appendChild(document.createTextNode(1));
+    dayNumber.appendChild(document.createTextNode(weekMap.get(String(i))));
 
     tableData.appendChild(dayName);
     tableData.appendChild(dayNumber);
@@ -38,12 +38,7 @@ const mapDaysRow = (date) => {
   });
 };
 
-const mapTimeRow = (date) => {
-  // if(!date) date = new Date();
-
-  // date.getDay()
-  // date.getDay()
-
+const mapTimeRow = () => {
   const weekTable = document.querySelector("#week-table");
   [...Array(24).keys()].forEach((hour) => {
     const timeRow = document.createElement("tr");
@@ -67,10 +62,11 @@ const mapTimeRow = (date) => {
   });
 };
 
-const createWeekView = () => {
+const createWeekView = (date) => {
+  clearCalendar();
   createEntryColumn();
-  mapDaysRow();
+  mapDaysRow(date);
   mapTimeRow();
 };
 
-createWeekView();
+createWeekView(new Date());

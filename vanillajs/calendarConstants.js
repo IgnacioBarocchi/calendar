@@ -18,7 +18,6 @@ const MONTHS_ABBREVIATIONS = MONTHS.map((month) => month.substring(0, 3));
 const DAYS = [
   "Sunday",
   "Monday",
-  "Monday",
   "Tuesday",
   "Wednesday",
   "Thursday",

@@ -1,0 +1,20 @@
+const getWeekDateByDayMap = (weekNumber, year, month) => {
+  if (!weekNumber) weekNumber = ONGOING_WEEK_NUMBER;
+  if (!year) year = new Date().getFullYear();
+  if (!month) month = new Date().getMonth() + 1;
+
+  const startDate = getStartDateOfWeek(weekNumber, year, month);
+
+  const weekMap = new Map();
+  //7
+  for (let i = 0; i < 7; i++) {
+    const dayOfWeek = startDate.toLocaleDateString("en-US", {
+      weekday: "short",
+    });
+    const dayOfMonth = startDate.getDate();
+    weekMap.set(dayOfWeek, dayOfMonth);
+    startDate.setDate(startDate.getDate() + 1);
+  }
+
+  return weekMap;
+};
