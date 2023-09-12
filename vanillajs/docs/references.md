@@ -13,3 +13,5 @@
 * Current week number [https://www.calconi.com/es/numero_de_semanas/info/semanas_calendario_2023.php#:~:text=2023%20s%C3%B3lo%20tiene%2052%20semanas,con%20la%20norma%20internacional%20ISO.]
 
 * Date comparison [https://bobbyhadz.com/blog/javascript-check-if-date-is-today]
+
+* Populate date fields [https://stackoverflow.com/questions/14245339/pre-populating-date-input-field-with-javascript]

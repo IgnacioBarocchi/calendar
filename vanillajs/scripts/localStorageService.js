@@ -21,5 +21,5 @@ const localStorageService = () => {
     localStorage.setItem("events", JSON.stringify(events));
   };
 
-  return { getEvents, setEvent, getWeekIndex, setWeekIndex };
+  return { getEvents, setEvent };
 };

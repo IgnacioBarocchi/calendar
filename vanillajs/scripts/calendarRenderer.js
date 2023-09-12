@@ -60,10 +60,10 @@ const mapTimeRow = (date) => {
     timeRow.appendChild(celHead);
 
     DAYS_ABBREVIATIONS.forEach((day) => {
-      const dateSlot = date;
-      dateSlot.setHours(hour);
-      dateSlot.setDate(1);
-      console.log(dateSlot);
+      // const dateSlot = date;
+      // dateSlot.setHours(hour);
+      // dateSlot.setDate(1);
+      // console.log(dateSlot);
       const tableData = document.createElement("td");
       // ! hago .toString()
       // ! cuando lo recibo hago new Date(payload)

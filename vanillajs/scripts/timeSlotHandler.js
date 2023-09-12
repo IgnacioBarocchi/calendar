@@ -16,8 +16,14 @@ const styleModal = (clientY, clientX) => {
 const populateEventRecordOnSlotClick = () => {
   // !clear first
   const startDate = document.querySelector("#start-datetime");
-  // get date from params
-  startDate.value = new Date();
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const day = String(today.getDate()).padStart(2, "0");
+  const hours = String(today.getHours()).padStart(2, "0");
+  const minutes = String(today.getMinutes()).padStart(2, "0");
+  const formattedDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
+  startDate.value = formattedDateTime;
 };
 
 const getDraftEvent = (timeSlotElement) => {
@@ -51,6 +57,6 @@ document.querySelectorAll("[data-day-time]").forEach((element) => {
     const { clientY, clientX } = event;
     styleModal(clientY, clientX);
     const draftEvent = getDraftEvent(this);
-    // populateEventRecordOnSlotClick
+    populateEventRecordOnSlotClick();
   });
 });
