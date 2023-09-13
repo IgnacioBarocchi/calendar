@@ -12,19 +12,21 @@ const TimeSlotEvent = (calendarEvent, timeSlotElement) => {
     [
       createElement2(
         `
-        <div class="${classNameByEventStage}">
-            <span>${title}</span>
-        </div>
-    `
+          <div class="${classNameByEventStage}">
+              <span>${title}</span>
+          </div>
+        `
       ),
     ],
     timeSlotElement
   );
-
-  // const eventElement = document.createElement("div");
-  // eventElement.classList.add("time-slot-event");
-  // eventElement.appendChild(document.createTextNode(eventThumbnailPlaceHolder));
-
-  // timeSlotElement.appendChild(eventElement);
-  // return eventElement;
 };
+
+/*
+const eventElement = document.createElement("div");
+eventElement.classList.add("time-slot-event");
+eventElement.appendChild(document.createTextNode(eventThumbnailPlaceHolder));
+
+timeSlotElement.appendChild(eventElement);
+return eventElement;
+*/

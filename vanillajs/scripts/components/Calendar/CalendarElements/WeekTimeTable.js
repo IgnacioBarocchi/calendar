@@ -10,6 +10,9 @@ const getTimeHeaderCell = (hour) => {
 };
 
 const WeekTimeTable = (week) => {
+  const Storage = localStorageService();
+  const calendarEvents = Storage.getEvents();
+
   const calendar = document.querySelector("#calendar");
   [...Array(24).keys()].forEach((hour) => {
     const WeekTimeTable = document.createElement("tr");
@@ -18,17 +21,37 @@ const WeekTimeTable = (week) => {
     week.forEach((dayString) => {
       const day = new Date(dayString);
       day.setHours(hour, 0, 0);
-
       const tableData = document.createElement("td");
-
       tableData.dataset.dayTime = day;
-
       WeekTimeTable.appendChild(tableData);
+
+      // ! USE MAP // USE WEEK INDEX // ! USE ID, ETC // ! OPTIMIZE THIS !!!!! // ! filter out events
+      // ! !!!!!!!!!!!!!!
+      // ! !!!!!!!!!!!!!!
+      // ! !!!!!!!!!!!!!!
+      if (calendarEvents.length) {
+        const thisWeekEvent = calendarEvents.find((event) => {
+          // debugger;
+          const fromDateTime = new Date(event.startDateTime);
+          const toDateTime = new Date(event.endDateTime);
+          const today = day >= fromDateTime && day < toDateTime;
+          if (!today) return false;
+
+          // alert("found event " + JSON.stringify(event));
+          const found = day.getHours() >= fromDateTime.getHours();
+
+          return found;
+        });
+
+        if (thisWeekEvent) TimeSlotEvent(thisWeekEvent, tableData);
+      }
     });
 
     calendar.appendChild(WeekTimeTable);
   });
 };
+
+// document.querySelector('[data-day-time="{{X date value}}"]');
 
 /*
 const WeekTimeTable = (week) => {

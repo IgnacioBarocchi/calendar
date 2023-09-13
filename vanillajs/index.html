@@ -52,23 +52,23 @@
       </ul>
     </header>
     <dialog id="event-modal">
-      <form>
+      <div>
         <label>Add a title</label>
-        <input type="text" id="title" required />
+        <input type="text" id="event-title" required />
 
         <label>Start Date and Time</label>
         <input type="datetime-local" id="start-datetime" required />
         <label>End Date and Time</label>
         <input type="datetime-local" id="end-datetime" required />
-
-        <label>Add rooms or locations</label>
-        <input type="text" id="location" />
+        <!-- not used -->
+        <!-- <label>Add rooms or locations</label>
+        <input type="text" id="location" /> -->
 
         <label>Add Description</label><br />
-        <textarea id="description" rows="4" cols="50"></textarea>
+        <textarea id="event-description" rows="4" cols="50"></textarea>
 
-        <input type="submit" value="Create Event" />
-      </form>
+        <button id="create-event-button">Create Event</button>
+      </div>
     </dialog>
     <main>
       <aside>
@@ -98,6 +98,15 @@
     type="text/javascript"
     src="scripts/helpers/calendarHelper.js"
   ></script>
+  <script
+    type="text/javascript"
+    src="scripts/components/EventModal/index.js"
+  ></script>
+  <!-- Time events mapping -->
+  <script
+    type="text/javascript"
+    src="scripts/components/TimeSlotEvent/index.js"
+  ></script>
   <!-- Calendar mapping -->
   <script
     type="text/javascript"
@@ -120,13 +129,13 @@
     type="text/javascript"
     src="scripts/components/Header/index.js"
   ></script>
-  <!-- Time events mapping -->
-  <script
-    type="text/javascript"
-    src="scripts/components/TimeSlotEvent/index.js"
-  ></script>
+
   <script
     type="text/javascript"
     src="scripts/handlers/timeSlotHandler.js"
+  ></script>
+  <script
+    type="text/javascript"
+    src="scripts/handlers/timeEventHandler.js"
   ></script>
 </html>
