@@ -1,6 +1,6 @@
 const clearCalendar = () => {
-  const DayRows = document.querySelector("#days-row");
-  DayRows.innerHTML = "";
+  const HeaderDaysRow = document.querySelector("#days-row");
+  HeaderDaysRow.innerHTML = "";
   document.querySelectorAll("tr").forEach((node) => {
     node.remove();
   });
@@ -9,7 +9,7 @@ const clearCalendar = () => {
 const Calendar = (date = new Date()) => {
   clearCalendar();
   EntryColumn();
-  DayRows(date);
+  HeaderDaysRow(date);
   TimeRow(date);
 };
 

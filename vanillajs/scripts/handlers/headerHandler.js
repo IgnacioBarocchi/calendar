@@ -22,7 +22,7 @@ const navigateWeeks = (target) => {
     today.getDate() + weekFactor * Math.abs(index)
   );
 
-  getWeekDateByDayMap(weekOffset);
+  // getWeekDateByDayMap(weekOffset);
   getWeekFrom(weekOffset);
   return weekOffset;
 };
@@ -38,6 +38,7 @@ document.querySelector("#prev-week").addEventListener("click", function () {
   updateWeekIndex(-1);
   const weekOffset = navigateWeeks("prev");
   Calendar(weekOffset);
+  Header(weekOffset);
 });
 
 document.querySelector("#next-week").addEventListener("click", function () {
@@ -45,6 +46,7 @@ document.querySelector("#next-week").addEventListener("click", function () {
   updateWeekIndex(1);
   const weekOffset = navigateWeeks("next");
   Calendar(weekOffset);
+  Header(weekOffset);
 });
 
 document.querySelector("#ongoing-week").addEventListener("click", function () {
@@ -52,6 +54,7 @@ document.querySelector("#ongoing-week").addEventListener("click", function () {
   sessionStorageService().setWeekIndex(0);
   const weekOffset = navigateWeeks("current");
   Calendar(weekOffset);
+  Header(weekOffset);
 });
 
 // createHeaderDateTextContent(null);

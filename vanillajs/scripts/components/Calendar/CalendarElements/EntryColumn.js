@@ -1,5 +1,5 @@
 const EntryColumn = () => {
-  const DayRows = document.querySelector("#days-row");
+  const HeaderDaysRow = document.querySelector("#days-row");
 
   const timezoneOffset = { 480: "UTC-8", 0: "UTC", 180: "UTC+3" }[
     Math.abs(new Date().getTimezoneOffset())
@@ -7,6 +7,6 @@ const EntryColumn = () => {
 
   appendElements(
     [createElement("th", { innerHTML: `<span>${timezoneOffset}</span>` })],
-    DayRows
+    HeaderDaysRow
   );
 };

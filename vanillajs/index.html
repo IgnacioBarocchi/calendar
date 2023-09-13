@@ -44,7 +44,9 @@
             <button class="today-button" id="ongoing-week">today</button>
             <button class="week-navigation-button" id="prev-week">&#60;</button>
             <button class="week-navigation-button" id="next-week">&#62;</button>
-            <div>{month}</div>
+            <div>
+              <span id="month-label"></span>
+            </div>
           </nav>
         </li>
       </ul>
@@ -99,7 +101,7 @@
   ></script>
   <script
     type="text/javascript"
-    src="scripts/components/Calendar/CalendarElements/DayRows.js"
+    src="scripts/components/Calendar/CalendarElements/HeaderDaysRow.js"
   ></script>
   <script
     type="text/javascript"
@@ -108,6 +110,11 @@
   <script
     type="text/javascript"
     src="scripts/components/Calendar/index.js"
+  ></script>
+  <!-- Header mapping -->
+  <script
+    type="text/javascript"
+    src="scripts/components/Header/index.js"
   ></script>
   <!-- Time events mapping -->
   <script

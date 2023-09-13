@@ -15,7 +15,7 @@ const weekToDayRow = (dateString, i) => {
   return createElement("td", { innerHTML });
 };
 
-const DayRows = (date) => {
+const HeaderDaysRow = (date) => {
   appendElements(
     getWeekFrom(date).map(weekToDayRow),
     document.querySelector("#days-row")
@@ -42,8 +42,8 @@ const mapDaysFrom =
     return createElement("td", { innerHTML });
   };
 
-const DayRows = (date) => {
-  const DayRows = document.querySelector("#days-row");
+const HeaderDaysRow = (date) => {
+  const HeaderDaysRow = document.querySelector("#days-row");
   appendElements(
     DAYS_ABBREVIATIONS.map(
       mapDaysFrom(
@@ -52,7 +52,7 @@ const DayRows = (date) => {
         date
       )
     ),
-    DayRows
+    HeaderDaysRow
   );
 };
 */
