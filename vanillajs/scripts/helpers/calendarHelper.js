@@ -1,42 +1,8 @@
-const getNumberOfDaysInMonth = (month, year) => {
-  return new Date(year, month, 0).getDate();
-};
-
-const getFirstDayOfMonth = (year, month) => new Date(year, month).getDay();
-
-const getStartDateOfWeek = (weekNumber, year, month) => {
-  // e.g "Friday" "September" 1st
-  const startDateOfMonth = new Date(year, month, 1);
-  const daysToAdd = (weekNumber - 1) * 7;
-  const startDateOfWeek = new Date(
-    startDateOfMonth.setDate(startDateOfMonth.getDate() + daysToAdd)
-  );
-  return startDateOfWeek;
-};
-
-const getWeekNumber = (year, month) => {
-  //   const today = new Date(year, 0, 1);
-  const targetDay = new Date(year, month, 1);
-  const startDateOfYear = new Date(year, 0, 1);
-  //? https://www.geeksforgeeks.org/calculate-current-week-number-in-javascript/
-  const days = Math.floor(
-    (targetDay - startDateOfYear) / (24 * 60 * 60 * 1000)
-  );
-
-  return Math.ceil(days / 7);
-};
-
-const ONGOING_WEEK_NUMBER = (() => {
-  const today = new Date();
-  return getWeekNumber(today.getFullYear(), today.getMonth());
-})();
-
-// todo refactor this
-const getWeekDateByDayMap = (weekOffset /*: Date*/) => {
+const getWeekDateByDayMap = (selectedDate /*: Date*/) => {
   const weekMap = new Map /*<string, string>*/();
-  let dateResult = weekOffset;
+  let dateResult = selectedDate;
 
-  for (let i = weekOffset.getDay(); i < 6; i++) {
+  for (let i = selectedDate.getDay(); i < 6; i++) {
     const nextDate = dateResult.getDate() + 1;
     dateResult = new Date(dateResult.setDate(nextDate));
     weekMap.set(
@@ -45,8 +11,8 @@ const getWeekDateByDayMap = (weekOffset /*: Date*/) => {
     );
   }
 
-  dateResult = weekOffset;
-  for (let i = weekOffset.getDay(); i > 0; i--) {
+  dateResult = selectedDate;
+  for (let i = selectedDate.getDay(); i > 0; i--) {
     const prevDate = dateResult.getDate() - 1;
     dateResult = new Date(dateResult.setDate(prevDate));
     weekMap.set(
@@ -58,8 +24,26 @@ const getWeekDateByDayMap = (weekOffset /*: Date*/) => {
   return weekMap;
 };
 
-const saveWeekData = (weekNumber, year, month, result) => {
-  const key = `${weekNumber}-${year}-${month}`;
-  //   memoize this data in local storage
-  record = { [key]: result };
+const getSundayOfWeek = (date) => {
+  return new Date(date.setDate(date.getDate() - date.getDay()));
+};
+
+const getWeekFrom = (selectedDate) => {
+  const Storage = localStorageService();
+  const weekIndex = sessionStorageService().getWeekIndex();
+
+  if (Storage.getWeekDatesByWeekIndex(weekIndex)) {
+    return Storage.getWeekDatesByWeekIndex(weekIndex);
+  }
+
+  const startDate = getSundayOfWeek(selectedDate);
+
+  const weekDates = [...Array(7).keys()].map((dayNumber) => {
+    const currentDate = new Date(startDate);
+    currentDate.setDate(startDate.getDate() + dayNumber);
+    return currentDate;
+  });
+
+  Storage.saveWeekDates(weekDates);
+  return weekDates;
 };

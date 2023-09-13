@@ -23,6 +23,7 @@ const navigateWeeks = (target) => {
   );
 
   getWeekDateByDayMap(weekOffset);
+  getWeekFrom(weekOffset);
   return weekOffset;
 };
 

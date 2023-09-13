@@ -1,4 +1,3 @@
-// !don't re render this
 const EntryColumn = () => {
   const daysRows = document.querySelector("#days-row");
 

@@ -1,3 +1,4 @@
+// rename file to storage
 /*
   storage interface:
   {
@@ -21,7 +22,23 @@ const localStorageService = () => {
     localStorage.setItem("events", JSON.stringify(events));
   };
 
-  return { getEvents, setEvent };
+  const getWeekDatesCollection = () => {
+    return JSON.parse(localStorage.getItem("weekDates"));
+  };
+
+  const getWeekDatesByWeekIndex = (index) => {
+    return getWeekDatesCollection()[index];
+  };
+
+  const saveWeekDates = (week) => {
+    const updatedCollection = {
+      [sessionStorageService().getWeekIndex()]: week,
+      ...getWeekDatesCollection(),
+    };
+    localStorage.setItem("weekDates", JSON.stringify(updatedCollection));
+  };
+
+  return { getEvents, setEvent, getWeekDatesByWeekIndex, saveWeekDates };
 };
 
 window.addEventListener("beforeunload", () => {
