@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles/table.css" />
     <link rel="stylesheet" href="styles/eventModal.css" />
     <link rel="stylesheet" href="styles/header.css" />
+    <link rel="stylesheet" href="styles/timeSlotEvents.css" />
     <title>Calendar</title>
   </head>
   <body>
@@ -52,7 +53,8 @@
       </ul>
     </header>
     <dialog id="event-modal">
-      <div>
+      <!-- <form> -->
+      <div id="event-creation-form">
         <label>Add a title</label>
         <input type="text" id="event-title" required />
 
@@ -70,6 +72,7 @@
         <button id="create-event-button">Create Event</button>
       </div>
     </dialog>
+    <dialog id="event-details-modal"></dialog>
     <main>
       <aside>
         <ul>
@@ -136,6 +139,15 @@
   ></script>
   <script
     type="text/javascript"
-    src="scripts/handlers/timeEventHandler.js"
+    src="scripts/handlers/eventModalFormHandler.js"
+  ></script>
+  <!-- Event details modal -->
+  <script
+    type="text/javascript"
+    src="scripts/components/EventDetailsModal/index.js"
+  ></script>
+  <script
+    type="text/javascript"
+    src="scripts/handlers/calendarEventsHandler.js"
   ></script>
 </html>

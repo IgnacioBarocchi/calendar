@@ -29,6 +29,8 @@ const createEventRecord = () => {
     startDateTime,
     endDateTime,
     description,
+    stage: "upcoming",
+    // ! the problem is that updating them in real time is quite complicated
     // todo add stage upcoming | ongoing | past depending on dates!
     //? parent time slot ?
     //? time slot metadata ?

@@ -6,7 +6,7 @@ dialog {
   border: 1px solid #71717a;
 }
 
-form {
+#event-creation-form {
   display: flex;
   flex-direction: column;
 }

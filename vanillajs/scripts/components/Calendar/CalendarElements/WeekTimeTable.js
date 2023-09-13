@@ -30,7 +30,7 @@ const WeekTimeTable = (week) => {
       // ! !!!!!!!!!!!!!!
       // ! !!!!!!!!!!!!!!
       if (calendarEvents.length) {
-        const thisWeekEvent = calendarEvents.find((event) => {
+        const thisWeekEventIndex = calendarEvents.findIndex((event) => {
           // debugger;
           const fromDateTime = new Date(event.startDateTime);
           const toDateTime = new Date(event.endDateTime);
@@ -43,7 +43,12 @@ const WeekTimeTable = (week) => {
           return found;
         });
 
-        if (thisWeekEvent) TimeSlotEvent(thisWeekEvent, tableData);
+        if (thisWeekEventIndex >= 0) {
+          // !!!!!!!!!
+          // !! not bulk supported
+          tableData.dataset.eventIds = thisWeekEventIndex;
+          TimeSlotEvent(calendarEvents[thisWeekEventIndex], tableData);
+        }
       }
     });
 
