@@ -10,7 +10,7 @@ const Calendar = (date = new Date()) => {
   clearCalendar();
   EntryColumn();
   HeaderDaysRow(date);
-  TimeRow(date);
+  WeekTimeTable(date);
 };
 
 Calendar(new Date());

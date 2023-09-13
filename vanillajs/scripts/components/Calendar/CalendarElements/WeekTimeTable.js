@@ -1,18 +1,19 @@
-const TimeRow = () => {
+// Time cells
+const WeekTimeTable = () => {
   const weekTable = document.querySelector("#week-table");
   [...Array(24).keys()].forEach((hour) => {
-    const timeRow2 = createElement2(`
+    const WeekTimeTable2 = createElement2(`
         <tr id="time-row-${hour}">
             <span>${hour}</span>
         </tr>
     `);
 
-    const timeRow = document.createElement("tr");
-    timeRow.id = "time-row-" + hour;
+    const WeekTimeTable = document.createElement("tr");
+    WeekTimeTable.id = "time-row-" + hour;
     const celHead = document.createElement("th");
     celHead.classList.add("entry-column");
     celHead.appendChild(document.createTextNode(hour));
-    timeRow.appendChild(celHead);
+    WeekTimeTable.appendChild(celHead);
 
     DAYS_ABBREVIATIONS.forEach((day) => {
       // const dateSlot = date;
@@ -28,9 +29,9 @@ const TimeRow = () => {
         number: 0,
         time: hour,
       });
-      timeRow.appendChild(tableData);
+      WeekTimeTable.appendChild(tableData);
     });
 
-    weekTable.appendChild(timeRow);
+    weekTable.appendChild(WeekTimeTable);
   });
 };
