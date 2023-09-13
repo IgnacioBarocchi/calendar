@@ -7,10 +7,11 @@ const clearCalendar = () => {
 };
 
 const Calendar = (date = new Date()) => {
+  const week = getWeekFrom(date);
   clearCalendar();
   EntryColumn();
   HeaderDaysRow(date);
-  WeekTimeTable(date);
+  WeekTimeTable(week);
 };
 
 Calendar(new Date());
