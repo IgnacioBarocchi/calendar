@@ -1,0 +1,1 @@
+Migrate weeks storage from local to session storage.
