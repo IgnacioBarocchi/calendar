@@ -1,3 +1,29 @@
+const weekToDayRow = (dateString, i) => {
+  const date = new Date(dateString);
+  const dateNumericValue = date.getDate();
+  const dayNumericElementClassName =
+    new Date().toDateString() === date.toDateString() ? "today-day" : "";
+
+  //* the week array is sorted, so we can use the iterator
+  const innerHTML = `
+      <div class="days-of-week">
+          <span>${DAYS_ABBREVIATIONS[i]}</span>
+          <span class="${dayNumericElementClassName}">${dateNumericValue}</span>
+      </div>
+  `;
+
+  return createElement("td", { innerHTML });
+};
+
+const DaysRow = (date) => {
+  appendElements(
+    getWeekFrom(date).map(weekToDayRow),
+    document.querySelector("#days-row")
+  );
+};
+
+// ! single iteration with map.
+/*
 const mapDaysFrom =
   (weekMap, todayIsVisible, date) => (dayTextValue, dayNumericValue) => {
     const dateNumericValue = weekMap.get(String(dayNumericValue));
@@ -29,3 +55,4 @@ const DaysRow = (date) => {
     daysRows
   );
 };
+*/

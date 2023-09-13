@@ -6,6 +6,10 @@
     currentWeek: number
   }
 */
+// ! reloading the page clears the session storage
+window.addEventListener("beforeunload", () => {
+  sessionStorage.clear();
+});
 
 const createStorage = () => {
   if (!localStorage.getItem("events")) {
@@ -40,10 +44,6 @@ const localStorageService = () => {
 
   return { getEvents, setEvent, getWeekDatesByWeekIndex, saveWeekDates };
 };
-
-window.addEventListener("beforeunload", () => {
-  sessionStorage.clear();
-});
 
 const sessionStorageService = () => {
   getWeekIndex = () => {
