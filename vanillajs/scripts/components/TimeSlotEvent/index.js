@@ -8,6 +8,10 @@ const TimeSlotEvent = (calendarEvent, timeSlotElement) => {
     draft: "time-slot-event-draft",
   }[stage];
 
+  if (!timeSlotElement) {
+    // search for it
+    return;
+  }
   appendElements(
     [
       createElement2(

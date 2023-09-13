@@ -46,6 +46,7 @@
             <button class="week-navigation-button" id="prev-week">&#60;</button>
             <button class="week-navigation-button" id="next-week">&#62;</button>
             <div>
+              <!--  -->
               <span id="month-label"></span>
             </div>
           </nav>
@@ -54,7 +55,7 @@
     </header>
     <dialog id="event-modal">
       <!-- <form> -->
-      <div id="event-creation-form">
+      <form id="event-creation-form">
         <label>Add a title</label>
         <input type="text" id="event-title" required />
 
@@ -69,13 +70,14 @@
         <label>Add Description</label><br />
         <textarea id="event-description" rows="4" cols="50"></textarea>
 
-        <button id="create-event-button">Create Event</button>
-      </div>
+        <button type="button" id="create-event-button">Create Event</button>
+      </form>
     </dialog>
     <dialog id="event-details-modal"></dialog>
     <main>
       <aside>
         <ul>
+          <li><button id="aside-create-event-button">Create event</button></li>
           <li><img src="https://placehold.co/300x300" /></li>
         </ul>
       </aside>
@@ -149,5 +151,10 @@
   <script
     type="text/javascript"
     src="scripts/handlers/calendarEventsHandler.js"
+  ></script>
+  <!-- ;;; -->
+  <script
+    type="text/javascript"
+    src="scripts/handlers/asideHandler.js"
   ></script>
 </html>
