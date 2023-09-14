@@ -26,6 +26,8 @@ const localStorageService = () => {
     localStorage.setItem("events", JSON.stringify(events));
   };
 
+  const getEventsBySlotIndex = () => {};
+
   return { getEvents, addEvent };
 };
 

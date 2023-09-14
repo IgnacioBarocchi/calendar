@@ -1,7 +1,6 @@
 import formatDateToDateInputValue from "../../lib/formatDateToDateInputValue.js";
 // !rename to startDateTime
 const autoFillDates = (startTime, endTime) => {
-  debugger;
   const startDateTimeField = document.querySelector("#start-datetime");
   const endDateTimeField = document.querySelector("#end-datetime");
 
