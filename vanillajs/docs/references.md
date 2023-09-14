@@ -23,3 +23,5 @@
 * String to html [https://grrr.tech/posts/create-dom-node-from-html-string/]
 
 * Vanilla JS modules [https://www.youtube.com/watch?v=cRHQNNcYf6s]
+
+* Grid traversal [https://dev.to/kaelscion/dynamically-filling-in-a-css-grid-with-javascript-5geb]
