@@ -45,31 +45,46 @@
             <button class="today-button" id="ongoing-week">today</button>
             <button class="week-navigation-button" id="prev-week">&#60;</button>
             <button class="week-navigation-button" id="next-week">&#62;</button>
-            <div>
-              <!--  -->
-              <span id="month-label"></span>
-            </div>
           </nav>
+          <div>
+            <span id="month-label"></span>
+          </div>
         </li>
       </ul>
     </header>
     <dialog id="event-modal">
-      <!-- <form> -->
       <form id="event-creation-form">
-        <label>Add a title</label>
-        <input type="text" id="event-title" required />
+        <label for="event-title"
+          >Add a title
+          <input type="text" id="event-title" name="event-title" required />
+        </label>
 
-        <label>Start Date and Time</label>
-        <input type="datetime-local" id="start-datetime" required />
-        <label>End Date and Time</label>
-        <input type="datetime-local" id="end-datetime" required />
-        <!-- not used -->
-        <!-- <label>Add rooms or locations</label>
-        <input type="text" id="location" /> -->
+        <label for="start-datetime"
+          >Start Date and Time
+          <input
+            type="datetime-local"
+            id="start-datetime"
+            name="start-datetime"
+            required
+          />
+        </label>
 
-        <label>Add Description</label><br />
-        <textarea id="event-description" rows="4" cols="50"></textarea>
-
+        <label for="end-datetime"
+          >End Date and Time
+          <input
+            type="datetime-local"
+            id="end-datetime"
+            name="end-datetime"
+            required
+          />
+        </label>
+        <label for="event-description">Add Description</label><br />
+        <textarea
+          id="event-description"
+          name="event-description"
+          rows="4"
+          cols="50"
+        ></textarea>
         <button type="button" id="create-event-button">Create Event</button>
       </form>
     </dialog>
