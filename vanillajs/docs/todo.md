@@ -10,6 +10,11 @@ Fix event creation modal unexpected behavior.
 
 use js modules
 
-create constants dynamically
-
 attach event handlers during the creation of the elements.
+
+<!--  -->
+
+export lib
+export helpers
+todo: export components
+use handlers!

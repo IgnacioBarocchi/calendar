@@ -21,3 +21,5 @@
 * DOM parser [https://stackoverflow.com/questions/3103962/converting-html-string-into-dom-elements]
 
 * String to html [https://grrr.tech/posts/create-dom-node-from-html-string/]
+
+* Vanilla JS modules [https://www.youtube.com/watch?v=cRHQNNcYf6s]

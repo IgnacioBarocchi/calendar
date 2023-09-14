@@ -31,3 +31,5 @@ for (let i = 0; i < 7; i++) {
   DAYS.push(dayName);
   DAYS_ABBREVIATIONS.push(dayAbbreviation);
 }
+
+export { MONTHS, MONTHS_ABBREVIATIONS, DAYS, DAYS_ABBREVIATIONS };

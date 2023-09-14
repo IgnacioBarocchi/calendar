@@ -1,3 +1,4 @@
+import formatDateToDateInputValue from "../../lib/formatDateToDateInputValue.js";
 // !rename to startDateTime
 const autoFillDates = (startTime, endTime) => {
   debugger;
@@ -24,6 +25,7 @@ const EventModal = (dateTimeEvent, position) => {
   dialog.open = !dialog.open;
 };
 
+export default EventModal;
 // ! account dialog w
 // ${`${
 //     clientX + dialog.offsetWidth > window.innerWidth ? "right" : "left"

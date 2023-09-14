@@ -1,3 +1,7 @@
+import TimeSlotEvent from "../../TimeSlotEvent/index.js";
+import appendElements from "../../../lib/appendElements.js";
+import { createElement } from "../../../lib/createElement.js";
+import { localStorageService } from "../../../storage/index.js";
 //* displays constant information
 const getTimeHeaderCell = (hour) => {
   //? Dom parser skipping th tag
@@ -56,6 +60,7 @@ const WeekTimeTable = (week) => {
   });
 };
 
+export default WeekTimeTable;
 // document.querySelector('[data-day-time="{{X date value}}"]');
 
 /*

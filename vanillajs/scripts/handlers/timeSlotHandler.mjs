@@ -1,3 +1,6 @@
+import EventModal from "../components/EventModal/index.js";
+import TimeSlotEvent from "../components/TimeSlotEvent/index.js";
+
 const getDraftEventFrom = (timeSlotElement) => {
   const slotDateTime = new Date(timeSlotElement.dataset.dayTime);
   const startTime = new Date(timeSlotElement.dataset.dayTime);

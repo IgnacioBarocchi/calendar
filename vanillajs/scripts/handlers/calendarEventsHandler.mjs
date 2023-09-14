@@ -1,3 +1,5 @@
+import EventDetailsModal from "../components/EventDetailsModal/index.js";
+import { localStorageService } from "../storage/index.js";
 const Storage = localStorageService();
 
 document

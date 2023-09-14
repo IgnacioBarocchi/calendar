@@ -1,4 +1,6 @@
 // !rename to startDateTime
+import appendElements from "../../lib/appendElements.js";
+import { createElement2 } from "../../lib/createElement.js";
 const TimeSlotEvent = (calendarEvent, timeSlotElement) => {
   const { stage, title } = calendarEvent || {};
   const classNameByEventStage = {
@@ -26,6 +28,7 @@ const TimeSlotEvent = (calendarEvent, timeSlotElement) => {
   );
 };
 
+export default TimeSlotEvent;
 /*
 const eventElement = document.createElement("div");
 eventElement.classList.add("time-slot-event");

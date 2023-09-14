@@ -1,16 +1,7 @@
-// const createHeaderDateTextContent = (selectedDate) => {
-//   const header = document.querySelector("#header-menu");
-//   const currentDateElement = document.createElement("li");
-//   const today = selectedDate ?? new Date();
-//   const internationalization = new Intl.DateTimeFormat("en-us", {
-//     dateStyle: "full",
-//   });
-//   currentDateElement.appendChild(
-//     document.createTextNode(internationalization.format(today))
-//   );
-//   header.appendChild(currentDateElement);
-// };
-
+import Calendar from "../components/Calendar/index.js";
+import Header from "../components/Header/index.js";
+import { getWeekFrom } from "../helpers/calendarHelper.js";
+import { sessionStorageService } from "../storage/index.js";
 const navigateWeeks = (target) => {
   const index = sessionStorageService().getWeekIndex();
   const weekFactor = { current: 0, next: 7, prev: -7 }[target];
@@ -58,3 +49,15 @@ document.querySelector("#ongoing-week").addEventListener("click", function () {
 });
 
 // createHeaderDateTextContent(null);
+// const createHeaderDateTextContent = (selectedDate) => {
+//   const header = document.querySelector("#header-menu");
+//   const currentDateElement = document.createElement("li");
+//   const today = selectedDate ?? new Date();
+//   const internationalization = new Intl.DateTimeFormat("en-us", {
+//     dateStyle: "full",
+//   });
+//   currentDateElement.appendChild(
+//     document.createTextNode(internationalization.format(today))
+//   );
+//   header.appendChild(currentDateElement);
+// };

@@ -1,3 +1,7 @@
+import { DAYS_ABBREVIATIONS } from "../../../constants/index.js";
+import appendElements from "../../../lib/appendElements.js";
+import { createElement } from "../../../lib/createElement.js";
+import { getWeekFrom } from "../../../helpers/calendarHelper.js";
 const weekToDayRow = (dateString, i) => {
   const date = new Date(dateString);
   const dateNumericValue = date.getDate();
@@ -21,6 +25,8 @@ const HeaderDaysRow = (date) => {
     document.querySelector("#days-row")
   );
 };
+
+export default HeaderDaysRow;
 
 // ! single iteration with map.
 /*

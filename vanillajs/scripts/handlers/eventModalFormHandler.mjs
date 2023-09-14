@@ -1,3 +1,5 @@
+import formatDateToDateInputValue from "../lib/formatDateToDateInputValue.js";
+import { localStorageService } from "../storage/index.js";
 const createEventRecord = () => {
   const title = document.querySelector("#event-title").value;
   const startDateTime = new Date(

@@ -1,3 +1,5 @@
+import appendElements from "../../../lib/appendElements.js";
+import { createElement } from "../../../lib/createElement.js";
 const EntryColumn = () => {
   const HeaderDaysRow = document.querySelector("#days-row");
 
@@ -10,3 +12,5 @@ const EntryColumn = () => {
     HeaderDaysRow
   );
 };
+
+export default EntryColumn;

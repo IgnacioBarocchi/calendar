@@ -46,13 +46,15 @@ const localStorageService = () => {
 };
 
 const sessionStorageService = () => {
-  getWeekIndex = () => {
+  const getWeekIndex = () => {
     return Number(sessionStorage.getItem("weekIndex"));
   };
 
-  setWeekIndex = (weekIndex) => {
+  const setWeekIndex = (weekIndex) => {
     sessionStorage.setItem("weekIndex", weekIndex + "");
   };
 
   return { getWeekIndex, setWeekIndex };
 };
+
+export { sessionStorageService, localStorageService };

@@ -1,3 +1,6 @@
+import appendElements from "../../lib/appendElements.js";
+import { createElement2 } from "../../lib/createElement.js";
+
 const EventDetailsModal = ({ title, startDateTime, description }) => {
   // todo format event duration. e.g: Monday, September 11⋅10:30 – 11:30am
   // todo codesplit description html elements, create constants
@@ -30,3 +33,5 @@ const EventDetailsModal = ({ title, startDateTime, description }) => {
     document.querySelector("#event-details-modal")
   );
 };
+
+export default EventDetailsModal;

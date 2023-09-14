@@ -1,28 +1,7 @@
-const getWeekDateByDayMap = (selectedDate /*: Date*/) => {
-  const weekMap = new Map /*<string, string>*/();
-  let dateResult = selectedDate;
-
-  for (let i = selectedDate.getDay(); i < 6; i++) {
-    const nextDate = dateResult.getDate() + 1;
-    dateResult = new Date(dateResult.setDate(nextDate));
-    weekMap.set(
-      dateResult.getDay().toString(),
-      dateResult.getDate().toString()
-    );
-  }
-
-  dateResult = selectedDate;
-  for (let i = selectedDate.getDay(); i > 0; i--) {
-    const prevDate = dateResult.getDate() - 1;
-    dateResult = new Date(dateResult.setDate(prevDate));
-    weekMap.set(
-      dateResult.getDay().toString(),
-      dateResult.getDate().toString()
-    );
-  }
-
-  return weekMap;
-};
+import {
+  localStorageService,
+  sessionStorageService,
+} from "../storage/index.js";
 
 const getSundayOfWeek = (date) => {
   return new Date(date.setDate(date.getDate() - date.getDay()));
@@ -47,3 +26,5 @@ const getWeekFrom = (selectedDate) => {
   Storage.saveWeekDates(weekDates);
   return weekDates;
 };
+
+export { getWeekFrom, getSundayOfWeek };

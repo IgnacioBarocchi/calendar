@@ -1,5 +1,6 @@
+import { MONTHS } from "../../constants/index.js";
+import { getSundayOfWeek } from "../../helpers/calendarHelper.js";
 const Header = (date) => {
-  // ! control rendering
   const shouldRender = false;
 
   document.querySelector("#month-label").textContent =
@@ -7,3 +8,5 @@ const Header = (date) => {
 };
 
 Header(new Date());
+
+export default Header;

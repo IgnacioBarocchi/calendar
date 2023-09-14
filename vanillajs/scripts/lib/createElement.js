@@ -1,4 +1,4 @@
-const createElement = (tagName, options) => {
+export const createElement = (tagName, options) => {
   const element = document.createElement(tagName);
   const { className, innerHTML } = options || {};
   if (innerHTML) {
@@ -12,7 +12,7 @@ const createElement = (tagName, options) => {
   return element;
 };
 
-const createElement2 = (html) => {
+export const createElement2 = (html) => {
   const node = new DOMParser().parseFromString(html, "text/html").body
     .firstElementChild;
   return node;

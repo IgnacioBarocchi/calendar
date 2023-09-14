@@ -1,3 +1,6 @@
+import EventModal from "../components/EventModal/index.js";
+import TimeSlotEvent from "../components/TimeSlotEvent/index.js";
+
 document
   .querySelector("#aside-create-event-button")
   .addEventListener("click", () => {

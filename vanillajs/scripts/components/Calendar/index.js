@@ -1,6 +1,10 @@
+import EntryColumn from "./CalendarElements/EntryColumn.js";
+import HeaderDaysRow from "./CalendarElements/HeaderDaysRow.js";
+import WeekTimeTable from "./CalendarElements/WeekTimeTable.js";
+import { getWeekFrom } from "../../helpers/calendarHelper.js";
 const clearCalendar = () => {
-  const HeaderDaysRow = document.querySelector("#days-row");
-  HeaderDaysRow.innerHTML = "";
+  const headerDaysRow = document.querySelector("#days-row");
+  headerDaysRow.innerHTML = "";
   document.querySelectorAll("tr").forEach((node) => {
     node.remove();
   });
@@ -15,3 +19,5 @@ const Calendar = (date = new Date()) => {
 };
 
 Calendar(new Date());
+
+export default Calendar;
