@@ -4,6 +4,7 @@ dialog {
   color: white;
   background: #030712;
   border: 1px solid #71717a;
+  margin: 0;
 }
 
 #event-creation-form {

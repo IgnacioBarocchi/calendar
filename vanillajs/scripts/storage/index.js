@@ -1,21 +1,6 @@
-// rename file to storage
-/*
-  storage interface:
-  {
-    events: string[],
-    currentWeek: number
-  }
-*/
-// ! reloading the page clears the session storage
 window.addEventListener("beforeunload", () => {
   sessionStorage.clear();
 });
-
-const createStorage = () => {
-  if (!localStorage.getItem("events")) {
-    localStorage.setItem("events", [].toString());
-  }
-};
 
 const localStorageService = () => {
   const events = JSON.parse(localStorage.getItem("events")) || {};

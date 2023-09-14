@@ -1,6 +1,7 @@
 // !rename to startDateTime
 import appendElements from "../../lib/appendElements.js";
 import { createElement2 } from "../../lib/createElement.js";
+// ! no hace falta pasar el timeslot a calendar event.
 const TimeSlotEvent = (calendarEvent, timeSlot) => {
   // const pixelUnitsOfOneHourSlot = timeSlot.offsetHeight;
   debugger;

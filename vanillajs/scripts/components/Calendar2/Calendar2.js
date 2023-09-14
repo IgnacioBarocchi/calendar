@@ -1,14 +1,23 @@
+import CreateEventModal from "../CreateEventModal/index.js";
 import { DAYS_ABBREVIATIONS } from "../../constants/index.js";
 import TimeSlotEvent from "../TimeSlotEvent/index.js";
 import appendElements from "../../lib/appendElements.js";
 import { createElement2 } from "../../lib/createElement.js";
 import { localStorageService } from "../../storage/index.js";
-
 const Storage = localStorageService();
 
 const timezoneOffset = { 480: "UTC-8", 0: "UTC", 180: "UTC+3" }[
   Math.abs(new Date().getTimezoneOffset())
 ];
+
+function openModal(event) {
+  const dialog = document.querySelector("#event-modal").open;
+  if (dialog.open) {
+    dialog.close();
+    return;
+  }
+  CreateEventModal(this.dataset.dateTime, [event.clientX, event.clientY]);
+}
 
 const getGridCell = (text, isHeader) =>
   createElement2(
@@ -17,7 +26,7 @@ const getGridCell = (text, isHeader) =>
           text &&
           `<div class="header-text-container">
             <span class="date-name">${text}</span>
-            <span class="date-number">0</span>
+            <span class="date-number"></span>
           </div>`
         }
     </div>`
@@ -47,6 +56,7 @@ const instanceCalendar = () => {
         ...[...Array(7).keys()].map((day) => {
           const timeSlot = getGridCell();
           timeSlot.dataset.slotIndex = `${day}-${hour}`;
+          timeSlot.addEventListener("click", openModal);
           return timeSlot;
         }),
       ],
@@ -56,7 +66,6 @@ const instanceCalendar = () => {
 };
 
 const updateCalendar = (week) => {
-  debugger;
   const calendarDaysHeader = document.querySelectorAll(".header-row");
   week.forEach((dateTime, i) => {
     //* update header

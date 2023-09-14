@@ -1,4 +1,4 @@
-import EventModal from "../components/EventModal/index.js";
+import CreateEventModal from "../components/CreateEventModal/index.js";
 import TimeSlotEvent from "../components/TimeSlotEvent/index.js";
 
 document
@@ -15,5 +15,5 @@ document
       this
     );
 
-    EventModal(draftEvent, [clientEvent.clientY, clientEvent.clientX]);
+    CreateEventModal(draftEvent, [clientEvent.clientY, clientEvent.clientX]);
   });
