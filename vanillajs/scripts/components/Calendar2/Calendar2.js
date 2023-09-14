@@ -6,10 +6,20 @@ import { localStorageService } from "../../storage/index.js";
 
 const Storage = localStorageService();
 
+const timezoneOffset = { 480: "UTC-8", 0: "UTC", 180: "UTC+3" }[
+  Math.abs(new Date().getTimezoneOffset())
+];
+
 const getGridCell = (text, isHeader) =>
   createElement2(
-    `<div class="grid-item ${isHeader ? "header-row" : ""}">
-        <span>${text}</span>
+    `<div class="grid-item ${isHeader ? "header-row" : "time-slot"}">
+        ${
+          text &&
+          `<div class="header-text-container">
+            <span class="date-name">${text}</span>
+            <span class="date-number">0</span>
+          </div>`
+        }
     </div>`
   );
 
@@ -17,7 +27,7 @@ const instanceCalendar = () => {
   const grid = document.getElementById("grid");
   appendElements(
     [
-      getGridCell("time", true),
+      getGridCell(timezoneOffset, true),
       ...DAYS_ABBREVIATIONS.map((day) => getGridCell(day, true)),
     ],
     grid
@@ -26,21 +36,34 @@ const instanceCalendar = () => {
   // * 7 x 24 + 1 header column + 1 header row
   [...Array(24).keys()].forEach((hour) => {
     appendElements(
-      [...Array(8).keys()].map((day) => {
-        const e = getGridCell();
-        e.dataset.slotIndex = `${day}-${hour}`;
-        e.classList.add("time-slot");
-        return e;
-      }),
+      [
+        createElement2(
+          `<div class="grid-item header-col">
+                <div class="header-text-container">
+                  <span>${hour}</span>
+                </div>
+          </div>`
+        ),
+        ...[...Array(7).keys()].map((day) => {
+          const timeSlot = getGridCell();
+          timeSlot.dataset.slotIndex = `${day}-${hour}`;
+          return timeSlot;
+        }),
+      ],
       grid
     );
   });
 };
 
 const updateCalendar = (week) => {
-  // todo wipe events
-  week.forEach((dateTime) => {
-    //
+  debugger;
+  const calendarDaysHeader = document.querySelectorAll(".header-row");
+  week.forEach((dateTime, i) => {
+    //* update header
+    const dateNumber = calendarDaysHeader[i + 1].querySelector(".date-number");
+    dateNumber.textContent = dateTime.getDate();
+
+    // * update cells
     const calendarSingleDayColumn = document.querySelectorAll(
       `[data-slot-index^='${dateTime.getDay()}']`
     );

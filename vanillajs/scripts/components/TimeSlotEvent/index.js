@@ -16,18 +16,26 @@ const TimeSlotEvent = (calendarEvent, timeSlot) => {
     // search for it
     return;
   }
-  appendElements(
-    [
-      createElement2(
-        `
-          <div class="${classNameByEventStage}">
-              <span>${title}</span>
-          </div>
-        `
-      ),
-    ],
-    timeSlot
+
+  const calendarEventElement = createElement2(
+    `
+      <div class="${classNameByEventStage}">
+          <span>${title}</span>
+      </div>
+    `
   );
+
+  calendarEventElement.addEventListener("click", (e) => {
+    e.stopPropagation();
+    alert("show event details. pass client x and y");
+    // const events = Storage.getEvents();
+    // const eventId = Number(calendarEvent.parentElement.dataset.eventIds);
+    // if (events[eventId]) {
+    //   EventDetailsModal(events[eventId]);
+    //   document.querySelector("#event-details-modal").open = true;
+    // }
+  });
+  appendElements([calendarEventElement], timeSlot);
 };
 
 export default TimeSlotEvent;
