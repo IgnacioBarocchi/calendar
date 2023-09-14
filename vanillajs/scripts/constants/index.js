@@ -1,28 +1,33 @@
-const MONTHS = [
-  "January",
-  "February",
-  "march",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+const MONTHS = [];
+const MONTHS_ABBREVIATIONS = [];
+const DAYS = [];
+const DAYS_ABBREVIATIONS = [];
 
-const MONTHS_ABBREVIATIONS = MONTHS.map((month) => month.substring(0, 3));
+for (let i = 0; i < 12; i++) {
+  const date = new Date(2023, i, 1);
 
-const DAYS = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
+  const monthName = new Intl.DateTimeFormat("en-US", { month: "long" }).format(
+    date
+  );
+  const monthAbbreviation = new Intl.DateTimeFormat("en-US", {
+    month: "short",
+  }).format(date);
 
-const DAYS_ABBREVIATIONS = DAYS.map((day) => day.substring(0, 3));
+  MONTHS.push(monthName);
+  MONTHS_ABBREVIATIONS.push(monthAbbreviation);
+}
+
+for (let i = 0; i < 7; i++) {
+  const date = new Date(2023, 0, i + 1);
+
+  const dayName = new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(
+    date
+  );
+  const dayAbbreviation = new Intl.DateTimeFormat("en-US", {
+    weekday: "short",
+  }).format(date);
+
+  DAYS.push(dayName);
+  DAYS_ABBREVIATIONS.push(dayAbbreviation);
+}
