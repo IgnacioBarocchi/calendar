@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="styles/eventModal.css" />
     <link rel="stylesheet" href="styles/header.css" />
     <link rel="stylesheet" href="styles/timeSlotEvents.css" />
+    <link rel="stylesheet" href="styles/calendarGridLayout.css" />
     <title>Calendar</title>
   </head>
   <body>
@@ -96,9 +97,12 @@
           <li><img src="https://placehold.co/300x300" /></li>
         </ul>
       </aside>
-      <table id="calendar">
+      <div id="calendar-container">
+        <div id="grid" class="grid-container"></div>
+      </div>
+      <!-- <table id="calendar">
         <thead id="days-row"></thead>
-      </table>
+      </table> -->
     </main>
   </body>
   <script
@@ -111,7 +115,7 @@
     type="module"
     defer
   ></script>
-  <script
+  <!-- <script
     src="./scripts/handlers/eventModalFormHandler.mjs"
     type="module"
     defer
@@ -125,5 +129,6 @@
     src="./scripts/handlers/timeSlotHandler.mjs"
     type="module"
     defer
-  ></script>
+  ></script> -->
+  <script src="./scripts/main.js" type="module" defer></script>
 </html>

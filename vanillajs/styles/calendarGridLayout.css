@@ -1,0 +1,34 @@
+#calendar-container {
+  background-color: orange;
+  width: 100%;
+}
+
+.grid-container {
+  margin-top: var(--header-height);
+  display: grid;
+  /* grid-template-columns: repeat(8, minmax(calc(100% - 80px), 1fr)); */
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(25, 1fr);
+}
+
+.grid-item {
+  border: 1px solid #52525b;
+  padding: 10px;
+  text-align: center;
+  height: var(--header-height);
+}
+
+.header-row {
+  background-color: red;
+  color: white;
+  position: sticky;
+}
+
+/* .grid-item:nth-child(8n + 1) {
+  width: 20px;
+  height: 20px;
+} */
+
+/* .grid-container:first-child {
+  background-color: orange;
+} */

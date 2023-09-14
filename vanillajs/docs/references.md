@@ -25,3 +25,6 @@
 * Vanilla JS modules [https://www.youtube.com/watch?v=cRHQNNcYf6s]
 
 * Grid traversal [https://dev.to/kaelscion/dynamically-filling-in-a-css-grid-with-javascript-5geb]
+
+* Auto fit grid columns [https://css-tricks.com/auto-sizing-columns-css-grid-auto-fill-vs-auto-fit/]
+
