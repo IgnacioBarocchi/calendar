@@ -8,13 +8,4 @@ Double parse dates from the local/session storage.
 
 Fix event creation modal unexpected behavior.
 
-use js modules
-
 attach event handlers during the creation of the elements.
-
-<!--  -->
-
-export lib
-export helpers
-todo: export components
-use handlers!

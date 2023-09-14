@@ -26,23 +26,7 @@ const localStorageService = () => {
     localStorage.setItem("events", JSON.stringify(events));
   };
 
-  const getWeekDatesCollection = () => {
-    return JSON.parse(localStorage.getItem("weekDates"));
-  };
-
-  const getWeekDatesByWeekIndex = (index) => {
-    return getWeekDatesCollection()[index];
-  };
-
-  const saveWeekDates = (week) => {
-    const updatedCollection = {
-      [sessionStorageService().getWeekIndex()]: week,
-      ...getWeekDatesCollection(),
-    };
-    localStorage.setItem("weekDates", JSON.stringify(updatedCollection));
-  };
-
-  return { getEvents, addEvent, getWeekDatesByWeekIndex, saveWeekDates };
+  return { getEvents, addEvent };
 };
 
 const sessionStorageService = () => {
@@ -54,7 +38,24 @@ const sessionStorageService = () => {
     sessionStorage.setItem("weekIndex", weekIndex + "");
   };
 
-  return { getWeekIndex, setWeekIndex };
+  const getWeekDatesCollection = () => {
+    return JSON.parse(sessionStorage.getItem("weekDates"));
+  };
+
+  const getWeekDatesByWeekIndex = (index) => {
+    if (!Array.isArray(getWeekDatesCollection())) return null;
+    return getWeekDatesCollection()[index];
+  };
+
+  const saveWeekDates = (week) => {
+    const updatedCollection = {
+      [sessionStorageService().getWeekIndex()]: week,
+      ...getWeekDatesCollection(),
+    };
+    sessionStorage.setItem("weekDates", JSON.stringify(updatedCollection));
+  };
+
+  return { getWeekIndex, setWeekIndex, getWeekDatesByWeekIndex, saveWeekDates };
 };
 
 export { sessionStorageService, localStorageService };

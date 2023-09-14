@@ -1,18 +1,15 @@
-import {
-  localStorageService,
-  sessionStorageService,
-} from "../storage/index.js";
+import { sessionStorageService } from "../storage/index.js";
 
 const getSundayOfWeek = (date) => {
   return new Date(date.setDate(date.getDate() - date.getDay()));
 };
 
 const getWeekFrom = (selectedDate) => {
-  const Storage = localStorageService();
+  const Session = sessionStorageService();
   const weekIndex = sessionStorageService().getWeekIndex();
 
-  if (Storage.getWeekDatesByWeekIndex(weekIndex)) {
-    return Storage.getWeekDatesByWeekIndex(weekIndex);
+  if (Session.getWeekDatesByWeekIndex(weekIndex)) {
+    return Session.getWeekDatesByWeekIndex(weekIndex);
   }
 
   const startDate = getSundayOfWeek(selectedDate);
@@ -23,7 +20,7 @@ const getWeekFrom = (selectedDate) => {
     return currentDate;
   });
 
-  Storage.saveWeekDates(weekDates);
+  Session.saveWeekDates(weekDates);
   return weekDates;
 };
 
