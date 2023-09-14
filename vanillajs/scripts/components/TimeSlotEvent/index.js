@@ -1,7 +1,9 @@
 // !rename to startDateTime
 import appendElements from "../../lib/appendElements.js";
 import { createElement2 } from "../../lib/createElement.js";
-const TimeSlotEvent = (calendarEvent, timeSlotElement) => {
+const TimeSlotEvent = (calendarEvent, timeSlot) => {
+  // const pixelUnitsOfOneHourSlot = timeSlot.offsetHeight;
+  debugger;
   const { stage, title } = calendarEvent || {};
   const classNameByEventStage = {
     upcoming: "time-slot-event-upcoming",
@@ -10,7 +12,7 @@ const TimeSlotEvent = (calendarEvent, timeSlotElement) => {
     draft: "time-slot-event-draft",
   }[stage];
 
-  if (!timeSlotElement) {
+  if (!timeSlot) {
     // search for it
     return;
   }
@@ -24,16 +26,8 @@ const TimeSlotEvent = (calendarEvent, timeSlotElement) => {
         `
       ),
     ],
-    timeSlotElement
+    timeSlot
   );
 };
 
 export default TimeSlotEvent;
-/*
-const eventElement = document.createElement("div");
-eventElement.classList.add("time-slot-event");
-eventElement.appendChild(document.createTextNode(eventThumbnailPlaceHolder));
-
-timeSlotElement.appendChild(eventElement);
-return eventElement;
-*/

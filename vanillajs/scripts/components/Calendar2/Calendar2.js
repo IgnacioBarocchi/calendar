@@ -1,8 +1,9 @@
 import { DAYS_ABBREVIATIONS } from "../../constants/index.js";
+import TimeSlotEvent from "../TimeSlotEvent/index.js";
 import appendElements from "../../lib/appendElements.js";
-// 7 x 24 + 1 header column + 1 header row
 import { createElement2 } from "../../lib/createElement.js";
 import { localStorageService } from "../../storage/index.js";
+
 const Storage = localStorageService();
 
 const getGridCell = (text, isHeader) =>
@@ -22,6 +23,7 @@ const instanceCalendar = () => {
     grid
   );
 
+  // * 7 x 24 + 1 header column + 1 header row
   [...Array(24).keys()].forEach((hour) => {
     appendElements(
       [...Array(8).keys()].map((day) => {
@@ -44,6 +46,7 @@ const updateCalendar = (week) => {
     );
 
     calendarSingleDayColumn.forEach((timeSlot) => {
+      timeSlot.innerHTML = ""; //wipe events
       const thisDayTime = new Date(dateTime).setHours(
         timeSlot.dataset.slotIndex.split("-")[1],
         0,
@@ -51,8 +54,15 @@ const updateCalendar = (week) => {
       );
       timeSlot.dataset.dateTime = new Date(thisDayTime);
 
-      // const calendarEvents = Storage.getEvents();
-      // const fromDateTime = new Date(event.startDateTime);
+      const calendarEvents = Storage.getEventsBySlotIndex(
+        timeSlot.dataset.slotIndex
+      );
+
+      if (calendarEvents && calendarEvents.length) {
+        calendarEvents.forEach((event) => {
+          TimeSlotEvent(event, timeSlot);
+        });
+      }
     });
   });
 };

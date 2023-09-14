@@ -1,6 +1,8 @@
+import { localStorageService, sessionStorageService } from "./storage/index.js";
+
 import Calendar2 from "./components/Calendar2/Calendar2.js";
 import { getWeekFrom } from "./helpers/calendarHelper.js";
-import { sessionStorageService } from "./storage/index.js";
+
 const Session = sessionStorageService();
 const calendar = Calendar2();
 calendar.instanceCalendar();
@@ -32,3 +34,10 @@ const getDateOf = (requestedWeekView) => {
       calendar.updateCalendar(getWeekFrom(getDateOf(requestedWeekView)));
     });
 });
+
+// console.log(localStorageService().getEventsBySlotIndex());
+// localStorageService().addEvent({
+//   title: "test2",
+//   description: "test2",
+//   startDateTime: new Date(),
+// });

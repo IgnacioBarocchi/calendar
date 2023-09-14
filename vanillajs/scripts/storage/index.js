@@ -18,17 +18,36 @@ const createStorage = () => {
 };
 
 const localStorageService = () => {
-  const events = JSON.parse(localStorage.getItem("events")) || [];
+  const events = JSON.parse(localStorage.getItem("events")) || {};
   const getEvents = () => events;
 
   const addEvent = (event) => {
-    events.push(event);
-    localStorage.setItem("events", JSON.stringify(events));
+    const slotIndex = `${event.startDateTime.getDay()}-${event.startDateTime.getHours()}`;
+    const eventsOfTheSlot = events[slotIndex] || [];
+    eventsOfTheSlot.push(event);
+    localStorage.setItem(
+      "events",
+      JSON.stringify({ ...events, [slotIndex]: eventsOfTheSlot })
+    );
   };
 
-  const getEventsBySlotIndex = () => {};
+  const getEventsBySlotIndex = (slotIndex) => {
+    const eventsOfTheSlot = events[slotIndex];
+    if (!eventsOfTheSlot || !eventsOfTheSlot.length) return [];
 
-  return { getEvents, addEvent };
+    const timeSlotDayTime = new Date(
+      document.querySelector(
+        `[data-slot-index="${slotIndex}"]`
+      ).dataset.dateTime
+    );
+
+    return eventsOfTheSlot.filter((event) => {
+      const eventDate = new Date(event.startDateTime);
+      return eventDate.getHours() === timeSlotDayTime.getHours();
+    });
+  };
+
+  return { getEvents, addEvent, getEventsBySlotIndex };
 };
 
 const sessionStorageService = () => {
