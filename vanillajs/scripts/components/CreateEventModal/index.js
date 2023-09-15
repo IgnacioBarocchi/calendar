@@ -2,6 +2,7 @@ import TimeSlotEvent from "../TimeSlotEvent/index.js";
 import formatDateToDateInputValue from "../../lib/formatDateToDateInputValue.js";
 import { localStorageService } from "../../storage/index.js";
 import { render } from "../../helpers/modalHelper.js";
+
 const autoFillDates = (startDateTime) => {
   const startDateTimeField = document.querySelector("#start-datetime");
   startDateTimeField.value = formatDateToDateInputValue(startDateTime);
@@ -19,7 +20,6 @@ const eventIsValid = (title, startDateTime, endDateTime) => {
 
   if (requiredFieldsAreEmpty) throw new Error("Missing required fields");
   if (wrongDateFormat) throw new Error("Wrong date format");
-  // ! doesn't work if (startDateTime.toDateString() === endDateTime.toDateString())
   if (
     formatDateToDateInputValue(startDateTime) ===
     formatDateToDateInputValue(endDateTime)
@@ -32,13 +32,17 @@ const eventIsValid = (title, startDateTime, endDateTime) => {
 };
 
 const CreateEventModal = (startTime, position) => {
-  render(position, document.querySelector("#event-modal"));
   autoFillDates(startTime);
+  render(position, document.querySelector("#event-modal"));
 };
 
 const createEventRecord = () => {
+  document.querySelectorAll(".draft").forEach((draft) => {
+    draft.remove();
+  });
+
   const title = document.querySelector("#event-title").value;
-  debugger;
+
   const startDateTime = new Date(
     document.querySelector("#start-datetime").value
   );

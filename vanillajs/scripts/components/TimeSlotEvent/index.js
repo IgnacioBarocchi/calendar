@@ -5,21 +5,42 @@ import { createElement2 } from "../../lib/createElement.js";
 const getEventHoursLong = (startDateTime, endDateTime) =>
   Math.abs(startDateTime - endDateTime) / 36e5;
 
+const processEvents = (calendarEventElement, stage) => {
+  if (stage === "draft") {
+    calendarEventElement.classList.add("draft");
+    return calendarEventElement;
+  }
+
+  calendarEventElement.addEventListener("click", function (clientEvent) {
+    clientEvent.stopPropagation();
+    const calendarEvent = JSON.parse(this.dataset.calendarEvent);
+    console.log(calendarEvent);
+
+    document.querySelector("#event-details-modal").showModal();
+    EventDetailsModal(calendarEvent, [
+      clientEvent.clientX,
+      clientEvent.clientY,
+    ]);
+  });
+
+  return calendarEventElement;
+};
+
 const TimeSlotEvent = (calendarEvent, timeSlot) => {
-  // const pixelUnitsOfOneHourSlot = timeSlot.offsetHeight;
-  const { stage, title } = calendarEvent || {};
+  const {
+    stage,
+    title,
+    startDateTime: startDateTimeString,
+    endDateTime: endDateTimeString,
+    description,
+  } = calendarEvent || {};
+
   const classNameByEventStage = {
     upcoming: "time-slot-event-upcoming",
     ongoing: "time-slot-event-ongoing",
     past: "time-slot-event-past",
     draft: "time-slot-event-draft",
   }[stage];
-
-  const {
-    startDateTime: startDateTimeString,
-    endDateTime: endDateTimeString,
-    description,
-  } = calendarEvent;
 
   const startDateTime = new Date(startDateTimeString);
   const endDateTime = new Date(endDateTimeString);
@@ -56,18 +77,9 @@ const TimeSlotEvent = (calendarEvent, timeSlot) => {
     `
   );
 
-  calendarEventElement.addEventListener("click", function (clientEvent) {
-    clientEvent.stopPropagation();
-    const calendarEvent = JSON.parse(this.dataset.calendarEvent);
-    console.log(calendarEvent);
+  appendElements([processEvents(calendarEventElement, stage)], timeSlot);
 
-    document.querySelector("#event-details-modal").showModal();
-    EventDetailsModal(calendarEvent, [
-      clientEvent.clientX,
-      clientEvent.clientY,
-    ]);
-  });
-  appendElements([calendarEventElement], timeSlot);
+  return calendarEventElement;
 };
 
 export default TimeSlotEvent;

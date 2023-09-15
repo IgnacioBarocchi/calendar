@@ -51,8 +51,10 @@
       </header>
 
       <aside>
-        <button id="aside-create-event-button">Create event</button>
-        <img src="https://placehold.co/300x300" />
+        <div style="position: fixed; top: 0">
+          <button id="aside-create-event-button">Create event</button>
+          <img src="https://placehold.co/300x300" />
+        </div>
       </aside>
 
       <div id="calendar-container">
@@ -61,6 +63,12 @@
     </div>
 
     <dialog id="event-modal">
+      <button
+        class="close-button"
+        onclick='document.querySelector("#event-modal").close();'
+      >
+        X
+      </button>
       <form id="event-creation-form">
         <label for="event-title"
           >Add a title

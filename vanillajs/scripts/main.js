@@ -1,6 +1,7 @@
 import Calendar from "./components/Calendar/Calendar.js";
-import EventDetailsModal from "./components/EventDetailsModal/index.js";
+import CreateEventModal from "./components/CreateEventModal/index.js";
 import Header from "./components/Header/index.js";
+import TimeSlotEvent from "./components/TimeSlotEvent/index.js";
 import { getWeekFrom } from "./helpers/calendarHelper.js";
 import { sessionStorageService } from "./storage/index.js";
 
@@ -9,7 +10,6 @@ const calendar = Calendar();
 calendar.instanceCalendar();
 calendar.updateCalendar(getWeekFrom(new Date()));
 Header(new Date());
-EventDetailsModal();
 
 const getDateOf = (requestedWeekView) => {
   const index = Session.getWeekIndex();
@@ -40,17 +40,20 @@ const getDateOf = (requestedWeekView) => {
     });
 });
 
+function createCalendarEventWithAsideButton(clientEvent) {
+  const draftEvent = {
+    stage: "draft",
+    title: `(no title), ${new Date().getHours()}`,
+    startDateTime: new Date(),
+    endDateTime: new Date(new Date().setMinutes(30)),
+  };
+  TimeSlotEvent(draftEvent).scrollIntoView({
+    // behavior: "smooth",
+    block: "end",
+    inline: "nearest",
+  });
+  CreateEventModal(draftEvent, [clientEvent.clientY, clientEvent.clientX]);
+}
 document
   .querySelector("#aside-create-event-button")
-  .addEventListener("click", () => {
-    const draftEvent = {
-      stage: "draft",
-      title: `(no title), ${new Date().getHours()}`,
-      startDateTime: new Date(),
-      endDateTime: new Date(new Date().setMinutes(30)),
-    };
-
-    TimeSlotEvent(draftEvent, this);
-
-    CreateEventModal(draftEvent, [clientEvent.clientY, clientEvent.clientX]);
-  });
+  .addEventListener("click", createCalendarEventWithAsideButton);
