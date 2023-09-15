@@ -50,7 +50,8 @@
   justify-content: center;
 }
 
-.header-col {
+.header-col,
+.header-row:first-child {
   background: linear-gradient(
         var(--background-brand-primary),
         var(--background-brand-primary)
