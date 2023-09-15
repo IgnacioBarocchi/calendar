@@ -26,7 +26,7 @@ main {
 
 aside {
   margin-top: var(--header-height);
-  width: 25%;
+  width: 20%;
   position: relative;
 }
 
