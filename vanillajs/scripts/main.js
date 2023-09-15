@@ -1,4 +1,5 @@
 import Calendar from "./components/Calendar/Calendar.js";
+// import ClockHand from "./components/ClockHand/ClockHand.js";
 import CreateEventModal from "./components/CreateEventModal/index.js";
 import Header from "./components/Header/index.js";
 import TimeSlotEvent from "./components/TimeSlotEvent/index.js";
@@ -8,8 +9,10 @@ import { sessionStorageService } from "./storage/index.js";
 window.addEventListener("DOMContentLoaded", () => {
   const Session = sessionStorageService();
   const calendar = Calendar();
+  // const clockHand = ClockHand();
   calendar.instanceCalendar();
   calendar.updateCalendar(getWeekFrom(new Date()));
+
   Header(new Date());
 
   const getDateOf = (requestedWeekView) => {
@@ -38,6 +41,7 @@ window.addEventListener("DOMContentLoaded", () => {
         const requestedWeekViewDate = getDateOf(requestedWeekView);
         calendar.updateCalendar(getWeekFrom(requestedWeekViewDate));
         Header(requestedWeekViewDate);
+        // clockHand.render();
       });
   });
 

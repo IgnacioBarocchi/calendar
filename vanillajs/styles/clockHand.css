@@ -1,0 +1,6 @@
+#clock-hand {
+  color: red;
+  position: absolute;
+  font-weight: bold;
+  z-index: 4;
+}

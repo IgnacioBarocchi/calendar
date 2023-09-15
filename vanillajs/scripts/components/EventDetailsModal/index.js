@@ -13,7 +13,6 @@ const EventDetailsModal = (calendarEventElement, position) => {
   const modal = document.querySelector("#event-details-modal");
   render(position, modal);
 
-  // document.querySelector("");
   document
     .querySelector("#delete-event-button")
     .addEventListener("click", function () {
