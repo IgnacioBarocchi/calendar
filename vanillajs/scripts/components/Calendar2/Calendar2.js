@@ -5,6 +5,7 @@ import TimeSlotEvent from "../TimeSlotEvent/index.js";
 import appendElements from "../../lib/appendElements.js";
 import { createElement2 } from "../../lib/createElement.js";
 import { localStorageService } from "../../storage/index.js";
+
 const Storage = localStorageService();
 
 function openModal(event) {
@@ -66,8 +67,13 @@ const updateCalendar = (week) => {
   const calendarDaysHeader = document.querySelectorAll(".header-row");
   week.forEach((dateTime, i) => {
     //* update header
-    const dateNumber = calendarDaysHeader[i + 1].querySelector(".date-number");
+    const calendarDaysHeaderCell = calendarDaysHeader[i + 1];
+    const dateNumber = calendarDaysHeaderCell.querySelector(".date-number");
     dateNumber.textContent = dateTime.getDate();
+
+    if (dateTime.toDateString() === new Date().toDateString()) {
+      dateNumber.classList.add("today-highlight");
+    }
 
     // * update cells
     const calendarSingleDayColumn = document.querySelectorAll(
@@ -75,12 +81,14 @@ const updateCalendar = (week) => {
     );
 
     calendarSingleDayColumn.forEach((timeSlot) => {
-      timeSlot.innerHTML = ""; //wipe events
+      //* Wipe events
+      timeSlot.innerHTML = "";
       const thisDayTime = new Date(dateTime).setHours(
         timeSlot.dataset.slotIndex.split("-")[1],
         0,
         0
       );
+
       timeSlot.dataset.dateTime = new Date(thisDayTime);
 
       const calendarEvents = Storage.getEventsBySlotIndex(

@@ -9,6 +9,7 @@ header {
   top: 0;
   z-index: 2;
   background: #030712;
+  border-bottom: 1px solid #52525b;
 }
 
 #header-menu {
@@ -45,9 +46,5 @@ header {
 
 .today-button {
   height: fit-content;
-  border: 1px solid white;
-  outline: none;
-  background: transparent;
-  color: white;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
