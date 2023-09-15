@@ -53,3 +53,8 @@ button {
   outline: none;
   font-size: 1.5rem;
 }
+
+button:hover {
+  color: var(--color-brand-primary);
+  transition: color 0.3s ease;
+}
