@@ -2,7 +2,7 @@
 .time-slot-event-ongoing,
 .time-slot-event-past,
 .time-slot-event-draft {
-  color: white;
+  color: var(--color-brand-primary);
   /* change colors */
-  background: #1d4ed8;
+  background: var(--color-accent-primary);
 }

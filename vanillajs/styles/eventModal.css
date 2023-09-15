@@ -1,9 +1,9 @@
 dialog {
   z-index: 2;
   position: absolute;
-  color: white;
+  color: var(--color-brand-primary);
   background: #030712;
-  border: 1px solid #71717a;
+  border: 1px solid var(--color-brand-secondary);
   margin: 0;
 }
 

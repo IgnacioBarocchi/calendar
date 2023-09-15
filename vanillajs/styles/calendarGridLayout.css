@@ -10,14 +10,14 @@
 }
 
 .grid-item {
-  border: 1px solid #52525b;
+  border: 1px solid var(--color-brand-tertiary);
   padding: 10px;
   text-align: center;
   height: calc(var(--header-height) * 1.618);
 }
 
 .header-row {
-  color: white;
+  color: var(--color-brand-primary);
   position: sticky;
   border-top: none;
 }
@@ -40,7 +40,7 @@
 }
 
 .today-highlight {
-  background-color: #1d4ed8;
+  background-color: var(--color-accent-primary);
   width: 2.5rem;
   height: 2.5rem;
   display: inline-flex;

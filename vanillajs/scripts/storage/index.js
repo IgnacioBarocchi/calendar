@@ -28,7 +28,10 @@ const localStorageService = () => {
 
     return eventsOfTheSlot.filter((event) => {
       const eventDate = new Date(event.startDateTime);
-      return eventDate.getHours() === timeSlotDayTime.getHours();
+      return (
+        eventDate.getHours() === timeSlotDayTime.getHours() &&
+        eventDate.getDate() === timeSlotDayTime.getDate()
+      );
     });
   };
 
