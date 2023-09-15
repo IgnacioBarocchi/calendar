@@ -3,6 +3,13 @@
 .time-slot-event-past,
 .time-slot-event-draft {
   color: var(--color-brand-primary);
-  /* change colors */
   background: var(--color-accent-primary);
+  text-align: left;
+  padding: 4px;
+  border-radius: 4px;
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  word-wrap: break-word;
+  overflow: hidden;
 }

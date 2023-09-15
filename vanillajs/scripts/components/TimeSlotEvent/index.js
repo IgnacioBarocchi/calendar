@@ -3,7 +3,7 @@ import appendElements from "../../lib/appendElements.js";
 import { createElement2 } from "../../lib/createElement.js";
 
 const getEventHoursLong = (startDateTime, endDateTime) =>
-  Math.abs(new Date(startDateTime) - new Date(endDateTime)) / 36e5;
+  Math.abs(startDateTime - endDateTime) / 36e5;
 
 const TimeSlotEvent = (calendarEvent, timeSlot) => {
   // const pixelUnitsOfOneHourSlot = timeSlot.offsetHeight;
@@ -14,14 +14,20 @@ const TimeSlotEvent = (calendarEvent, timeSlot) => {
     past: "time-slot-event-past",
     draft: "time-slot-event-draft",
   }[stage];
-  const eventHoursLong = getEventHoursLong(
-    calendarEvent.startDateTime,
-    calendarEvent.endDateTime
-  );
+
+  const {
+    startDateTime: startDateTimeString,
+    endDateTime: endDateTimeString,
+    description,
+  } = calendarEvent;
+
+  const startDateTime = new Date(startDateTimeString);
+  const endDateTime = new Date(endDateTimeString);
+  const eventHoursLong = getEventHoursLong(startDateTime, endDateTime);
 
   if (!timeSlot) {
     timeSlot = document.querySelector(
-      `[data-slot-index="${calendarEvent.startDateTime.getDay()}-${calendarEvent.startDateTime.getHours()}"]`
+      `[data-slot-index="${startDateTime.getDay()}-${startDateTime.getHours()}"]`
     );
   }
 
@@ -32,10 +38,20 @@ const TimeSlotEvent = (calendarEvent, timeSlot) => {
 
   const calendarEventElement = createElement2(
     `
-      <div class="${classNameByEventStage}" style="height: ${calendarEventOffsetHeight}px;" data-calendar-event='${JSON.stringify(
+      <div class="${classNameByEventStage}" style="height: ${calendarEventOffsetHeight}px; top:${startDateTime.getMinutes()}px" data-calendar-event='${JSON.stringify(
       calendarEvent
     )}'>
-          <span>${title}</span>
+          <h3>${title}</h3>
+          <div>${startDateTime.toLocaleString("en-US", {
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true,
+          })} - ${endDateTime.toLocaleString("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    })}</div>
+    ${description ? `<div>${description}</div>` : ""}
       </div>
     `
   );
