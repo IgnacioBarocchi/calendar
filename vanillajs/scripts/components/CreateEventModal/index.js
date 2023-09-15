@@ -58,6 +58,7 @@ const CreateEventModal = (startTime, position) => {
 
 const createEventRecord = () => {
   const title = document.querySelector("#event-title").value;
+  debugger;
   const startDateTime = new Date(
     document.querySelector("#start-datetime").value
   );

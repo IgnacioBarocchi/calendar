@@ -1,7 +1,9 @@
 import EventDetailsModal from "../EventDetailsModal/index.js";
-// !rename to startDateTime
 import appendElements from "../../lib/appendElements.js";
 import { createElement2 } from "../../lib/createElement.js";
+
+const getEventHoursLong = (startDateTime, endDateTime) =>
+  Math.abs(new Date(startDateTime) - new Date(endDateTime)) / 36e5;
 
 const TimeSlotEvent = (calendarEvent, timeSlot) => {
   // const pixelUnitsOfOneHourSlot = timeSlot.offsetHeight;
@@ -12,6 +14,10 @@ const TimeSlotEvent = (calendarEvent, timeSlot) => {
     past: "time-slot-event-past",
     draft: "time-slot-event-draft",
   }[stage];
+  const eventHoursLong = getEventHoursLong(
+    calendarEvent.startDateTime,
+    calendarEvent.endDateTime
+  );
 
   if (!timeSlot) {
     timeSlot = document.querySelector(
@@ -19,9 +25,14 @@ const TimeSlotEvent = (calendarEvent, timeSlot) => {
     );
   }
 
+  const pixelUnitsOfOneHourSlot = timeSlot.offsetHeight;
+  const calendarEventOffsetHeight = `${
+    pixelUnitsOfOneHourSlot * eventHoursLong
+  }`;
+
   const calendarEventElement = createElement2(
     `
-      <div class="${classNameByEventStage}" data-calendar-event='${JSON.stringify(
+      <div class="${classNameByEventStage}" style="height: ${calendarEventOffsetHeight}px;" data-calendar-event='${JSON.stringify(
       calendarEvent
     )}'>
           <span>${title}</span>
