@@ -3,6 +3,9 @@ const MONTHS = [];
 const MONTHS_ABBREVIATIONS = [];
 const DAYS = [];
 const DAYS_ABBREVIATIONS = [];
+const TIME_ZONE_OFFSET = { 480: "UTC-8", 0: "UTC", 180: "UTC+3" }[
+  Math.abs(new Date().getTimezoneOffset())
+];
 
 for (let i = 0; i < 12; i++) {
   const date = new Date(2023, i, 1);
@@ -32,4 +35,10 @@ for (let i = 0; i < 7; i++) {
   DAYS_ABBREVIATIONS.push(dayAbbreviation);
 }
 
-export { MONTHS, MONTHS_ABBREVIATIONS, DAYS, DAYS_ABBREVIATIONS };
+export {
+  MONTHS,
+  MONTHS_ABBREVIATIONS,
+  DAYS,
+  DAYS_ABBREVIATIONS,
+  TIME_ZONE_OFFSET,
+};

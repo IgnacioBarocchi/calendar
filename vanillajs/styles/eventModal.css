@@ -11,3 +11,7 @@ dialog {
   display: flex;
   flex-direction: column;
 }
+
+dialog::backdrop {
+  pointer-events: all;
+}

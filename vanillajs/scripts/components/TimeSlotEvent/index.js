@@ -4,7 +4,6 @@ import { createElement2 } from "../../lib/createElement.js";
 // ! no hace falta pasar el timeslot a calendar event.
 const TimeSlotEvent = (calendarEvent, timeSlot) => {
   // const pixelUnitsOfOneHourSlot = timeSlot.offsetHeight;
-  debugger;
   const { stage, title } = calendarEvent || {};
   const classNameByEventStage = {
     upcoming: "time-slot-event-upcoming",
@@ -14,8 +13,9 @@ const TimeSlotEvent = (calendarEvent, timeSlot) => {
   }[stage];
 
   if (!timeSlot) {
-    // search for it
-    return;
+    timeSlot = document.querySelector(
+      `[data-slot-index="${calendarEvent.startDateTime.getDay()}-${calendarEvent.startDateTime.getHours()}"]`
+    );
   }
 
   const calendarEventElement = createElement2(

@@ -11,12 +11,6 @@ const autoFillDates = (startDateTime) => {
     new Date(startDateTime).setMinutes(30)
   );
 };
-// todo
-// dialog::backdrop { //  hide on click
-//   position: fixed;
-//   inset: 0px;
-//   background: rgba(0, 0, 0, 0.1);
-// }
 
 const render = (startTime, position) => {
   const [x, y] = position;
@@ -80,11 +74,9 @@ const createEventRecord = () => {
       stage: "upcoming",
       // ! the problem is that updating them in real time is quite complicated
       // todo add stage upcoming | ongoing | past depending on dates!
-      //? parent time slot ?
-      //? time slot metadata ?
     };
     // document query selector all draft events and remove
-    // TimeSlotEvent(eventRecord);
+    TimeSlotEvent(eventRecord);
     localStorageService().addEvent(eventRecord);
     document.querySelector("#event-modal").close();
   }

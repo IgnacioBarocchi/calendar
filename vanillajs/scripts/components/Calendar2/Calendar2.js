@@ -1,14 +1,11 @@
+import { DAYS_ABBREVIATIONS, TIME_ZONE_OFFSET } from "../../constants/index.js";
+
 import CreateEventModal from "../CreateEventModal/index.js";
-import { DAYS_ABBREVIATIONS } from "../../constants/index.js";
 import TimeSlotEvent from "../TimeSlotEvent/index.js";
 import appendElements from "../../lib/appendElements.js";
 import { createElement2 } from "../../lib/createElement.js";
 import { localStorageService } from "../../storage/index.js";
 const Storage = localStorageService();
-
-const timezoneOffset = { 480: "UTC-8", 0: "UTC", 180: "UTC+3" }[
-  Math.abs(new Date().getTimezoneOffset())
-];
 
 function openModal(event) {
   const dialog = document.querySelector("#event-modal").open;
@@ -36,7 +33,7 @@ const instanceCalendar = () => {
   const grid = document.getElementById("grid");
   appendElements(
     [
-      getGridCell(timezoneOffset, true),
+      getGridCell(TIME_ZONE_OFFSET, true),
       ...DAYS_ABBREVIATIONS.map((day) => getGridCell(day, true)),
     ],
     grid
