@@ -36,9 +36,8 @@ main {
 }
 
 aside {
-  margin-top: var(--header-height);
   width: var(--aside-width);
-  position: relative;
+  grid-area: aside-area;
 }
 
 ul {
@@ -58,3 +57,18 @@ button:hover {
   color: var(--color-brand-primary);
   transition: color 0.3s ease;
 }
+
+.layout {
+  display: grid;
+  grid-template-columns: 20vw 80vw;
+  grid-template-rows: var(--header-height) 100vh;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "header-area header-area"
+    "aside-area calendar-area";
+}
+
+/* .header-area {
+  grid-area: header-area;
+} */

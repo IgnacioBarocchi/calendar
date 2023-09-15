@@ -1,9 +1,9 @@
 #calendar-container {
   width: 100%;
+  grid-area: calendar-area;
 }
 
 .grid-container {
-  margin-top: var(--header-height);
   display: grid;
   grid-template-columns: 5rem 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: repeat(25, 1fr);

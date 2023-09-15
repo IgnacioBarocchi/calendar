@@ -7,6 +7,7 @@ header {
   background: #030712;
   border-bottom: 1px solid var(--color-brand-tertiary);
   display: flex;
+  grid-area: header-area;
 }
 
 #logo-container {
