@@ -35,7 +35,21 @@ const localStorageService = () => {
     });
   };
 
-  return { getEvents, addEvent, getEventsBySlotIndex };
+  const deleteEvent = (event) => {
+    localStorage.setItem(
+      "events",
+      events.filter(
+        (e) =>
+          event.title !== e.title &&
+          event.stage !== e.stage &&
+          event.startDateTime !== e.startDateTime &&
+          event.endDateTime !== e.endDateTime &&
+          event.description !== e.description
+      )
+    );
+  };
+
+  return { getEvents, addEvent, getEventsBySlotIndex, deleteEvent };
 };
 
 const sessionStorageService = () => {

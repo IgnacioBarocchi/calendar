@@ -40,6 +40,11 @@ aside {
   grid-area: aside-area;
 }
 
+#aside-menu {
+  position: fixed;
+  top: var(--header-height);
+}
+
 ul {
   list-style: none;
 }
