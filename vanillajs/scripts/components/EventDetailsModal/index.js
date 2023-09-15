@@ -9,12 +9,13 @@ const EventDetailsModal = (calendarEvent, position) => {
     calendarEvent.description;
   const modal = document.querySelector("#event-details-modal");
   render(position, modal);
-  // calendarEvent
+
+  // document.querySelector("");
   document
     .querySelector("#delete-event-button")
     .addEventListener("click", function () {
-      // this.remove();
-      Storage.deleteEvent(calendarEvent);
+      Storage.deleteEventByObjectIds(calendarEvent.id);
+      modal.close();
     });
 };
 

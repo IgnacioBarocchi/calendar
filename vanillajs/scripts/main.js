@@ -1,10 +1,9 @@
-import { localStorageService, sessionStorageService } from "./storage/index.js";
-
 import Calendar from "./components/Calendar/Calendar.js";
 import CreateEventModal from "./components/CreateEventModal/index.js";
 import Header from "./components/Header/index.js";
 import TimeSlotEvent from "./components/TimeSlotEvent/index.js";
 import { getWeekFrom } from "./helpers/calendarHelper.js";
+import { sessionStorageService } from "./storage/index.js";
 
 window.addEventListener("DOMContentLoaded", () => {
   const Session = sessionStorageService();

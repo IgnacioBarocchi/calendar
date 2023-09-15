@@ -1,3 +1,5 @@
+// ! the problem is that updating them in real time is quite complicated unless we implement the clock hand logic
+// todo add stage upcoming | ongoing | past depending on dates!
 import TimeSlotEvent from "../TimeSlotEvent/index.js";
 import formatDateToDateInputValue from "../../lib/formatDateToDateInputValue.js";
 import { localStorageService } from "../../storage/index.js";
@@ -57,10 +59,7 @@ const createEventRecord = () => {
       endDateTime,
       description,
       stage: "upcoming",
-      // ! the problem is that updating them in real time is quite complicated
-      // todo add stage upcoming | ongoing | past depending on dates!
     };
-    // document query selector all draft events and remove
     TimeSlotEvent(eventRecord);
     localStorageService().addEvent(eventRecord);
     document.querySelector("#event-modal").close();

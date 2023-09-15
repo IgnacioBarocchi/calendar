@@ -9,7 +9,15 @@ const localStorageService = () => {
   const addEvent = (event) => {
     const slotIndex = `${event.startDateTime.getDay()}-${event.startDateTime.getHours()}`;
     const eventsOfTheSlot = events[slotIndex] || [];
+    // ! replace by seed random | nano id npm module
+    event.id = String(
+      Object.values(events).flat().length +
+        Math.random() * 10000 +
+        new Date().getSeconds()
+    ).replace(".", "");
+
     eventsOfTheSlot.push(event);
+
     localStorage.setItem(
       "events",
       JSON.stringify({ ...events, [slotIndex]: eventsOfTheSlot })
@@ -35,21 +43,20 @@ const localStorageService = () => {
     });
   };
 
-  const deleteEvent = (event) => {
+  const deleteEventByObjectIds = (targetId) => {
     localStorage.setItem(
       "events",
-      events.filter(
-        (e) =>
-          event.title !== e.title &&
-          event.stage !== e.stage &&
-          event.startDateTime !== e.startDateTime &&
-          event.endDateTime !== e.endDateTime &&
-          event.description !== e.description
+      JSON.stringify(
+        Object.fromEntries(
+          Object.entries(events).map(([key, itsEvents]) => {
+            return [key, itsEvents.filter((event) => event.id !== targetId)];
+          })
+        )
       )
     );
   };
 
-  return { getEvents, addEvent, getEventsBySlotIndex, deleteEvent };
+  return { getEvents, addEvent, getEventsBySlotIndex, deleteEventByObjectIds };
 };
 
 const sessionStorageService = () => {

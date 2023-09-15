@@ -37,3 +37,5 @@
 * 12 hours clock formatting [https://stackoverflow.com/questions/8888491/how-do-you-display-javascript-datetime-in-12-hour-am-pm-format]
 
 * Get hours between two dates [https://stackoverflow.com/questions/19225414/how-to-get-the-hours-difference-between-two-date-objects]
+
+* Object from entries [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/fromEntries]
