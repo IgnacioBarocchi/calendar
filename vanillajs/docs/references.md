@@ -33,3 +33,5 @@
 * Border gradient generator [https://unused-css.com/tools/border-gradient-generator]
 
 * Grid layout generator [https://grid.layoutit.com/]
+
+* 12 hours clock formatting [https://stackoverflow.com/questions/8888491/how-do-you-display-javascript-datetime-in-12-hour-am-pm-format]

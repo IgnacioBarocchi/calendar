@@ -42,12 +42,18 @@ const instanceCalendar = () => {
 
   // * 7 x 24 + 1 header column + 1 header row
   [...Array(24).keys()].forEach((hour) => {
+    const time = new Date();
+    time.setHours(hour, 0, 0);
+
     appendElements(
       [
         createElement2(
           `<div class="grid-item header-col">
                 <div class="header-text-container">
-                  <span>${hour}</span>
+                  <span>${time.toLocaleString("en-US", {
+                    hour: "numeric",
+                    hour12: true,
+                  })}</span>
                 </div>
           </div>`
         ),
