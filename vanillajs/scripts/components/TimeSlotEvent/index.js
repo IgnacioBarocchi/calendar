@@ -13,11 +13,9 @@ const processEvents = (calendarEventElement, stage) => {
 
   calendarEventElement.addEventListener("click", function (clientEvent) {
     clientEvent.stopPropagation();
-    const calendarEvent = JSON.parse(this.dataset.calendarEvent);
-    console.log(calendarEvent);
 
     document.querySelector("#event-details-modal").showModal();
-    EventDetailsModal(calendarEvent, [
+    EventDetailsModal(calendarEventElement, [
       clientEvent.clientX,
       clientEvent.clientY,
     ]);
