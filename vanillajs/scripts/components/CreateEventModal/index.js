@@ -1,7 +1,7 @@
 import TimeSlotEvent from "../TimeSlotEvent/index.js";
 import formatDateToDateInputValue from "../../lib/formatDateToDateInputValue.js";
 import { localStorageService } from "../../storage/index.js";
-
+import { render } from "../../helpers/modalHelper.js";
 const autoFillDates = (startDateTime) => {
   const startDateTimeField = document.querySelector("#start-datetime");
   startDateTimeField.value = formatDateToDateInputValue(startDateTime);
@@ -10,27 +10,6 @@ const autoFillDates = (startDateTime) => {
   endDateTimeField.value = formatDateToDateInputValue(
     new Date(startDateTime).setMinutes(30)
   );
-};
-
-const render = (startTime, position) => {
-  const [x, y] = position;
-  autoFillDates(startTime);
-
-  const dialog = document.querySelector("#event-modal");
-  dialog.showModal();
-
-  const maxLeft = window.innerWidth - dialog.offsetWidth;
-  const maxTop = window.innerHeight - dialog.offsetHeight;
-
-  const calculatedX = Math.min(Math.max(0, x), maxLeft);
-  const calculatedY = Math.min(Math.max(0, y), maxTop);
-
-  const modalCss = `
-      top: ${calculatedY}px;
-      left: ${calculatedX}px;
-    `;
-
-  dialog.style.cssText = modalCss;
 };
 
 const eventIsValid = (title, startDateTime, endDateTime) => {
@@ -53,7 +32,8 @@ const eventIsValid = (title, startDateTime, endDateTime) => {
 };
 
 const CreateEventModal = (startTime, position) => {
-  render(startTime, position);
+  render(position, document.querySelector("#event-modal"));
+  autoFillDates(startTime);
 };
 
 const createEventRecord = () => {

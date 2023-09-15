@@ -1,11 +1,11 @@
-import Calendar2 from "./components/Calendar2/Calendar2.js";
+import Calendar from "./components/Calendar/Calendar.js";
 import EventDetailsModal from "./components/EventDetailsModal/index.js";
 import Header from "./components/Header/index.js";
 import { getWeekFrom } from "./helpers/calendarHelper.js";
 import { sessionStorageService } from "./storage/index.js";
 
 const Session = sessionStorageService();
-const calendar = Calendar2();
+const calendar = Calendar();
 calendar.instanceCalendar();
 calendar.updateCalendar(getWeekFrom(new Date()));
 Header(new Date());
@@ -39,3 +39,18 @@ const getDateOf = (requestedWeekView) => {
       Header(requestedWeekViewDate);
     });
 });
+
+document
+  .querySelector("#aside-create-event-button")
+  .addEventListener("click", () => {
+    const draftEvent = {
+      stage: "draft",
+      title: `(no title), ${new Date().getHours()}`,
+      startDateTime: new Date(),
+      endDateTime: new Date(new Date().setMinutes(30)),
+    };
+
+    TimeSlotEvent(draftEvent, this);
+
+    CreateEventModal(draftEvent, [clientEvent.clientY, clientEvent.clientX]);
+  });

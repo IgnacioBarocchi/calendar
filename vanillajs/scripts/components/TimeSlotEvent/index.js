@@ -61,8 +61,11 @@ const TimeSlotEvent = (calendarEvent, timeSlot) => {
     const calendarEvent = JSON.parse(this.dataset.calendarEvent);
     console.log(calendarEvent);
 
-    EventDetailsModal(calendarEvent);
-    document.querySelector("#event-details-modal").open = true;
+    document.querySelector("#event-details-modal").showModal();
+    EventDetailsModal(calendarEvent, [
+      clientEvent.clientX,
+      clientEvent.clientY,
+    ]);
   });
   appendElements([calendarEventElement], timeSlot);
 };
