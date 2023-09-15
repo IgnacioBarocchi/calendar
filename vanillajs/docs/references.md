@@ -29,3 +29,7 @@
 * Auto fit grid columns [https://css-tricks.com/auto-sizing-columns-css-grid-auto-fill-vs-auto-fit/]
 
 * CSS color variables naming [https://medium.com/@stefanmorris/proper-naming-of-color-variables-683264fec0f4]
+
+* Border gradient generator [https://unused-css.com/tools/border-gradient-generator]
+
+* Grid layout generator [https://grid.layoutit.com/]

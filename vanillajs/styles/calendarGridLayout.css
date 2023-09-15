@@ -50,6 +50,15 @@
   justify-content: center;
 }
 
+.header-col {
+  background: linear-gradient(
+        var(--background-brand-primary),
+        var(--background-brand-primary)
+      )
+      50% 50% / calc(100% - 2px) calc(100% - 2px) no-repeat,
+    linear-gradient(90deg, transparent 0%, var(--color-brand-tertiary) 100%);
+  border: none;
+}
 /* 
 not working magic
 .grid-item:nth-child(8n + 1) {
