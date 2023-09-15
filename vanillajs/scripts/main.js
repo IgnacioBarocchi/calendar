@@ -1,4 +1,5 @@
 import Calendar2 from "./components/Calendar2/Calendar2.js";
+import Header from "./components/Header/index.js";
 import { getWeekFrom } from "./helpers/calendarHelper.js";
 import { sessionStorageService } from "./storage/index.js";
 
@@ -6,6 +7,7 @@ const Session = sessionStorageService();
 const calendar = Calendar2();
 calendar.instanceCalendar();
 calendar.updateCalendar(getWeekFrom(new Date()));
+Header(new Date());
 
 const getDateOf = (requestedWeekView) => {
   const index = Session.getWeekIndex();
@@ -30,6 +32,8 @@ const getDateOf = (requestedWeekView) => {
           { prev: -1, next: 1, ongoing: 0 }[requestedWeekView]
       );
 
-      calendar.updateCalendar(getWeekFrom(getDateOf(requestedWeekView)));
+      const requestedWeekViewDate = getDateOf(requestedWeekView);
+      calendar.updateCalendar(getWeekFrom(requestedWeekViewDate));
+      Header(requestedWeekViewDate);
     });
 });

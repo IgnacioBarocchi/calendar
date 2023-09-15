@@ -1,12 +1,12 @@
 import { MONTHS } from "../../constants/index.js";
 import { getSundayOfWeek } from "../../helpers/calendarHelper.js";
+
 const Header = (date) => {
   const shouldRender = false;
-
-  document.querySelector("#month-label").textContent =
-    MONTHS[getSundayOfWeek(date).getMonth()];
+  const startDate = getSundayOfWeek(date);
+  document.querySelector("#month-label").textContent = `${
+    MONTHS[startDate.getMonth()]
+  } ${startDate.getFullYear()}`;
 };
-
-Header(new Date());
 
 export default Header;

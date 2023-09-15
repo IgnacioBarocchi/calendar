@@ -23,9 +23,15 @@ header {
   margin-left: 1rem;
   cursor: pointer;
 }
+
 #navigation-section {
   width: 100%;
-  margin-left: 20%;
+  margin-left: 17%;
+  display: flex;
+}
+
+#month-label {
+  font-size: 1.5rem;
 }
 
 #navigation-bar {
