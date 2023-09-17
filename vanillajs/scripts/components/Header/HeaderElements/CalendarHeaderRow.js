@@ -75,9 +75,9 @@ export default class CalendarHeaderRow {
     this.renderWeekDaysItems();
     console.log(this.headerElements);
     this.clearElementsData();
-    if (this.parentElement) {
-    } else {
-      appendElements(this.headerElements, this.parentElement);
-    }
+    // if (this.parentElement) {
+    // } else {
+    appendElements(this.headerElements, this.parentElement);
+    // }
   }
 }
