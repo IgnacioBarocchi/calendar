@@ -9,6 +9,14 @@ import TimeSlotEvent from "./components/TimeSlotEvent/index.js";
 import { getWeekFrom } from "./helpers/calendarHelper.js";
 import { sessionStorageService } from "./storage/index.js";
 
+const st = new SessionStorageService2();
+
+// const vn = new NavigationBar(st);
+const hd = new Header2(st);
+// const cl = new Calendar2(st);
+// cl.render();
+hd.render();
+
 // window.addEventListener("DOMContentLoaded", () => {
 //   const Session = sessionStorageService();
 //   const calendar = Calendar();
@@ -67,11 +75,3 @@ import { sessionStorageService } from "./storage/index.js";
 //     .querySelector("#aside-create-event-button")
 //     .addEventListener("click", createCalendarEventWithAsideButton);
 // });
-
-const st = new SessionStorageService2();
-
-// const vn = new NavigationBar(st);
-const hd = new Header2(st);
-// const cl = new Calendar2(st);
-// cl.render();
-hd.render();

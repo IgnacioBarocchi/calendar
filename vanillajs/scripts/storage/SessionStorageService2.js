@@ -3,7 +3,8 @@ import mapRange from "../lib/mapRange.js";
 
 // ! TENGO QUE USAR SESSION STORAGE PORQUE NO TENGO SINGLETON
 export default class SessionStorageService2 {
-  selectedWeek = [];
+  selectedWeek;
+  events;
 
   constructor() {
     window.addEventListener("beforeunload", () => {
@@ -23,9 +24,14 @@ export default class SessionStorageService2 {
   }
 
   setSelectedWeek(date, index) {
-    const cashedWeeks = JSON.parse(sessionStorage.getItem("cashedWeeks"));
+    const cashedWeeks = JSON.parse(sessionStorage.getItem("cashedWeeks")).map(
+      (dateTimeString) => new Date(dateTimeString)
+    );
+
     if (cashedWeeks[index] && cashedWeeks[index].length) {
-      return cashedWeeks[index];
+      const cashedWeek = cashedWeeks[index];
+      this.selectedWeek = cashedWeek;
+      return this.selectedWeek;
     }
 
     const startDate = new Date(date.setDate(date.getDate()));
@@ -35,9 +41,12 @@ export default class SessionStorageService2 {
       return currentDate;
     });
 
-    this.cashWeek(week, index);
-    this.selectedWeek = week;
-    console.log(this.selectedWeek);
+    if (week && week.length > 0) {
+      this.cashWeek(week, index);
+      this.selectedWeek = week;
+    } else {
+      throw new Error("Week error");
+    }
   }
 
   getSelectedWeek() {

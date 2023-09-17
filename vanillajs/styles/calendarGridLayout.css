@@ -61,9 +61,3 @@
     linear-gradient(90deg, transparent 0%, var(--color-brand-tertiary) 100%);
   border: none;
 }
-/* 
-not working magic
-.grid-item:nth-child(8n + 1) {
-  width: 50px;
-} */
-/* grid-template-columns: repeat(8, minmax(calc(100% - 80px), 1fr)); */

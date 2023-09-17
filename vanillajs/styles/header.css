@@ -1,27 +1,55 @@
-header {
+.header {
   width: 100%;
-  height: 60px;
+  height: var(--header-height);
   position: fixed;
   top: 0;
   z-index: 3;
   background: #030712;
   border-bottom: 1px solid var(--color-brand-tertiary);
-  display: flex;
+  display: grid;
+  grid-template-columns: 0.3fr 1.1fr;
+  grid-template-rows: 0.5fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "logo navigation"
+    "create-event calendar-header";
+  /* delete */
   grid-area: header-area;
+  border: 1px solid green;
+}
+
+.logo {
+  grid-area: logo;
+  background-color: blue;
 }
 
 #logo-container {
   margin-left: 1rem;
   cursor: pointer;
   display: block;
-  width: var(--aside-width) !important;
+  /* width: var(--aside-width) !important; */
+}
+
+.create-event {
+  grid-area: create-event;
+  background-color: red;
+}
+
+.navigation {
+  grid-area: navigation;
+  background-color: purple;
+}
+
+.calendar-header {
+  grid-area: calendar-header;
+  background-color: yellow;
 }
 
 #navigation-section {
-  width: var(--aside-width);
+  /* width: var(--aside-width); */
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
 }
 
 #month-label {

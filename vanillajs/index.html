@@ -5,19 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles/reset.css" />
     <link rel="stylesheet" href="styles/index.css" />
-    <link rel="stylesheet" href="styles/table.css" />
+    <!-- <link rel="stylesheet" href="styles/table.css" />
     <link rel="stylesheet" href="styles/createEventModal.css" />
     <link rel="stylesheet" href="styles/eventDetailsModal.css" />
     <link rel="stylesheet" href="styles/header.css" />
     <link rel="stylesheet" href="styles/timeSlotEvents.css" />
     <link rel="stylesheet" href="styles/calendarGridLayout.css" />
-    <link rel="stylesheet" href="styles/clockHand.css" />
+    <link rel="stylesheet" href="styles/clockHand.css" /> -->
+    <link rel="stylesheet" href="styles/header.css" />
+
+    <!-- <link rel="stylesheet" href="styles/calendarGridLayout.css" /> -->
+
     <title>Calendar</title>
   </head>
   <body>
     <div class="layout">
-      <header>
+      <header class="header">
         <a
+          class="logo"
           id="logo-container"
           href="https://main--cerulean-gingersnap-166563.netdivfy.app/"
         >
@@ -41,7 +46,10 @@
             </g>
           </svg>
         </a>
-        <div id="navigation-section">
+        <div class="create-event">
+          <button id="aside-create-event-button">Create event</button>
+        </div>
+        <div class="navigation" id="navigation-section">
           <nav id="navigation-bar">
             <button class="today-button" id="ongoing-week">Today</button>
             <button class="week-navigation-button" id="prev-week">&#60;</button>
@@ -49,18 +57,25 @@
           </nav>
           <span id="month-label"></span>
         </div>
+        <div d="calendar-header-row-container" class="calendar-header"></div>
       </header>
 
-      <aside>
-        <div id="aside-menu">
-          <button id="aside-create-event-button">Create event</button>
-        </div>
+
+
+
+      <div class="calendar-layout-container">
+        <div class="aside"></div>
+        <div class="calendar"></div>
+      </div>
+
+      <!-- <aside>
+        <div id="aside-menu"></div>
       </aside>
 
       <div id="calendar-container">
         <div id="grid" class="grid-container"></div>
       </div>
-    </div>
+    </div> -->
 
     <span id="clock-hand">._________</span>
     <dialog id="event-modal">

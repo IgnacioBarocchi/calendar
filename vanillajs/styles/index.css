@@ -1,5 +1,5 @@
 :root {
-  --header-height: 60px;
+  --header-height: 200px;
   --aside-width: 20vw;
   --color-brand-primary: white;
   --color-brand-secondary: #71717a;
@@ -7,6 +7,8 @@
   --color-accent-primary: #1d4ed8;
   --background-brand-primary: #030712;
   --background-brand-secondary: #3333;
+  --layout-template-columns: 0.3fr 1.1fr;
+  --layout-template-rows: 1fr 1fr;
 }
 
 * {

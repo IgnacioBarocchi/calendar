@@ -2,9 +2,13 @@
 export default class NavigationBar {
   navigationIndex = 0;
   store;
+  header;
   stages = ["next", "prev", "ongoing"];
-  constructor(store /*instanceof Store | Store*/) {
+  constructor(store /*instanceof Store | Store*/, header) {
     this.store = store;
+    this.header = header;
+    console.log("navigation bar context ");
+    console.log(this.store);
   }
 
   incrementNavigationIndex() {
@@ -47,6 +51,8 @@ export default class NavigationBar {
       this.getDateOf(requestedWeekView),
       this.navigationIndex
     );
+
+    this.header.render();
   }
 
   navigate() {
