@@ -39,3 +39,5 @@
 * Get hours between two dates [https://stackoverflow.com/questions/19225414/how-to-get-the-hours-difference-between-two-date-objects]
 
 * Object from entries [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/fromEntries]
+
+* Range function snippet [https://stackoverflow.com/questions/3895478/does-javascript-have-a-method-like-range-to-generate-a-range-within-the-supp?page=2&tab=scoredesc#tab-top]
