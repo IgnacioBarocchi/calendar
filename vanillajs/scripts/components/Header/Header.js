@@ -12,7 +12,6 @@ export default class Header2 {
       this.store.setSelectedWeek(new Date(), 0);
     }
 
-    console.log(this.store);
     this.navigation = new NavigationBar(this.store, this);
     this.calendarHeaderRow = new CalendarHeaderRow(this.store);
     this.navigation.navigate();

@@ -1,29 +1,32 @@
-// todo: conver to singleton using typescript modifiers
+// todo: conver to singleton and use TypeScript modifiers
 export default class NavigationBar {
   navigationIndex = 0;
   store;
   header;
+  calendarBody;
+  //! retrieve from html
   stages = ["next", "prev", "ongoing"];
-  constructor(store /*instanceof Store | Store*/, header) {
+
+  constructor(store /*instanceof Store | Store*/, header, calendarBody) {
     this.store = store;
     this.header = header;
-    console.log("navigation bar context ");
+    this.calendarBody = calendarBody;
     console.log(this.store);
   }
 
-  incrementNavigationIndex() {
+  /*private*/ incrementNavigationIndex() {
     this.navigationIndex++;
   }
 
-  decrementNavigationIndex() {
+  /*private*/ decrementNavigationIndex() {
     this.navigationIndex--;
   }
 
-  resetNavigationIndex() {
+  /*private*/ resetNavigationIndex() {
     this.navigationIndex = 0;
   }
 
-  getDateOf(requestedWeekView) {
+  /*private*/ getDateOf(requestedWeekView) {
     const numberOfDaysToAdd = { ongoing: 0, next: 7, prev: -7 }[
       requestedWeekView
     ];
@@ -36,7 +39,7 @@ export default class NavigationBar {
     );
   }
   // !super ugly
-  handleNavigationChange(requestedWeekView) {
+  /*private*/ handleNavigationChange(requestedWeekView) {
     this[
       {
         prev: "decrementNavigationIndex",
@@ -53,6 +56,8 @@ export default class NavigationBar {
     );
 
     this.header.render();
+    // !add
+    // this.calendarBody.render();
   }
 
   navigate() {

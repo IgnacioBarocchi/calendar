@@ -21,5 +21,5 @@ const ClockHand = () => {
 
   return { render };
 };
-ClockHand().render();
+
 export default ClockHand;

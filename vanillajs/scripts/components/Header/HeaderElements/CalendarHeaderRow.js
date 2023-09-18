@@ -8,76 +8,75 @@ import { createElement2 } from "../../../lib/createElement.js";
 
 export default class CalendarHeaderRow {
   store;
-  headerElements;
+  dayOfTheWeekElements = [];
+  dateDataByDayName = {};
   parentElement = document.querySelector("#calendar-header-row-container");
 
   constructor(store) {
     this.store = store;
-  }
 
-  /*private*/ getTimeZoneOffsetDataHTMLStringFragment() {
-    return `<span class="date-name">${TIME_ZONE_OFFSET}</span>`;
-  }
-
-  /*private*/ getDateDataHTMLStringFragment(dateName, dateNumber, highlight) {
-    return `
-            <span class="date-name">${dateName}</span>
-            <span class="date-number ${
-              highlight ? "today-highlight" : ""
-            }">${dateNumber}</span>
-        `;
-  }
-
-  renderTimeZoneOffsetItem() {
     const timeZoneOffsetElement = createElement2(`
       <div class="grid-item header-row">
         <div class="header-text-container">
-          ${this.getTimeZoneOffsetDataHTMLStringFragment()}
+          <span class="date-name">${TIME_ZONE_OFFSET}</span>
         </div>
       </div>`);
-    this.headerElements = [timeZoneOffsetElement];
+
+    this.updateDateOfWeekElements();
+
+    appendElements(
+      [timeZoneOffsetElement, ...this.dayOfTheWeekElements],
+      this.parentElement
+    );
   }
 
-  renderWeekDaysItems() {
+  /*private*/ updateDateDataByDayName() {
+    this.store.selectedWeek.forEach((dateTime) => {
+      this.dateDataByDayName[DAYS_ABBREVIATIONS[dateTime.getDay()]] = {
+        date: dateTime.getDate(),
+        today: dateTime.toDateString() === new Date().toDateString(),
+      };
+    });
+  }
+
+  updateDateOfWeekElements() {
     if (!this.store.selectedWeek) return;
-    this.store.selectedWeek.map((dateTime) => {
-      const dataHTMLStringElements = this.getDateDataHTMLStringFragment(
-        DAYS_ABBREVIATIONS[dateTime.getDay()],
-        dateTime.getDate(),
-        dateTime.toDateString() === new Date().toDateString()
+    this.updateDateDataByDayName();
+    const shouldCreateElements = this.dayOfTheWeekElements?.length !== 7;
+    // !unnecessary variable evaluation
+    if (shouldCreateElements) {
+      this.dayOfTheWeekElements = Object.entries(this.dateDataByDayName).map(
+        ([dayName, record]) => {
+          return createElement2(`
+          <div class="grid-item header-row">
+            <div class="header-text-container">
+              <span class="date-name">${dayName}</span>
+              <span class="date-number ${
+                record.today ? "today-highlight" : ""
+              }">${record.date}</span>
+            </div>
+          </div>`);
+        }
       );
+    } else {
+      this.dayOfTheWeekElements.forEach((element) => {
+        const record =
+          this.dateDataByDayName[
+            element.querySelector(".date-name").textContent
+          ];
 
-      const dateHeaderElement = createElement2(`
-      <div class="grid-item header-row">
-        <div class="header-text-container">
-          ${dataHTMLStringElements}
-        </div>
-      </div>`);
+        const dateELement = element.querySelector(".date-number");
 
-      this.headerElements.push(dateHeaderElement);
+        dateELement.textContent = record.date;
 
-      return dateHeaderElement;
-    });
-  }
-
-  clearElementsData() {
-    this.headerElements.forEach((element, index) => {
-      // !skip timezone offset
-      if (index === 0) return;
-
-      element.querySelector(".date-name");
-      element.querySelector(".date-date-number");
-    });
+        dateELement.classList[record.today ? "add" : "remove"](
+          "today-highlight"
+        );
+      });
+    }
   }
 
   render() {
-    this.renderTimeZoneOffsetItem();
-    this.renderWeekDaysItems();
-    console.log(this.headerElements);
-    this.clearElementsData();
-    // if (this.parentElement) {
-    // } else {
-    appendElements(this.headerElements, this.parentElement);
-    // }
+    this.updateDateOfWeekElements();
   }
 }
