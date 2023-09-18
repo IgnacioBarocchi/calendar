@@ -14,14 +14,11 @@
   grid-template-areas:
     "logo navigation"
     "create-event calendar-header";
-  /* delete */
   grid-area: header-area;
-  border: 1px solid green;
 }
 
 .logo {
   grid-area: logo;
-  background-color: blue;
 }
 
 #logo-container {
@@ -33,17 +30,17 @@
 
 .create-event {
   grid-area: create-event;
-  background-color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .navigation {
   grid-area: navigation;
-  background-color: purple;
 }
 
 .calendar-header {
   grid-area: calendar-header;
-  background-color: yellow;
   display: grid;
   grid-template-columns: 5rem 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
@@ -84,12 +81,12 @@
   /* height: calc(var(--header-height) * 1.618); */
   position: relative;
 }
-
+/* 
 .header-row {
   color: var(--color-brand-primary);
   position: sticky;
   border-top: none;
-}
+} */
 
 .header-text-container {
   display: flex;
