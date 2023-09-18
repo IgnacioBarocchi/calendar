@@ -1,3 +1,5 @@
+import ModalComponent from "../../Modal/Modal.js";
+import TimeSlotEvent from "../../TimeSlotEvent/TimeSlotEvent.js";
 import { createElement2 } from "../../../lib/createElement.js";
 
 export default class TimeSlot {
@@ -6,21 +8,42 @@ export default class TimeSlot {
   timeSlotElement;
   store;
 
-  constructor(store, date, startingHour) {
+  constructor(store, dateTime, startingHour) {
     this.store = store;
-    this.dateTime = date.setHours(startingHour, 0, 0);
-    this.slotIndex = `${date.getDay()}-${date.getHours()}`;
-
+    this.slotIndex = `${dateTime.getDay()}-${startingHour}`;
+    const dateTimeValue = new Date(dateTime).setHours(startingHour, 0, 0);
+    this.dateTime = new Date(dateTimeValue);
     this.timeSlotElement = createElement2(`
         <div 
             class="grid-item time-slot" 
             data-slot-index="${this.slotIndex}" 
-            data-date-time="${new Date(this.dateTime).toDateString()}">
+            data-date-time="${dateTime}">
         </div>`);
 
-    this.timeSlotElement.addEventListener("click", () => {
-      alert("open modal");
-    });
+    this.timeSlotElement.addEventListener(
+      "click",
+      function (clientEvent) {
+        this._renderDraftCalendarEvent();
+
+        ModalComponent.openCreateEventModal([
+          clientEvent.clientX,
+          clientEvent.clientY,
+        ]);
+      }.bind(this)
+    );
+  }
+  _renderDraftCalendarEvent() {
+    const draftTimeSlotEvent = new TimeSlotEvent(
+      {
+        stage: "draft",
+        title: `(no title), ${this.dateTime.getHours()}`,
+        startDateTime: this.dateTime,
+        endDateTime: new Date(new Date(this.dateTime).setMinutes(30)),
+      },
+      this.timeSlotElement
+    );
+
+    draftTimeSlotEvent.render();
   }
 
   update(date) {

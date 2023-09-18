@@ -1,5 +1,6 @@
 import CalendarHeaderColumn from "./CalendarDataElements/CalendarHeaderColumn.js";
 import TimeSlot from "./CalendarDataElements/TimeSlot.js";
+import TimeSlotEvent from "../TimeSlotEvent/TimeSlotEvent.js";
 import appendElements from "../../lib/appendElements.js";
 //todo static class extends "Container"
 
@@ -35,15 +36,27 @@ export default class CalendarBody {
   mapEvents() {}
 
   updateTimeSlotsData() {
-    // this.store.selectedWeek.forEach((dateTime) => {
-    // });
+    const week = [...this.store.selectedWeek];
 
-    // ! add/remove events.
     this.timeSlotElements.forEach((timeSlotElement) => {
-      const [dayNumber, dateNumber] =
-        timeSlotElement.dataset.slotIndex.split("-");
-      const dateTime = this.store.selectedWeek[dayNumber];
-      timeSlotElement.dataset.dateTime = new Date(dateTime).toDateString();
+      timeSlotElement.innerHTML = "";
+
+      const [dayNumber, hour] = timeSlotElement.dataset.slotIndex.split("-");
+
+      const dayTimeValue = week[dayNumber]?.setHours(hour, 0, 0);
+
+      timeSlotElement.dataset.dateTime = new Date(dayTimeValue);
+
+      const slotEvents = this.store.getEventsBySlotIndex(
+        timeSlotElement.dataset.slotIndex
+      );
+
+      if (slotEvents?.length) {
+        slotEvents.forEach((slotEvent) => {
+          const timeSlotEvent = new TimeSlotEvent(slotEvent, timeSlotElement);
+          timeSlotEvent.render();
+        });
+      }
     });
   }
 

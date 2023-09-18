@@ -1,7 +1,8 @@
 import CalendarBody from "./components/CalendarBody/CalendarBody.js";
 import CalendarHeaderRow from "./components/Header/HeaderElements/CalendarHeaderRow.js";
 import NavigationControls from "./components/Header/HeaderElements/NavigationBar.js";
-import SessionStorageService2 from "./storage/SessionStorageService2.js";
+import SessionStorageService2 from "./storage/Storage.js";
+// import removeDraftEvents from "./lib/removeDraftEvents.js";
 
 const st = new SessionStorageService2();
 const hd = new CalendarHeaderRow(st);
@@ -13,6 +14,14 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const nv = new NavigationControls(st, hd, cb);
   nv.navigate();
+
+  // document.body.addEventListener("keypress", function (e) {
+  //   if (e.key == "Escape") removeDraftEvents();
+  // });
+
+  // document.querySelectorAll('.close-button')array.forEach(element => {
+
+  // });.addEventListener();
 });
 
 /* 
