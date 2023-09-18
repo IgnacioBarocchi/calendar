@@ -1,4 +1,3 @@
-import { getWeekFrom } from "../helpers/calendarHelper.js";
 import mapRange from "../lib/mapRange.js";
 
 // ! TENGO QUE USAR SESSION STORAGE PORQUE NO TENGO SINGLETON
@@ -10,12 +9,8 @@ export default class Storage {
       sessionStorage.clear();
     });
 
-    sessionStorage.setItem(
-      "cashedWeeks",
-      JSON.stringify([getWeekFrom(new Date())])
-    );
-
     this.setSelectedWeek(new Date(), 0);
+    sessionStorage.setItem("cashedWeeks", JSON.stringify([]));
   }
 
   /*Local*/
@@ -26,7 +21,7 @@ export default class Storage {
     return JSON.parse(localStorage.getItem("events"));
   }
 
-  addEvent(event) {
+  saveEvent(event) {
     const events = this._getEvents();
     const slotIndex = `${event.startDateTime.getDay()}-${event.startDateTime.getHours()}`;
     const eventsOfTheSlot = events[slotIndex] || [];
@@ -86,17 +81,17 @@ export default class Storage {
 
   /*Session*/
   cashWeek(week, index) {
-    const cashedWeeks = JSON.parse(sessionStorage.getItem("cashedWeeks"));
+    const cashedWeeks = JSON.parse(sessionStorage.getItem("cashedWeeks")) || [];
     cashedWeeks[index] = week;
     sessionStorage.setItem("cashedWeeks", JSON.stringify(cashedWeeks, null, 2));
   }
 
   setSelectedWeek(date, index) {
-    const cashedWeeks = JSON.parse(sessionStorage.getItem("cashedWeeks")).map(
+    const cashedWeeks = JSON.parse(sessionStorage.getItem("cashedWeeks"))?.map(
       (dateTimeString) => new Date(dateTimeString)
     );
 
-    if (cashedWeeks[index] && cashedWeeks[index].length) {
+    if (cashedWeeks && cashedWeeks[index]?.length) {
       const cashedWeek = cashedWeeks[index];
       this.selectedWeek = cashedWeek;
       return this.selectedWeek;

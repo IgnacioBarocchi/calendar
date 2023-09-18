@@ -1,10 +1,7 @@
-import {
-  DAYS_ABBREVIATIONS,
-  TIME_ZONE_OFFSET,
-} from "../../../constants/index.js";
+import { DAYS_ABBREVIATIONS, TIME_ZONE_OFFSET } from "../../constants/index.js";
 
-import appendElements from "../../../lib/appendElements.js";
-import { createElement2 } from "../../../lib/createElement.js";
+import appendElements from "../../lib/appendElements.js";
+import { createElement2 } from "../../lib/createElement.js";
 
 export default class CalendarHeaderRow {
   store;

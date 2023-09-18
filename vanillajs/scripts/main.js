@@ -1,6 +1,6 @@
 import CalendarBody from "./components/CalendarBody/CalendarBody.js";
-import CalendarHeaderRow from "./components/Header/HeaderElements/CalendarHeaderRow.js";
-import NavigationControls from "./components/Header/HeaderElements/NavigationBar.js";
+import CalendarHeaderRow from "./components/CalendarHeaderRow/CalendarHeaderRow.js";
+import NavigationControls from "./controls/NavigationControls.js";
 import SessionStorageService2 from "./storage/Storage.js";
 // import removeDraftEvents from "./lib/removeDraftEvents.js";
 

@@ -1,9 +1,14 @@
 import formatDateToDateInputValue from "../../lib/formatDateToDateInputValue.js";
-export class CalendarEventCreationForm {
+export default class CalendarEventCreationForm {
+  store;
   calendarEventCreationFormElement = document.querySelector(
     "#event-creation-form"
   );
-  // el modal lo va a usar cuando se le agregue el event listener
+
+  constructor(store) {
+    this.store = store;
+  }
+
   autoFillDates(startDateTime) {
     const startDateTimeField = document.querySelector("#start-datetime");
     startDateTimeField.value = formatDateToDateInputValue(startDateTime);
@@ -33,6 +38,7 @@ export class CalendarEventCreationForm {
   }
 
   createEventRecord() {
+    // remove draft events.
     const title = document.querySelector("#event-title").value;
 
     const startDateTime = new Date(
@@ -50,13 +56,14 @@ export class CalendarEventCreationForm {
         description,
         stage: "upcoming",
       };
-      TimeSlotEvent(eventRecord);
-      localStorageService().addEvent(eventRecord);
-      document.querySelector("#event-modal").close();
+
+      // TimeSlotEvent(eventRecord);
+      // localStorageService().addEvent(eventRecord);
+      // document.querySelector("#event-modal").close();
+
+      this.store.SaveEvent(eventRecord);
     }
   }
 
   render() {}
 }
-
-export default new CalendarEventCreationForm();
