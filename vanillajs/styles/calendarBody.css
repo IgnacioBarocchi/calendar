@@ -10,7 +10,7 @@
 }
 
 .aside {
-  background-color: red;
+  background-color: var(--background-brand-primar);
   grid-area: aside;
 }
 

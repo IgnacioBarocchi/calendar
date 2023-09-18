@@ -14,36 +14,5 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const nv = new NavigationControls(st, hd, cb);
   nv.navigate();
-
-  // document.body.addEventListener("keypress", function (e) {
-  //   if (e.key == "Escape") removeDraftEvents();
-  // });
-
-  // document.querySelectorAll('.close-button')array.forEach(element => {
-
-  // });.addEventListener();
 });
-
-/* 
-window.addEventListener("DOMContentLoaded", () => {
-
-  function createCalendarEventWithAsideButton(clientEvent) {
-    const draftEvent = {
-      stage: "draft",
-      title: `(no title), ${new Date().getHours()}`,
-      startDateTime: new Date(),
-      endDateTime: new Date(new Date().setMinutes(30)),
-    };
-    TimeSlotEvent(draftEvent).scrollIntoView({
-      // behavior: "smooth",
-      block: "end",
-      inline: "nearest",
-    });
-    CreateEventModal(draftEvent, [clientEvent.clientY, clientEvent.clientX]);
-  }
-
-  document
-    .querySelector("#aside-create-event-button")
-    .addEventListener("click", createCalendarEventWithAsideButton);
-});
-*/
+// querySelector("#aside-create-event-button")

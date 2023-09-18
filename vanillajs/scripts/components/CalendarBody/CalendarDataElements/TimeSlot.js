@@ -44,8 +44,8 @@ export default class TimeSlot {
       this.timeSlotElement
     );
 
-    // !!!!new instance lol
-    const form = new CalendarEventCreationForm();
+    // !!!!new instance lol duplicated records!!!!!!!!!!!!!
+    const form = new CalendarEventCreationForm(this.store);
     form.autoFillDates(this.dateTime);
     draftTimeSlotEvent.render();
   }

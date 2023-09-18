@@ -1,4 +1,4 @@
-// import EventDetailsModal from "../EventDetailsModal/index.js";
+// todo: refactor!
 import appendElements from "../../lib/appendElements.js";
 import { createElement2 } from "../../lib/createElement.js";
 

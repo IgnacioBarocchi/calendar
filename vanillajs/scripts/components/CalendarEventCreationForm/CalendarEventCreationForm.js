@@ -1,4 +1,7 @@
+import ModalComponent from "../Modal/Modal.js";
+import TimeSlotEvent from "../TimeSlotEvent/TimeSlotEvent.js";
 import formatDateToDateInputValue from "../../lib/formatDateToDateInputValue.js";
+
 export default class CalendarEventCreationForm {
   store;
   calendarEventCreationFormElement = document.querySelector(
@@ -7,6 +10,10 @@ export default class CalendarEventCreationForm {
 
   constructor(store) {
     this.store = store;
+
+    this.calendarEventCreationFormElement
+      .querySelector("#create-event-button")
+      .addEventListener("click", this.createEventRecord.bind(this));
   }
 
   autoFillDates(startDateTime) {
@@ -19,7 +26,7 @@ export default class CalendarEventCreationForm {
     );
   }
 
-  _eventIsValid() {
+  _eventIsValid(title, startDateTime, endDateTime) {
     const requiredFieldsAreEmpty = !title || !startDateTime || !endDateTime;
     const wrongDateFormat =
       !startDateTime instanceof Date || !endDateTime instanceof Date;
@@ -57,13 +64,10 @@ export default class CalendarEventCreationForm {
         stage: "upcoming",
       };
 
-      // TimeSlotEvent(eventRecord);
-      // localStorageService().addEvent(eventRecord);
-      // document.querySelector("#event-modal").close();
-
-      this.store.SaveEvent(eventRecord);
+      const timeSlotEvent = new TimeSlotEvent(eventRecord);
+      timeSlotEvent.render();
+      ModalComponent.closeCreateEventModal();
+      this.store.saveEvent(eventRecord);
     }
   }
-
-  render() {}
 }
