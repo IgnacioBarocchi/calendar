@@ -17,8 +17,8 @@ export class Modal {
         this.closeEventDetailsModal();
       });
 
-    document.body.addEventListener("keypress", function (e) {
-      if (e.key == "Escape") alert("a");
+    document.addEventListener("keypress", function (e) {
+      if (e.key == "Escape") alert("test");
     });
   }
 
@@ -28,6 +28,29 @@ export class Modal {
 
   openEventDetailsModal(position) {
     this._open(this.eventDetailsModalElement, position);
+  }
+
+  showEventDetails(calendarEventElement, position) {
+    this.openEventDetailsModal(position);
+    const calendarEvent = JSON.parse(
+      calendarEventElement.dataset.calendarEvent
+    );
+
+    this.eventDetailsModalElement.querySelector(
+      "#event-details-title"
+    ).textContent = calendarEvent.title;
+
+    this.eventDetailsModalElement.querySelector(
+      "#event-details-description"
+    ).textContent = calendarEvent.description;
+
+    // !todo constructor!!!!
+    this.eventDetailsModalElement
+      .querySelector("#delete-event-button")
+      .addEventListener("click", function () {
+        Storage.deleteEventByObjectIds(calendarEvent.id);
+        calendarEventElement.remove();
+      });
   }
 
   closeCreateEventModal() {

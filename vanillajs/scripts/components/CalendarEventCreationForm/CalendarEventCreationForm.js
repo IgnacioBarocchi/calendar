@@ -1,5 +1,5 @@
 import ModalComponent from "../Modal/Modal.js";
-import TimeSlotEvent from "../TimeSlotEvent/TimeSlotEvent.js";
+import TimeSlotEvent from "../CalendarEvent/CalendarEvent.js";
 import formatDateToDateInputValue from "../../lib/formatDateToDateInputValue.js";
 
 export default class CalendarEventCreationForm {

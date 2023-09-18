@@ -1,6 +1,6 @@
+import CalendarEvent from "../CalendarEvent/CalendarEvent.js";
 import CalendarHeaderColumn from "./CalendarDataElements/CalendarHeaderColumn.js";
 import TimeSlot from "./CalendarDataElements/TimeSlot.js";
-import TimeSlotEvent from "../TimeSlotEvent/TimeSlotEvent.js";
 import appendElements from "../../lib/appendElements.js";
 //todo static class extends "Container"
 
@@ -53,7 +53,7 @@ export default class CalendarBody {
 
       if (slotEvents?.length) {
         slotEvents.forEach((slotEvent) => {
-          const timeSlotEvent = new TimeSlotEvent(slotEvent, timeSlotElement);
+          const timeSlotEvent = new CalendarEvent(slotEvent, timeSlotElement);
           timeSlotEvent.render();
         });
       }

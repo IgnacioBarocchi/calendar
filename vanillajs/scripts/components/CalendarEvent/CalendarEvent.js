@@ -1,8 +1,9 @@
+import ModalComponent from "../Modal/Modal.js";
 // todo: refactor!
 import appendElements from "../../lib/appendElements.js";
 import { createElement2 } from "../../lib/createElement.js";
 
-export default class TimeSlotEvent {
+export default class CalendarEvent {
   calendarEvent;
   timeSlot;
 
@@ -23,15 +24,18 @@ export default class TimeSlotEvent {
       return this.calendarEventElement;
     }
 
-    this.calendarEventElement.addEventListener("click", (clientEvent) => {
-      clientEvent.stopPropagation();
+    this.calendarEventElement.addEventListener(
+      "click",
+      function (clientEvent) {
+        alert("event! " + clientEvent);
+        clientEvent.stopPropagation();
 
-      document.querySelector("#event-details-modal").showModal();
-      EventDetailsModal(this.calendarEventElement, [
-        clientEvent.clientX,
-        clientEvent.clientY,
-      ]);
-    });
+        ModalComponent.showEventDetails(this.calendarEventElement, [
+          clientEvent.clientX,
+          clientEvent.clientY,
+        ]);
+      }.bind(this)
+    );
 
     return this.calendarEventElement;
   }

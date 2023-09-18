@@ -10,7 +10,7 @@ export default class Storage {
     });
 
     this.setSelectedWeek(new Date(), 0);
-    sessionStorage.setItem("cashedWeeks", JSON.stringify([]));
+    sessionStorage.setItem("cachedWeeks", JSON.stringify([]));
   }
 
   /*Local*/
@@ -80,20 +80,20 @@ export default class Storage {
   }
 
   /*Session*/
-  cashWeek(week, index) {
-    const cashedWeeks = JSON.parse(sessionStorage.getItem("cashedWeeks")) || [];
-    cashedWeeks[index] = week;
-    sessionStorage.setItem("cashedWeeks", JSON.stringify(cashedWeeks, null, 2));
+  cachWeek(week, index) {
+    const cachedWeeks = JSON.parse(sessionStorage.getItem("cachedWeeks")) || [];
+    cachedWeeks[index] = week;
+    sessionStorage.setItem("cachedWeeks", JSON.stringify(cachedWeeks, null, 2));
   }
 
   setSelectedWeek(date, index) {
-    const cashedWeeks = JSON.parse(sessionStorage.getItem("cashedWeeks"))?.map(
+    const cachedWeeks = JSON.parse(sessionStorage.getItem("cachedWeeks"))?.map(
       (dateTimeString) => new Date(dateTimeString)
     );
 
-    if (cashedWeeks && cashedWeeks[index]?.length) {
-      const cashedWeek = cashedWeeks[index];
-      this.selectedWeek = cashedWeek;
+    if (cachedWeeks && cachedWeeks[index]?.length) {
+      const cachedWeek = cachedWeeks[index];
+      this.selectedWeek = cachedWeek;
       return this.selectedWeek;
     }
 
@@ -106,7 +106,7 @@ export default class Storage {
     });
 
     if (week && week.length > 0) {
-      this.cashWeek(week, index);
+      this.cachWeek(week, index);
       this.selectedWeek = week;
     } else {
       throw new Error("Week error");

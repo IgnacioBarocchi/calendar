@@ -1,6 +1,6 @@
+import CalendarEvent from "../../CalendarEvent/CalendarEvent.js";
 import CalendarEventCreationForm from "../../CalendarEventCreationForm/CalendarEventCreationForm.js";
 import ModalComponent from "../../Modal/Modal.js";
-import TimeSlotEvent from "../../TimeSlotEvent/TimeSlotEvent.js";
 import { createElement2 } from "../../../lib/createElement.js";
 
 export default class TimeSlot {
@@ -34,7 +34,7 @@ export default class TimeSlot {
     );
   }
   _renderDraftCalendarEvent() {
-    const draftTimeSlotEvent = new TimeSlotEvent(
+    const draftTimeSlotEvent = new CalendarEvent(
       {
         stage: "draft",
         title: `(no title), ${this.dateTime.getHours()}`,
