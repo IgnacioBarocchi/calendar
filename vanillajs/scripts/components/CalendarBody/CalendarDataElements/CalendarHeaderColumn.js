@@ -1,6 +1,8 @@
+// todo: static
+import { createElement2 } from "../../../lib/createElement.js";
+import mapRange from "../../../lib/mapRange.js";
 export default class CalendarHeaderColumn {
-  calendarHeaderColumnElements = [];
-
+  /*private? | {get, _} accessor*/ calendarHeaderColumnElements = [];
   getElements() {
     mapRange(0, 24, (hour) => {
       const time = new Date();
@@ -11,7 +13,7 @@ export default class CalendarHeaderColumn {
         hour12: true,
       });
 
-      calendarHeaderColumnElements.push(
+      this.calendarHeaderColumnElements.push(
         createElement2(
           `<div class="grid-item header-col">
                 <div class="header-text-container">

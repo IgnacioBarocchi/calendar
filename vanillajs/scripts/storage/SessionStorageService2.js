@@ -15,8 +15,20 @@ export default class SessionStorageService2 {
       "cashedWeeks",
       JSON.stringify([getWeekFrom(new Date())])
     );
+
+    localStorage.setItem("events", "{}");
   }
 
+  /*Local*/
+  getEvents() {}
+
+  addEvent(event) {}
+
+  getEventsBySlotIndex() {}
+
+  deleteEventById(targetId) {}
+
+  /*Session*/
   cashWeek(week, index) {
     const cashedWeeks = JSON.parse(sessionStorage.getItem("cashedWeeks"));
     cashedWeeks[index] = week;

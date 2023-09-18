@@ -11,7 +11,6 @@ export default class NavigationBar {
     this.store = store;
     this.header = header;
     this.calendarBody = calendarBody;
-    console.log(this.store);
   }
 
   /*private*/ incrementNavigationIndex() {

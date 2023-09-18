@@ -1,4 +1,5 @@
 import Calendar from "./components/Calendar/Calendar.js";
+import CalendarBody from "./components/CalendarBody/CalendarBody.js";
 // import ClockHand from "./components/ClockHand/ClockHand.js";
 import CreateEventModal from "./components/CreateEventModal/index.js";
 import Header from "./components/Header/index.js";
@@ -10,51 +11,13 @@ import { getWeekFrom } from "./helpers/calendarHelper.js";
 import { sessionStorageService } from "./storage/index.js";
 
 const st = new SessionStorageService2();
-
-// const vn = new NavigationBar(st);
 const hd = new Header2(st);
-// const cl = new Calendar2(st);
-// cl.render();
-hd.render();
-
+const cb = new CalendarBody(st);
+window.addEventListener("DOMContentLoaded", () => {
+  hd.render();
+  cb.render();
+});
 // window.addEventListener("DOMContentLoaded", () => {
-//   const Session = sessionStorageService();
-//   const calendar = Calendar();
-//   // const clockHand = ClockHand();
-//   calendar.instanceCalendar();
-//   calendar.updateCalendar(getWeekFrom(new Date()));
-
-//   Header(new Date());
-
-//   const getDateOf = (requestedWeekView) => {
-//     const index = Session.getWeekIndex();
-//     const numberOfDaysToAdd = { ongoing: 0, next: 7, prev: -7 }[
-//       requestedWeekView
-//     ];
-
-//     const today = new Date();
-//     if (numberOfDaysToAdd === 0) return today;
-
-//     const result = today.setDate(today.getDate() + numberOfDaysToAdd * index);
-
-//     return new Date(result);
-//   };
-
-//   ["prev", "next", "ongoing"].forEach((requestedWeekView) => {
-//     document
-//       .querySelector(`#${requestedWeekView}-week`)
-//       .addEventListener("click", function () {
-//         Session.setWeekIndex(
-//           Session.getWeekIndex() +
-//             { prev: -1, next: 1, ongoing: 0 }[requestedWeekView]
-//         );
-
-//         const requestedWeekViewDate = getDateOf(requestedWeekView);
-//         calendar.updateCalendar(getWeekFrom(requestedWeekViewDate));
-//         Header(requestedWeekViewDate);
-//         // clockHand.render();
-//       });
-//   });
 
 //   function createCalendarEventWithAsideButton(clientEvent) {
 //     const draftEvent = {

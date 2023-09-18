@@ -44,6 +44,7 @@ export default class CalendarHeaderRow {
     this.updateDateDataByDayName();
     const shouldCreateElements = this.dayOfTheWeekElements?.length !== 7;
     // !unnecessary variable evaluation
+    // !code split: create calendar in constructor. update in render method
     if (shouldCreateElements) {
       this.dayOfTheWeekElements = Object.entries(this.dateDataByDayName).map(
         ([dayName, record]) => {
