@@ -1,6 +1,6 @@
 // todo: abstract class modal => open: () => void
 
-class Modal {
+export class Modal {
   createEventModalElement = document.querySelector("#event-modal");
   eventDetailsModalElement = document.querySelector("#event-details-modal");
 
@@ -68,4 +68,5 @@ class Modal {
     });
   }
 }
+
 export default new Modal();

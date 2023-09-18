@@ -1,3 +1,4 @@
+import CalendarEventCreationFormComponent from "../../CalendarEventCreationForm/CalendarEventCreationForm.js";
 import ModalComponent from "../../Modal/Modal.js";
 import TimeSlotEvent from "../../TimeSlotEvent/TimeSlotEvent.js";
 import { createElement2 } from "../../../lib/createElement.js";
@@ -43,6 +44,7 @@ export default class TimeSlot {
       this.timeSlotElement
     );
 
+    CalendarEventCreationFormComponent.autoFillDates(this.dateTime);
     draftTimeSlotEvent.render();
   }
 
