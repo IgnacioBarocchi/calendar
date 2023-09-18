@@ -1,4 +1,5 @@
 .calendar-body-layout-container {
+  margin-top: var(--header-height);
   display: grid;
   height: 100vh;
   grid-template-columns: 0.2fr 1fr;
@@ -14,8 +15,12 @@
 }
 
 .calendar {
-  background-color: aqua;
   grid-area: calendar;
   display: grid;
   grid-template-columns: 5rem 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.header-col,
+.time-slot {
+  height: calc(var(--header-height) / 2.5);
 }

@@ -1,12 +1,14 @@
 import CalendarHeaderColumn from "./CalendarDataElements/CalendarHeaderColumn.js";
 import TimeSlot from "./CalendarDataElements/TimeSlot.js";
+import appendElements from "../../lib/appendElements.js";
 //todo static class extends "Container"
 
 export default class CalendarBody {
   calendarHeaderColumnElements;
   store;
-  bodyElements = [];
+  timeSlotElements = [];
   parentElement = document.getElementById("calendar-body-container");
+  timeSlotInstances = [];
 
   constructor(store) {
     this.store = store;
@@ -16,22 +18,36 @@ export default class CalendarBody {
   }
 
   createCalendarBody() {
-    // por cada header le agrego 7 elements.
-
-    this.calendarHeaderColumnElements.forEach((_, index) => {
-      const timeSlot = new TimeSlot(this.store, index, date);
-      timeSlot.getElement();
+    const bodyElements = [];
+    this.calendarHeaderColumnElements.forEach((hourOfDayElement, i) => {
+      bodyElements.push(hourOfDayElement);
+      this.store.selectedWeek.forEach((dateTime) => {
+        const timeSlot = new TimeSlot(this.store, dateTime, i);
+        const timeSlotElement = timeSlot.getElement();
+        bodyElements.push(timeSlotElement);
+        this.timeSlotElements.push(timeSlotElement);
+      });
     });
+
+    appendElements(bodyElements, this.parentElement);
   }
 
   mapEvents() {}
 
   updateTimeSlotsData() {
-    // solo tengo que updetear el dataset.dateTime
-    // entonces los puedo crear vacios.
+    // this.store.selectedWeek.forEach((dateTime) => {
+    // });
 
-    this.store.selectedWeek.map((date) => {});
+    // ! add/remove events.
+    this.timeSlotElements.forEach((timeSlotElement) => {
+      const [dayNumber, dateNumber] =
+        timeSlotElement.dataset.slotIndex.split("-");
+      const dateTime = this.store.selectedWeek[dayNumber];
+      timeSlotElement.dataset.dateTime = new Date(dateTime).toDateString();
+    });
   }
 
-  render() {}
+  render() {
+    this.updateTimeSlotsData();
+  }
 }

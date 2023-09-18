@@ -1,5 +1,5 @@
 // todo: conver to singleton and use TypeScript modifiers
-export default class NavigationBar {
+export default class NavigationControls {
   navigationIndex = 0;
   store;
   header;
@@ -7,25 +7,25 @@ export default class NavigationBar {
   //! retrieve from html
   stages = ["next", "prev", "ongoing"];
 
-  constructor(store /*instanceof Store | Store*/, header, calendarBody) {
+  constructor(store, header, calendarBody) {
     this.store = store;
     this.header = header;
     this.calendarBody = calendarBody;
   }
 
-  /*private*/ incrementNavigationIndex() {
+  _incrementNavigationIndex() {
     this.navigationIndex++;
   }
 
-  /*private*/ decrementNavigationIndex() {
+  _decrementNavigationIndex() {
     this.navigationIndex--;
   }
 
-  /*private*/ resetNavigationIndex() {
+  _resetNavigationIndex() {
     this.navigationIndex = 0;
   }
 
-  /*private*/ getDateOf(requestedWeekView) {
+  _getDateOf(requestedWeekView) {
     const numberOfDaysToAdd = { ongoing: 0, next: 7, prev: -7 }[
       requestedWeekView
     ];
@@ -38,32 +38,32 @@ export default class NavigationBar {
     );
   }
   // !super ugly
-  /*private*/ handleNavigationChange(requestedWeekView) {
+  _handleNavigationChange(requestedWeekView) {
     this[
       {
-        prev: "decrementNavigationIndex",
-        next: "incrementNavigationIndex",
-        ongoing: "resetNavigationIndex",
+        prev: "_decrementNavigationIndex",
+        next: "_incrementNavigationIndex",
+        ongoing: "_resetNavigationIndex",
       }[requestedWeekView]
     ]();
 
     // !maybe store should have navigation dependency injected
     // !to avoid circular dependency {navigationIndex/weekIndex}
     this.store.setSelectedWeek(
-      this.getDateOf(requestedWeekView),
+      this._getDateOf(requestedWeekView),
       this.navigationIndex
     );
 
-    this.header.render();
-    // !add
-    // this.calendarBody.render();
+    [this.header, this.calendarBody].forEach((component) => {
+      component.render();
+    });
   }
 
   navigate() {
     this.stages.forEach((requestedWeekView) => {
       const activeButton = document.querySelector(`#${requestedWeekView}-week`);
       activeButton.addEventListener("click", () =>
-        this.handleNavigationChange.bind(this)(requestedWeekView)
+        this._handleNavigationChange.bind(this)(requestedWeekView)
       );
     });
   }

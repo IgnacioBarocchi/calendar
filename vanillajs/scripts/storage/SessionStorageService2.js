@@ -16,6 +16,8 @@ export default class SessionStorageService2 {
       JSON.stringify([getWeekFrom(new Date())])
     );
 
+    this.setSelectedWeek(new Date(), 0);
+
     localStorage.setItem("events", "{}");
   }
 

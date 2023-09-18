@@ -78,8 +78,6 @@
   border: 1px solid var(--color-brand-tertiary);
   padding: 10px;
   text-align: center;
-  /* height: calc(var(--header-height) * 1.618); */
-  position: relative;
 }
 /* 
 .header-row {
