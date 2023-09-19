@@ -4,7 +4,7 @@
   --color-brand-primary: white;
   --color-brand-secondary: #71717a;
   --color-brand-tertiary: #52525b;
-  --color-accent-primary: #1d4ed8;
+  --color-accent-primary: #2563eb;
   --background-brand-primary: #030712;
   --background-brand-secondary: #3333;
   --layout-template-columns: 0.3fr 1.1fr;
@@ -24,6 +24,11 @@ body {
   color: var(--color-brand-primary);
   background: var(--background-brand-primary);
   font-family: "Inter", sans-serif;
+}
+
+.highlighted-text {
+  color: var(--color-accent-primary);
+  font-weight: bold;
 }
 
 nav > ul {

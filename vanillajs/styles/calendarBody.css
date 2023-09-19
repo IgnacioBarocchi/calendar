@@ -20,8 +20,13 @@
   grid-template-columns: 5rem 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
-.header-col,
+.header-column-item,
 .time-slot {
   height: calc(var(--header-height) / 2.5);
   position: relative;
+}
+
+.calendar-body-container:first-child {
+  border-top: none;
+  background-color: red !important;
 }

@@ -20,6 +20,11 @@ export default class StorageService {
     return JSON.parse(localStorage.getItem("events"));
   }
 
+  getTodayEvents() {
+    const events = _getEvents();
+    // dateTime.toDateString() === new Date().toDateString()
+  }
+
   saveEvent(event) {
     const events = this._getEvents();
     const slotIndex = `${event.startDateTime.getDay()}-${event.startDateTime.getHours()}`;

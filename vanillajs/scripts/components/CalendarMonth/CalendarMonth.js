@@ -1,7 +1,7 @@
-import { createElement2 } from "../../lib/createElement.js";
-import appendElements from "../../lib/appendElements.js";
 import { DAYS_ABBREVIATIONS } from "../../constants/index.js";
 import NavigationControls from "../../controls/NavigationControls.js";
+import appendElements from "../../lib/appendElements.js";
+import { createElement2 } from "../../lib/createElement.js";
 export default class CalendarMonth {
   // save previous state | cach month
   calendarBodyElement = document.querySelector("#days-of-month-body");
@@ -18,7 +18,14 @@ export default class CalendarMonth {
       DAYS_ABBREVIATIONS.map((day) => {
         return createElement2(`
         <div class='calendar-day-cell'>
-            <span>${day}</span>
+            <span class='${
+              day.toLowerCase() ===
+              new Date()
+                .toLocaleDateString("en-US", { weekday: "short" })
+                .toLocaleLowerCase()
+                ? "highlighted-text"
+                : ""
+            }'>${day}</span>
         </div>
         `);
       }),
@@ -42,15 +49,16 @@ export default class CalendarMonth {
 
     appendElements(
       this.days.map((day) => {
-        const dateIstoday = day.toDateString() === new Date().toDateString();
         const dayOfMonthElement = createElement2(`
             <div class="calendar-day-cell ${
-              dateIstoday ? "today-highlight" : ""
+              day.toDateString() === new Date().toDateString()
+                ? "today-highlight"
+                : ""
             }">
                 <span>${day.getDate()}</span>
             </div>
         `);
-        // calendar - day - cell;
+
         dayOfMonthElement.addEventListener("click", () => {
           if (
             !this.storage.selectedWeek.find(

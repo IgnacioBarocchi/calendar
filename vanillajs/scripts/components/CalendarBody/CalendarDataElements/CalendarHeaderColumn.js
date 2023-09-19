@@ -15,7 +15,7 @@ export default class CalendarHeaderColumn {
 
       this.calendarHeaderColumnElements.push(
         createElement2(
-          `<div class="grid-item header-col">
+          `<div class="grid-item header-column-item">
                 <div class="header-text-container">
                     <span>${textContent}</span>
                 </div>

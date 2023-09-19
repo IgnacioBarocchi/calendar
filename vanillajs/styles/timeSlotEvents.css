@@ -15,4 +15,6 @@
   min-height: 32px;
   cursor: pointer;
   user-select: none;
+  font-size: 0.7rem;
+  width: calc(100% - 8px);
 }

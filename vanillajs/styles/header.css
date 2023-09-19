@@ -116,7 +116,7 @@
   justify-content: center;
 }
 
-.header-col,
+.header-column-item,
 .header-row:first-child {
   background: linear-gradient(
         var(--background-brand-primary),

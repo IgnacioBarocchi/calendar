@@ -1,12 +1,15 @@
 #clock-hand {
+  height: 1px;
+  line-height: 1px;
   color: red;
   position: absolute;
   font-weight: bold;
   z-index: 3;
   width: 100%;
-  border-bottom: 1px solid red;
+  border-bottom: 2px solid red;
 }
 
 #clock-hand::before {
   content: "●";
+  font-size: 2rem;
 }

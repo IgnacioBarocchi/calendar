@@ -1,9 +1,9 @@
 import CalendarBody from "./components/CalendarBody/CalendarBody.js";
 import CalendarHeaderRow from "./components/CalendarHeaderRow/CalendarHeaderRow.js";
+import CalendarMonth from "./components/CalendarMonth/CalendarMonth.js";
 import ClockHand from "./components/ClockHand/ClockHand.js";
 import NavigationControls from "./controls/NavigationControls.js";
 import StorageService from "./StorageService/StorageService.js";
-import CalendarMonth from "./components/CalendarMonth/CalendarMonth.js";
 
 const today = new Date();
 const storageService = new StorageService();
@@ -36,4 +36,9 @@ window.addEventListener("DOMContentLoaded", () => {
   );
 
   ClockHandComponent.startTick();
+
+  const earliestEventOfTheWeek = document.querySelector(
+    "[class^=time-slot-event]"
+  );
+  earliestEventOfTheWeek.scrollIntoView();
 });
