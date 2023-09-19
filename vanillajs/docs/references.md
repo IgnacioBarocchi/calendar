@@ -41,3 +41,5 @@
 * Object from entries [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/fromEntries]
 
 * Range function snippet [https://stackoverflow.com/questions/3895478/does-javascript-have-a-method-like-range-to-generate-a-range-within-the-supp?page=2&tab=scoredesc#tab-top]
+
+* Vanilla "Singleton" snippet [https://stackoverflow.com/questions/1479319/simplest-cleanest-way-to-implement-a-singleton-in-javascript]
