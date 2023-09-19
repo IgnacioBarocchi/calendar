@@ -1,10 +1,10 @@
 // todo: abstract class modal => open: () => void
-
+import StorageService from "../../StorageService/StorageService.js";
 export class Modal {
   createEventModalElement = document.querySelector("#event-modal");
   eventDetailsModalElement = document.querySelector("#event-details-modal");
-
-  constructor() {
+  store;
+  constructor(store) {
     this.createEventModalElement
       .querySelector(".close-button")
       .addEventListener("click", () => {
@@ -16,6 +16,8 @@ export class Modal {
       .addEventListener("click", () => {
         this.closeEventDetailsModal();
       });
+
+    this.store = store;
 
     document.addEventListener("keypress", function (e) {
       if (e.key == "Escape") alert("test");
@@ -48,7 +50,7 @@ export class Modal {
     this.eventDetailsModalElement
       .querySelector("#delete-event-button")
       .addEventListener("click", function () {
-        Storage.deleteEventByObjectIds(calendarEvent.id);
+        this.store.deleteEventByObjectIds(calendarEvent.id);
         calendarEventElement.remove();
       });
   }
@@ -91,5 +93,6 @@ export class Modal {
     });
   }
 }
+const st = new StorageService();
 
-export default new Modal();
+export default new Modal(st);

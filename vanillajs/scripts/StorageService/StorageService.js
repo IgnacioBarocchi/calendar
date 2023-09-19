@@ -1,7 +1,6 @@
 import mapRange from "../lib/mapRange.js";
 
-// ! TENGO QUE USAR SESSION STORAGE PORQUE NO TENGO SINGLETON
-export default class Storage {
+export default class StorageService {
   selectedWeek;
 
   constructor() {
