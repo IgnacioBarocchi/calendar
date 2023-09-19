@@ -3,6 +3,7 @@
   position: absolute;
   font-weight: bold;
   z-index: 4;
-  /* could be and hr or a box with border bottom */
-  /* border-bottom: 5px solid red; */
+  width: 100%;
+  border-bottom: 1px solid red;
+  /* line-height: 1px; */
 }

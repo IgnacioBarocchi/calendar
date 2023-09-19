@@ -27,7 +27,7 @@ export default class CalendarEvent {
     this.calendarEventElement.addEventListener(
       "click",
       function (clientEvent) {
-        alert("event! " + clientEvent);
+        // alert("event! " + clientEvent);
         clientEvent.stopPropagation();
 
         ModalComponent.showEventDetails(this.calendarEventElement, [

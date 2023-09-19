@@ -23,4 +23,5 @@
 .header-col,
 .time-slot {
   height: calc(var(--header-height) / 2.5);
+  position: relative;
 }
