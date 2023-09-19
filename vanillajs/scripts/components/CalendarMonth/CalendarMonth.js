@@ -1,14 +1,27 @@
 import { createElement2 } from "../../lib/createElement.js";
 import appendElements from "../../lib/appendElements.js";
-
+import { DAYS_ABBREVIATIONS } from "../../constants/index.js";
+import NavigationControls from "../../controls/NavigationControls.js";
 export default class CalendarMonth {
   // save previous state | cach month
-  parentElement = document.querySelector("#days-of-month-body");
+  calendarBodyElement = document.querySelector("#days-of-month-body");
+  calendarHeaderElement = document.querySelector("#days-of-month-header");
   days = [];
   storage;
 
   constructor(storage) {
     this.storage = storage;
+
+    appendElements(
+      DAYS_ABBREVIATIONS.map((day) => {
+        return createElement2(`
+        <div class='calendar-day-cell'>
+            <span>${day}</span>
+        </div>
+        `);
+      }),
+      this.calendarHeaderElement
+    );
   }
 
   render() {
@@ -26,13 +39,28 @@ export default class CalendarMonth {
 
     appendElements(
       this.days.map((day) => {
-        return createElement2(`
-      <div class='calendar-day-cell'>
-          <span>${day.getDate()}</span>
-      </div>
-      `);
+        const dateIstoday = day.toDateString() === new Date().toDateString();
+        const dayOfMonthElement = createElement2(`
+            <div class="calendar-day-cell ${
+              dateIstoday ? "today-highlight" : ""
+            }">
+                <span>${day.getDate()}</span>
+            </div>
+        `);
+        // calendar - day - cell;
+        dayOfMonthElement.addEventListener("click", () => {
+          if (
+            !this.storage.selectedWeek.find(
+              (date) => date.toDateString() === day.toDateString()
+            )
+          ) {
+            const navigationControls = new NavigationControls();
+            navigationControls.navigateWithDaysOfMonth(date);
+          }
+        });
+        return dayOfMonthElement;
       }),
-      this.parentElement
+      this.calendarBodyElement
     );
   }
 }

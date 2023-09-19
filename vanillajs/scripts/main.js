@@ -27,7 +27,7 @@ window.addEventListener("DOMContentLoaded", () => {
     calendarMonthComponent
   );
 
-  navigationControls.navigate();
+  navigationControls.navigateWithNavbar();
 
   const ClockHandComponent = new ClockHand(
     document.querySelector(

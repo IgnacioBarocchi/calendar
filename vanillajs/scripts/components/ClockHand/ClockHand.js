@@ -31,7 +31,8 @@ export default class ClockHand {
       (startingMinutes * this._getStartSlotHeight()) / 60 - startingMinutes;
     let y = oClockTimePosition + minutesPosition;
 
-    this.clockHandElement.style.left = this._getStartSlotOffsetLeft() + "px";
+    this.clockHandElement.style.left =
+      this._getStartSlotOffsetLeft() - 4 + "px";
     this.clockHandElement.style.width =
       this.startingTimeSlot.offsetWidth + "px";
 

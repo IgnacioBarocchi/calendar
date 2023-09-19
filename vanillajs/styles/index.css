@@ -23,7 +23,7 @@ body {
   width: 100%;
   color: var(--color-brand-primary);
   background: var(--background-brand-primary);
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 nav > ul {

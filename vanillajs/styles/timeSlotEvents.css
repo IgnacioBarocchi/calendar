@@ -13,4 +13,6 @@
   word-wrap: break-word;
   overflow: hidden;
   min-height: 32px;
+  cursor: pointer;
+  user-select: none;
 }

@@ -5,5 +5,8 @@
   z-index: 3;
   width: 100%;
   border-bottom: 1px solid red;
-  /* line-height: 1px; */
+}
+
+#clock-hand::before {
+  content: "●";
 }
