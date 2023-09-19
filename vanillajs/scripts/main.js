@@ -37,8 +37,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
   ClockHandComponent.startTick();
 
+  // todo: attach scroll during first iteration
   const earliestEventOfTheWeek = document.querySelector(
     "[class^=time-slot-event]"
   );
-  earliestEventOfTheWeek.scrollIntoView();
+  earliestEventOfTheWeek?.scrollIntoView();
 });

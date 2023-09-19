@@ -1,5 +1,5 @@
-import mapRange from "../lib/mapRange.js";
 import { MONTHS } from "../constants/index.js";
+import mapRange from "../lib/mapRange.js";
 export default class StorageService {
   selectedWeek;
 
@@ -18,11 +18,6 @@ export default class StorageService {
       localStorage.setItem("events", "{}");
     }
     return JSON.parse(localStorage.getItem("events"));
-  }
-
-  getTodayEvents() {
-    const events = _getEvents();
-    // dateTime.toDateString() === new Date().toDateString()
   }
 
   saveEvent(event) {

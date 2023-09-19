@@ -36,6 +36,7 @@ export default class CalendarBody {
   mapEvents() {}
 
   updateTimeSlotsData() {
+    debugger;
     const week = [...this.storage.selectedWeek];
 
     this.timeSlotElements.forEach((timeSlotElement) => {

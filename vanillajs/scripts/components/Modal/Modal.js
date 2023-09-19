@@ -1,11 +1,15 @@
 // todo: abstract class modal => open: () => void
 import StorageService from "../../StorageService/StorageService.js";
 export class Modal {
-  createEventModalElement = document.querySelector("#event-modal");
-  eventDetailsModalElement = document.querySelector("#event-details-modal");
   storage;
+  eventCreationModalElement = document.querySelector("#event-modal");
+  eventDetailsModalElement = document.querySelector("#event-details-modal");
+  eventCreationButtonElement = document.querySelector("#create-event-button");
+
   constructor(storage) {
-    this.createEventModalElement
+    this.storage = storage;
+
+    this.eventCreationModalElement
       .querySelector(".close-button")
       .addEventListener("click", () => {
         this.closeCreateEventModal();
@@ -17,15 +21,22 @@ export class Modal {
         this.closeEventDetailsModal();
       });
 
-    this.storage = storage;
-
-    document.addEventListener("keypress", function (e) {
-      if (e.key == "Escape") alert("test");
-    });
+    // todo:
+    // this.eventCreationButtonElement.addEventListener("click", () => {});
+    // function (e) {
+    //   alert("a");
+    //   // this.openCreateEventModal();
+    // } //.bind(this)
+    document.addEventListener(
+      "keypress",
+      function (e) {
+        if (e.key == "Escape") alert("test");
+      }.bind(this)
+    );
   }
 
   openCreateEventModal(position) {
-    this._open(this.createEventModalElement, position);
+    this._open(this.eventCreationModalElement, position);
   }
 
   openEventDetailsModal(position) {
@@ -61,7 +72,7 @@ export class Modal {
   }
 
   closeCreateEventModal() {
-    this._close(this.createEventModalElement);
+    this._close(this.eventCreationModalElement);
     this._removeDraftEvents();
   }
 
