@@ -8,6 +8,7 @@ export default class CalendarHeaderRow {
   dayOfTheWeekElements = [];
   dateDataByDayName = {};
   parentElement = document.querySelector("#calendar-header-row-container");
+  monthLabel = document.querySelector("#header-month-label");
 
   constructor(storage) {
     this.storage = storage;
@@ -74,7 +75,12 @@ export default class CalendarHeaderRow {
     }
   }
 
+  updateMonthLabel() {
+    this.monthLabel.textContent = this.storage.getMonthOfYear();
+  }
+
   render() {
+    this.updateMonthLabel();
     this.updateDateOfWeekElements();
   }
 }

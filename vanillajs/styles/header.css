@@ -19,6 +19,7 @@
 
 .logo {
   grid-area: logo;
+  border-bottom: 1px solid var(--color-brand-tertiary);
 }
 
 #logo-container {
@@ -33,10 +34,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 0;
 }
 
 .navigation {
   grid-area: navigation;
+  border-bottom: 1px solid var(--color-brand-tertiary);
 }
 
 .calendar-header {
@@ -51,7 +54,7 @@
   align-items: center;
 }
 
-#month-label {
+#header-month-label {
   font-size: 1.5rem;
 }
 
@@ -78,13 +81,12 @@
   border: 1px solid var(--color-brand-tertiary);
   padding: 10px;
   text-align: center;
-}
-/* 
-.header-row {
-  color: var(--color-brand-primary);
-  position: sticky;
   border-top: none;
-} */
+}
+
+.header-row {
+  border-top: none;
+}
 
 .header-text-container {
   display: flex;

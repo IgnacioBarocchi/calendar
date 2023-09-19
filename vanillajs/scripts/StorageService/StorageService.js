@@ -1,5 +1,5 @@
 import mapRange from "../lib/mapRange.js";
-
+import { MONTHS } from "../constants/index.js";
 export default class StorageService {
   selectedWeek;
 
@@ -72,6 +72,12 @@ export default class StorageService {
         )
       )
     );
+  }
+
+  getMonthOfYear() {
+    const referenceSunday = this.selectedWeek[0];
+    return `
+      ${MONTHS[referenceSunday.getMonth()]} ${referenceSunday.getFullYear()}`;
   }
 
   /*Session*/

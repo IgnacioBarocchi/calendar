@@ -49,3 +49,5 @@
 * Caculate week difference [https://www.w3resource.com/javascript-exercises/javascript-date-exercise-47.php]
   
 * Caculate week difference [https://stackoverflow.com/questions/20587660/calculate-date-difference-in-weeks-javascript]
+
+* First n children selector [https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-child]

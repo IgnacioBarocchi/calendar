@@ -6,6 +6,8 @@ export default class CalendarMonth {
   // save previous state | cach month
   calendarBodyElement = document.querySelector("#days-of-month-body");
   calendarHeaderElement = document.querySelector("#days-of-month-header");
+  monthLabel = document.querySelector("#days-of-month-month-label");
+
   days = [];
   storage;
 
@@ -25,6 +27,7 @@ export default class CalendarMonth {
   }
 
   render() {
+    this.monthLabel.textContent = this.storage.getMonthOfYear();
     const stratDate = this.storage.selectedWeek[0];
     const month = stratDate.getMonth();
     const year = stratDate.getFullYear();
