@@ -49,10 +49,15 @@ export class Modal {
     // !todo constructor!!!!
     this.eventDetailsModalElement
       .querySelector("#delete-event-button")
-      .addEventListener("click", function () {
-        this.storage.deleteEventByObjectIds(calendarEvent.id);
-        calendarEventElement.remove();
-      });
+      .addEventListener(
+        "click",
+        function () {
+          debugger;
+          this.storage.deleteEventById(calendarEvent.id);
+          calendarEventElement.remove();
+          this.closeEventDetailsModal();
+        }.bind(this)
+      );
   }
 
   closeCreateEventModal() {

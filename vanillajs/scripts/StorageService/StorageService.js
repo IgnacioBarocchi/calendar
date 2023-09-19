@@ -70,7 +70,7 @@ export default class StorageService {
       "events",
       JSON.stringify(
         Object.fromEntries(
-          Object.entries(events).map(([key, itsEvents]) => {
+          Object.entries(this._getEvents()).map(([key, itsEvents]) => {
             return [key, itsEvents.filter((event) => event.id !== targetId)];
           })
         )
