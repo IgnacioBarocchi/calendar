@@ -6,13 +6,13 @@ import appendElements from "../../lib/appendElements.js";
 
 export default class CalendarBody {
   calendarHeaderColumnElements;
-  store;
+  storage;
   timeSlotElements = [];
   parentElement = document.getElementById("calendar-body-container");
   timeSlotInstances = [];
 
-  constructor(store) {
-    this.store = store;
+  constructor(storage) {
+    this.storage = storage;
     const headerColumn = new CalendarHeaderColumn();
     this.calendarHeaderColumnElements = headerColumn.getElements();
     this.createCalendarBody();
@@ -22,8 +22,8 @@ export default class CalendarBody {
     const bodyElements = [];
     this.calendarHeaderColumnElements.forEach((hourOfDayElement, i) => {
       bodyElements.push(hourOfDayElement);
-      this.store.selectedWeek.forEach((dateTime) => {
-        const timeSlot = new TimeSlot(this.store, dateTime, i);
+      this.storage.selectedWeek.forEach((dateTime) => {
+        const timeSlot = new TimeSlot(this.storage, dateTime, i);
         const timeSlotElement = timeSlot.getElement();
         bodyElements.push(timeSlotElement);
         this.timeSlotElements.push(timeSlotElement);
@@ -36,7 +36,7 @@ export default class CalendarBody {
   mapEvents() {}
 
   updateTimeSlotsData() {
-    const week = [...this.store.selectedWeek];
+    const week = [...this.storage.selectedWeek];
 
     this.timeSlotElements.forEach((timeSlotElement) => {
       timeSlotElement.innerHTML = "";
@@ -47,7 +47,7 @@ export default class CalendarBody {
 
       timeSlotElement.dataset.dateTime = new Date(dayTimeValue);
 
-      const slotEvents = this.store.getEventsBySlotIndex(
+      const slotEvents = this.storage.getEventsBySlotIndex(
         timeSlotElement.dataset.slotIndex
       );
 

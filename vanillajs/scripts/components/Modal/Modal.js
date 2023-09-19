@@ -3,8 +3,8 @@ import StorageService from "../../StorageService/StorageService.js";
 export class Modal {
   createEventModalElement = document.querySelector("#event-modal");
   eventDetailsModalElement = document.querySelector("#event-details-modal");
-  store;
-  constructor(store) {
+  storage;
+  constructor(storage) {
     this.createEventModalElement
       .querySelector(".close-button")
       .addEventListener("click", () => {
@@ -17,7 +17,7 @@ export class Modal {
         this.closeEventDetailsModal();
       });
 
-    this.store = store;
+    this.storage = storage;
 
     document.addEventListener("keypress", function (e) {
       if (e.key == "Escape") alert("test");
@@ -50,7 +50,7 @@ export class Modal {
     this.eventDetailsModalElement
       .querySelector("#delete-event-button")
       .addEventListener("click", function () {
-        this.store.deleteEventByObjectIds(calendarEvent.id);
+        this.storage.deleteEventByObjectIds(calendarEvent.id);
         calendarEventElement.remove();
       });
   }

@@ -7,10 +7,10 @@ export default class TimeSlot {
   slotIndex;
   dateTime;
   timeSlotElement;
-  store;
+  storage;
 
-  constructor(store, dateTime, startingHour) {
-    this.store = store;
+  constructor(storage, dateTime, startingHour) {
+    this.storage = storage;
     this.slotIndex = `${dateTime.getDay()}-${startingHour}`;
     const dateTimeValue = new Date(dateTime).setHours(startingHour, 0, 0);
     this.dateTime = new Date(dateTimeValue);
@@ -45,7 +45,7 @@ export default class TimeSlot {
     );
 
     // !!!!new instance lol duplicated records!!!!!!!!!!!!!
-    const form = new CalendarEventCreationForm(this.store);
+    const form = new CalendarEventCreationForm(this.storage);
     form.autoFillDates(this.dateTime);
     draftTimeSlotEvent.render();
   }

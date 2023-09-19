@@ -1,4 +1,4 @@
-Replace "store" prop drilling by static singleton storage class.
+Replace "storage" prop drilling by static singleton storage class.
 
 save events in storage.
 

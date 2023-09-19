@@ -4,13 +4,13 @@ import appendElements from "../../lib/appendElements.js";
 import { createElement2 } from "../../lib/createElement.js";
 
 export default class CalendarHeaderRow {
-  store;
+  storage;
   dayOfTheWeekElements = [];
   dateDataByDayName = {};
   parentElement = document.querySelector("#calendar-header-row-container");
 
-  constructor(store) {
-    this.store = store;
+  constructor(storage) {
+    this.storage = storage;
 
     const timeZoneOffsetElement = createElement2(`
       <div class="grid-item header-row">
@@ -28,7 +28,7 @@ export default class CalendarHeaderRow {
   }
 
   /*private*/ updateDateDataByDayName() {
-    this.store.selectedWeek.forEach((dateTime) => {
+    this.storage.selectedWeek.forEach((dateTime) => {
       this.dateDataByDayName[DAYS_ABBREVIATIONS[dateTime.getDay()]] = {
         date: dateTime.getDate(),
         today: dateTime.toDateString() === new Date().toDateString(),
@@ -37,7 +37,7 @@ export default class CalendarHeaderRow {
   }
 
   updateDateOfWeekElements() {
-    if (!this.store.selectedWeek) return;
+    if (!this.storage.selectedWeek) return;
     this.updateDateDataByDayName();
     const shouldCreateElements = this.dayOfTheWeekElements?.length !== 7;
     // !unnecessary variable evaluation

@@ -1,14 +1,14 @@
 // todo: conver to singleton and use TypeScript modifiers
 export default class NavigationControls {
   navigationIndex = 0;
-  store;
+  storage;
   header;
   calendarBody;
   //! retrieve from html
   stages = ["next", "prev", "ongoing"];
 
-  constructor(store, header, calendarBody) {
-    this.store = store;
+  constructor(storage, header, calendarBody) {
+    this.storage = storage;
     this.header = header;
     this.calendarBody = calendarBody;
   }
@@ -47,9 +47,9 @@ export default class NavigationControls {
       }[requestedWeekView]
     ]();
 
-    // !maybe store should have navigation dependency injected
+    // !maybe storage should have navigation dependency injected
     // !to avoid circular dependency {navigationIndex/weekIndex}
-    this.store.setSelectedWeek(
+    this.storage.setSelectedWeek(
       this._getDateOf(requestedWeekView),
       this.navigationIndex
     );

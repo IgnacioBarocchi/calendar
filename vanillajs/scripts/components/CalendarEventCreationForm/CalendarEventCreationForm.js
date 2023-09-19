@@ -3,13 +3,13 @@ import TimeSlotEvent from "../CalendarEvent/CalendarEvent.js";
 import formatDateToDateInputValue from "../../lib/formatDateToDateInputValue.js";
 
 export default class CalendarEventCreationForm {
-  store;
+  storage;
   calendarEventCreationFormElement = document.querySelector(
     "#event-creation-form"
   );
 
-  constructor(store) {
-    this.store = store;
+  constructor(storage) {
+    this.storage = storage;
 
     this.calendarEventCreationFormElement
       .querySelector("#create-event-button")
@@ -67,7 +67,7 @@ export default class CalendarEventCreationForm {
       const timeSlotEvent = new TimeSlotEvent(eventRecord);
       timeSlotEvent.render();
       ModalComponent.closeCreateEventModal();
-      this.store.saveEvent(eventRecord);
+      this.storage.saveEvent(eventRecord);
     }
   }
 }
