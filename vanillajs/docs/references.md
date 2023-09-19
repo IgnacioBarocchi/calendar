@@ -43,3 +43,5 @@
 * Range function snippet [https://stackoverflow.com/questions/3895478/does-javascript-have-a-method-like-range-to-generate-a-range-within-the-supp?page=2&tab=scoredesc#tab-top]
 
 * Vanilla "Singleton" snippet [https://stackoverflow.com/questions/1479319/simplest-cleanest-way-to-implement-a-singleton-in-javascript]
+
+* Get days of month snippet [https://stackoverflow.com/questions/13146418/find-all-the-days-in-a-month-with-date-object]

@@ -54,10 +54,6 @@ export default class StorageService {
 
     return eventsOfTheSlot.filter((event) => {
       const eventDate = new Date(event.startDateTime);
-      console.log(eventDate.getHours());
-      console.log(eventDate.getDate());
-      console.log(timeSlotDayTime.getHours());
-      console.log(timeSlotDayTime.getDate());
       return (
         eventDate.getHours() === timeSlotDayTime.getHours() &&
         eventDate.getDate() === timeSlotDayTime.getDate()

@@ -67,7 +67,7 @@ button:hover {
 
 .layout {
   display: grid;
-  grid-template-columns: 20vw 80vw;
+  grid-template-columns: var(--aside-width) 80vw;
   grid-template-rows: var(--header-height) 100vh;
   gap: 0px 0px;
   grid-auto-flow: row;

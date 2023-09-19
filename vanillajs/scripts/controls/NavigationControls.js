@@ -4,13 +4,15 @@ export default class NavigationControls {
   storage;
   header;
   calendarBody;
+  calendarMonth;
   //! retrieve from html
   stages = ["next", "prev", "ongoing"];
 
-  constructor(storage, header, calendarBody) {
+  constructor(storage, header, calendarBody, calendarMonth) {
     this.storage = storage;
     this.header = header;
     this.calendarBody = calendarBody;
+    this.calendarMonth = calendarMonth;
   }
 
   _incrementNavigationIndex() {
@@ -54,9 +56,12 @@ export default class NavigationControls {
       this.navigationIndex
     );
 
-    [this.header, this.calendarBody].forEach((component) => {
-      component.render();
-    });
+    this.calendarMonth.parentElement.innerHTML = "";
+    [(this.header, this.calendarBody, this.calendarMonth)].forEach(
+      (component) => {
+        component.render();
+      }
+    );
   }
 
   navigate() {

@@ -11,10 +11,10 @@
     <link rel="stylesheet" href="styles/header.css" />
     <link rel="stylesheet" href="styles/calendarBody.css" />
     <link rel="stylesheet" href="styles/clockHand.css" />
+    <link rel="stylesheet" href="styles/aside.css" />
     <title>Calendar</title>
   </head>
   <body>
-    <!-- <div class="layout"> -->
     <header class="header">
       <a
         class="logo"
@@ -56,11 +56,17 @@
     </header>
 
     <div class="calendar-body-layout-container">
-      <div class="aside"></div>
+      <aside id="aside" class="aside">
+        <div id="days-of-month-container">
+          <div id="days-of-month-header">september 2023</div>
+          <div id="days-of-month-body"></div>
+        </div>
+      </aside>
       <div id="calendar-body-container" class="calendar"></div>
     </div>
 
     <span id="clock-hand">●</span>
+
     <dialog id="event-modal">
       <button
         class="close-button"

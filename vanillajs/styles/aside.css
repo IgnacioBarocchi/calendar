@@ -1,0 +1,41 @@
+#aside {
+  width: 100%;
+}
+
+#days-of-month-container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  width: 70%;
+  margin: 0 auto;
+  position: fixed;
+  top: var(--header-height);
+  width: calc(var(--aside-width) / 1.25);
+  padding: 1rem;
+}
+
+#days-of-month-body {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 4px;
+  /* position: fixed; */
+}
+
+#days-of-month-header {
+  margin-bottom: 1rem;
+}
+
+.calendar-day-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-brand-tertiary);
+}
+
+.day-header {
+  font-weight: bold;
+  background-color: #333;
+  color: #fff;
+}
