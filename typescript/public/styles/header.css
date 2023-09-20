@@ -12,8 +12,8 @@
   gap: 0px 0px;
   grid-auto-flow: row;
   grid-template-areas:
-    "logo navigation"
-    "create-event calendar-header";
+    'logo navigation'
+    'create-event calendar-header';
   grid-area: header-area;
 }
 
@@ -107,8 +107,8 @@
 
 .today-highlight {
   background-color: var(--color-accent-primary);
-  width: 2.5rem;
-  height: 2.5rem;
+  width: var(--circle-radius);
+  height: var(--circle-radius);
   display: inline-flex;
   align-items: center;
   border-radius: 50%;

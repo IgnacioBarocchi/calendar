@@ -1,14 +1,15 @@
 :root {
   --header-height: 200px;
   --aside-width: 20vw;
-  --color-brand-primary: white;
+  --color-brand-primary: #ffffff;
   --color-brand-secondary: #71717a;
   --color-brand-tertiary: #52525b;
   --color-accent-primary: #2563eb;
   --background-brand-primary: #030712;
-  --background-brand-secondary: #3333;
+  --background-brand-secondary: #333333;
   --layout-template-columns: 0.3fr 1.1fr;
   --layout-template-rows: 1fr 1fr;
+  --circle-radius: 2.5rem;
 }
 
 * {
@@ -23,7 +24,7 @@ body {
   width: 100%;
   color: var(--color-brand-primary);
   background: var(--background-brand-primary);
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 .highlighted-text {
@@ -77,8 +78,8 @@ button:hover {
   gap: 0px 0px;
   grid-auto-flow: row;
   grid-template-areas:
-    "header-area header-area"
-    "aside-area calendar-area";
+    'header-area header-area'
+    'aside-area calendar-area';
 }
 
 /* .header-area {

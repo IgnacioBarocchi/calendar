@@ -77,8 +77,8 @@ export default class CalendarMonth {
     this.dates = [];
     const date = new Date(year, month, 1);
     this.prependDatesFromPreviousMonth(date);
-
-    while (date.getMonth() === month && this.dates.length < 31) {
+    // date.getMonth() === month &&
+    while (date.getMonth() === month) {
       this.dates.push(new Date(date));
       date.setDate(date.getDate() + 1);
     }
