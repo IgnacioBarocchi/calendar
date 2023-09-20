@@ -1,0 +1,128 @@
+.header {
+  width: 100%;
+  height: var(--header-height);
+  position: fixed;
+  top: 0;
+  z-index: 4;
+  background: var(--background-brand-primary);
+  border-bottom: 1px solid var(--color-brand-tertiary);
+  display: grid;
+  grid-template-columns: 0.2fr 1fr;
+  grid-template-rows: 0.5fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "logo navigation"
+    "create-event calendar-header";
+  grid-area: header-area;
+}
+
+.logo {
+  grid-area: logo;
+  border-bottom: 1px solid var(--color-brand-tertiary);
+}
+
+#logo-container {
+  margin-left: 1rem;
+  cursor: pointer;
+  display: block;
+  /* width: var(--aside-width) !important; */
+}
+
+.create-event {
+  grid-area: create-event;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+}
+
+.navigation {
+  grid-area: navigation;
+  border-bottom: 1px solid var(--color-brand-tertiary);
+}
+
+.calendar-header {
+  grid-area: calendar-header;
+  display: grid;
+  grid-template-columns: 5rem 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+#navigation-section {
+  /* width: var(--aside-width); */
+  display: flex;
+  align-items: center;
+}
+
+#header-month-label {
+  font-size: 1.5rem;
+}
+
+#navigation-bar {
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.week-navigation-button {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--color-brand-primary);
+  font-size: 2rem;
+}
+
+.today-button {
+  height: fit-content;
+}
+
+.grid-item {
+  border: 1px solid var(--color-brand-tertiary);
+  padding: 10px;
+  text-align: center;
+  border-top: none;
+}
+
+.header-row {
+  border-top: none;
+}
+
+.header-text-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-around;
+}
+
+.date-name {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.date-number {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.today-highlight {
+  background-color: var(--color-accent-primary);
+  width: 2.5rem;
+  height: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 50%;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.header-column-item,
+.header-row:first-child {
+  background: linear-gradient(
+        var(--background-brand-primary),
+        var(--background-brand-primary)
+      )
+      50% 50% / calc(100% - 2px) calc(100% - 2px) no-repeat,
+    linear-gradient(90deg, transparent 0%, var(--color-brand-tertiary) 100%);
+  border: none;
+}

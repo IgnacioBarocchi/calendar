@@ -1,0 +1,32 @@
+.calendar-body-layout-container {
+  margin-top: var(--header-height);
+  display: grid;
+  height: 100vh;
+  grid-template-columns: 0.2fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas: "aside calendar";
+}
+
+.aside {
+  background-color: var(--background-brand-primar);
+  grid-area: aside;
+}
+
+.calendar {
+  grid-area: calendar;
+  display: grid;
+  grid-template-columns: 5rem 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.header-column-item,
+.time-slot {
+  height: calc(var(--header-height) / 2.5);
+  position: relative;
+}
+
+.calendar-body-container:first-child {
+  border-top: none;
+  background-color: red !important;
+}

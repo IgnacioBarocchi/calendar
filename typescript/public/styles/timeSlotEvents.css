@@ -1,0 +1,20 @@
+.time-slot-event-upcoming,
+.time-slot-event-ongoing,
+.time-slot-event-past,
+.time-slot-event-draft {
+  color: var(--color-brand-primary);
+  background: var(--color-accent-primary);
+  text-align: left;
+  padding: 4px;
+  border-radius: 4px;
+  top: 0;
+  z-index: 2;
+  position: absolute;
+  word-wrap: break-word;
+  overflow: hidden;
+  min-height: 32px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 0.7rem;
+  width: calc(100% - 8px);
+}
