@@ -1,5 +1,12 @@
 import StorageService from '../StorageService/StorageService';
 
+enum Stages {
+  NEXT,
+  PREV,
+  ONGOING,
+}
+
+// I'd be easier to handle a read-only object const Stages = { ... } as const;
 export default class NavigationControls {
   private static instance: NavigationControls | null = null;
 
@@ -8,7 +15,6 @@ export default class NavigationControls {
   header: any;
   calendarBody: any;
   calendarMonth: any;
-  stages = ['next', 'prev', 'ongoing'];
 
   constructor(header: any, calendarBody: any, calendarMonth: any) {
     if (NavigationControls.instance) {
@@ -32,11 +38,13 @@ export default class NavigationControls {
     this.navigationIndex = 0;
   }
 
-  private getDateOf(requestedWeekView: 'ongoing' | 'next' | 'prev') {
+  private getDateOf(requestedWeekView: Stages) {
     debugger;
-    const numberOfDaysToAdd = { ongoing: 0, next: 7, prev: -7 }[
-      requestedWeekView
-    ];
+    const numberOfDaysToAdd = {
+      [Stages[Stages.ONGOING]]: 0,
+      [Stages[Stages.NEXT]]: 7,
+      [Stages[Stages.PREV]]: -7,
+    }[requestedWeekView];
 
     if (numberOfDaysToAdd === 0) return new Date();
 
@@ -47,17 +55,16 @@ export default class NavigationControls {
     );
   }
 
-  private handleNavigationChange(
-    requestedWeekView: 'ongoing' | 'next' | 'prev',
-  ) {
+  private handleNavigationChange(requestedWeekView: Stages) {
+    debugger;
     switch (requestedWeekView) {
-      case 'ongoing':
+      case Stages.ONGOING:
         this.resetNavigationIndex();
         break;
-      case 'next':
+      case Stages.NEXT:
         this.incrementNavigationIndex();
         break;
-      case 'prev':
+      case Stages.PREV:
         this.decrementNavigationIndex();
         break;
     }
@@ -98,8 +105,14 @@ export default class NavigationControls {
   }
 
   public navigateWithNavbar() {
-    this.stages.forEach((requestedWeekView: 'ongoing' | 'next' | 'prev') => {
-      const activeButton = document.querySelector(`#${requestedWeekView}-week`);
+    const keys: (keyof typeof Stages)[] = <(keyof typeof Stages)[]>(
+      Object.keys(Stages).filter((value) => !Number.isInteger(Number(value)))
+    );
+
+    keys.forEach((requestedWeekView) => {
+      const activeButton = document.querySelector(
+        `#${String(requestedWeekView).toLowerCase()}-week`,
+      );
       activeButton?.addEventListener('click', () =>
         this.handleNavigationChange(requestedWeekView),
       );
