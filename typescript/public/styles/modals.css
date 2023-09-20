@@ -99,6 +99,7 @@ textarea {
 }
 
 .draggable-header {
+  padding: 4px;
   cursor: move;
   background-color: var(--color-brand-secondary);
 }

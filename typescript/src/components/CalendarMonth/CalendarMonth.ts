@@ -45,8 +45,53 @@ export default class CalendarMonth implements Renderable {
       referenceDate.setDate(referenceDate.getDate() - 1);
       this.dates.unshift(new Date(referenceDate));
     });
+  }
 
-    /* 
+  render() {
+    if (!this.monthLabel) return;
+
+    this.monthLabel.textContent = StorageService.getMonthOfYear();
+    const stratDate = StorageService.selectedWeek[0];
+    const month = stratDate.getMonth();
+    const year = stratDate.getFullYear();
+
+    this.dates = [];
+    const date = new Date(year, month, 1);
+    this.prependDatesFromPreviousMonth(date);
+
+    while (date.getMonth() === month) {
+      this.dates.push(new Date(date));
+      date.setDate(date.getDate() + 1);
+    }
+
+    const dateElements = this.dates.map((date) => {
+      const dayOfMonthElement = createElement(`
+          <div class="calendar-day-cell ${
+            date.toDateString() === new Date().toDateString()
+              ? 'today-highlight'
+              : ''
+          }">
+              <span>${date.getDate()}</span>
+          </div>
+      `);
+
+      dayOfMonthElement.addEventListener('click', () => {
+        const outsideOfWeek = !StorageService.selectedWeek.find(
+          (dateOfWeek) => dateOfWeek.toDateString() === date.toDateString(),
+        );
+
+        if (outsideOfWeek) {
+          NavigationControls.getInstance().navigateWithDaysOfMonth(date);
+        }
+      });
+      return dayOfMonthElement;
+    });
+
+    appendElements(dateElements, this.calendarBodyElement);
+  }
+}
+
+/* 
     //todo: depending on the current month duration 30 | 31 | 28
     const daysToPrepend = 7;
     const lastDayOfPreviousMonth = new Date(
@@ -65,48 +110,3 @@ export default class CalendarMonth implements Renderable {
       lastDayOfPreviousMonth.setDate(lastDayOfPreviousMonth.getDate() + 1);
     });
     */
-  }
-
-  render() {
-    if (!this.monthLabel) return;
-
-    this.monthLabel.textContent = StorageService.getMonthOfYear();
-    const stratDate = StorageService.selectedWeek[0];
-    const month = stratDate.getMonth();
-    const year = stratDate.getFullYear();
-
-    this.dates = [];
-    const date = new Date(year, month, 1);
-    this.prependDatesFromPreviousMonth(date);
-    // date.getMonth() === month &&
-    while (date.getMonth() === month) {
-      this.dates.push(new Date(date));
-      date.setDate(date.getDate() + 1);
-    }
-
-    const dateElements = this.dates.map((date) => {
-      const dayOfMonthElement = createElement(`
-          <div class="calendar-day-cell ${
-            date.toDateString() === new Date().toDateString()
-              ? 'today-highlight'
-              : ''
-          }">
-              <span>${date.getDate()}</span>
-          </div>
-      `);
-
-      dayOfMonthElement.addEventListener('click', () => {
-        if (
-          !StorageService.selectedWeek.find(
-            (date) => date.toDateString() === date.toDateString(),
-          )
-        ) {
-          NavigationControls.getInstance().navigateWithDaysOfMonth(date);
-        }
-      });
-      return dayOfMonthElement;
-    });
-
-    appendElements(dateElements, this.calendarBodyElement);
-  }
-}
