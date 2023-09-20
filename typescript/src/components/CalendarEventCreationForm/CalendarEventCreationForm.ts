@@ -6,12 +6,20 @@ import formatDateToDateInputValue from '../../lib/formatDateToDateInputValue.ts'
 class CalendarEventCreationForm {
   private calendarEventCreationFormElement = document.querySelector(
     '#event-creation-form',
-  );
+  ) as HTMLFormElement;
 
   private constructor() {
-    this.calendarEventCreationFormElement
-      .querySelector('#create-event-button')
-      .addEventListener('click', this.createEventRecord.bind(this));
+    const createEventButton =
+      this.calendarEventCreationFormElement.querySelector(
+        '#create-event-button',
+      );
+
+    if (!createEventButton) return;
+
+    createEventButton.addEventListener(
+      'click',
+      this.createEventRecord.bind(this),
+    );
   }
 
   autoFillDates(startDateTime) {
