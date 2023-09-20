@@ -6,8 +6,7 @@
     <link rel="stylesheet" href="./styles/reset.css" />
     <link rel="stylesheet" href="./styles/index.css" />
     <link rel="stylesheet" href="./styles/timeSlotEvents.css" />
-    <link rel="stylesheet" href="./styles/createEventModal.css" />
-    <link rel="stylesheet" href="./styles/eventDetailsModal.css" />
+    <link rel="stylesheet" href="./styles/modals.css" />
     <link rel="stylesheet" href="./styles/header.css" />
     <link rel="stylesheet" href="./styles/calendarBody.css" />
     <link rel="stylesheet" href="./styles/clockHand.css" />
@@ -80,56 +79,69 @@
     <span id="clock-hand"></span>
 
     <dialog id="event-creation-modal">
-      <button class="close-button" id="event-creation-close-modal-button">
-        &#215;
-      </button>
+      <div class="draggable-header">
+        <button class="close-button" id="event-creation-close-modal-button">
+          &#215;
+        </button>
+      </div>
+
       <form id="event-creation-form">
-        <label for="event-title"
-          >Add a title
-          <input type="text" id="event-title" name="event-title" required />
-        </label>
+        <div id="event-creation-form-fields">
+          <div class="event-creation-form-column">
+            <label for="event-title"
+              >Add a title
+              <input type="text" id="event-title" name="event-title" required />
+            </label>
 
-        <label for="start-datetime"
-          >Start Date and Time
-          <input
-            type="datetime-local"
-            id="start-datetime"
-            name="start-datetime"
-            required
-          />
-        </label>
+            <label for="start-datetime"
+              >Start Date and Time
+              <input
+                type="datetime-local"
+                id="start-datetime"
+                name="start-datetime"
+                required
+              />
+            </label>
 
-        <label for="end-datetime"
-          >End Date and Time
-          <input
-            type="datetime-local"
-            id="end-datetime"
-            name="end-datetime"
-            required
-          />
-        </label>
-        <label for="event-description">Add Description</label><br />
-        <textarea
-          id="event-description"
-          name="event-description"
-          rows="4"
-          cols="50"
-        ></textarea>
-        <button type="button" id="create-event-button">Create Event</button>
+            <label for="end-datetime"
+              >End Date and Time
+              <input
+                type="datetime-local"
+                id="end-datetime"
+                name="end-datetime"
+                required
+              />
+            </label>
+          </div>
+
+          <div class="event-creation-form-column">
+            <label for="event-description">Add Description</label>
+            <textarea
+              id="event-description"
+              name="event-description"
+              rows="4"
+              cols="50"
+            ></textarea>
+          </div>
+        </div>
+        <div class="event-creation-modal-footer">
+          <button type="button" id="create-event-button">Save</button>
+        </div>
       </form>
     </dialog>
 
-    <dialog id="event-details-modal" class="modal-container">
-      <div>
+    <dialog id="event-details-modal">
+      <div class="draggable-header">
         <button class="close-button" id="event-details-close-modal-button">
           &#215;
         </button>
-        <div>
-          <h3 id="event-details-title" class="event-title">About the event:</h3>
-          <span id="event-details-description" class="event-description"></span>
-        </div>
-        <button id="delete-event-button">Delete event</button>
       </div>
+
+      <div>
+        <h3 id="event-details-title" class="event-title">About the event:</h3>
+        <span id="event-details-description" class="event-description"></span>
+      </div>
+      <button id="delete-event-button">Delete event</button>
     </dialog>
   </body>
   <script type="module" src="/dist/index.js"></script>
