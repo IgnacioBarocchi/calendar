@@ -1,4 +1,5 @@
-import { MONTHS } from '../constants/index';
+import { MONTHS, USE_WEEK_CACHING } from '../constants/index';
+
 import mapRange from '../lib/mapRange';
 
 class StorageService {
@@ -90,14 +91,16 @@ class StorageService {
   }
 
   public setSelectedWeek(date: Date, index: number) {
-    const cachedWeeks = JSON.parse(
-      sessionStorage.getItem('cachedWeeks') || '[]',
-    ).map((dateTimeString: string) => new Date(dateTimeString));
+    if (USE_WEEK_CACHING) {
+      const cachedWeeks = JSON.parse(
+        sessionStorage.getItem('cachedWeeks') || '[]',
+      ).map((dateTimeString: string) => new Date(dateTimeString));
 
-    if (cachedWeeks && cachedWeeks[index]?.length) {
-      const cachedWeek = cachedWeeks[index];
-      this.selectedWeek = cachedWeek;
-      return this.selectedWeek;
+      if (cachedWeeks && cachedWeeks[index]?.length) {
+        const cachedWeek = cachedWeeks[index];
+        this.selectedWeek = cachedWeek;
+        return this.selectedWeek;
+      }
     }
 
     const startDate = new Date(date.setDate(date.getDate() - date.getDay()));
@@ -109,7 +112,9 @@ class StorageService {
     });
 
     if (week && week.length > 0) {
-      this.cachWeek(week, index);
+      if (USE_WEEK_CACHING) {
+        this.cachWeek(week, index);
+      }
       this.selectedWeek = week;
     } else {
       throw new Error('Week error');

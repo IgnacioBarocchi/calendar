@@ -20,44 +20,50 @@ export default class NavigationControls {
     NavigationControls.instance = this;
   }
 
-  private _incrementNavigationIndex() {
+  private incrementNavigationIndex() {
     this.navigationIndex++;
   }
 
-  private _decrementNavigationIndex() {
+  private decrementNavigationIndex() {
     this.navigationIndex--;
   }
 
-  private _resetNavigationIndex() {
+  private resetNavigationIndex() {
     this.navigationIndex = 0;
   }
 
-  private _getDateOf(requestedWeekView: 'ongoing' | 'next' | 'prev') {
+  private getDateOf(requestedWeekView: 'ongoing' | 'next' | 'prev') {
+    debugger;
     const numberOfDaysToAdd = { ongoing: 0, next: 7, prev: -7 }[
       requestedWeekView
     ];
 
-    const today = new Date();
-    if (numberOfDaysToAdd === 0) return today;
+    if (numberOfDaysToAdd === 0) return new Date();
+
+    const referenceSunday = StorageService.getSelectedWeek()[0];
 
     return new Date(
-      today.setDate(today.getDate() + numberOfDaysToAdd * this.navigationIndex),
+      referenceSunday.setDate(referenceSunday.getDate() + numberOfDaysToAdd),
     );
   }
 
-  private _handleNavigationChange(
+  private handleNavigationChange(
     requestedWeekView: 'ongoing' | 'next' | 'prev',
   ) {
-    this[
-      {
-        prev: '_decrementNavigationIndex',
-        next: '_incrementNavigationIndex',
-        ongoing: '_resetNavigationIndex',
-      }[requestedWeekView]
-    ]();
+    switch (requestedWeekView) {
+      case 'ongoing':
+        this.resetNavigationIndex();
+        break;
+      case 'next':
+        this.incrementNavigationIndex();
+        break;
+      case 'prev':
+        this.decrementNavigationIndex();
+        break;
+    }
 
     StorageService.setSelectedWeek(
-      this._getDateOf(requestedWeekView),
+      this.getDateOf(requestedWeekView),
       this.navigationIndex,
     );
 
@@ -75,7 +81,6 @@ export default class NavigationControls {
 
   public navigateWithDaysOfMonth(date: Date) {
     const referenceSunday = StorageService.selectedWeek[0];
-    const currentNavigationIndex = this.navigationIndex;
 
     const currentDate = new Date(date);
     const dayOfWeek = currentDate.getDay();
@@ -96,7 +101,7 @@ export default class NavigationControls {
     this.stages.forEach((requestedWeekView: 'ongoing' | 'next' | 'prev') => {
       const activeButton = document.querySelector(`#${requestedWeekView}-week`);
       activeButton?.addEventListener('click', () =>
-        this._handleNavigationChange(requestedWeekView),
+        this.handleNavigationChange(requestedWeekView),
       );
     });
   }

@@ -5,8 +5,8 @@ import ClockHand from './components/ClockHand/ClockHand';
 import NavigationControls from './controls/NavigationControls';
 
 const today = new Date();
-const calendaeHeaderRowComponent = new CalendarHeaderRow();
-const calendarBodyComponent = new CalendarBody();
+const calendaeHeaderRowComponent = CalendarHeaderRow.getInstance();
+const calendarBodyComponent = CalendarBody.getInstance();
 const calendarMonthComponent = new CalendarMonth();
 
 const components = [

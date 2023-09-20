@@ -23,7 +23,6 @@ export default class CalendarBody implements Renderable {
   private calendarHeaderColumnElements;
   private timeSlotElements = [];
   private parentElement = document.getElementById('calendar-body-container');
-  private timeSlotInstances = [];
 
   private createCalendarBody() {
     const bodyElements = [];
@@ -39,8 +38,6 @@ export default class CalendarBody implements Renderable {
 
     appendElements(bodyElements, this.parentElement);
   }
-
-  private mapEvents() {}
 
   private updateTimeSlotsData() {
     const week = [...StorageService.selectedWeek];
