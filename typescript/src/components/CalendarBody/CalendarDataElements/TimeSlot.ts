@@ -5,13 +5,13 @@ import createElement from '../../../lib/createElement.ts';
 
 export default class TimeSlot {
   slotIndex;
-  dateTime;
+  initialDateTime;
   timeSlotElement;
 
   constructor(dateTime: Date, startingHour: number) {
     this.slotIndex = `${dateTime.getDay()}-${startingHour}`;
     const dateTimeValue = new Date(dateTime).setHours(startingHour, 0, 0);
-    this.dateTime = new Date(dateTimeValue);
+    this.initialDateTime = new Date(dateTimeValue);
     this.timeSlotElement = createElement(`
         <div 
             class="grid-item time-slot" 
@@ -30,17 +30,19 @@ export default class TimeSlot {
   }
 
   private renderDraftCalendarEvent() {
+    const currentDateTime = new Date(this.timeSlotElement.dataset.dateTime);
+
     const draftTimeSlotEvent = new CalendarEvent(
       {
         stage: 'draft',
-        title: `(no title), ${this.dateTime.getHours()}`,
-        startDateTime: this.dateTime,
-        endDateTime: new Date(new Date(this.dateTime).setMinutes(30)),
+        title: `(no title), ${currentDateTime.getHours()}`,
+        startDateTime: currentDateTime,
+        endDateTime: new Date(new Date(currentDateTime).setMinutes(30)),
       },
       this.timeSlotElement,
     );
 
-    CalendarEventCreationForm.autoFillDates(this.dateTime);
+    CalendarEventCreationForm.autoFillDates(currentDateTime);
     draftTimeSlotEvent.render();
   }
 
