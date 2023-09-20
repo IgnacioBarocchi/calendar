@@ -1,10 +1,11 @@
 import { DAYS_ABBREVIATIONS, TIME_ZONE_OFFSET } from '../../constants/index.ts';
 
+import Renderable from '../../interfaces/Renderable.ts';
 import StorageService from '../../StorageService/StorageService.ts';
 import appendElements from '../../lib/appendElements.ts';
 import createElement from '../../lib/createElement.ts';
 
-export default class CalendarHeaderRow {
+export default class CalendarHeaderRow implements Renderable {
   private static instance: CalendarHeaderRow;
 
   private dayOfTheWeekElements = [];

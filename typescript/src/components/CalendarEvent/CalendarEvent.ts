@@ -1,8 +1,9 @@
 import EventDetailsModal from '../Modal/EventDetailsModal.ts';
+import Renderable from '../../interfaces/Renderable.ts';
 import appendElements from '../../lib/appendElements.ts';
 import createElement from '../../lib/createElement.ts';
 
-export default class CalendarEvent {
+export default class CalendarEvent implements Renderable {
   calendarEvent;
   timeSlot;
 

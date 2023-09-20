@@ -1,11 +1,12 @@
 import { DAYS_ABBREVIATIONS } from '../../constants/index.ts';
 import NavigationControls from '../../controls/NavigationControls.ts';
+import Renderable from '../../interfaces/Renderable.ts';
 import StorageService from '../../StorageService/StorageService.ts';
 import appendElements from '../../lib/appendElements.ts';
 import createElement from '../../lib/createElement.ts';
 import range from '../../lib/range.ts';
 
-export default class CalendarMonth {
+export default class CalendarMonth implements Renderable {
   calendarBodyElement = document.querySelector('#days-of-month-body');
   calendarHeaderElement = document.querySelector('#days-of-month-header');
   monthLabel = document.querySelector('#days-of-month-month-label');
