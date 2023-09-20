@@ -3,16 +3,22 @@ import Renderable from '../../interfaces/Renderable.ts';
 import appendElements from '../../lib/appendElements.ts';
 import createElement from '../../lib/createElement.ts';
 
-export default class CalendarEvent implements Renderable {
-  calendarEvent;
-  timeSlot;
+export const CalendarEventRecordStages = {
+  upcoming: 'upcoming',
+  draft: 'draft',
+} as const;
 
-  constructor(calendarEvent, timeSlot) {
+export default class CalendarEvent implements Renderable {
+  calendarEvent: CalendarEventRecord;
+  timeSlot: HTMLElement;
+  calendarEventElement: HTMLElement;
+
+  constructor(calendarEvent: CalendarEventRecord, timeSlot: HTMLElement) {
     this.calendarEvent = calendarEvent;
     this.timeSlot = timeSlot;
   }
 
-  private getEventHoursLong(startDateTime, endDateTime) {
+  private getEventHoursLong(startDateTime: Date, endDateTime: Date): Number {
     return Math.abs(startDateTime - endDateTime) / 36e5;
   }
 
@@ -26,7 +32,7 @@ export default class CalendarEvent implements Renderable {
 
     this.calendarEventElement.addEventListener(
       'click',
-      function (clientEvent) {
+      function (clientEvent: PointerEvent) {
         // alert("event! " + clientEvent);
         clientEvent.stopPropagation();
 
@@ -95,4 +101,12 @@ export default class CalendarEvent implements Renderable {
 
     return this.calendarEventElement;
   }
+}
+
+export interface CalendarEventRecord {
+  stage: keyof typeof CalendarEventRecordStages;
+  title: string;
+  startDateTime: Date;
+  endDateTime: Date;
+  description?: string;
 }
