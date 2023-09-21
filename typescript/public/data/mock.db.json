@@ -1,18 +1,20 @@
-[
-  {
-    "title": "ddd",
-    "startDateTime": "2023-09-27T01:00:00.000Z",
-    "endDateTime": "2023-09-27T01:30:00.000Z",
-    "description": "dddd",
-    "stage": "upcoming",
-    "id": "10104039775921177"
-  },
-  {
-    "title": "d",
-    "startDateTime": "2023-09-18T23:00:00.000Z",
-    "endDateTime": "2023-09-18T23:30:00.000Z",
-    "description": "d",
-    "stage": "upcoming",
-    "id": "59269004200333875"
-  }
-]
+{
+  "events": [
+    {
+      "title": "ddd",
+      "startDateTime": "2023-09-27T01:00:00.000Z",
+      "endDateTime": "2023-09-27T01:30:00.000Z",
+      "description": "dddd",
+      "stage": "upcoming",
+      "id": "10104039775921177"
+    },
+    {
+      "title": "d",
+      "startDateTime": "2023-09-18T23:00:00.000Z",
+      "endDateTime": "2023-09-18T23:30:00.000Z",
+      "description": "d",
+      "stage": "upcoming",
+      "id": "59269004200333875"
+    }
+  ]
+}

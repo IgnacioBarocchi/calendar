@@ -4,15 +4,16 @@
     "build": "snowpack build",
     "test": "echo \"This template does not include a test runner by default.\" && exit 1",
     "format": "prettier --write \"src/**/*.{ts,js}\"",
-    "lint": "prettier --check \"src/**/*.{ts,js}\""
+    "lint": "prettier --check \"src/**/*.{ts,js}\"",
+    "serve": "json-server --watch ./public/data/mock.db.json",
+    "dev": "concurrently \"npm run serve\" \"npm start\""
   },
   "dependencies": {
-    "canvas-confetti": "^1.2.0",
+    "concurrently": "^8.2.1",
     "json-server": "^0.17.3"
   },
   "devDependencies": {
     "@snowpack/plugin-typescript": "^1.2.1",
-    "@types/canvas-confetti": "^1.0.0",
     "@types/snowpack-env": "^2.3.3",
     "prettier": "^2.2.1",
     "snowpack": "^3.3.7",
