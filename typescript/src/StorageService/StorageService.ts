@@ -1,6 +1,6 @@
 import { MONTHS, USE_JSON_SERVER, USE_WEEK_CACHING } from '../constants/index';
+import { findEvents, getEventsOfThisWeek } from '../services/events.service';
 
-import { findEvents } from '../services/events.service';
 import mapRange from '../lib/mapRange';
 
 class StorageService {
@@ -139,6 +139,26 @@ class StorageService {
       StorageService.instance = new StorageService();
     }
     return StorageService.instance;
+  }
+
+  public async getEventsOfTheWeekBySlotIndex() {
+    return (await getEventsOfThisWeek(this.selectedWeek)).reduce(
+      (acc, eventRecord) => {
+        // debugger;
+        const { startDateTime: startDateTimeString } = eventRecord;
+
+        const startDateTime = new Date(startDateTimeString);
+        const date = startDateTime.getDate();
+        const hour = startDateTime.getHours();
+        const events = acc[`${date}-${hour}`] || [];
+        events.push(startDateTime);
+
+        acc[`${date}-${hour}`] = events;
+
+        return acc;
+      },
+      {},
+    );
   }
 }
 

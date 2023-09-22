@@ -1,5 +1,4 @@
 import CalendarBody from './components/CalendarBody/CalendarBody';
-import { CalendarEventRecordStages } from './components/CalendarEvent/CalendarEvent';
 import CalendarHeaderRow from './components/CalendarHeaderRow/CalendarHeaderRow';
 import CalendarMonth from './components/CalendarMonth/CalendarMonth';
 import ClockHand from './components/ClockHand/ClockHand';
@@ -41,3 +40,8 @@ window.addEventListener('DOMContentLoaded', () => {
   );
   earliestEventOfTheWeek?.scrollIntoView();
 });
+
+// import StorageService from './StorageService/StorageService';
+// (async function () {
+//   console.log('in index', await StorageService.getEventsOfTheWeekBySlotIndex());
+// })();

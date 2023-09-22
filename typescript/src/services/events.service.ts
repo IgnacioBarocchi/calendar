@@ -43,10 +43,23 @@ export const findEvetnsByStartingDate = async (startingDate: Date) => {
   return await findEvents(`/events?startDateTime_like=^${x}`);
 };
 
-export const getEventsOfThisWeek = (week: Date[]) => {
-  week
-    .map(async (d) => {
-      findEvetnsByStartingDate(d);
-    })
-    .flat();
+// export const getEventsOfThisWeek = async (week: Date[]) => {
+//   getEventsOfThisWeek
+//   // return week
+//   //   .map(async (d) => {
+//   //     return await await findEvetnsByStartingDate(d);
+//   //   })
+//   //   .flat();
+// };
+export const getEventsOfThisWeek = async (week: Date[]) => {
+  const eventsPromises = week.map(async (d) => {
+    return findEvetnsByStartingDate(d);
+  });
+
+  const events = await Promise.all(eventsPromises);
+
+  const result = events.flat();
+  console.log('result', result);
+
+  return result;
 };
