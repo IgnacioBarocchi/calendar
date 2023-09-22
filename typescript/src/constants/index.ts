@@ -38,7 +38,7 @@ for (let i = 0; i < 7; i++) {
 // todo: make .env file DEV PROD modes
 // * https://www.snowpack.dev/reference/environment-variables
 const USE_WEEK_CACHING = false;
-const USE_JSON_SERVER = false;
+const USE_JSON_SERVER = true;
 
 export {
   USE_WEEK_CACHING,

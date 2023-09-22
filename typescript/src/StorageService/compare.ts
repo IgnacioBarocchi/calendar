@@ -4,7 +4,6 @@ import { findEvents } from '../services/events.service';
 import mapRange from '../lib/mapRange';
 
 class StorageService {
-  // todo: change to private
   public selectedWeek: Date[] = [];
   private static instance: StorageService | null = null;
 

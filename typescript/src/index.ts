@@ -1,14 +1,9 @@
 import CalendarBody from './components/CalendarBody/CalendarBody';
+import { CalendarEventRecordStages } from './components/CalendarEvent/CalendarEvent';
 import CalendarHeaderRow from './components/CalendarHeaderRow/CalendarHeaderRow';
 import CalendarMonth from './components/CalendarMonth/CalendarMonth';
 import ClockHand from './components/ClockHand/ClockHand';
 import NavigationControls from './controls/NavigationControls';
-import getEvents from './lib/getEvents';
-
-(async function () {
-  const data = await getEvents();
-  console.log(data);
-})();
 
 const today = new Date();
 const calendaeHeaderRowComponent = CalendarHeaderRow.getInstance();
