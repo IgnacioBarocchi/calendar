@@ -64,26 +64,20 @@ class StorageService {
       ? await this.getEventsOfTheWeekBySlotIndex()
       : await this.getEvents();
 
-    if (events && events.length) {
-      alert(events);
-    }
-
     const eventsOfTheSlot = events[slotIndex];
-    if (!eventsOfTheSlot?.length) return [];
 
+    if (!eventsOfTheSlot?.length) return [];
+    // ! estamos seguros de que llega aca
     const timeSlotDayTime = new Date(
       document.querySelector(`[data-slot-index="${slotIndex}"]`)?.dataset
         .dateTime || '',
     );
 
     return await eventsOfTheSlot.filter((event: any) => {
+      console.log('event', event);
+
       const eventDate = new Date(event.startDateTime);
-      if (
-        eventDate.getHours() === timeSlotDayTime.getHours() &&
-        eventDate.getDate() === timeSlotDayTime.getDate()
-      ) {
-        alert('f');
-      }
+
       return (
         eventDate.getHours() === timeSlotDayTime.getHours() &&
         eventDate.getDate() === timeSlotDayTime.getDate()
@@ -94,7 +88,7 @@ class StorageService {
   public async deleteEventById(targetId: string) {
     if (USE_JSON_SERVER) {
       const a = await deleteEventById(targetId);
-      alert(JSON.stringify(a));
+      console.log(JSON.stringify(a));
     } else {
       localStorage.setItem(
         'events',
@@ -180,7 +174,7 @@ class StorageService {
         const day = startDateTime.getDay();
         const hour = startDateTime.getHours();
         const events = acc[`${day}-${hour}`] || [];
-        events.push(startDateTime);
+        events.push(eventRecord);
 
         acc[`${day}-${hour}`] = events;
 

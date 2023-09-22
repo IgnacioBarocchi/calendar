@@ -78,7 +78,7 @@ export const postEvent = async (event: CalendarEventRecord) => {
 
 export const deleteEventById = async (eventId: string) => {
   try {
-    alert('url: ' + `${EVENTS_BASE_URL}/${eventId}`);
+    console.log('url: ' + `${EVENTS_BASE_URL}/${eventId}`);
     const response = await fetch(`${EVENTS_BASE_URL}/${eventId}`, {
       method: 'DELETE',
     });

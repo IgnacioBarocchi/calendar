@@ -40,6 +40,7 @@ export default class CalendarBody implements Renderable {
   }
 
   private updateTimeSlotsData() {
+    console.count('updateTimeSlotsData');
     const week = [...StorageService.selectedWeek];
 
     this.timeSlotElements.forEach(async (timeSlotElement) => {
@@ -55,14 +56,10 @@ export default class CalendarBody implements Renderable {
         timeSlotElement.dataset.slotIndex,
       );
 
-      if (slotEvents && slotEvents.length) {
-        alert(JSON.stringify(slotEvents));
-      }
-
       if (slotEvents?.length) {
         slotEvents.forEach((slotEvent) => {
-          const timeSlotEvent = new CalendarEvent(slotEvent, timeSlotElement);
-          timeSlotEvent.render();
+          const calendarEvent = new CalendarEvent(slotEvent, timeSlotElement);
+          calendarEvent.render();
         });
       }
     });
