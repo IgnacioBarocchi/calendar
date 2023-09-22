@@ -36,6 +36,8 @@ class EventDetailsModal extends Modal {
     this.modalElement.querySelector('#delete-event-button').addEventListener(
       'click',
       function () {
+        // ! logical coupling: depends on the data attribute to delete an element!
+        // alert(calendarEvent.id);
         StorageService.deleteEventById(calendarEvent.id);
         calendarEventElement.remove();
         this.close();

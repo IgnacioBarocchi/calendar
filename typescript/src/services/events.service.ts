@@ -52,3 +52,46 @@ export const getEventsOfThisWeek = async (week: Date[]) => {
   const result = events.flat();
   return result;
 };
+
+export const postEvent = async (event: CalendarEventRecord) => {
+  try {
+    const response = await fetch(EVENTS_BASE_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(event),
+    });
+
+    if (response.ok) {
+      return await response.json();
+    } else {
+      throw new Error('Error posting event');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    console.table({ error });
+
+    throw error;
+  }
+};
+
+export const deleteEventById = async (eventId: string) => {
+  try {
+    alert('url: ' + `${EVENTS_BASE_URL}/${eventId}`);
+    const response = await fetch(`${EVENTS_BASE_URL}/${eventId}`, {
+      method: 'DELETE',
+    });
+
+    if (response.ok) {
+      return null;
+    } else {
+      throw new Error('Error deleting event');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    console.table({ error });
+
+    throw error;
+  }
+};

@@ -42,7 +42,7 @@ export default class CalendarBody implements Renderable {
   private updateTimeSlotsData() {
     const week = [...StorageService.selectedWeek];
 
-    this.timeSlotElements.forEach((timeSlotElement) => {
+    this.timeSlotElements.forEach(async (timeSlotElement) => {
       timeSlotElement.innerHTML = '';
 
       const [dayNumber, hour] = timeSlotElement.dataset.slotIndex.split('-');
@@ -51,9 +51,13 @@ export default class CalendarBody implements Renderable {
 
       timeSlotElement.dataset.dateTime = new Date(dayTimeValue).toString();
 
-      const slotEvents = StorageService.getEventsBySlotIndex(
+      const slotEvents = await StorageService.getEventsBySlotIndex(
         timeSlotElement.dataset.slotIndex,
       );
+
+      if (slotEvents && slotEvents.length) {
+        alert(JSON.stringify(slotEvents));
+      }
 
       if (slotEvents?.length) {
         slotEvents.forEach((slotEvent) => {

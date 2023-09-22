@@ -1,5 +1,10 @@
 import { MONTHS, USE_JSON_SERVER, USE_WEEK_CACHING } from '../constants/index';
-import { findEvents, getEventsOfThisWeek } from '../services/events.service';
+import {
+  deleteEventById,
+  findEvents,
+  getEventsOfThisWeek,
+  postEvent,
+} from '../services/events.service';
 
 import mapRange from '../lib/mapRange';
 
@@ -44,10 +49,14 @@ class StorageService {
 
     eventsOfTheSlot.push(event);
 
-    localStorage.setItem(
-      'events',
-      JSON.stringify({ ...events, [slotIndex]: eventsOfTheSlot }),
-    );
+    if (USE_JSON_SERVER) {
+      postEvent(event);
+    } else {
+      localStorage.setItem(
+        'events',
+        JSON.stringify({ ...events, [slotIndex]: eventsOfTheSlot }),
+      );
+    }
   }
 
   public async getEventsBySlotIndex(slotIndex: string) {
@@ -55,10 +64,11 @@ class StorageService {
       ? await this.getEventsOfTheWeekBySlotIndex()
       : await this.getEvents();
 
-    console.log(JSON.stringify(events));
+    if (events && events.length) {
+      alert(events);
+    }
 
     const eventsOfTheSlot = events[slotIndex];
-    console.log(slotIndex, eventsOfTheSlot);
     if (!eventsOfTheSlot?.length) return [];
 
     const timeSlotDayTime = new Date(
@@ -66,8 +76,14 @@ class StorageService {
         .dateTime || '',
     );
 
-    return eventsOfTheSlot.filter((event: any) => {
+    return await eventsOfTheSlot.filter((event: any) => {
       const eventDate = new Date(event.startDateTime);
+      if (
+        eventDate.getHours() === timeSlotDayTime.getHours() &&
+        eventDate.getDate() === timeSlotDayTime.getDate()
+      ) {
+        alert('f');
+      }
       return (
         eventDate.getHours() === timeSlotDayTime.getHours() &&
         eventDate.getDate() === timeSlotDayTime.getDate()
@@ -75,19 +91,27 @@ class StorageService {
     });
   }
 
-  public deleteEventById(targetId: string) {
-    localStorage.setItem(
-      'events',
-      JSON.stringify(
-        Object.fromEntries(
-          Object.entries(this.getEvents()).map(
-            ([key, itsEvents]: [string, any[]]) => {
-              return [key, itsEvents.filter((event) => event.id !== targetId)];
-            },
+  public async deleteEventById(targetId: string) {
+    if (USE_JSON_SERVER) {
+      const a = await deleteEventById(targetId);
+      alert(JSON.stringify(a));
+    } else {
+      localStorage.setItem(
+        'events',
+        JSON.stringify(
+          Object.fromEntries(
+            Object.entries(this.getEvents()).map(
+              ([key, itsEvents]: [string, any[]]) => {
+                return [
+                  key,
+                  itsEvents.filter((event) => event.id !== targetId),
+                ];
+              },
+            ),
           ),
         ),
-      ),
-    );
+      );
+    }
   }
 
   public getMonthOfYear() {

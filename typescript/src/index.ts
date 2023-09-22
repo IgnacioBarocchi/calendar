@@ -40,8 +40,3 @@ window.addEventListener('DOMContentLoaded', () => {
   );
   earliestEventOfTheWeek?.scrollIntoView();
 });
-
-// import StorageService from './StorageService/StorageService';
-// (async function () {
-//   console.log('in index', await StorageService.getEventsOfTheWeekBySlotIndex());
-// })();
