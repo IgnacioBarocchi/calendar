@@ -50,9 +50,15 @@ class StorageService {
     );
   }
 
-  public getEventsBySlotIndex(slotIndex: string) {
-    const events = this.getEvents();
+  public async getEventsBySlotIndex(slotIndex: string) {
+    const events = USE_JSON_SERVER
+      ? await this.getEventsOfTheWeekBySlotIndex()
+      : await this.getEvents();
+
+    console.log(JSON.stringify(events));
+
     const eventsOfTheSlot = events[slotIndex];
+    console.log(slotIndex, eventsOfTheSlot);
     if (!eventsOfTheSlot?.length) return [];
 
     const timeSlotDayTime = new Date(
@@ -141,19 +147,18 @@ class StorageService {
     return StorageService.instance;
   }
 
-  public async getEventsOfTheWeekBySlotIndex() {
+  private async getEventsOfTheWeekBySlotIndex() {
     return (await getEventsOfThisWeek(this.selectedWeek)).reduce(
       (acc, eventRecord) => {
-        // debugger;
         const { startDateTime: startDateTimeString } = eventRecord;
 
         const startDateTime = new Date(startDateTimeString);
-        const date = startDateTime.getDate();
+        const day = startDateTime.getDay();
         const hour = startDateTime.getHours();
-        const events = acc[`${date}-${hour}`] || [];
+        const events = acc[`${day}-${hour}`] || [];
         events.push(startDateTime);
 
-        acc[`${date}-${hour}`] = events;
+        acc[`${day}-${hour}`] = events;
 
         return acc;
       },

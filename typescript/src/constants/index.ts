@@ -39,8 +39,10 @@ for (let i = 0; i < 7; i++) {
 // * https://www.snowpack.dev/reference/environment-variables
 const USE_WEEK_CACHING = false;
 const USE_JSON_SERVER = true;
+const EVENTS_BASE_URL = 'http://localhost:3000/events';
 
 export {
+  EVENTS_BASE_URL,
   USE_WEEK_CACHING,
   USE_JSON_SERVER,
   MONTHS,

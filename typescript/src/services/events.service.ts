@@ -1,11 +1,10 @@
 import { CalendarEventRecord } from '../components/CalendarEvent/CalendarEvent';
+import { EVENTS_BASE_URL } from '../constants/index';
 import formatDateToDateInputValue from '../lib/formatDateToDateInputValue';
-
-const BASE_URL = 'http://localhost:3000/events';
 
 export const findEvents = async (query = '') => {
   try {
-    const response = await fetch(new URL(query, BASE_URL));
+    const response = await fetch(new URL(query, EVENTS_BASE_URL));
 
     if (response.ok) return await response.json();
 
@@ -20,7 +19,7 @@ export const findEvents = async (query = '') => {
 
 export const saveEvent = async (event: CalendarEventRecord) => {
   try {
-    const response = await fetch(BASE_URL, {
+    const response = await fetch(EVENTS_BASE_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -38,19 +37,11 @@ export const saveEvent = async (event: CalendarEventRecord) => {
   }
 };
 
-export const findEvetnsByStartingDate = async (startingDate: Date) => {
-  const x = formatDateToDateInputValue(startingDate).split('T')[0];
-  return await findEvents(`/events?startDateTime_like=^${x}`);
+export const findEvetnsByStartingDate = async (startDate: Date) => {
+  const startDateString = formatDateToDateInputValue(startDate).split('T')[0];
+  return await findEvents(`/events?startDateTime_like=^${startDateString}`);
 };
 
-// export const getEventsOfThisWeek = async (week: Date[]) => {
-//   getEventsOfThisWeek
-//   // return week
-//   //   .map(async (d) => {
-//   //     return await await findEvetnsByStartingDate(d);
-//   //   })
-//   //   .flat();
-// };
 export const getEventsOfThisWeek = async (week: Date[]) => {
   const eventsPromises = week.map(async (d) => {
     return findEvetnsByStartingDate(d);
@@ -59,7 +50,5 @@ export const getEventsOfThisWeek = async (week: Date[]) => {
   const events = await Promise.all(eventsPromises);
 
   const result = events.flat();
-  console.log('result', result);
-
   return result;
 };
