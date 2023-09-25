@@ -1,4 +1,7 @@
+import CalendarBody from '../components/CalendarBody/CalendarBody';
 import StorageService from '../StorageService/StorageService';
+import CalendarHeaderRow from '../components/CalendarHeaderRow/CalendarHeaderRow';
+import CalendarMonth from '../components/CalendarMonth/CalendarMonth';
 
 enum Stages {
   NEXT,
@@ -11,12 +14,15 @@ export default class NavigationControls {
   private static instance: NavigationControls | null = null;
 
   navigationIndex = 0;
-  storage: any;
-  header: any;
-  calendarBody: any;
-  calendarMonth: any;
+  header?: CalendarHeaderRow;
+  calendarBody?: CalendarBody;
+  calendarMonth?: CalendarMonth;
 
-  constructor(header: any, calendarBody: any, calendarMonth: any) {
+  constructor(
+    header?: CalendarHeaderRow,
+    calendarBody?: CalendarBody,
+    calendarMonth?: CalendarMonth,
+  ) {
     if (NavigationControls.instance) {
       return NavigationControls.instance;
     }
@@ -55,7 +61,9 @@ export default class NavigationControls {
     );
   }
 
-  private handleNavigationChange(requestedWeekView: Stages) {
+  private handleNavigationChange(
+    requestedWeekView: Stages.ONGOING | Stages.NEXT | Stages.PREV,
+  ) {
     debugger;
     switch (requestedWeekView) {
       case Stages.ONGOING:
@@ -78,6 +86,7 @@ export default class NavigationControls {
   }
 
   private reRenderControlledComponents() {
+    if (!this.calendarMonth?.calendarBodyElement) return;
     this.calendarMonth.calendarBodyElement.innerHTML = '';
     [this.header, this.calendarBody, this.calendarMonth].forEach(
       (component: any) => {
@@ -114,7 +123,10 @@ export default class NavigationControls {
         `#${String(requestedWeekView).toLowerCase()}-week`,
       );
       activeButton?.addEventListener('click', () =>
-        this.handleNavigationChange(requestedWeekView),
+        this.handleNavigationChange(
+          // @ts-ignore
+          requestedWeekView,
+        ),
       );
     });
   }

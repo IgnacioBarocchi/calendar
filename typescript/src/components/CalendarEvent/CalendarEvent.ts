@@ -10,39 +10,42 @@ export const CalendarEventRecordStages = {
 
 export default class CalendarEvent implements Renderable {
   calendarEvent: CalendarEventRecord;
-  timeSlot: HTMLElement;
-  calendarEventElement: HTMLElement;
+  timeSlot?: HTMLElement;
+  calendarEventElement?: HTMLElement;
 
-  constructor(calendarEvent: CalendarEventRecord, timeSlot: HTMLElement) {
+  constructor(calendarEvent: CalendarEventRecord, timeSlot?: HTMLElement) {
     this.calendarEvent = calendarEvent;
     this.timeSlot = timeSlot;
   }
 
-  private getEventHoursLong(startDateTime: Date, endDateTime: Date): Number {
-    return Math.abs(startDateTime - endDateTime) / 36e5;
+  private getEventHoursLong(startDateTime: Date, endDateTime: Date): number {
+    return Math.abs(Number(startDateTime) - Number(endDateTime)) / 36e5;
   }
 
-  private processEvents() {
+  private getProcessedEvent(): HTMLElement {
     const { stage } = this.calendarEvent || {};
 
     if (stage === 'draft') {
-      this.calendarEventElement.classList.add('draft');
-      return this.calendarEventElement;
+      this.calendarEventElement?.classList.add('draft');
+      return this.calendarEventElement!;
     }
 
-    this.calendarEventElement.addEventListener(
-      'click',
-      function (clientEvent: PointerEvent) {
-        clientEvent.stopPropagation();
+    function handleOpenEventDetails(clientEvent: PointerEvent) {
+      clientEvent.stopPropagation();
+      // @ts-ignore
+      EventDetailsModal.open(this.calendarEventElement, [
+        clientEvent.clientX,
+        clientEvent.clientY,
+      ]);
+    }
 
-        EventDetailsModal.open(this.calendarEventElement, [
-          clientEvent.clientX,
-          clientEvent.clientY,
-        ]);
-      }.bind(this),
+    this.calendarEventElement?.addEventListener(
+      'click',
+      // @ts-ignore
+      handleOpenEventDetails.bind(this),
     );
 
-    return this.calendarEventElement;
+    return this.calendarEventElement!;
   }
 
   render() {
@@ -68,7 +71,7 @@ export default class CalendarEvent implements Renderable {
     if (!this.timeSlot) {
       this.timeSlot = document.querySelector(
         `[data-slot-index="${startDateTime.getDay()}-${startDateTime.getHours()}"]`,
-      );
+      )!;
     }
 
     const pixelUnitsOfOneHourSlot = this.timeSlot.offsetHeight;
@@ -96,7 +99,7 @@ export default class CalendarEvent implements Renderable {
       `,
     );
 
-    appendElements([this.processEvents()], this.timeSlot);
+    appendElements([this.getProcessedEvent()], this.timeSlot);
 
     return this.calendarEventElement;
   }

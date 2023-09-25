@@ -7,9 +7,17 @@ import createElement from '../../lib/createElement.ts';
 import range from '../../lib/range.ts';
 
 export default class CalendarMonth implements Renderable {
-  calendarBodyElement = document.querySelector('#days-of-month-body');
-  calendarHeaderElement = document.querySelector('#days-of-month-header');
-  monthLabel = document.querySelector('#days-of-month-month-label');
+  calendarBodyElement: HTMLElement = document.querySelector(
+    '#days-of-month-body',
+  )!;
+
+  calendarHeaderElement: HTMLElement = document.querySelector(
+    '#days-of-month-header',
+  )!;
+
+  monthLabel: HTMLElement = document.querySelector(
+    '#days-of-month-month-label',
+  )!;
 
   dates: Date[] = [];
 
@@ -90,23 +98,3 @@ export default class CalendarMonth implements Renderable {
     appendElements(dateElements, this.calendarBodyElement);
   }
 }
-
-/* 
-    //todo: depending on the current month duration 30 | 31 | 28
-    const daysToPrepend = 7;
-    const lastDayOfPreviousMonth = new Date(
-      date.getFullYear(),
-      date.getMonth(),
-      0,
-    );
-    //* +1 to start from the previous month
-    lastDayOfPreviousMonth.setDate(
-      lastDayOfPreviousMonth.getDate() - daysToPrepend + 1,
-    );
-
-    range(daysToPrepend).forEach(() => {
-      this.dates.push(new Date(lastDayOfPreviousMonth));
-      // update, don't create new
-      lastDayOfPreviousMonth.setDate(lastDayOfPreviousMonth.getDate() + 1);
-    });
-    */

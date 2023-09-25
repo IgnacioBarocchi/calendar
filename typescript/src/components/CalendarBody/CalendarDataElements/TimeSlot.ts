@@ -25,12 +25,13 @@ export default class TimeSlot {
 
       const draftTimeSlotEvent = new CalendarEvent(
         {
+          id: 'draft-event',
           stage: 'draft',
           title: `(no title), ${currentDateTime.getHours()}`,
           startDateTime: currentDateTime,
           endDateTime: new Date(new Date(currentDateTime).setMinutes(30)),
         },
-        this,
+        this as HTMLElement,
       );
 
       CalendarEventCreationForm.autoFillDates(currentDateTime);
@@ -39,6 +40,7 @@ export default class TimeSlot {
       EventCreationModal.open([clientEvent.clientX, clientEvent.clientY]);
     }
 
+    // @ts-ignore
     this.timeSlotElement.addEventListener('click', createDraftEvent);
   }
 

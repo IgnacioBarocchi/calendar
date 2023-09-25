@@ -62,20 +62,33 @@ class CalendarEventCreationForm {
   }
 
   private createEventRecord() {
-    const title: string = document.querySelector('#event-title')!.value;
+    const titleElement: HTMLInputElement = document.querySelector(
+      '#event-title',
+    )!;
 
-    const startDateTime = new Date(
-      document.querySelector('#start-datetime').value,
-    );
+    const startDateTimeElement: HTMLInputElement = document.querySelector(
+      '#start-datetime',
+    )!;
 
-    const endDateTime = new Date(
-      document.querySelector('#end-datetime')!.value,
-    );
-    const description: string = document.querySelector('#event-description')!
-      .value;
+    const endDateTimeElement: HTMLInputElement = document.querySelector(
+      '#end-datetime',
+    )!;
+
+    const descriptionElement: HTMLTextAreaElement = document.querySelector(
+      '#event-description',
+    )!;
+
+    const title = titleElement.value;
+
+    const startDateTime = new Date(startDateTimeElement.value);
+
+    const endDateTime = new Date(endDateTimeElement.value);
+
+    const description = descriptionElement.value;
 
     if (this.eventIsValid(title, startDateTime, endDateTime)) {
-      const eventRecord = {
+      const eventRecord: CalendarEventRecord = {
+        id: 'tmp',
         title,
         startDateTime,
         endDateTime,

@@ -25,7 +25,7 @@ export default class CalendarBody implements Renderable {
 
   private calendarHeaderColumnElements;
   private timeSlotElements: HTMLElement[] = [];
-  private parentElement = document.getElementById('calendar-body-container');
+  private parentElement = document.getElementById('calendar-body-container')!;
 
   private createCalendarBody() {
     const bodyElements: HTMLElement[] = [];

@@ -13,12 +13,20 @@ class EventCreationModal extends Modal {
       ) as HTMLElement,
     );
 
-    document.querySelector('#aside-create-event-button')?.addEventListener(
+    const asideCreateEventButton = document.querySelector(
+      '#aside-create-event-button',
+    )!;
+
+    function handleEventCreation(clientEvent: PointerEvent) {
+      CalendarEventCreationForm.autoFillDates(new Date());
+      // @ts-ignore
+      this.open([clientEvent.clientX, clientEvent.clientY]);
+    }
+
+    // @ts-ignore
+    asideCreateEventButton?.addEventListener(
       'click',
-      function (clientEvent: PointerEvent) {
-        CalendarEventCreationForm.autoFillDates(new Date());
-        this.open([clientEvent.clientX, clientEvent.clientY]);
-      }.bind(this),
+      handleEventCreation.bind(this),
     );
   }
 
