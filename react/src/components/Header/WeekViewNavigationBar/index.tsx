@@ -1,15 +1,17 @@
+import { Button, TextBig } from '../../UI/UI';
 import {
+  NavContainer,
   NextWeekButton,
   PrevWeekButton,
 } from './WeekViewNavigationBarElements';
 
 import { ActionTypes } from '../../../store/@types';
-import { Button } from '../../UI/UI';
+import { FC } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 
 // eslint-disable-next-line react-refresh/only-export-components
-const WeekViewNavigationBar = () => {
+const WeekViewNavigationBar: FC<{ gridArea: string }> = ({ gridArea }) => {
   const dispatch = useDispatch();
 
   const handleNextWeekClick = () => {
@@ -25,14 +27,14 @@ const WeekViewNavigationBar = () => {
   };
 
   return (
-    <>
-      <span>september</span>
+    <NavContainer gridArea={gridArea}>
       <nav>
         <PrevWeekButton onClick={handlePreviousWeekClick} />
         <NextWeekButton onClick={handleNextWeekClick} />
         <Button onClick={handleTodayClick}>today</Button>
       </nav>
-    </>
+      <TextBig>september</TextBig>
+    </NavContainer>
   );
 };
 

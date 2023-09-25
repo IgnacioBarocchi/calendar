@@ -4,6 +4,12 @@ import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { Button } from '../../UI/UI';
 import styled from 'styled-components';
 
+export const NavContainer = styled.div<{ gridArea: string }>`
+  display: flex;
+  align-items: center;
+  grid-area: ${({ gridArea }) => gridArea};
+`;
+
 const NavPreviousWeekIcon = styled(FaArrowLeft)`
   color: red;
 `;

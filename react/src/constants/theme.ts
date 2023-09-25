@@ -1,3 +1,5 @@
+export const HEADER_HEIGHT = '20vh';
+
 const theme = {
   dark: {
     primary: '#ffffff',

@@ -1,3 +1,4 @@
+import { CalendarCell } from '../../UI/UI';
 import { FC } from 'react';
 import styled from 'styled-components';
 
@@ -7,17 +8,7 @@ export const CalendarHeaderRowGrid = styled.div`
   grid-template-columns: 5rem 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 `;
 
-const CalendarHeaderCell = styled.div`
-  border: ${({ theme }) => '1px solid' + theme.tertiary};
-  padding: 10px;
-  text-align: center;
-  &first-child: {
-    background: linear-gradient(red, red) 50% 50% / calc(100% - 2px)
-        calc(100% - 2px) no-repeat,
-      linear-gradient(90deg, transparent 0%, blue 100%);
-    border: none;
-  }
-`;
+const CalendarHeaderCell = styled(CalendarCell)``;
 
 export const WeekDayDetailsContainer = styled.div`
   display: flex;
@@ -37,7 +28,8 @@ export const DayName = styled.span`
 
 export const DateNumberContainer = styled.div<{ today: boolean }>`
   font-size: 2rem;
-  background-color: ${({ today }) => `${today ? 'red' : 'blue'}`};
+  background-color: ${({ theme, today }) =>
+    `${today ? theme.accent : theme.bgPrimary}`};
   border-radius: 50%;
   width: 3rem;
   height: 3rem;
