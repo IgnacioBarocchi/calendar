@@ -1,4 +1,7 @@
-import CalendarEvent from '../CalendarEvent/CalendarEvent.ts';
+import CalendarEvent, {
+  CalendarEventRecord,
+} from '../CalendarEvent/CalendarEvent.ts';
+
 import CalendarHeaderColumn from './CalendarDataElements/CalendarHeaderColumn.ts';
 import Renderable from '../../interfaces/Renderable.ts';
 import StorageService from '../../StorageService/StorageService.ts';
@@ -21,11 +24,11 @@ export default class CalendarBody implements Renderable {
   }
 
   private calendarHeaderColumnElements;
-  private timeSlotElements = [];
+  private timeSlotElements: HTMLElement[] = [];
   private parentElement = document.getElementById('calendar-body-container');
 
   private createCalendarBody() {
-    const bodyElements = [];
+    const bodyElements: HTMLElement[] = [];
     this.calendarHeaderColumnElements.forEach((hourOfDayElement, i) => {
       bodyElements.push(hourOfDayElement);
       StorageService.selectedWeek.forEach((dateTime) => {
@@ -46,14 +49,19 @@ export default class CalendarBody implements Renderable {
     this.timeSlotElements.forEach(async (timeSlotElement) => {
       timeSlotElement.innerHTML = '';
 
-      const [dayNumber, hour] = timeSlotElement.dataset.slotIndex.split('-');
+      const [
+        dayNumber,
+        hour,
+      ]: number[] = timeSlotElement.dataset
+        .slotIndex!.split('-')
+        .map((v) => Number(v));
 
       const dayTimeValue = week[dayNumber]?.setHours(hour, 0, 0);
 
       timeSlotElement.dataset.dateTime = new Date(dayTimeValue).toString();
 
-      const slotEvents = await StorageService.getEventsBySlotIndex(
-        timeSlotElement.dataset.slotIndex,
+      const slotEvents: CalendarEventRecord[] = await StorageService.getEventsBySlotIndex(
+        timeSlotElement?.dataset?.slotIndex as string,
       );
 
       if (slotEvents?.length) {

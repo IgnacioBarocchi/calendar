@@ -6,6 +6,7 @@ import {
   postEvent,
 } from '../services/events.service';
 
+import { CalendarEventRecord } from '../components/CalendarEvent/CalendarEvent';
 import mapRange from '../lib/mapRange';
 
 class StorageService {
@@ -25,21 +26,24 @@ class StorageService {
     }
   }
 
-  private getEvents() {
+  private getEvents(): CalendarEventRecord[] | Promise<CalendarEventRecord[]> {
     if (USE_JSON_SERVER) {
+      // @ts-ignore
       return findEvents();
     }
 
     if (!localStorage.length) {
       localStorage.setItem('events', '{}');
     }
+
     return JSON.parse(localStorage.getItem('events') || '{}');
   }
 
-  public saveEvent(event: any) {
+  public saveEvent(event: CalendarEventRecord): void {
     const events = this.getEvents();
     const slotIndex = `${event.startDateTime.getDay()}-${event.startDateTime.getHours()}`;
-    const eventsOfTheSlot = events[slotIndex] || [];
+    //  @ts-ignore
+    const eventsOfTheSlot: CalendarEventRecord[] = events[slotIndex] || [];
 
     event.id = String(
       Object.values(events).flat().length +
@@ -59,16 +63,20 @@ class StorageService {
     }
   }
 
-  public async getEventsBySlotIndex(slotIndex: string) {
+  public async getEventsBySlotIndex(
+    slotIndex: string,
+  ): Promise<CalendarEventRecord[]> {
     const events = USE_JSON_SERVER
       ? await this.getEventsOfTheWeekBySlotIndex()
       : await this.getEvents();
 
-    const eventsOfTheSlot = events[slotIndex];
+    // @ts-ignore
+    const eventsOfTheSlot = events[slotIndex] || [];
 
     if (!eventsOfTheSlot?.length) return [];
     // ! estamos seguros de que llega aca
     const timeSlotDayTime = new Date(
+      // @ts-ignore
       document.querySelector(`[data-slot-index="${slotIndex}"]`)?.dataset
         .dateTime || '',
     );
@@ -83,7 +91,7 @@ class StorageService {
     });
   }
 
-  public async deleteEventById(targetId: string) {
+  public async deleteEventById(targetId: string): Promise<void> {
     if (USE_JSON_SERVER) {
       await deleteEventById(targetId);
     } else {
@@ -105,14 +113,14 @@ class StorageService {
     }
   }
 
-  public getMonthOfYear() {
+  public getMonthOfYear(): string {
     const referenceSunday = this.selectedWeek[0];
     return `${
       MONTHS[referenceSunday.getMonth()]
     } ${referenceSunday.getFullYear()}`;
   }
 
-  private cachWeek(week: Date[], index: number) {
+  private cachWeek(week: Date[], index: number): void {
     const cachedWeeks = JSON.parse(
       sessionStorage.getItem('cachedWeeks') || '[]',
     );
@@ -120,7 +128,7 @@ class StorageService {
     sessionStorage.setItem('cachedWeeks', JSON.stringify(cachedWeeks, null, 2));
   }
 
-  public setSelectedWeek(date: Date, index: number) {
+  public setSelectedWeek(date: Date, index: number): void | Date[] {
     if (USE_WEEK_CACHING) {
       const cachedWeeks = JSON.parse(
         sessionStorage.getItem('cachedWeeks') || '[]',
@@ -151,20 +159,23 @@ class StorageService {
     }
   }
 
-  public getSelectedWeek() {
+  public getSelectedWeek(): Date[] {
     return this.selectedWeek;
   }
 
-  public static getInstance() {
+  public static getInstance(): StorageService {
     if (!StorageService.instance) {
       StorageService.instance = new StorageService();
     }
     return StorageService.instance;
   }
 
-  private async getEventsOfTheWeekBySlotIndex() {
+  private async getEventsOfTheWeekBySlotIndex(): Promise<
+    CalendarEventRecord[]
+  > {
+    // @ts-ignore
     return (await getEventsOfThisWeek(this.selectedWeek)).reduce(
-      (acc, eventRecord) => {
+      (acc: { [x: string]: CalendarEventRecord[] }, eventRecord) => {
         const { startDateTime: startDateTimeString } = eventRecord;
 
         const startDateTime = new Date(startDateTimeString);

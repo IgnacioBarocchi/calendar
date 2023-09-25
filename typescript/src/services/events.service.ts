@@ -2,7 +2,7 @@ import { CalendarEventRecord } from '../components/CalendarEvent/CalendarEvent';
 import { EVENTS_BASE_URL } from '../constants/index';
 import formatDateToDateInputValue from '../lib/formatDateToDateInputValue';
 
-export const findEvents = async (query = '') => {
+export const findEvents = async (query = ''): Promise<CalendarEventRecord> => {
   try {
     const response = await fetch(new URL(query, EVENTS_BASE_URL));
 
@@ -17,7 +17,9 @@ export const findEvents = async (query = '') => {
   }
 };
 
-export const saveEvent = async (event: CalendarEventRecord) => {
+export const saveEvent = async (
+  event: CalendarEventRecord,
+): Promise<CalendarEventRecord> => {
   try {
     const response = await fetch(EVENTS_BASE_URL, {
       method: 'POST',
@@ -37,12 +39,16 @@ export const saveEvent = async (event: CalendarEventRecord) => {
   }
 };
 
-export const findEvetnsByStartingDate = async (startDate: Date) => {
+export const findEvetnsByStartingDate = async (
+  startDate: Date,
+): Promise<CalendarEventRecord> => {
   const startDateString = formatDateToDateInputValue(startDate).split('T')[0];
   return await findEvents(`/events?startDateTime_like=^${startDateString}`);
 };
 
-export const getEventsOfThisWeek = async (week: Date[]) => {
+export const getEventsOfThisWeek = async (
+  week: Date[],
+): Promise<CalendarEventRecord[]> => {
   const eventsPromises = week.map(async (d) => {
     return findEvetnsByStartingDate(d);
   });
@@ -53,7 +59,9 @@ export const getEventsOfThisWeek = async (week: Date[]) => {
   return result;
 };
 
-export const postEvent = async (event: CalendarEventRecord) => {
+export const postEvent = async (
+  event: CalendarEventRecord,
+): Promise<CalendarEventRecord> => {
   try {
     const response = await fetch(EVENTS_BASE_URL, {
       method: 'POST',
@@ -76,7 +84,7 @@ export const postEvent = async (event: CalendarEventRecord) => {
   }
 };
 
-export const deleteEventById = async (eventId: string) => {
+export const deleteEventById = async (eventId: string): Promise<null> => {
   try {
     const response = await fetch(`${EVENTS_BASE_URL}/${eventId}`, {
       method: 'DELETE',

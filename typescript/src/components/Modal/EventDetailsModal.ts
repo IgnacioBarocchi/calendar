@@ -22,23 +22,26 @@ class EventDetailsModal extends Modal {
   }
 
   open(calendarEventElement: HTMLElement, position: Position) {
+    if (!calendarEventElement.dataset.calendarEvent) return;
+
     const calendarEvent = JSON.parse(
       calendarEventElement.dataset.calendarEvent,
     );
 
-    this.modalElement.querySelector('#event-details-title').textContent =
+    this.modalElement.querySelector('#event-details-title')!.textContent =
       calendarEvent.title;
 
-    this.modalElement.querySelector('#event-details-description').textContent =
+    this.modalElement.querySelector('#event-details-description')!.textContent =
       calendarEvent.description;
 
     // !todo constructor!!!!
-    this.modalElement.querySelector('#delete-event-button').addEventListener(
+    this.modalElement.querySelector('#delete-event-button')!.addEventListener(
       'click',
       function () {
         // ! logical coupling: depends on the data attribute to delete an element!
         StorageService.deleteEventById(calendarEvent.id);
         calendarEventElement.remove();
+        // @ts-ignore
         this.close();
       }.bind(this),
     );

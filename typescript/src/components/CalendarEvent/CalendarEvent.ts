@@ -103,6 +103,7 @@ export default class CalendarEvent implements Renderable {
 }
 
 export interface CalendarEventRecord {
+  id: string;
   stage: keyof typeof CalendarEventRecordStages;
   title: string;
   startDateTime: Date;

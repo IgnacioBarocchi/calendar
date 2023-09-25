@@ -46,7 +46,7 @@ export default class TimeSlot {
     this.timeSlotElement.dataset.dateTime = date + '';
   }
 
-  getElement() {
+  getElement(): HTMLElement {
     return this.timeSlotElement;
   }
 }

@@ -18,6 +18,7 @@ export default abstract class Modal {
         document.querySelectorAll('.draft').forEach((draft) => {
           draft.remove();
         });
+        // @ts-ignore
         this.hide();
       }.bind(this),
     );

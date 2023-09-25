@@ -1,4 +1,7 @@
-import CalendarEvent from '../CalendarEvent/CalendarEvent.ts';
+import CalendarEvent, {
+  CalendarEventRecord,
+} from '../CalendarEvent/CalendarEvent.ts';
+
 import EventCreationModal from '../Modal/EventCreationModal.ts';
 import StorageService from '../../StorageService/StorageService.ts';
 import formatDateToDateInputValue from '../../lib/formatDateToDateInputValue.ts';
@@ -21,17 +24,26 @@ class CalendarEventCreationForm {
     );
   }
 
-  autoFillDates(startDateTime) {
-    const startDateTimeField = document.querySelector('#start-datetime');
+  autoFillDates(startDateTime: Date) {
+    const startDateTimeField: HTMLInputElement = document.querySelector(
+      '#start-datetime',
+    )!;
+
     startDateTimeField.value = formatDateToDateInputValue(startDateTime);
-    const endDateTimeField = document.querySelector('#end-datetime');
+    const endDateTimeField: HTMLInputElement = document.querySelector(
+      '#end-datetime',
+    )!;
 
     endDateTimeField.value = formatDateToDateInputValue(
       new Date(startDateTime).setMinutes(30),
     );
   }
 
-  private eventIsValid(title, startDateTime, endDateTime) {
+  private eventIsValid(
+    title: CalendarEventRecord['title'],
+    startDateTime: CalendarEventRecord['startDateTime'],
+    endDateTime: CalendarEventRecord['endDateTime'],
+  ) {
     const requiredFieldsAreEmpty = !title || !startDateTime || !endDateTime;
     const wrongDateFormat =
       !(startDateTime instanceof Date) || !(endDateTime instanceof Date);
@@ -50,14 +62,17 @@ class CalendarEventCreationForm {
   }
 
   private createEventRecord() {
-    const title = document.querySelector('#event-title').value;
+    const title: string = document.querySelector('#event-title')!.value;
 
     const startDateTime = new Date(
       document.querySelector('#start-datetime').value,
     );
 
-    const endDateTime = new Date(document.querySelector('#end-datetime').value);
-    const description = document.querySelector('#event-description').value;
+    const endDateTime = new Date(
+      document.querySelector('#end-datetime')!.value,
+    );
+    const description: string = document.querySelector('#event-description')!
+      .value;
 
     if (this.eventIsValid(title, startDateTime, endDateTime)) {
       const eventRecord = {
