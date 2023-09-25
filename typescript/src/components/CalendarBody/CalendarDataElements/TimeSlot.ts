@@ -19,35 +19,31 @@ export default class TimeSlot {
             data-date-time="${dateTime}">
         </div>`);
 
-    this.timeSlotElement.addEventListener(
-      'click',
-      function (clientEvent: PointerEvent) {
-        this.renderDraftCalendarEvent();
+    function createDraftEvent(this: HTMLElement, clientEvent: PointerEvent) {
+      if (!this.dataset.dateTime) return;
+      const currentDateTime = new Date(this.dataset.dateTime);
 
-        EventCreationModal.open([clientEvent.clientX, clientEvent.clientY]);
-      }.bind(this),
-    );
-  }
+      const draftTimeSlotEvent = new CalendarEvent(
+        {
+          stage: 'draft',
+          title: `(no title), ${currentDateTime.getHours()}`,
+          startDateTime: currentDateTime,
+          endDateTime: new Date(new Date(currentDateTime).setMinutes(30)),
+        },
+        this,
+      );
 
-  private renderDraftCalendarEvent() {
-    const currentDateTime = new Date(this.timeSlotElement.dataset.dateTime);
+      CalendarEventCreationForm.autoFillDates(currentDateTime);
+      draftTimeSlotEvent.render();
 
-    const draftTimeSlotEvent = new CalendarEvent(
-      {
-        stage: 'draft',
-        title: `(no title), ${currentDateTime.getHours()}`,
-        startDateTime: currentDateTime,
-        endDateTime: new Date(new Date(currentDateTime).setMinutes(30)),
-      },
-      this.timeSlotElement,
-    );
+      EventCreationModal.open([clientEvent.clientX, clientEvent.clientY]);
+    }
 
-    CalendarEventCreationForm.autoFillDates(currentDateTime);
-    draftTimeSlotEvent.render();
+    this.timeSlotElement.addEventListener('click', createDraftEvent);
   }
 
   update(date: Date) {
-    this.timeSlotElement.dataset.dateTime = date;
+    this.timeSlotElement.dataset.dateTime = date + '';
   }
 
   getElement() {

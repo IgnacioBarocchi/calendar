@@ -1,7 +1,7 @@
 import CalendarBody from './components/CalendarBody/CalendarBody';
 import CalendarHeaderRow from './components/CalendarHeaderRow/CalendarHeaderRow';
 import CalendarMonth from './components/CalendarMonth/CalendarMonth';
-import ClockHand from './components/ClockHand/ClockHand';
+// import ClockHand from './components/ClockHand/ClockHand';
 import NavigationControls from './controls/NavigationControls';
 
 const today = new Date();
@@ -26,13 +26,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
   navigationControls.navigateWithNavbar();
 
-  const ClockHandComponent = new ClockHand(
+  /*const ClockHandComponent = new ClockHand(
     document.querySelector(
       `[data-slot-index="${today.getDay()}-${today.getHours()}"]`,
     ) as HTMLElement,
   );
 
-  ClockHandComponent.startTick();
+  ClockHandComponent.startTick();*/
 
   // todo: attach scroll during first iteration
   const earliestEventOfTheWeek = document.querySelector(

@@ -74,8 +74,6 @@ class StorageService {
     );
 
     return await eventsOfTheSlot.filter((event: any) => {
-      console.log('event', event);
-
       const eventDate = new Date(event.startDateTime);
 
       return (
@@ -87,8 +85,7 @@ class StorageService {
 
   public async deleteEventById(targetId: string) {
     if (USE_JSON_SERVER) {
-      const a = await deleteEventById(targetId);
-      console.log(JSON.stringify(a));
+      await deleteEventById(targetId);
     } else {
       localStorage.setItem(
         'events',

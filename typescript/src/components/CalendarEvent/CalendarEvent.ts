@@ -33,7 +33,6 @@ export default class CalendarEvent implements Renderable {
     this.calendarEventElement.addEventListener(
       'click',
       function (clientEvent: PointerEvent) {
-        // console.log("event! " + clientEvent);
         clientEvent.stopPropagation();
 
         EventDetailsModal.open(this.calendarEventElement, [
