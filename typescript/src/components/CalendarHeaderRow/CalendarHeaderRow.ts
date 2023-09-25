@@ -69,10 +69,9 @@ export default class CalendarHeaderRow implements Renderable {
       );
     } else {
       this.dayOfTheWeekElements.forEach((element) => {
-        const record =
-          this.dateDataByDayName[
-            element.querySelector('.date-name').textContent
-          ];
+        const record = this.dateDataByDayName[
+          element.querySelector('.date-name').textContent
+        ];
 
         const dateElement = element.querySelector('.date-number');
 
