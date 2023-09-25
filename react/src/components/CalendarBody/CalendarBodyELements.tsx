@@ -21,8 +21,3 @@ export const TimeIndexItem: FC<{ timeIndex: number }> = ({ timeIndex }) => {
 };
 
 export const TimeSlot = styled(CalendarCell)``;
-// `<div class="grid-item header-column-item">
-//                   <div class="header-text-container">
-//                       <span>${textContent}</span>
-//                   </div>
-//               </div>`
