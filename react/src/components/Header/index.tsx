@@ -12,7 +12,6 @@ const HeaderContainer = styled.header`
   top: 0;
   z-index: 4;
   background: ${({ theme }) => theme.bgPrimary};
-  border-bottom: 1px solid red;
   display: grid;
   grid-template-columns: 0.2fr 1fr;
   grid-template-rows: 0.5fr 1fr;

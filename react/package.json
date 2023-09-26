@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "serve": "json-server --watch ./public/data/events.json"
   },
   "dependencies": {
     "@types/styled-components": "^5.1.27",
@@ -15,6 +16,8 @@
     "nanoid": "^5.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-draggable": "^4.4.5",
+    "react-fast-marquee": "^1.6.1",
     "react-icons": "^4.11.0",
     "react-redux": "^8.1.2",
     "redux": "^4.2.1",

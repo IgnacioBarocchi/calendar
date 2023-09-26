@@ -1,4 +1,4 @@
-import { Button, TextBig } from '../../UI/UI';
+import { Button, TextBig } from '../../UI';
 import {
   NavContainer,
   NextWeekButton,
@@ -7,7 +7,6 @@ import {
 
 import { ActionTypes } from '../../../store/@types';
 import { FC } from 'react';
-import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -38,7 +37,4 @@ const WeekViewNavigationBar: FC<{ gridArea: string }> = ({ gridArea }) => {
   );
 };
 
-export default styled(WeekViewNavigationBar)`
-  display: flex;
-  align-items: center;
-`;
+export default WeekViewNavigationBar;

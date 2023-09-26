@@ -1,9 +1,10 @@
-import { CalendarCell } from '../../UI/UI';
+import { CalendarCell } from '../../UI';
 import { FC } from 'react';
+import Marquee from 'react-fast-marquee';
 import styled from 'styled-components';
 
-export const CalendarHeaderRowGrid = styled.div`
-  grid-area: calendar-header;
+export const CalendarHeaderRowGrid = styled.div<{ gridArea: string }>`
+  grid-area: ${({ gridArea }) => gridArea};
   display: grid;
   grid-template-columns: 5rem 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 `;
@@ -28,7 +29,7 @@ export const DayName = styled.span`
 
 export const DateNumberContainer = styled.div<{ today: boolean }>`
   font-size: 2rem;
-  background-color: ${({ theme, today }) =>
+  background: ${({ theme, today }) =>
     `${today ? theme.accent : theme.bgPrimary}`};
   border-radius: 50%;
   width: 3rem;
@@ -39,13 +40,24 @@ export const DateNumberContainer = styled.div<{ today: boolean }>`
 }
 `;
 
-export const DetailSlot = styled.div``;
+export const FoldedEventContainer = styled(Marquee)`
+  padding: 4px;
+  border-radius: 4px;
+  width: 90%;
+`;
+
+export const FoldedEventText = styled.span<{ shouldRender: boolean }>`
+  background: ${({ theme }) => theme.bgPrimary};
+  visibility: ${({ shouldRender }) => (shouldRender ? 'auto' : 'hidden')};
+  width: 100%;
+`;
 
 export const DayOfWeekItem: FC<{
   weekDay: string;
   dateNumber: number;
   today: boolean;
-}> = ({ weekDay, dateNumber, today }) => {
+  folderEventText?: string;
+}> = ({ weekDay, dateNumber, today, folderEventText }) => {
   return (
     <CalendarHeaderCell>
       <WeekDayDetailsContainer>
@@ -53,10 +65,16 @@ export const DayOfWeekItem: FC<{
         <DateNumberContainer today={today}>
           <span>{dateNumber}</span>
         </DateNumberContainer>
+
+        {/* //todo: remove redundant logic */}
+        <FoldedEventContainer>
+          {folderEventText && (
+            <FoldedEventText shouldRender={!!folderEventText}>
+              {folderEventText}
+            </FoldedEventText>
+          )}
+        </FoldedEventContainer>
       </WeekDayDetailsContainer>
-      <DetailSlot>
-        <span>holiday?event?</span>
-      </DetailSlot>
     </CalendarHeaderCell>
   );
 };

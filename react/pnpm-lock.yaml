@@ -20,6 +20,12 @@ dependencies:
   react-dom:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
+  react-draggable:
+    specifier: ^4.4.5
+    version: 4.4.5(react-dom@18.2.0)(react@18.2.0)
+  react-fast-marquee:
+    specifier: ^1.6.1
+    version: 1.6.1(react-dom@18.2.0)(react@18.2.0)
   react-icons:
     specifier: ^4.11.0
     version: 4.11.0(react@18.2.0)
@@ -2368,6 +2374,11 @@ packages:
       wrap-ansi: 7.0.0
     dev: false
 
+  /clsx@1.2.1:
+    resolution: {integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==}
+    engines: {node: '>=6'}
+    dev: false
+
   /color-convert@1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}
     dependencies:
@@ -4217,6 +4228,28 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
+
+  /react-draggable@4.4.5(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-OMHzJdyJbYTZo4uQE393fHcqqPYsEtkjfMgvCHr6rejT+Ezn4OZbNyGH50vv+SunC1RMvwOTSWkEODQLzw1M9g==}
+    peerDependencies:
+      react: '>= 16.3.0'
+      react-dom: '>= 16.3.0'
+    dependencies:
+      clsx: 1.2.1
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /react-fast-marquee@1.6.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-SFY+FQectFXsuCrcJuIxrh34YzJ+TKH0Lp6BqZaalVhjdmu6Sx11rKKGQiC6vvC/q9ySXYVn9sozoOvPXFSMoQ==}
+    peerDependencies:
+      react: '>= 16.8.0 || 18.0.0'
+      react-dom: '>= 16.8.0 || 18.0.0'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /react-icons@4.11.0(react@18.2.0):

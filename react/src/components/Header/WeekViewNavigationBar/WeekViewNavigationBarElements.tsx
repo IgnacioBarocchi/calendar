@@ -1,7 +1,7 @@
 import { FC, MouseEventHandler } from 'react';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
-import { Button } from '../../UI/UI';
+import { Button } from '../../UI';
 import styled from 'styled-components';
 
 export const NavContainer = styled.div<{ gridArea: string }>`
@@ -11,11 +11,11 @@ export const NavContainer = styled.div<{ gridArea: string }>`
 `;
 
 const NavPreviousWeekIcon = styled(FaArrowLeft)`
-  color: red;
+  color: ${({ theme }) => theme.primary};
 `;
 
 const NavNextWeekIcon = styled(FaArrowRight)`
-  color: red;
+  color: ${({ theme }) => theme.primary};
 `;
 
 export const PrevWeekButton: FC<{

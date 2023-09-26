@@ -1,4 +1,8 @@
-export const getWeekFrom = (date: Date): Date[] => {
+import { RootState } from '../store/@types';
+
+export type Week = RootState['week'];
+
+export const getWeekFrom = (date: Date): Week => {
   const referenceSunday = new Date(
     date.setDate(date.getDate() - date.getDay()),
   );
@@ -7,16 +11,16 @@ export const getWeekFrom = (date: Date): Date[] => {
     const currentDate = new Date(referenceSunday);
     currentDate.setDate(referenceSunday.getDate() + dayNumber);
     return currentDate;
-  });
+  }) as Week;
 };
 
-export const calculateNextWeek = (currentWeek: Date[]): Date[] => {
+export const calculateNextWeek = (currentWeek: Week): Week => {
   const lastDayOfCurrentWeek = new Date(currentWeek[6]);
   lastDayOfCurrentWeek.setDate(lastDayOfCurrentWeek.getDate() + 1);
   return getWeekFrom(lastDayOfCurrentWeek);
 };
 
-export const calculatePreviousWeek = (currentWeek: Date[]): Date[] => {
+export const calculatePreviousWeek = (currentWeek: Week): Week => {
   const firstDayOfCurrentWeek = new Date(currentWeek[0]);
   firstDayOfCurrentWeek.setDate(firstDayOfCurrentWeek.getDate() - 1);
   return getWeekFrom(firstDayOfCurrentWeek);

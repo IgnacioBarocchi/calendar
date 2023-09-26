@@ -1,0 +1,28 @@
+{
+  "events": [
+    {
+      "id": "Event 1",
+      "title": "Event 1",
+      "description": "Test 1",
+      "start": "Tue Sep 26 2023 09:52:31 GMT+0300 (Eastern European Summer Time)",
+      "end": "Tue Sep 26 2023 10:52:31 GMT+0300 (Eastern European Summer Time)",
+      "value": "1695711827808"
+    },
+    {
+      "id": "Event 2",
+      "title": "Event 2",
+      "description": "Test 2",
+      "start": "Tue Sep 27 2023 09:52:31 GMT+0300 (Eastern European Summer Time)",
+      "end": "Tue Sep 27 2023 10:52:31 GMT+0300 (Eastern European Summer Time)",
+      "value": "1695798287964"
+    },
+    {
+      "id": "Event 3",
+      "title": "Event 3",
+      "description": "Test 3",
+      "start": "Fri Oct 27 2023 09:52:31 GMT+0300 (Eastern European Summer Time)",
+      "end": "Fri Oct 27 2023 11:52:31 GMT+0300 (Eastern European Summer Time)",
+      "value": "1698389551000"
+    }
+  ]
+}

@@ -13,7 +13,7 @@ const CalendarHeaderRow: FC<{ gridArea: string }> = ({ gridArea }) => {
   const week = useSelector((state: RootState) => state.week);
 
   return (
-    <CalendarHeaderRowGrid>
+    <CalendarHeaderRowGrid gridArea={gridArea}>
       <TimeZoneOffsetItem />
       {week.map((date) => (
         <DayOfWeekItem
@@ -21,6 +21,7 @@ const CalendarHeaderRow: FC<{ gridArea: string }> = ({ gridArea }) => {
           today={new Date().toDateString() === date.toDateString()}
           dateNumber={date.getDate()}
           weekDay={date.toLocaleDateString('en-US', { weekday: 'short' })}
+          // folderEventText="foo holiday event"
         ></DayOfWeekItem>
       ))}
     </CalendarHeaderRowGrid>
