@@ -1,4 +1,5 @@
-import { CalendarCell } from '../../UI';
+import { CalendarCell, TextBig } from '../../UI';
+
 import { FC } from 'react';
 import Marquee from 'react-fast-marquee';
 import styled from 'styled-components';
@@ -27,8 +28,7 @@ export const DayName = styled.span`
   font-weight: bold;
 `;
 
-export const DateNumberContainer = styled.div<{ today: boolean }>`
-  font-size: 2rem;
+export const DateNumberContainer = styled(TextBig)<{ today: boolean }>`
   background: ${({ theme, today }) =>
     `${today ? theme.accent : theme.bgPrimary}`};
   border-radius: 50%;

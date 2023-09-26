@@ -1,3 +1,4 @@
+import { Button } from '../UI';
 import Modal from '../Modal';
 import { RootState } from '../../store/@types';
 import { useSelector } from 'react-redux';
@@ -48,9 +49,9 @@ const EventCreationModal = () => {
           </div>
         </div>
         <div className="event-creation-modal-footer">
-          <button type="button" id="create-event-button">
+          <Button type="button" id="create-event-button">
             Save
-          </button>
+          </Button>
         </div>
       </form>
     </Modal>

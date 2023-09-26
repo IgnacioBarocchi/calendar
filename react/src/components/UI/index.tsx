@@ -36,6 +36,7 @@ export const CalendarCell = styled.div`
 
 export const TextBig = styled.span`
   color: ${({ theme }) => theme.primary};
+  font-size: 2rem;
 `;
 
 export const Dialog = styled.dialog`
@@ -47,6 +48,7 @@ export const Dialog = styled.dialog`
   margin: 0;
   padding: 0;
   border-radius: 4px;
+  width: 35vw;
 `;
 
 const DialogHeaderContainer = styled.div.attrs(({ className }) => ({
@@ -73,7 +75,7 @@ export const DialogHeader: FC<{ modalId: ModalId }> = ({ modalId }) => {
 
   return (
     <DialogHeaderContainer>
-      <button onClick={handleCloseModalClick}>close</button>
+      <Button onClick={handleCloseModalClick}>close</Button>
     </DialogHeaderContainer>
   );
 };
