@@ -16,13 +16,16 @@ export const ActionTypes = {
   UPDATE_EVENT_DETAILS_MODAL: 'UPDATE_EVENT_CREATION_MODAL_VISIBILITY',
 } as const;
 
-export interface CalendarEvent {
-  id: string;
-  title: string;
+export interface DraftEvent {
+  title?: string;
   type: 'draft' | 'upcoming';
   description?: string;
   start: Date;
   end: Date;
+}
+export interface CalendarEvent extends DraftEvent {
+  id: string;
+  title: string;
 }
 
 export interface Action {
