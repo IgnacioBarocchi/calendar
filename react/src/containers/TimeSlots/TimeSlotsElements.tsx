@@ -1,10 +1,9 @@
 import { ActionTypes, CalendarEvent } from '../../store/@types';
 import { FC, MouseEvent } from 'react';
-import { getActionFrom, getDefaultDateTimeValue } from './helper';
 
 import { CalendarBodyColumnCell } from '../../components/CalendarBody/CalendarBodyELements';
 import { CalendarCell } from '../../components/UI';
-import { formatDateToDateInputValue } from '../../components/EventCreationModal/helper';
+import { getActionFrom } from './helper';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 

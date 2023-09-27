@@ -2,6 +2,7 @@ import { CalendarEvent } from '../store/@types';
 import { EVENTS_BASE_URL } from '../constants/endpoints';
 import { Week } from '../lib/weekHelper';
 import getResponseFrom from '../lib/getResponseFrom';
+import { nanoid } from 'nanoid';
 
 export const getWeekEvents = async (week: Week): Promise<CalendarEvent[]> => {
   const referenceSundayValue = new Date(
@@ -28,6 +29,7 @@ export const postEvent = async (
     },
     body: JSON.stringify({
       ...event,
+      id: nanoid(),
       start: event.start.toISOString(),
       end: event.end.toISOString(),
     }),

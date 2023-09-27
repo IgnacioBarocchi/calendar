@@ -11,17 +11,18 @@ const TimeSlots = () => {
     weekEvents: state.weekEvents,
   }));
 
-  const [slotRecords, setSlotRecords] = useState<SlotRecord[]>([]);
+  const [eventsMap, setEventsMap] = useState<Map<string, CalendarEvent[]>>(
+    new Map<string, CalendarEvent[]>(),
+  );
 
   useEffect(() => {
-    const eventsMap = new Map<string, CalendarEvent[]>();
-
     weekEvents.forEach((event) => {
-      const startTime = new Date(event.start);
-      startTime.setMinutes(0);
-      startTime.setSeconds(0);
+      const matchingStartTime = new Date(event.start);
+      matchingStartTime.setMinutes(0);
+      matchingStartTime.setSeconds(0);
+      matchingStartTime.setMilliseconds(0);
 
-      const key = startTime.toISOString();
+      const key = matchingStartTime.toISOString();
 
       if (!eventsMap.has(key)) {
         eventsMap.set(key, []);
@@ -30,36 +31,28 @@ const TimeSlots = () => {
       eventsMap.get(key)?.push(event);
     });
 
-    const slotRecords = week.map((date) => {
-      const key = date.toISOString();
-      return {
-        date,
-        events: eventsMap.get(key) || [],
-      };
-    });
-
-    setSlotRecords(slotRecords);
+    setEventsMap(eventsMap);
   }, [week, weekEvents]);
-
-  console.log(weekEvents);
 
   return [...Array(24).keys()].map((timeIndex) => (
     <React.Fragment key={nanoid()}>
       <TimeIndexItem key={nanoid()} timeIndex={timeIndex} />
-      {slotRecords.map(({ date, events }: SlotRecord) => (
-        <TimeSlot
-          key={nanoid()}
-          timeSlotDate={new Date(date.setHours(timeIndex, 0, 0))}
-          calendarEvents={events}
-        />
-      ))}
+      {week.map((date) => {
+        const normalizedSlotDateTime = new Date(
+          date.setHours(timeIndex, 0, 0, 0),
+        );
+        const events = eventsMap.get(normalizedSlotDateTime.toISOString());
+
+        return (
+          <TimeSlot
+            key={nanoid()}
+            timeSlotDate={normalizedSlotDateTime}
+            calendarEvents={events}
+          />
+        );
+      })}
     </React.Fragment>
   ));
 };
 
 export default TimeSlots;
-
-interface SlotRecord {
-  date: Date;
-  events?: CalendarEvent[];
-}
