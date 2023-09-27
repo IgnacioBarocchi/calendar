@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   ActionTypes,
   CalendarEvent,
@@ -10,7 +11,13 @@ import {
   formReducer,
   parseDateRecordValue,
 } from './helper';
-import { ChangeEvent, ChangeEventHandler, useReducer } from 'react';
+import {
+  ChangeEvent,
+  ChangeEventHandler,
+  useEffect,
+  useReducer,
+  useState,
+} from 'react';
 import {
   DateTimeField,
   DescriptionField,
@@ -20,24 +27,43 @@ import {
   FormFooter,
   TitleField,
 } from './EventCreationModal';
+import { getWeekEvents, postEvent } from '../../services/events.service';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Button } from '../UI';
 import Modal from '../Modal';
-import { postEvent } from '../../services/events.service';
 
 const EventCreationModal = () => {
   const dispatch = useDispatch();
 
-  const { isOpen, initialFormValues } = useSelector(
-    (state: RootState) => state.eventCerationModalState,
-  );
+  const {
+    week,
+    eventCerationModalState: { isOpen, initialFormValues },
+  } = useSelector((state: RootState) => ({
+    eventCerationModalState: state.eventCerationModalState,
+    week: state.week,
+  }));
 
   const [formData, dispatchFormData] = useReducer<
     (state: DraftEvent, action: Actions) => DraftEvent
   >(formReducer, initialFormValues as DraftEvent);
 
-  if (!isOpen) return null;
+  const [shouldFetchEvents, setShouldFetchEvents] = useState(false);
+
+  useEffect(() => {
+    const dispatchNewEvents = async () => {
+      dispatch({
+        type: ActionTypes.FETCH_WEEK_EVENTS,
+        payload: await getWeekEvents(week),
+      });
+
+      setShouldFetchEvents(false);
+    };
+
+    if (shouldFetchEvents) {
+      dispatchNewEvents();
+    }
+  }, [shouldFetchEvents]);
 
   const handleInputChange:
     | ChangeEventHandler<HTMLInputElement>
@@ -92,12 +118,16 @@ const EventCreationModal = () => {
             },
           },
         });
+
+        setShouldFetchEvents(true);
       }
     } catch (error) {
       // todo: use toast of something
       console.error(error);
     }
   };
+
+  if (!isOpen) return null;
 
   return (
     <Modal modalId={'creation'}>

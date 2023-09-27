@@ -5,17 +5,17 @@ import {
   getWeekFrom,
 } from '../lib/weekHelper';
 
-import { getEventsFrom } from '../lib/eventsHelper';
-
 const ongoingWeek = getWeekFrom(new Date());
 
 const initialState = {
   week: ongoingWeek,
-  weekEvents: getEventsFrom(ongoingWeek),
+  weekEvents: [],
   eventCerationModalState: { isOpen: false },
   eventDetailsModalIsOpen: { isOpen: false },
 };
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 export const reducer = (state: RootState = initialState, action: Action) => {
   const { payload } = action;
 
@@ -46,14 +46,12 @@ export const reducer = (state: RootState = initialState, action: Action) => {
         ...state,
         eventCerationModalState: payload,
       };
+    case ActionTypes.FETCH_WEEK_EVENTS:
+      return {
+        ...state,
+        weekEvents: payload,
+      };
     default:
       return state;
   }
 };
-//   ill add this later on.
-// case ActionTypes.CREATE_EVENT:
-//   const { newEvent } = action.payload;
-//   return {
-//     ...state,
-//     events: [...state.events, newEvent],
-//   };

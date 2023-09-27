@@ -1,5 +1,6 @@
 import { ActionTypes, CalendarEvent } from '../../store/@types';
 import { FC, MouseEvent } from 'react';
+import { getActionFrom, getDefaultDateTimeValue } from './helper';
 
 import { CalendarBodyColumnCell } from '../../components/CalendarBody/CalendarBodyELements';
 import { CalendarCell } from '../../components/UI';
@@ -37,39 +38,15 @@ const CalendarEventContainer = styled.div`
   width: calc(100% - 8px);
 `;
 
-const getDefaultDateTimeValue = (
-  date: Date,
-  add30: boolean = false,
-): string => {
-  if (add30) {
-    date.setHours(date.getHours(), 30, 0);
-  }
-
-  return formatDateToDateInputValue(date);
-};
-
 export const TimeSlot: FC<{
   timeSlotDate: Date;
-  calendarEvent?: CalendarEvent;
-}> = ({ timeSlotDate, calendarEvent }) => {
+  calendarEvents?: CalendarEvent[];
+}> = ({ timeSlotDate, calendarEvents }) => {
   const dispatch = useDispatch();
 
   const handleOpenModalClick = (event: MouseEvent) => {
     event.stopPropagation();
-
-    dispatch({
-      type: ActionTypes.UPDATE_EVENT_CREATION_MODAL_STATE,
-      payload: {
-        isOpen: true,
-        initialFormValues: {
-          title: '',
-          type: 'draft',
-          start: getDefaultDateTimeValue(timeSlotDate),
-          end: getDefaultDateTimeValue(timeSlotDate, true),
-          description: '',
-        },
-      },
-    });
+    dispatch(getActionFrom(timeSlotDate));
   };
 
   const handleOpenDetailsModalClick = (event: MouseEvent) => {
@@ -84,15 +61,17 @@ export const TimeSlot: FC<{
     });
   };
 
-  const draftTextContent = `no title ${timeSlotDate.toISOString()} - ${timeSlotDate.toISOString()}`;
+  // const draftTextContent = `no title ${timeSlotDate.toISOString()} - ${timeSlotDate.toISOString()}`;
 
   return (
     <CalendarCell onClick={handleOpenModalClick}>
-      {calendarEvent && (
-        <CalendarEventContainer onClick={handleOpenDetailsModalClick}>
-          {draftTextContent}
-        </CalendarEventContainer>
-      )}
+      {calendarEvents?.length &&
+        calendarEvents.map((evt) => (
+          <CalendarEventContainer onClick={handleOpenDetailsModalClick}>
+            {/* {draftTextContent} */}
+            {evt.title}
+          </CalendarEventContainer>
+        ))}
     </CalendarCell>
   );
 };

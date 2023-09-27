@@ -1,41 +1,20 @@
 import { DraftEvent } from '../../../store/@types';
 
-export interface Actions {
-  type: string;
-  payload: string | Date;
-}
+const isDate = (value: string | Date): boolean => value instanceof Date;
 
-export interface ControlledDraftEvent
-  extends Omit<DraftEvent, 'start' | 'end'> {
-  start: Date | string;
-  end: Date | string;
-}
-
-export const formReducer = (
-  state: DraftEvent | ControlledDraftEvent,
-  action: Actions,
-): DraftEvent => {
+export const formReducer = (state: DraftEvent, action: Actions): DraftEvent => {
   const { payload } = action;
   if (!payload) return state;
 
-  // ! ??????
-  //   if (
-  //     ['SET_START_DATETIME', 'SET_END_DATETIME'].includes(action.type) &&
-  //     !(payload instanceof Date)
-  //   )
-  //     return state;
-
   switch (action.type) {
     case 'SET_TITLE':
-      return { ...state, title: payload as unknown as string };
+      return { ...state, title: String(payload) };
     case 'SET_START':
-      // todo: remove casting
-      return { ...state, start: payload as unknown as Date };
+      return { ...state, start: parseDateRecordValue(payload) };
     case 'SET_END':
-      // todo: remove casting
-      return { ...state, end: payload as unknown as Date };
+      return { ...state, end: parseDateRecordValue(payload) };
     case 'SET_DESCRIPTION':
-      return { ...state, description: payload as unknown as string };
+      return { ...state, description: String(payload) };
     default:
       return state;
   }
@@ -47,23 +26,25 @@ export const eventIsValid = (
   end: DraftEvent['end'],
 ) => {
   const requiredFieldsAreEmpty = !title || !start || !end;
-  const wrongDateFormat = !(start instanceof Date) || !(end instanceof Date);
+  const wrongDateFormat = !isDate(start) || !isDate(end);
 
   if (requiredFieldsAreEmpty) throw new Error('Missing required fields');
+
   if (wrongDateFormat) throw new Error('Wrong date format');
-  //   if (
-  //     formatDateToDateInputValue(start) ===
-  //     formatDateToDateInputValue(end)
-  //   )
-  //     throw new Error('The start date cannot be equal to the end date');
-  //   if (start > end)
-  //     throw new Error('The start date cannot be greater than the end date');
+
+  if (start.toISOString() === end.toISOString())
+    throw new Error('The start date cannot be equal to the end date');
+
+  if (start.toISOString() > end.toISOString())
+    throw new Error('The start date cannot be greater than the end date');
 
   return true;
 };
 
 export const parseDateRecordValue = (value: string | Date): Date => {
-  return typeof value === 'string' ? new Date(value) : value;
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  return isDate(value) ? value : new Date(value);
 };
 
 export const formatDateToDateInputValue = (value: string | Date): string => {
@@ -73,3 +54,14 @@ export const formatDateToDateInputValue = (value: string | Date): string => {
         .toISOString()
         .split('.')[0];
 };
+
+export interface Actions {
+  type: string;
+  payload: string | Date;
+}
+
+export interface ControlledDraftEvent
+  extends Omit<DraftEvent, 'start' | 'end'> {
+  start: Date | string;
+  end: Date | string;
+}

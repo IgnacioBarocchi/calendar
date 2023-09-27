@@ -2,7 +2,7 @@ import { ControlledDraftEvent } from '../../components/EventCreationModal/helper
 
 export interface RootState {
   week: [Date, Date, Date, Date, Date, Date, Date];
-  events: CalendarEvent[];
+  weekEvents: CalendarEvent[];
   eventCerationModalState: {
     isOpen: boolean;
     initialFormValues: DraftEvent | ControlledDraftEvent;
@@ -18,6 +18,7 @@ export const ActionTypes = {
   CREATE_EVENT: 'CREATE_EVENT',
   UPDATE_EVENT_CREATION_MODAL_STATE: 'UPDATE_EVENT_CREATION_MODAL_STATE',
   UPDATE_EVENT_DETAILS_MODAL_STATE: 'UPDATE_EVENT_DETAILS_MODAL_STATE',
+  FETCH_WEEK_EVENTS: 'FETCH_WEEK_EVENTS',
 } as const;
 
 export interface DraftEvent {
