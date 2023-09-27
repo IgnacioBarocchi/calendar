@@ -1,9 +1,7 @@
-import { ActionTypes } from '../../store/@types';
 import { FC } from 'react';
 import { HEADER_HEIGHT } from '../../constants/theme';
 import { ModalId } from '../Modal';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
 
 export const TodayCircle = styled.div`
   border-radius: 50%;
@@ -68,3 +66,14 @@ export const DialogHeader: FC<{ modalId: ModalId; close }> = ({
     </DialogHeaderContainer>
   );
 };
+
+export const MonthViewItem = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  color: ${({ theme }) => theme.primary};
+`;

@@ -39,10 +39,13 @@ export const reducer = (
         week: ongoingWeek,
       };
     case ActionTypes.GET_WEEK_FROM_DATE:
-      if (!payload?.date) throw new Error(`Date is missing`);
+      debugger;
+      if (!payload || !(payload instanceof Date)) {
+        throw new Error(`Date is missing`);
+      }
       return {
         ...state,
-        week: getWeekFrom(payload?.date),
+        week: getWeekFrom(payload),
       };
     case ActionTypes.UPDATE_EVENT_CREATION_MODAL_STATE:
       return {
