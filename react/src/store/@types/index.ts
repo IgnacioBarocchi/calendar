@@ -7,7 +7,7 @@ export interface RootState {
     isOpen: boolean;
     initialFormValues: DraftEvent | ControlledDraftEvent;
   };
-  eventDetailsModalIsOpen: { isOpen: boolean };
+  eventDetailsModalState: { isOpen: boolean; eventId: string };
 }
 
 export const ActionTypes = {

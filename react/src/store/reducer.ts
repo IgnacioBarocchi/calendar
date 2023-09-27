@@ -11,12 +11,15 @@ const initialState = {
   week: ongoingWeek,
   weekEvents: [],
   eventCerationModalState: { isOpen: false },
-  eventDetailsModalIsOpen: { isOpen: false },
+  eventDetailsModalState: { isOpen: false },
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-export const reducer = (state: RootState = initialState, action: Action) => {
+export const reducer = (
+  state: RootState = initialState,
+  action: Action,
+): RootState => {
   const { payload } = action;
 
   switch (action.type) {
@@ -45,6 +48,11 @@ export const reducer = (state: RootState = initialState, action: Action) => {
       return {
         ...state,
         eventCerationModalState: payload,
+      };
+    case ActionTypes.UPDATE_EVENT_DETAILS_MODAL_STATE:
+      return {
+        ...state,
+        eventDetailsModalState: payload,
       };
     case ActionTypes.FETCH_WEEK_EVENTS:
       return {

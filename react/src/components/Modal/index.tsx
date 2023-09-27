@@ -12,7 +12,8 @@ export type ModalId = 'creation' | 'details';
 const Modal: FC<{
   children: JSX.Element[] | JSX.Element;
   modalId: ModalId;
-}> = ({ modalId, children }) => {
+  close: () => void;
+}> = ({ modalId, children, close }) => {
   const [currentPosition, setCurrentPosition] = useState<Position>({
     xRate: 150,
     yRate: 150,
@@ -31,7 +32,7 @@ const Modal: FC<{
       onDrag={onDrag}
     >
       <Dialog open>
-        <DialogHeader modalId={modalId} />
+        <DialogHeader close={close} modalId={modalId} />
         {children}
       </Dialog>
     </Draggable>

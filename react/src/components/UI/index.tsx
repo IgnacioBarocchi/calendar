@@ -58,24 +58,13 @@ const DialogHeaderContainer = styled.div.attrs(({ className }) => ({
   cursor: drag;
 `;
 
-export const DialogHeader: FC<{ modalId: ModalId }> = ({ modalId }) => {
-  const dispatch = useDispatch();
-
-  const handleCloseModalClick = () => {
-    dispatch({
-      type: {
-        creation: ActionTypes.UPDATE_EVENT_CREATION_MODAL_STATE,
-        details: ActionTypes.UPDATE_EVENT_DETAILS_MODAL,
-      }[modalId],
-      payload: {
-        isOpen: false,
-      },
-    });
-  };
-
+export const DialogHeader: FC<{ modalId: ModalId; close }> = ({
+  modalId,
+  close,
+}) => {
   return (
     <DialogHeaderContainer>
-      <Button onClick={handleCloseModalClick}>close</Button>
+      <Button onClick={close}>close</Button>
     </DialogHeaderContainer>
   );
 };

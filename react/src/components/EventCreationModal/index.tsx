@@ -14,6 +14,7 @@ import {
 import {
   ChangeEvent,
   ChangeEventHandler,
+  MouseEvent,
   useEffect,
   useReducer,
   useState,
@@ -84,7 +85,25 @@ const EventCreationModal = () => {
     console.log(formData);
   };
 
-  const handleSubmit = () => {
+  const close = () => {
+    dispatch({
+      type: ActionTypes.UPDATE_EVENT_CREATION_MODAL_STATE,
+      payload: {
+        isOpen: false,
+        initialFormValues: {
+          title: '',
+          type: 'draft',
+          start: '',
+          end: '',
+          description: '',
+        },
+      },
+    });
+  };
+
+  const handleSubmit = (event: MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault();
+
     try {
       const parsedStartDateString = parseDateRecordValue(formData.start);
       const parsedEndDateString = parseDateRecordValue(formData.end);
@@ -105,19 +124,7 @@ const EventCreationModal = () => {
           end: parsedEndDateString,
         } as CalendarEvent);
 
-        dispatch({
-          type: ActionTypes.UPDATE_EVENT_CREATION_MODAL_STATE,
-          payload: {
-            isOpen: false,
-            initialFormValues: {
-              title: '',
-              type: 'draft',
-              start: '',
-              end: '',
-              description: '',
-            },
-          },
-        });
+        close();
 
         setShouldFetchEvents(true);
       }
@@ -130,7 +137,7 @@ const EventCreationModal = () => {
   if (!isOpen) return null;
 
   return (
-    <Modal modalId={'creation'}>
+    <Modal modalId={'creation'} close={close}>
       <Form>
         <FormFields>
           <FormColumn>

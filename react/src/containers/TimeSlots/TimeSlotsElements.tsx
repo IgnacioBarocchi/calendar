@@ -4,6 +4,7 @@ import { FC, MouseEvent } from 'react';
 import { CalendarBodyColumnCell } from '../../components/CalendarBody/CalendarBodyELements';
 import { CalendarCell } from '../../components/UI';
 import { getActionFrom } from './helper';
+import { nanoid } from 'nanoid';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 
@@ -48,27 +49,29 @@ export const TimeSlot: FC<{
     dispatch(getActionFrom(timeSlotDate));
   };
 
-  const handleOpenDetailsModalClick = (event: MouseEvent) => {
+  const handleOpenDetailsModalClick = (event: MouseEvent, eventId: string) => {
     event.stopPropagation();
-
     dispatch({
       type: ActionTypes.UPDATE_EVENT_DETAILS_MODAL_STATE,
       payload: {
         isOpen: true,
-        event: {},
+        eventId,
       },
     });
   };
 
-  // const draftTextContent = `no title ${timeSlotDate.toISOString()} - ${timeSlotDate.toISOString()}`;
-
   return (
     <CalendarCell onClick={handleOpenModalClick}>
       {calendarEvents?.length &&
-        calendarEvents.map((evt) => (
-          <CalendarEventContainer onClick={handleOpenDetailsModalClick}>
+        calendarEvents.map((calendarEventRecord) => (
+          <CalendarEventContainer
+            key={nanoid()}
+            onClick={(mouseEvent: MouseEvent) =>
+              handleOpenDetailsModalClick(mouseEvent, calendarEventRecord.id)
+            }
+          >
             {/* {draftTextContent} */}
-            {evt.title}
+            {calendarEventRecord.title}
           </CalendarEventContainer>
         ))}
     </CalendarCell>
