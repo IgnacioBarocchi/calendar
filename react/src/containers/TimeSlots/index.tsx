@@ -8,20 +8,21 @@ const TimeSlots = () => {
   const week = useSelector((state: RootState) => state.week);
 
   return [...Array(24).keys()].map((timeIndex) => (
+    // todo: add key
     <>
       <TimeIndexItem key={nanoid()} timeIndex={timeIndex} />
       {week.map((date: Date) => {
         return (
           <TimeSlot
-            timeSlotDate={new Date(date.setHours(timeIndex, 0, 0))}
-            calendarEvent={{
-              id: '2222',
-              type: 'upcoming',
-              start: new Date(),
-              end: new Date(),
-              title: 'm',
-            }}
             key={nanoid()}
+            timeSlotDate={new Date(date.setHours(timeIndex, 0, 0))}
+            // calendarEvent={{
+            //   id: '2222',
+            //   type: 'upcoming',
+            //   start: new Date(),
+            //   end: new Date(),
+            //   title: 'm',
+            // }}
           ></TimeSlot>
         );
       })}

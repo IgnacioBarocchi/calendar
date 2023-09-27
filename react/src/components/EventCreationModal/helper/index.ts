@@ -1,15 +1,41 @@
 import { DraftEvent } from '../../../store/@types';
 
-export const formReducer = (state: DraftEvent, action) => {
+export interface Actions {
+  type: string;
+  payload: string | Date;
+}
+
+export interface ControlledDraftEvent
+  extends Omit<DraftEvent, 'start' | 'end'> {
+  start: Date | string;
+  end: Date | string;
+}
+
+export const formReducer = (
+  state: DraftEvent | ControlledDraftEvent,
+  action: Actions,
+): DraftEvent => {
+  const { payload } = action;
+  if (!payload) return state;
+
+  // ! ??????
+  //   if (
+  //     ['SET_START_DATETIME', 'SET_END_DATETIME'].includes(action.type) &&
+  //     !(payload instanceof Date)
+  //   )
+  //     return state;
+
   switch (action.type) {
     case 'SET_TITLE':
-      return { ...state, title: action.payload };
-    case 'SET_START_DATETIME':
-      return { ...state, startDateTime: action.payload };
-    case 'SET_END_DATETIME':
-      return { ...state, endDateTime: action.payload };
+      return { ...state, title: payload as unknown as string };
+    case 'SET_START':
+      // todo: remove casting
+      return { ...state, start: payload as unknown as Date };
+    case 'SET_END':
+      // todo: remove casting
+      return { ...state, end: payload as unknown as Date };
     case 'SET_DESCRIPTION':
-      return { ...state, description: action.payload };
+      return { ...state, description: payload as unknown as string };
     default:
       return state;
   }
@@ -17,22 +43,33 @@ export const formReducer = (state: DraftEvent, action) => {
 
 export const eventIsValid = (
   title: DraftEvent['title'],
-  startDateTime: DraftEvent['start'],
-  endDateTime: DraftEvent['end'],
+  start: DraftEvent['start'],
+  end: DraftEvent['end'],
 ) => {
-  const requiredFieldsAreEmpty = !title || !startDateTime || !endDateTime;
-  const wrongDateFormat =
-    !(startDateTime instanceof Date) || !(endDateTime instanceof Date);
+  const requiredFieldsAreEmpty = !title || !start || !end;
+  const wrongDateFormat = !(start instanceof Date) || !(end instanceof Date);
 
   if (requiredFieldsAreEmpty) throw new Error('Missing required fields');
   if (wrongDateFormat) throw new Error('Wrong date format');
   //   if (
-  //     formatDateToDateInputValue(startDateTime) ===
-  //     formatDateToDateInputValue(endDateTime)
+  //     formatDateToDateInputValue(start) ===
+  //     formatDateToDateInputValue(end)
   //   )
   //     throw new Error('The start date cannot be equal to the end date');
-  //   if (startDateTime > endDateTime)
+  //   if (start > end)
   //     throw new Error('The start date cannot be greater than the end date');
 
   return true;
+};
+
+export const parseDateRecordValue = (value: string | Date): Date => {
+  return typeof value === 'string' ? new Date(value) : value;
+};
+
+export const formatDateToDateInputValue = (value: string | Date): string => {
+  return typeof value === 'string'
+    ? value
+    : new Date(value.toString().split('GMT')[0] + ' UTC')
+        .toISOString()
+        .split('.')[0];
 };

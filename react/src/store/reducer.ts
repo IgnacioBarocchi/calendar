@@ -12,8 +12,8 @@ const ongoingWeek = getWeekFrom(new Date());
 const initialState = {
   week: ongoingWeek,
   weekEvents: getEventsFrom(ongoingWeek),
-  eventCerationModalIsOpen: false,
-  eventDetailsModalIsOpen: false,
+  eventCerationModalState: { isOpen: false },
+  eventDetailsModalIsOpen: { isOpen: false },
 };
 
 export const reducer = (state: RootState = initialState, action: Action) => {
@@ -41,10 +41,10 @@ export const reducer = (state: RootState = initialState, action: Action) => {
         ...state,
         week: getWeekFrom(payload?.date),
       };
-    case ActionTypes.UPDATE_EVENT_CREATION_MODAL_VISIBILITY:
+    case ActionTypes.UPDATE_EVENT_CREATION_MODAL_STATE:
       return {
         ...state,
-        eventCerationModalIsOpen: payload?.isOpen,
+        eventCerationModalState: payload,
       };
     default:
       return state;

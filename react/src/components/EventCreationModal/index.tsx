@@ -1,60 +1,97 @@
 import {
+  ActionTypes,
+  CalendarEvent,
+  DraftEvent,
+  RootState,
+} from '../../store/@types';
+import {
+  Actions,
+  eventIsValid,
+  formReducer,
+  parseDateRecordValue,
+} from './helper';
+import { ChangeEvent, ChangeEventHandler, useReducer } from 'react';
+import {
+  DateTimeField,
+  DescriptionField,
   Form,
   FormColumn,
   FormFields,
   FormFooter,
-  Input,
-  Label,
-  Textarea,
+  TitleField,
 } from './EventCreationModal';
-import { eventIsValid, formReducer } from './helper';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Button } from '../UI';
 import Modal from '../Modal';
-import { RootState } from '../../store/@types';
-import { nanoid } from 'nanoid';
-import { useReducer } from 'react';
-import { useSelector } from 'react-redux';
-
-// Define an initial state for the form
+import { postEvent } from '../../services/events.service';
 
 const EventCreationModal = () => {
-  const [formData, dispatch] = useReducer(formReducer, {
-    title: '',
-    start: '',
-    end: '',
-    description: '',
-  });
+  const dispatch = useDispatch();
 
-  const eventCerationModalIsOpen = useSelector(
-    (state: RootState) => state.eventCerationModalIsOpen,
+  const { isOpen, initialFormValues } = useSelector(
+    (state: RootState) => state.eventCerationModalState,
   );
 
-  if (!eventCerationModalIsOpen) return null;
+  const [formData, dispatchFormData] = useReducer<
+    (state: DraftEvent, action: Actions) => DraftEvent
+  >(formReducer, initialFormValues as DraftEvent);
 
-  // todo:
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   dispatch({ type: `SET_${name.toUpperCase()}`, payload: value });
-  // };
+  if (!isOpen) return null;
+
+  const handleInputChange:
+    | ChangeEventHandler<HTMLInputElement>
+    | ChangeEventHandler<HTMLTextAreaElement> = (
+    inputEvent: ChangeEvent<HTMLInputElement>,
+  ) => {
+    if (!inputEvent.target) return;
+
+    const { name, value } = inputEvent.target;
+    const payload = ['end', 'start'].includes(name) ? new Date(value) : value;
+
+    const action = {
+      type: `SET_${name.toUpperCase()}`,
+      payload,
+    };
+
+    dispatchFormData(action);
+    console.log(formData);
+  };
 
   const handleSubmit = () => {
     try {
-      // Validate the form data
-      if (eventIsValid(formData.title, formData.start, formData.end)) {
-        const calendarEvent = {
-          id: nanoid(),
-          title: formData.title,
-          type: 'draft',
-          description: formData.description,
-          start: new Date(formData.start),
-          end: new Date(formData.end),
-        };
+      const parsedStartDateString = parseDateRecordValue(formData.start);
+      const parsedEndDateString = parseDateRecordValue(formData.end);
 
-        console.log(calendarEvent);
+      const shouldSubmit = eventIsValid(
+        formData.title,
+        parsedStartDateString,
+        parsedEndDateString,
+      );
 
-        //  todo: dispatch close modal
-        //  todo: dispatch save event
+      console.log(shouldSubmit, formData);
+
+      if (shouldSubmit) {
+        postEvent({
+          ...formData,
+          type: 'upcoming',
+          start: parsedStartDateString,
+          end: parsedEndDateString,
+        } as CalendarEvent);
+
+        dispatch({
+          type: ActionTypes.UPDATE_EVENT_CREATION_MODAL_STATE,
+          payload: {
+            isOpen: false,
+            initialFormValues: {
+              title: '',
+              type: 'draft',
+              start: '',
+              end: '',
+              description: '',
+            },
+          },
+        });
       }
     } catch (error) {
       // todo: use toast of something
@@ -65,57 +102,32 @@ const EventCreationModal = () => {
   return (
     <Modal modalId={'creation'}>
       <Form>
-        <FormFields id="event-creation-form-fields">
-          <FormColumn className="event-creation-form-column">
-            <Label htmlFor="event-title">
-              Add a title
-              <Input
-                type="text"
-                id="event-title"
-                name="title"
-                required
-                value={formData.title}
-                onChange={handleInputChange}
-              />
-            </Label>
-
-            <Label htmlFor="start-datetime">
-              Start Date and Time
-              <Input
-                type="datetime-local"
-                id="start-datetime"
-                name="start"
-                required
-                value={formData.start}
-                onChange={handleInputChange}
-              />
-            </Label>
-
-            <Label htmlFor="end-datetime">
-              End Date and Time
-              <Input
-                type="datetime-local"
-                id="end-datetime"
-                name="end"
-                required
-                value={formData.end}
-                onChange={handleInputChange}
-              />
-            </Label>
+        <FormFields>
+          <FormColumn>
+            <TitleField value={formData?.title} handler={handleInputChange} />
+            <DateTimeField
+              name={'start'}
+              defaultValue={String(initialFormValues?.start)}
+              value={formData?.start}
+              handler={handleInputChange}
+            />
+            <DateTimeField
+              name={'end'}
+              defaultValue={String(initialFormValues?.end)}
+              value={formData?.end}
+              handler={handleInputChange}
+            />
           </FormColumn>
 
           <FormColumn className="event-creation-form-column">
-            <Label>Add Description</Label>
-            <Textarea
-              id="event-description"
-              name="description"
-              value={formData.description}
-              onChange={handleInputChange}
-            ></Textarea>
+            <DescriptionField
+              value={formData?.description}
+              handler={handleInputChange}
+            />
           </FormColumn>
         </FormFields>
         <FormFooter>
-          <Button type="button" id="create-event-button" onClick={handleSubmit}>
+          <Button type="button" onClick={handleSubmit}>
             Save
           </Button>
         </FormFooter>

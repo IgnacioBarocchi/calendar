@@ -1,3 +1,6 @@
+import { ChangeEventHandler, FC } from 'react';
+
+import { formatDateToDateInputValue } from './helper';
 import styled from 'styled-components';
 
 export const Form = styled.form`
@@ -26,13 +29,13 @@ export const FormFooter = styled.footer`
   width: 96%;
 `;
 
-export const Label = styled.label`
+const Label = styled.label`
   display: flex;
   flex-direction: column;
   margin-bottom: 16px;
 `;
 
-export const Input = styled.input`
+const Input = styled.input`
   padding: 8px;
   border: 1px solid ${({ theme }) => theme.secondary};
   border-radius: 4px;
@@ -40,10 +43,66 @@ export const Input = styled.input`
   color: ${({ theme }) => theme.primary};
 `;
 
-export const Textarea = styled.textarea`
+const Textarea = styled.textarea`
   padding: 8px;
   border: 1px solid ${({ theme }) => theme.secondary};
   border-radius: 4px;
   background: ${({ theme }) => theme.tertiary};
   color: ${({ theme }) => theme.primary};
 `;
+
+export const TitleField: FC<{
+  value?: string;
+  handler: ChangeEventHandler<HTMLInputElement>;
+}> = ({ value, handler }) => {
+  return (
+    <Label htmlFor="event-title">
+      Add a title
+      <Input
+        type="text"
+        name="title"
+        required
+        value={value}
+        onChange={handler}
+      />
+    </Label>
+  );
+};
+
+export const DateTimeField: FC<{
+  defaultValue: string;
+  value: Date;
+  name: 'start' | 'end';
+  handler: ChangeEventHandler<HTMLInputElement>;
+}> = ({ defaultValue, value, name, handler }) => {
+  return (
+    <Label htmlFor={`${name}-datetime`}>
+      {`${name === 'start' ? 'Start' : 'End'} Date and Time`}
+      <Input
+        type="datetime-local"
+        name={name}
+        required
+        value={value ? formatDateToDateInputValue(value) : value}
+        defaultValue={defaultValue}
+        onChange={handler}
+      />
+    </Label>
+  );
+};
+
+export const DescriptionField: FC<{
+  value?: string;
+  handler: ChangeEventHandler<HTMLInputElement>;
+}> = ({ value, handler }) => {
+  return (
+    <Label htmlFor="event-description">
+      Add Description
+      <Textarea
+        name="description"
+        required
+        value={value}
+        onChange={handler as unknown as ChangeEventHandler<HTMLTextAreaElement>}
+      />
+    </Label>
+  );
+};

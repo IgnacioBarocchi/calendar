@@ -1,8 +1,13 @@
+import { ControlledDraftEvent } from '../../components/EventCreationModal/helper';
+
 export interface RootState {
   week: [Date, Date, Date, Date, Date, Date, Date];
   events: CalendarEvent[];
-  eventCerationModalIsOpen: boolean;
-  eventDetailsModalIsOpen: boolean;
+  eventCerationModalState: {
+    isOpen: boolean;
+    initialFormValues: DraftEvent | ControlledDraftEvent;
+  };
+  eventDetailsModalIsOpen: { isOpen: boolean };
 }
 
 export const ActionTypes = {
@@ -11,9 +16,8 @@ export const ActionTypes = {
   GET_ONGOING_WEEK: 'GET_ONGOING_WEEK',
   GET_WEEK_FROM_DATE: 'GET_WEEK_FROM_DATE',
   CREATE_EVENT: 'CREATE_EVENT',
-  UPDATE_EVENT_CREATION_MODAL_VISIBILITY:
-    'UPDATE_EVENT_CREATION_MODAL_VISIBILITY',
-  UPDATE_EVENT_DETAILS_MODAL: 'UPDATE_EVENT_CREATION_MODAL_VISIBILITY',
+  UPDATE_EVENT_CREATION_MODAL_STATE: 'UPDATE_EVENT_CREATION_MODAL_STATE',
+  UPDATE_EVENT_DETAILS_MODAL_STATE: 'UPDATE_EVENT_DETAILS_MODAL_STATE',
 } as const;
 
 export interface DraftEvent {

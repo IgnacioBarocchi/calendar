@@ -3,6 +3,7 @@ import { FC, MouseEvent } from 'react';
 
 import { CalendarBodyColumnCell } from '../../components/CalendarBody/CalendarBodyELements';
 import { CalendarCell } from '../../components/UI';
+import { formatDateToDateInputValue } from '../../components/EventCreationModal/helper';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 
@@ -36,6 +37,17 @@ const CalendarEventContainer = styled.div`
   width: calc(100% - 8px);
 `;
 
+const getDefaultDateTimeValue = (
+  date: Date,
+  add30: boolean = false,
+): string => {
+  if (add30) {
+    date.setHours(date.getHours(), 30, 0);
+  }
+
+  return formatDateToDateInputValue(date);
+};
+
 export const TimeSlot: FC<{
   timeSlotDate: Date;
   calendarEvent?: CalendarEvent;
@@ -46,12 +58,15 @@ export const TimeSlot: FC<{
     event.stopPropagation();
 
     dispatch({
-      type: ActionTypes.UPDATE_EVENT_CREATION_MODAL_VISIBILITY,
+      type: ActionTypes.UPDATE_EVENT_CREATION_MODAL_STATE,
       payload: {
         isOpen: true,
-        placeHolderDates: {
-          start: timeSlotDate.toISOString(),
-          end: new Date(timeSlotDate.setHours(0, 30, 0)).toISOString(),
+        initialFormValues: {
+          title: '',
+          type: 'draft',
+          start: getDefaultDateTimeValue(timeSlotDate),
+          end: getDefaultDateTimeValue(timeSlotDate, true),
+          description: '',
         },
       },
     });
@@ -61,7 +76,7 @@ export const TimeSlot: FC<{
     event.stopPropagation();
 
     dispatch({
-      type: ActionTypes.UPDATE_EVENT_CREATION_MODAL_VISIBILITY,
+      type: ActionTypes.UPDATE_EVENT_DETAILS_MODAL_STATE,
       payload: {
         isOpen: true,
         event: {},

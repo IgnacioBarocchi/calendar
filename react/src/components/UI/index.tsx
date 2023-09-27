@@ -64,7 +64,7 @@ export const DialogHeader: FC<{ modalId: ModalId }> = ({ modalId }) => {
   const handleCloseModalClick = () => {
     dispatch({
       type: {
-        creation: ActionTypes.UPDATE_EVENT_CREATION_MODAL_VISIBILITY,
+        creation: ActionTypes.UPDATE_EVENT_CREATION_MODAL_STATE,
         details: ActionTypes.UPDATE_EVENT_DETAILS_MODAL,
       }[modalId],
       payload: {

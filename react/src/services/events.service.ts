@@ -23,28 +23,6 @@ export const getWeekEvents = async (week: Week): Promise<CalendarEvent[]> => {
   }
 };
 
-export const saveEvent = async (
-  event: CalendarEvent,
-): Promise<CalendarEvent> => {
-  try {
-    const response = await fetch(EVENTS_BASE_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(event),
-    });
-
-    // check if response was succesful
-    return response.json();
-  } catch (error) {
-    console.error('Error:', error);
-    console.table({ error });
-
-    throw error;
-  }
-};
-
 export const postEvent = async (
   event: CalendarEvent,
 ): Promise<CalendarEvent> => {
@@ -54,7 +32,11 @@ export const postEvent = async (
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(event),
+      body: JSON.stringify({
+        ...event,
+        start: event.start.toISOString(),
+        end: event.end.toISOString(),
+      }),
     });
 
     if (response.ok) {
