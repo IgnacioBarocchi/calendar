@@ -4,6 +4,7 @@ import { FC, MouseEvent } from 'react';
 import { CalendarBodyColumnCell } from '../../components/CalendarBody/CalendarBodyELements';
 import { CalendarCell } from '../../components/UI';
 import { getActionFrom } from './helper';
+import mouseHandler from '../../lib/mouseHandler';
 import { nanoid } from 'nanoid';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
@@ -45,18 +46,18 @@ export const TimeSlot: FC<{
   const dispatch = useDispatch();
 
   const handleOpenModalClick = (event: MouseEvent) => {
-    event.stopPropagation();
-    dispatch(getActionFrom(timeSlotDate));
+    mouseHandler(event, () => dispatch(getActionFrom(event, timeSlotDate)));
   };
 
   const handleOpenDetailsModalClick = (event: MouseEvent, eventId: string) => {
-    event.stopPropagation();
-    dispatch({
-      type: ActionTypes.UPDATE_EVENT_DETAILS_MODAL_STATE,
-      payload: {
-        isOpen: true,
-        eventId,
-      },
+    mouseHandler(event, () => {
+      dispatch({
+        type: ActionTypes.UPDATE_EVENT_DETAILS_MODAL_STATE,
+        payload: {
+          isOpen: true,
+          eventId,
+        },
+      });
     });
   };
 

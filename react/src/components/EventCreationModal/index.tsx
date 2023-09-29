@@ -39,7 +39,7 @@ const EventCreationModal = () => {
 
   const {
     week,
-    eventCerationModalState: { isOpen, initialFormValues },
+    eventCerationModalState: { isOpen, initialFormValues, position },
   } = useSelector((state: RootState) => ({
     eventCerationModalState: state.eventCerationModalState,
     week: state.week,
@@ -137,7 +137,7 @@ const EventCreationModal = () => {
   if (!isOpen) return null;
 
   return (
-    <Modal modalId={'creation'} close={close}>
+    <Modal modalId={'creation'} close={close} position={position}>
       <Form>
         <FormFields>
           <FormColumn>

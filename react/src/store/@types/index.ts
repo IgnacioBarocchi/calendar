@@ -1,4 +1,5 @@
 import { ControlledDraftEvent } from '../../components/EventCreationModal/helper';
+import { Position } from '../../components/Modal';
 
 export interface RootState {
   week: [Date, Date, Date, Date, Date, Date, Date];
@@ -6,6 +7,7 @@ export interface RootState {
   eventCerationModalState: {
     isOpen: boolean;
     initialFormValues: DraftEvent | ControlledDraftEvent;
+    position: Position;
   };
   eventDetailsModalState: { isOpen: boolean; eventId: string };
 }
