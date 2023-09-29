@@ -2,6 +2,11 @@ const desktopGeneric = {
   size: {
     headerHeight: '20vh',
     circleRadius: '2.5rem',
+    text: {
+      l: '1.5rem',
+      m: '1rem',
+      s: '0.75rem',
+    },
   },
 };
 

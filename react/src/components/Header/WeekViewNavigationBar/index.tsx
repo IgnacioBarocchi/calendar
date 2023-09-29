@@ -1,4 +1,4 @@
-import { Button, TextBig } from '../../UI';
+import { Button, Text } from '../../UI';
 import {
   NavContainer,
   NextWeekButton,
@@ -32,7 +32,9 @@ const WeekViewNavigationBar: FC<{ gridArea: string }> = ({ gridArea }) => {
         <NextWeekButton onClick={handleNextWeekClick} />
         <Button onClick={handleTodayClick}>today</Button>
       </nav>
-      <TextBig>september</TextBig>
+      <Text size={'l'} weight="bold">
+        september
+      </Text>
     </NavContainer>
   );
 };

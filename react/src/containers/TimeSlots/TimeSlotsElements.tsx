@@ -1,10 +1,7 @@
 import { ActionTypes, CalendarEvent } from '../../store/@types';
-import {
-  CalendarBodyColumnCell,
-  CalendarBodyRowCell,
-} from '../../components/CalendarBody/CalendarBodyELements';
 import { FC, MouseEvent } from 'react';
 
+import { CalendarCell } from '../../components/UI';
 import { getActionFrom } from './helper';
 import mouseHandler from '../../lib/mouseHandler';
 import { nanoid } from 'nanoid';
@@ -20,7 +17,11 @@ export const TimeIndexItem: FC<{ timeIndex: number }> = ({ timeIndex }) => {
     hour12: true,
   });
 
-  return <CalendarBodyColumnCell>{normalizedTimeIndex}</CalendarBodyColumnCell>;
+  return (
+    <CalendarCell location={'header-column'}>
+      {normalizedTimeIndex}
+    </CalendarCell>
+  );
 };
 
 // todo: can be a dragable cmp. if we know the grid.
@@ -64,7 +65,7 @@ export const TimeSlot: FC<{
   };
 
   return (
-    <CalendarBodyRowCell onClick={handleOpenModalClick}>
+    <CalendarCell location={'body'} onClick={handleOpenModalClick}>
       {calendarEvents?.length &&
         calendarEvents.map((calendarEventRecord) => (
           <CalendarEventContainer
@@ -76,6 +77,6 @@ export const TimeSlot: FC<{
             {calendarEventRecord.title}
           </CalendarEventContainer>
         ))}
-    </CalendarBodyRowCell>
+    </CalendarCell>
   );
 };

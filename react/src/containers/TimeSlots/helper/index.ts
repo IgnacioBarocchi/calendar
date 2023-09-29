@@ -19,3 +19,12 @@ export const getActionFrom = (event: MouseEvent, timeSlotDate: Date) => ({
     },
   },
 });
+
+export const getMapKeyFrom = (date: Date) => {
+  const matchingStartTime = new Date(date);
+  matchingStartTime.setMinutes(0);
+  matchingStartTime.setSeconds(0);
+  matchingStartTime.setMilliseconds(0);
+
+  return matchingStartTime.toISOString();
+};

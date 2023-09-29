@@ -1,4 +1,4 @@
-import { CalendarBodyContainer } from './CalendarBodyELements';
+import { CalendarBodyContainer } from './CalendarBodyElements';
 import { FC } from 'react';
 import TimeSlots from '../../containers/TimeSlots';
 

@@ -1,7 +1,8 @@
 import { CalendarEvent, RootState } from '../../store/@types';
-import React, { useEffect, useState } from 'react';
+import React, { useMemo } from 'react';
 import { TimeIndexItem, TimeSlot } from './TimeSlotsElements';
 
+import { getMapKeyFrom } from './helper';
 import { nanoid } from 'nanoid';
 import { useSelector } from 'react-redux';
 
@@ -11,21 +12,7 @@ const TimeSlots = () => {
     weekEvents: state.weekEvents,
   }));
 
-  const [eventsMap, setEventsMap] = useState<Map<string, CalendarEvent[]>>(
-    new Map<string, CalendarEvent[]>(),
-  );
-
-  const getMapKeyFrom = (date: Date) => {
-    const matchingStartTime = new Date(date);
-    matchingStartTime.setMinutes(0);
-    matchingStartTime.setSeconds(0);
-    matchingStartTime.setMilliseconds(0);
-
-    return matchingStartTime.toISOString();
-  };
-
-  useEffect(() => {
-    // setEventsMap(new Map<string, CalendarEvent[]>());
+  const eventsMap = useMemo(() => {
     const newEventsMap = new Map<string, CalendarEvent[]>();
 
     weekEvents.forEach((event) => {
@@ -38,9 +25,8 @@ const TimeSlots = () => {
       newEventsMap.get(key)?.push(event);
     });
 
-    setEventsMap(newEventsMap);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [weekEvents.length]);
+    return newEventsMap;
+  }, [weekEvents]);
 
   return [...Array(24).keys()].map((timeIndex) => (
     <React.Fragment key={nanoid()}>
