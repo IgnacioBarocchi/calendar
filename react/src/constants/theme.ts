@@ -13,3 +13,7 @@ const theme = {
 };
 
 export default theme;
+// theme.fontSize}px
+// theme.lineHeight}px
+// theme.palette.background}
+// theme.palette.foreground}
