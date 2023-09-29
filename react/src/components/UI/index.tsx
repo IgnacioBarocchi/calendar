@@ -82,14 +82,3 @@ export const DialogHeader: FC<{ modalId: ModalId; close: () => void }> = ({
     </DialogHeaderContainer>
   );
 };
-
-export const MonthViewItem = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  width: 2rem;
-  height: 2rem;
-  border-radius: 50%;
-  color: ${({ theme }) => theme.palette.foreground.primary};
-`;

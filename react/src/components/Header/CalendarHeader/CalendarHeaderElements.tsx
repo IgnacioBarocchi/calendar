@@ -16,6 +16,9 @@ const CalendarHeaderCell = styled(CalendarCell)`
   display: flex;
   justify-content: center;
   align-items: center;
+  &:first-child {
+    border-left: none;
+  }
 `;
 
 export const WeekDayDetailsContainer = styled.div`

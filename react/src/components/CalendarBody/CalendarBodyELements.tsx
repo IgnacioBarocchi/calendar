@@ -2,6 +2,12 @@ import { CalendarCell } from '../UI';
 import styled from 'styled-components';
 
 export const CalendarBodyRowCell = styled(CalendarCell)`
+  /*
+  todo: work on parent component &:last-child > div
+  &:nth-child(n + calc((24*8)-8)):nth-child(-n + calc(24*8)) {
+    border-bottom: none;
+  }
+  */
   &:nth-child(n + 186):nth-child(-n + 192) {
     border-bottom: none;
   }
