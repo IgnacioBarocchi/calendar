@@ -39,7 +39,6 @@ export const reducer = (
         week: ongoingWeek,
       };
     case ActionTypes.GET_WEEK_FROM_DATE:
-      debugger;
       if (!payload || !(payload instanceof Date)) {
         throw new Error(`Date is missing`);
       }
@@ -61,6 +60,11 @@ export const reducer = (
       return {
         ...state,
         weekEvents: payload,
+      };
+    case ActionTypes.DELETE_EVENT:
+      return {
+        ...state,
+        weekEvents: state.weekEvents.filter((event) => payload !== event.id),
       };
     default:
       return state;

@@ -1,16 +1,5 @@
 import { ActionTypes } from '../../../store/@types';
-import { formatDateToDateInputValue } from '../../../components/EventCreationModal/helper';
-
-const getDefaultDateTimeValue = (
-  date: Date,
-  add30: boolean = false,
-): string => {
-  if (add30) {
-    date.setHours(date.getHours(), 30, 0);
-  }
-
-  return formatDateToDateInputValue(date);
-};
+import { getDefaultDateTimeValue } from '../../../components/EventCreationModal/helper';
 
 export const getActionFrom = (timeSlotDate: Date) => ({
   type: ActionTypes.UPDATE_EVENT_CREATION_MODAL_STATE,

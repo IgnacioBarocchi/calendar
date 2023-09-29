@@ -3,6 +3,8 @@ import { MouseEvent, MouseEventHandler, useEffect, useState } from 'react';
 import { deleteEventById, getWeekEvents } from '../../services/events.service';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { Button } from '../UI';
+import { FaTrash } from 'react-icons/fa';
 import Modal from '../Modal';
 
 const EventDetailsModal = () => {
@@ -51,8 +53,10 @@ const EventDetailsModal = () => {
     event.preventDefault();
 
     const response = await deleteEventById(eventId);
-
-    if (response === null) {
+    alert(response);
+    if (response) {
+      alert('ok');
+      dispatch({ type: ActionTypes.DELETE_EVENT, payload: eventId });
       closeModal();
       setShouldFetchEvents(true);
     }
@@ -60,7 +64,9 @@ const EventDetailsModal = () => {
 
   return (
     <Modal modalId={'details'} close={closeModal}>
-      <button onClick={handleDeleteEvent}>delte {eventId}</button>
+      <Button onClick={handleDeleteEvent}>
+        <FaTrash />
+      </Button>
     </Modal>
   );
 };

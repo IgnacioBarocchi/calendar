@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { FaWindowClose } from 'react-icons/fa';
 import { HEADER_HEIGHT } from '../../constants/theme';
 import { ModalId } from '../Modal';
 import styled from 'styled-components';
@@ -16,6 +17,25 @@ export const Button = styled.button`
   font-size: 2rem;
 `;
 
+const CloseButtonContainer = styled(Button)`
+  border: none;
+  outline: none;
+  background: transparent;
+  color: ${({ theme }) => theme.primary};
+  padding: 0;
+  font-size: auto;
+`;
+
+const CloseButtonIcon = styled(FaWindowClose)`
+  margin: 0;
+  padding: 0;
+`;
+
+const CloseButton: FC<{ close: () => void }> = ({ close }) => (
+  <CloseButtonContainer onClick={close}>
+    <CloseButtonIcon size={20} />
+  </CloseButtonContainer>
+);
 export const CalendarCell = styled.div`
   color: ${({ theme }) => theme.primary};
   border: ${({ theme }) => '1px solid' + theme.tertiary};
@@ -50,19 +70,21 @@ export const Dialog = styled.dialog`
 `;
 
 const DialogHeaderContainer = styled.div.attrs(({ className }) => ({
-  className: className || 'header',
+  className: className || 'draggable-header',
 }))`
-  height: 20px;
-  cursor: drag;
+  height: 24px;
+  cursor: move;
 `;
 
-export const DialogHeader: FC<{ modalId: ModalId; close }> = ({
+export const DialogHeader: FC<{ modalId: ModalId; close: () => void }> = ({
   modalId,
   close,
 }) => {
+  console.log('show text based on modal id', modalId);
+
   return (
     <DialogHeaderContainer>
-      <Button onClick={close}>close</Button>
+      <CloseButton close={close} />
     </DialogHeaderContainer>
   );
 };

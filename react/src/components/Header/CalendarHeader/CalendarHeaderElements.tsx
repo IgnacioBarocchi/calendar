@@ -10,7 +10,9 @@ export const CalendarHeaderRowGrid = styled.div<{ gridArea: string }>`
   grid-template-columns: 5rem 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 `;
 
-const CalendarHeaderCell = styled(CalendarCell)``;
+const CalendarHeaderCell = styled(CalendarCell)`
+  border-top: none;
+`;
 
 export const WeekDayDetailsContainer = styled.div`
   display: flex;

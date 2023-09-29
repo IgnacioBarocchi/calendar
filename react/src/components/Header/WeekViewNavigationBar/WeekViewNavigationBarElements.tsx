@@ -8,6 +8,7 @@ export const NavContainer = styled.div<{ gridArea: string }>`
   display: flex;
   align-items: center;
   grid-area: ${({ gridArea }) => gridArea};
+  border-bottom: 1px solid ${({ theme }) => theme.tertiary};
 `;
 
 const NavPreviousWeekIcon = styled(FaArrowLeft)`

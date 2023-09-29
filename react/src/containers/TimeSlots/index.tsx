@@ -15,24 +15,32 @@ const TimeSlots = () => {
     new Map<string, CalendarEvent[]>(),
   );
 
+  const getMapKeyFrom = (date: Date) => {
+    const matchingStartTime = new Date(date);
+    matchingStartTime.setMinutes(0);
+    matchingStartTime.setSeconds(0);
+    matchingStartTime.setMilliseconds(0);
+
+    return matchingStartTime.toISOString();
+  };
+
   useEffect(() => {
+    // setEventsMap(new Map<string, CalendarEvent[]>());
+    const newEventsMap = new Map<string, CalendarEvent[]>();
+
     weekEvents.forEach((event) => {
-      const matchingStartTime = new Date(event.start);
-      matchingStartTime.setMinutes(0);
-      matchingStartTime.setSeconds(0);
-      matchingStartTime.setMilliseconds(0);
+      const key = getMapKeyFrom(event.start);
 
-      const key = matchingStartTime.toISOString();
-
-      if (!eventsMap.has(key)) {
-        eventsMap.set(key, []);
+      if (!newEventsMap.has(key)) {
+        newEventsMap.set(key, []);
       }
 
-      eventsMap.get(key)?.push(event);
+      newEventsMap.get(key)?.push(event);
     });
 
-    setEventsMap(eventsMap);
-  }, [week, weekEvents]);
+    setEventsMap(newEventsMap);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [weekEvents.length]);
 
   return [...Array(24).keys()].map((timeIndex) => (
     <React.Fragment key={nanoid()}>
@@ -41,6 +49,7 @@ const TimeSlots = () => {
         const normalizedSlotDateTime = new Date(
           date.setHours(timeIndex, 0, 0, 0),
         );
+
         const events = eventsMap.get(normalizedSlotDateTime.toISOString());
 
         return (

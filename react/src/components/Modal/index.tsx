@@ -25,6 +25,7 @@ const Modal: FC<{
 
   return (
     <Draggable
+      handle=".draggable-header"
       position={{
         x: currentPosition.xRate,
         y: currentPosition.yRate,
@@ -32,8 +33,10 @@ const Modal: FC<{
       onDrag={onDrag}
     >
       <Dialog open>
-        <DialogHeader close={close} modalId={modalId} />
-        {children}
+        <div className="modal-dialog">
+          <DialogHeader close={close} modalId={modalId} />
+          {children}
+        </div>
       </Dialog>
     </Draggable>
   );

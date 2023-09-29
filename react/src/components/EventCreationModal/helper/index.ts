@@ -55,6 +55,17 @@ export const formatDateToDateInputValue = (value: string | Date): string => {
         .split('.')[0];
 };
 
+export const getDefaultDateTimeValue = (
+  date: Date,
+  add30: boolean = false,
+): string => {
+  if (add30) {
+    date.setHours(date.getHours(), 30, 0);
+  }
+
+  return formatDateToDateInputValue(date);
+};
+
 export interface Actions {
   type: string;
   payload: string | Date;
