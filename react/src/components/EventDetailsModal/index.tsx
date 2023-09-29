@@ -1,9 +1,10 @@
 import { ActionTypes, RootState } from '../../store/@types';
-import { MouseEvent, MouseEventHandler, useEffect, useState } from 'react';
 import { deleteEventById, getWeekEvents } from '../../services/events.service';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 
 import { Button } from '../UI';
+import { ButtonProps } from '../UI/@types';
 import { FaTrash } from 'react-icons/fa';
 import Modal from '../Modal';
 
@@ -47,26 +48,22 @@ const EventDetailsModal = () => {
 
   if (!isOpen || !eventId) return null;
 
-  const handleDeleteEvent: MouseEventHandler<HTMLButtonElement> = (async (
-    event: MouseEvent<HTMLButtonElement, MouseEvent>,
-  ): Promise<void> => {
-    event.preventDefault();
-
+  const handleDeleteEvent = async (): Promise<void> => {
     const response = await deleteEventById(eventId);
-    alert(response);
     if (response) {
       alert('ok');
       dispatch({ type: ActionTypes.DELETE_EVENT, payload: eventId });
       closeModal();
       setShouldFetchEvents(true);
     }
-  }) as unknown as MouseEventHandler<HTMLButtonElement>;
+  };
 
   return (
     <Modal modalId={'details'} close={closeModal}>
-      <Button onClick={handleDeleteEvent}>
-        <FaTrash />
-      </Button>
+      <Button
+        onClick={handleDeleteEvent as ButtonProps['onClick']}
+        Icon={FaTrash}
+      />
     </Modal>
   );
 };

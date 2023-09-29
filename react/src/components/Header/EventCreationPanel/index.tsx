@@ -1,5 +1,6 @@
+import Dropdown, { Button } from '../../UI';
+
 import { ActionTypes } from '../../../store/@types';
-import { Button } from '../../UI';
 import { EventCreationPanelContainer } from './EventCreationPanelElements';
 import { FC } from 'react';
 import { getDefaultDateTimeValue } from '../../EventCreationModal/helper';
@@ -24,7 +25,28 @@ const EventCreationPanel: FC<{ gridArea: string }> = ({ gridArea }) => {
   };
   return (
     <EventCreationPanelContainer gridArea={gridArea}>
-      <Button onClick={handleOpenModal}>create event</Button>
+      {/* <Button onClick={handleOpenModal} label="create event" /> */}
+
+      <Dropdown
+        options={['x', 'l']}
+        onSelect={(v) => {
+          alert(v);
+        }}
+      />
+      <Button
+        label="about"
+        size="m"
+        onClick={() => {
+          console.log('x');
+        }}
+      />
+      <Button
+        label="toggle theme"
+        size="m"
+        onClick={() => {
+          console.log('x');
+        }}
+      />
     </EventCreationPanelContainer>
   );
 };

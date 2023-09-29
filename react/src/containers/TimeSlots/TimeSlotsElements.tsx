@@ -1,10 +1,10 @@
 import { ActionTypes, CalendarEvent } from '../../store/@types';
+import { CalendarCell, Text } from '../../components/UI';
 import { FC, MouseEvent } from 'react';
 
-import { CalendarCell } from '../../components/UI';
 import { getActionFrom } from './helper';
-import mouseHandler from '../../lib/mouseHandler';
 import { nanoid } from 'nanoid';
+import pressableInterceptor from '../../lib/pressable';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 
@@ -19,7 +19,7 @@ export const TimeIndexItem: FC<{ timeIndex: number }> = ({ timeIndex }) => {
 
   return (
     <CalendarCell location={'header-column'}>
-      {normalizedTimeIndex}
+      <Text size="m">{normalizedTimeIndex}</Text>
     </CalendarCell>
   );
 };
@@ -49,18 +49,16 @@ export const TimeSlot: FC<{
   const dispatch = useDispatch();
 
   const handleOpenModalClick = (event: MouseEvent) => {
-    mouseHandler(event, () => dispatch(getActionFrom(event, timeSlotDate)));
+    dispatch(getActionFrom(event, timeSlotDate));
   };
 
-  const handleOpenDetailsModalClick = (event: MouseEvent, eventId: string) => {
-    mouseHandler(event, () => {
-      dispatch({
-        type: ActionTypes.UPDATE_EVENT_DETAILS_MODAL_STATE,
-        payload: {
-          isOpen: true,
-          eventId,
-        },
-      });
+  const handleOpenDetailsModalClick = (eventId: string) => {
+    dispatch({
+      type: ActionTypes.UPDATE_EVENT_DETAILS_MODAL_STATE,
+      payload: {
+        isOpen: true,
+        eventId,
+      },
     });
   };
 
@@ -71,7 +69,10 @@ export const TimeSlot: FC<{
           <CalendarEventContainer
             key={nanoid()}
             onClick={(mouseEvent: MouseEvent) =>
-              handleOpenDetailsModalClick(mouseEvent, calendarEventRecord.id)
+              pressableInterceptor(
+                mouseEvent,
+                handleOpenDetailsModalClick(calendarEventRecord.id),
+              )
             }
           >
             {calendarEventRecord.title}

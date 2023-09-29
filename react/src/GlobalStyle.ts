@@ -43,6 +43,10 @@ const GlobalStyle = createGlobalStyle`
       return theme.palette.background.primary;
     }};
     }
+
+    a {
+        text-decoration: none;
+    }
 `;
 
 export default GlobalStyle;

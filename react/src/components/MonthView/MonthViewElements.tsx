@@ -1,6 +1,6 @@
+import { Button, Text } from '../UI';
 import { FC, MouseEventHandler } from 'react';
 
-import { Text } from '../UI';
 import { nanoid } from 'nanoid';
 import styled from 'styled-components';
 
@@ -9,7 +9,6 @@ export const MonthViewContainer = styled.div`
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(5, 1fr);
   gap: 4px;
-  padding: 1rem;
 `;
 
 const MonthViewItemContainer = styled.div`
@@ -22,21 +21,13 @@ const MonthViewItemContainer = styled.div`
   color: ${({ theme }) => theme.palette.foreground.primary};
 `;
 
-const DateItem = styled.button`
-  background: none;
-  outline: none;
-  border: none;
-  color: ${({ theme }) => theme.palette.foreground.primary};
-  cursor: pointer;
-`;
-
 export const MonthViewItem: FC<{
   date: number;
-  handler: MouseEventHandler<HTMLButtonElement>;
+  handler: MouseEventHandler;
 }> = ({ date, handler }) => {
   return (
     <MonthViewItemContainer>
-      <DateItem onClick={handler}>{date}</DateItem>
+      <Button onClick={handler} label={date} size={'s'} />
     </MonthViewItemContainer>
   );
 };

@@ -1,4 +1,7 @@
 const desktopGeneric = {
+  padding: {
+    aside: '1rem',
+  },
   size: {
     headerHeight: '20vh',
     circleRadius: '2.5rem',
@@ -19,8 +22,23 @@ const theme = {
         tertiary: '#52525b',
       },
       background: {
-        primary: '#030712',
+        primary: 'black',
         secondary: '#333333',
+      },
+      brand: '#2563eb',
+    },
+    ...desktopGeneric,
+  },
+  light: {
+    palette: {
+      foreground: {
+        primary: 'black',
+        secondary: '#71717a',
+        tertiary: '#52525b',
+      },
+      background: {
+        primary: '#ffffff',
+        secondary: '#f5f5f5',
       },
       brand: '#2563eb',
     },

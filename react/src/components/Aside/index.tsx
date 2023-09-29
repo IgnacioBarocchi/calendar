@@ -1,4 +1,8 @@
-import { AsideContainer, AsideContentWrapper } from './AsideElements';
+import {
+  AsideContainer,
+  AsideContentWrapper,
+  AsideFooter,
+} from './AsideElements';
 
 import { FC } from 'react';
 import MonthView from '../MonthView';
@@ -8,6 +12,7 @@ const Aside: FC<{ gridArea: string }> = ({ gridArea }) => {
     <AsideContainer gridArea={gridArea}>
       <AsideContentWrapper>
         <MonthView />
+        <AsideFooter />
       </AsideContentWrapper>
     </AsideContainer>
   );

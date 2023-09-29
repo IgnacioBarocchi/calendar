@@ -101,9 +101,7 @@ const EventCreationModal = () => {
     });
   };
 
-  const handleSubmit = (event: MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    event.preventDefault();
-
+  const handleSubmit = () => {
     try {
       const parsedStartDateString = parseDateRecordValue(formData.start);
       const parsedEndDateString = parseDateRecordValue(formData.end);
@@ -164,9 +162,7 @@ const EventCreationModal = () => {
           </FormColumn>
         </FormFields>
         <FormFooter>
-          <Button type="button" onClick={handleSubmit}>
-            Save
-          </Button>
+          <Button onClick={handleSubmit} label="Save"></Button>
         </FormFooter>
       </Form>
     </Modal>

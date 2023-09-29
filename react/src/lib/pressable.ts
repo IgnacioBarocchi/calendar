@@ -14,17 +14,15 @@ const debounce = (
   };
 };
 
-const mouseHandler = (
+const pressableInterceptor = (
   event: MouseEvent,
   callback: (event: MouseEvent, ...rest: unknown[]) => void,
   delay: number = 500,
 ): void => {
-  // eslint-disable-next-line no-debugger
-  debugger;
   event.preventDefault();
   event.stopPropagation();
   const debouncedCallback = debounce(callback, delay);
   debouncedCallback(event, ...([] as unknown[]));
 };
 
-export default mouseHandler;
+export default pressableInterceptor;

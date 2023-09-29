@@ -1,20 +1,34 @@
-import { FC } from 'react';
-import { FaWindowClose } from 'react-icons/fa';
+import { ButtonProps, TextProps } from './@types';
+import { FC, MouseEvent, useState } from 'react';
+import { FaAngleDown, FaWindowClose } from 'react-icons/fa';
+
 import { ModalId } from '../Modal';
+import { Pressable } from './DumbComponents';
+import pressableInterceptor from '../../lib/pressable';
 import styled from 'styled-components';
 
-export const TodayCircle = styled.div`
-  border-radius: 50%;
-  background: ${({ theme }) => theme.palette.foreground.primary};
+export const Text = styled.span<TextProps>`
+  color: ${({ theme, brand }) =>
+    theme.palette.foreground[brand ? 'brand' : 'primary']};
+  font-size: ${({ theme, size }) => theme.size.text[size ?? 'l']};
+  font-weight: ${({ weight }) => weight ?? 'regular'};
 `;
 
-export const Button = styled.button`
-  border: none;
-  outline: none;
-  background: transparent;
-  color: ${({ theme }) => theme.palette.foreground.primary};
-  font-size: 2rem;
-`;
+export const Button: FC<ButtonProps> = (props) => {
+  const { onClick, label, Icon, border } = props;
+
+  return (
+    <Pressable
+      type="button"
+      onClick={(event: MouseEvent) => {
+        pressableInterceptor(event, onClick);
+      }}
+      border={border || false}
+    >
+      {Icon ? <Icon {...props} /> : <Text {...props}> {label + ''}</Text>}
+    </Pressable>
+  );
+};
 
 const CloseButtonContainer = styled(Button)`
   border: none;
@@ -77,17 +91,6 @@ export const CalendarCell = styled.div<{
     }[location])}
 `;
 
-export const Text = styled.span<{
-  size?: 'l' | 'm' | 's';
-  weight?: 'bold' | 'regular';
-  brand?: boolean;
-}>`
-  color: ${({ theme, brand }) =>
-    theme.palette.foreground[brand ? 'brand' : 'primary']};
-  font-size: ${({ theme, size }) => theme.size.text[size ?? 'l']};
-  font-weight: ${({ weight }) => weight ?? 'regular'};
-`;
-
 export const Dialog = styled.dialog`
   z-index: 5;
   position: relative;
@@ -119,3 +122,73 @@ export const DialogHeader: FC<{ modalId: ModalId; close: () => void }> = ({
     </DialogHeaderContainer>
   );
 };
+const DropdownWrapper = styled.div`
+  position: relative;
+  display: inline-block;
+`;
+
+const DropdownHeader = styled.div`
+  cursor: pointer;
+  color: white;
+`;
+
+const DropdownList = styled.ul<{ isOpen: boolean }>`
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
+`;
+
+const DropdownItem = styled.li`
+  padding: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
+`;
+
+export const Dropdown: FC<{
+  options: string[];
+  onSelect: (val: string) => void;
+}> = ({ options, onSelect }) => {
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleOptionClick = (option: string) => {
+    setSelectedOption(option);
+    setIsOpen(false);
+    onSelect(option);
+  };
+
+  return (
+    <DropdownWrapper>
+      <DropdownHeader onClick={toggleDropdown}>
+        Create event
+        <FaAngleDown />
+        {/* {selectedOption || 'Select an option'} */}
+      </DropdownHeader>
+      <DropdownList isOpen={isOpen}>
+        {options.map((option) => (
+          <DropdownItem key={option} onClick={() => handleOptionClick(option)}>
+            {option}
+          </DropdownItem>
+        ))}
+      </DropdownList>
+    </DropdownWrapper>
+  );
+};
+
+export default Dropdown;

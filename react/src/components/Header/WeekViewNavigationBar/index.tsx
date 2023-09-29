@@ -1,5 +1,6 @@
 import { Button, Text } from '../../UI';
 import {
+  MonthLabel,
   NavContainer,
   NextWeekButton,
   PrevWeekButton,
@@ -30,11 +31,11 @@ const WeekViewNavigationBar: FC<{ gridArea: string }> = ({ gridArea }) => {
       <nav>
         <PrevWeekButton onClick={handlePreviousWeekClick} />
         <NextWeekButton onClick={handleNextWeekClick} />
-        <Button onClick={handleTodayClick}>today</Button>
+        <Button onClick={handleTodayClick} label="today" border={true} />
       </nav>
-      <Text size={'l'} weight="bold">
+      <MonthLabel size="l" weight="bold">
         september
-      </Text>
+      </MonthLabel>
     </NavContainer>
   );
 };
