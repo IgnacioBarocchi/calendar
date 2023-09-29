@@ -1,19 +1,18 @@
 import { FC } from 'react';
 import { FaWindowClose } from 'react-icons/fa';
-import { HEADER_HEIGHT } from '../../constants/theme';
 import { ModalId } from '../Modal';
 import styled from 'styled-components';
 
 export const TodayCircle = styled.div`
   border-radius: 50%;
-  background: ${({ theme }) => theme.primary};
+  background: ${({ theme }) => theme.palette.foreground.primary};
 `;
 
 export const Button = styled.button`
   border: none;
   outline: none;
   background: transparent;
-  color: ${({ theme }) => theme.primary};
+  color: ${({ theme }) => theme.palette.foreground.primary};
   font-size: 2rem;
 `;
 
@@ -21,7 +20,7 @@ const CloseButtonContainer = styled(Button)`
   border: none;
   outline: none;
   background: transparent;
-  color: ${({ theme }) => theme.primary};
+  color: ${({ theme }) => theme.palette.foreground.primary};
   padding: 0;
   font-size: auto;
 `;
@@ -37,32 +36,27 @@ const CloseButton: FC<{ close: () => void }> = ({ close }) => (
   </CloseButtonContainer>
 );
 export const CalendarCell = styled.div`
-  color: ${({ theme }) => theme.primary};
-  border: ${({ theme }) => '1px solid' + theme.tertiary};
-  background: ${({ theme }) => theme.bgPrimary};
+  color: ${({ theme }) => theme.palette.foreground.primary};
+  border: ${({ theme }) => '1px solid' + theme.palette.foreground.tertiary};
+  background: ${({ theme }) => theme.palette.background.primary};
   text-align: center;
-  height: cal(${HEADER_HEIGHT} / 2);
-  &first-child: {
-    background: ${({ theme }) => `
-      linear-gradient(${theme.primary}, ${theme.primary}) 50% 50% / calc(100% - 2px)
-      calc(100% - 2px) no-repeat,
-      linear-gradient(90deg, transparent 0%, ${theme.tertiary} 100%);
-      border: none;
-    `};
-  }
+  height: calc(${({ theme }) => theme.size.headerHeight} / 2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const TextBig = styled.span`
-  color: ${({ theme }) => theme.primary};
+  color: ${({ theme }) => theme.palette.foreground.primary};
   font-size: 2rem;
 `;
 
 export const Dialog = styled.dialog`
   z-index: 5;
   position: relative;
-  background: ${({ theme }) => theme.bgSecondary};
-  color: ${({ theme }) => theme.primary};
-  border: 1px solid ${({ theme }) => theme.secondary};
+  background: ${({ theme }) => theme.palette.background.secondary};
+  color: ${({ theme }) => theme.palette.foreground.primary};
+  border: 1px solid ${({ theme }) => theme.palette.foreground.secondary};
   margin: 0;
   padding: 0;
   border-radius: 4px;
@@ -97,5 +91,5 @@ export const MonthViewItem = styled.div`
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
-  color: ${({ theme }) => theme.primary};
+  color: ${({ theme }) => theme.palette.foreground.primary};
 `;

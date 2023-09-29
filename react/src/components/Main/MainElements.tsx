@@ -1,8 +1,7 @@
-import { HEADER_HEIGHT } from '../../constants/theme';
 import styled from 'styled-components';
 
 export const MainContainer = styled.main`
-  margin-top: ${HEADER_HEIGHT};
+  margin-top: ${({ theme }) => theme.size.headerHeight};
   display: grid;
   height: 100vh;
   grid-template-columns: 0.2fr 1fr;

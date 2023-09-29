@@ -1,6 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
+    /* Custom CSS */
+    @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
     /* http://meyerweb.com/eric/tools/css/reset/ v2.0 | 20110126 License: none (public domain) */
     html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
         margin: 0;
@@ -33,13 +36,11 @@ const GlobalStyle = createGlobalStyle`
     }
     
     /* Custom CSS */
-    @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
-
     html,
     body {
     font-family: 'Inter', sans-serif;
     background: ${({ theme }) => {
-      return theme.bgPrimary;
+      return theme.palette.background.primary;
     }};
     }
 `;

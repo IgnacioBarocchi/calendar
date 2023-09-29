@@ -15,7 +15,6 @@ const Modal: FC<{
   position: Position;
   close: () => void;
 }> = ({ modalId, children, close, position }) => {
-  // alert(JSON.stringify(position));
   const [currentPosition, setCurrentPosition] = useState<Position>(position);
 
   const onDrag = (_: DraggableEvent, data: DraggableData) => {

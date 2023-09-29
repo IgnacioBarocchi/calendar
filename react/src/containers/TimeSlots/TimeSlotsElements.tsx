@@ -1,8 +1,10 @@
 import { ActionTypes, CalendarEvent } from '../../store/@types';
+import {
+  CalendarBodyColumnCell,
+  CalendarBodyRowCell,
+} from '../../components/CalendarBody/CalendarBodyELements';
 import { FC, MouseEvent } from 'react';
 
-import { CalendarBodyColumnCell } from '../../components/CalendarBody/CalendarBodyELements';
-import { CalendarCell } from '../../components/UI';
 import { getActionFrom } from './helper';
 import mouseHandler from '../../lib/mouseHandler';
 import { nanoid } from 'nanoid';
@@ -23,8 +25,8 @@ export const TimeIndexItem: FC<{ timeIndex: number }> = ({ timeIndex }) => {
 
 // todo: can be a dragable cmp. if we know the grid.
 const CalendarEventContainer = styled.div`
-  color: ${({ theme }) => theme.primary};
-  background: ${({ theme }) => theme.accent};
+  color: ${({ theme }) => theme.palette.foreground.primary};
+  background: ${({ theme }) => theme.palette.brand};
   text-align: left;
   padding: 4px;
   border-radius: 4px;
@@ -62,7 +64,7 @@ export const TimeSlot: FC<{
   };
 
   return (
-    <CalendarCell onClick={handleOpenModalClick}>
+    <CalendarBodyRowCell onClick={handleOpenModalClick}>
       {calendarEvents?.length &&
         calendarEvents.map((calendarEventRecord) => (
           <CalendarEventContainer
@@ -71,10 +73,9 @@ export const TimeSlot: FC<{
               handleOpenDetailsModalClick(mouseEvent, calendarEventRecord.id)
             }
           >
-            {/* {draftTextContent} */}
             {calendarEventRecord.title}
           </CalendarEventContainer>
         ))}
-    </CalendarCell>
+    </CalendarBodyRowCell>
   );
 };

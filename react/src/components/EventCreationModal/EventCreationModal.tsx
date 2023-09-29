@@ -4,8 +4,8 @@ import { formatDateToDateInputValue } from './helper';
 import styled from 'styled-components';
 
 export const Form = styled.form`
-  color: ${({ theme }) => theme.primary};
-  background: ${({ theme }) => theme.bgPrimary};
+  color: ${({ theme }) => theme.palette.foreground.primary};
+  background: ${({ theme }) => theme.palette.background.primary};
   border-radius: 4px;
 `;
 
@@ -37,18 +37,18 @@ const Label = styled.label`
 
 const Input = styled.input`
   padding: 8px;
-  border: 1px solid ${({ theme }) => theme.secondary};
+  border: 1px solid ${({ theme }) => theme.palette.foreground.secondary};
   border-radius: 4px;
-  background: ${({ theme }) => theme.tertiary};
-  color: ${({ theme }) => theme.primary};
+  background: ${({ theme }) => theme.palette.foreground.tertiary};
+  color: ${({ theme }) => theme.palette.foreground.primary};
 `;
 
 const Textarea = styled.textarea`
   padding: 8px;
-  border: 1px solid ${({ theme }) => theme.secondary};
+  border: 1px solid ${({ theme }) => theme.palette.foreground.secondary};
   border-radius: 4px;
-  background: ${({ theme }) => theme.tertiary};
-  color: ${({ theme }) => theme.primary};
+  background: ${({ theme }) => theme.palette.foreground.tertiary};
+  color: ${({ theme }) => theme.palette.foreground.primary};
 `;
 
 export const TitleField: FC<{

@@ -1,19 +1,30 @@
-export const HEADER_HEIGHT = '20vh';
+const desktopGeneric = {
+  size: {
+    headerHeight: '20vh',
+    circleRadius: '2.5rem',
+  },
+};
 
 const theme = {
   dark: {
-    primary: '#ffffff',
-    secondary: '#71717a',
-    tertiary: '#52525b',
-    accent: '#2563eb',
-    bgPrimary: '#030712',
-    bgSecondary: '#333333',
-    circleRadius: '2.5rem',
+    palette: {
+      foreground: {
+        primary: '#ffffff',
+        secondary: '#71717a',
+        tertiary: '#52525b',
+      },
+      background: {
+        primary: '#030712',
+        secondary: '#333333',
+      },
+      brand: '#2563eb',
+    },
+    ...desktopGeneric,
   },
 };
 
 export default theme;
 // theme.fontSize}px
 // theme.lineHeight}px
-// theme.palette.background}
-// theme.palette.foreground}
+// theme.palettepalette.background}
+// theme.palettepalette.foreground}

@@ -1,14 +1,8 @@
-import Aside from '../Aside';
-import CalendarBody from '../CalendarBody';
+import { FC } from 'react';
 import { MainContainer } from './MainElements';
 
-const Main = () => {
-  return (
-    <MainContainer>
-      <Aside gridArea="aside" />
-      <CalendarBody gridArea="calendar" />
-    </MainContainer>
-  );
+const Main: FC<{ children: JSX.Element[] }> = ({ children }) => {
+  return <MainContainer>{children}</MainContainer>;
 };
 
 export default Main;

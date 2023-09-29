@@ -1,7 +1,7 @@
-import DesktopLayout from './components/DesktopLayout';
 import EventCreationModal from './components/EventCreationModal';
 import EventDetailsModal from './components/EventDetailsModal';
 import GlobalStyle from './GlobalStyle';
+import Layout from './components/Layout';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import store from './store';
@@ -14,7 +14,7 @@ function App() {
       <Provider store={store}>
         <EventDetailsModal />
         <EventCreationModal />
-        <DesktopLayout />
+        <Layout />
       </Provider>
     </ThemeProvider>
   );

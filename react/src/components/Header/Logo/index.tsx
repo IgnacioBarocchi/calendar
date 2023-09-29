@@ -9,7 +9,7 @@ const LogoContainer = styled.a<{ gridArea: string }>`
   cursor: pointer;
   display: block;
   grid-area: ${({ gridArea }) => gridArea};
-  border-bottom: 1px solid ${({ theme }) => theme.tertiary};
+  border-bottom: 1px solid ${({ theme }) => theme.palette.foreground.tertiary};
 `;
 
 const Logo: FC<{ gridArea: string }> = ({ gridArea }) => {

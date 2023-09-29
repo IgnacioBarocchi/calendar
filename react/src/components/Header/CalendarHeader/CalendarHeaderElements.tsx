@@ -12,6 +12,10 @@ export const CalendarHeaderRowGrid = styled.div<{ gridArea: string }>`
 
 const CalendarHeaderCell = styled(CalendarCell)`
   border-top: none;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const WeekDayDetailsContainer = styled.div`
@@ -32,7 +36,7 @@ export const DayName = styled.span`
 
 export const DateNumberContainer = styled(TextBig)<{ today: boolean }>`
   background: ${({ theme, today }) =>
-    `${today ? theme.accent : theme.bgPrimary}`};
+    `${today ? theme.palette.brand : theme.palette.background.primary}`};
   border-radius: 50%;
   width: 3rem;
   height: 3rem;
@@ -49,7 +53,7 @@ export const FoldedEventContainer = styled(Marquee)`
 `;
 
 export const FoldedEventText = styled.span<{ shouldRender: boolean }>`
-  background: ${({ theme }) => theme.bgPrimary};
+  background: ${({ theme }) => theme.palette.background.primary};
   visibility: ${({ shouldRender }) => (shouldRender ? 'auto' : 'hidden')};
   width: 100%;
 `;

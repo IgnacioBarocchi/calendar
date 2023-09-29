@@ -8,15 +8,15 @@ export const NavContainer = styled.div<{ gridArea: string }>`
   display: flex;
   align-items: center;
   grid-area: ${({ gridArea }) => gridArea};
-  border-bottom: 1px solid ${({ theme }) => theme.tertiary};
+  border-bottom: 1px solid ${({ theme }) => theme.palette.foreground.tertiary};
 `;
 
 const NavPreviousWeekIcon = styled(FaArrowLeft)`
-  color: ${({ theme }) => theme.primary};
+  color: ${({ theme }) => theme.palette.foreground.primary};
 `;
 
 const NavNextWeekIcon = styled(FaArrowRight)`
-  color: ${({ theme }) => theme.primary};
+  color: ${({ theme }) => theme.palette.foreground.primary};
 `;
 
 export const PrevWeekButton: FC<{
