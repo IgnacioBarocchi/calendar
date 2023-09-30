@@ -25,14 +25,7 @@ const EventCreationPanel: FC<{ gridArea: string }> = ({ gridArea }) => {
   };
   return (
     <EventCreationPanelContainer gridArea={gridArea}>
-      {/* <Button onClick={handleOpenModal} label="create event" /> */}
-
-      <Dropdown
-        options={['x', 'l']}
-        onSelect={(v) => {
-          alert(v);
-        }}
-      />
+      <Dropdown options={['Create event']} onSelect={handleOpenModal} />
       <Button
         label="about"
         size="m"
@@ -44,7 +37,7 @@ const EventCreationPanel: FC<{ gridArea: string }> = ({ gridArea }) => {
         label="toggle theme"
         size="m"
         onClick={() => {
-          console.log('x');
+          dispatch({ type: ActionTypes.TOGGLE_THEME });
         }}
       />
     </EventCreationPanelContainer>

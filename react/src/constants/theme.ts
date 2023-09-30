@@ -17,9 +17,9 @@ const theme = {
   dark: {
     palette: {
       foreground: {
-        primary: '#ffffff',
+        primary: '#ffffe3',
         secondary: '#71717a',
-        tertiary: '#52525b',
+        tertiary: '#E3E3FF',
       },
       background: {
         primary: 'black',
@@ -47,6 +47,7 @@ const theme = {
 };
 
 export default theme;
+//'#52525b',
 // theme.fontSize}px
 // theme.lineHeight}px
 // theme.palettepalette.background}

@@ -22,6 +22,7 @@ const MonthDates: FC<{
           <MonthViewItem
             key={nanoid()}
             date={date.getDate()}
+            today={date.toDateString() === new Date().toDateString()}
             handler={() => {
               handleUpdateWeek(date);
             }}

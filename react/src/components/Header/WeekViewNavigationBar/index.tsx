@@ -1,4 +1,3 @@
-import { ActionTypes, RootState } from '../../../store/@types';
 import { FC, memo } from 'react';
 import {
   MonthLabel,
@@ -7,6 +6,7 @@ import {
   PrevWeekButton,
 } from './WeekViewNavigationBarElements';
 
+import { ActionTypes } from '../../../store/@types';
 import { Button } from '../../UI';
 import { useDispatch } from 'react-redux';
 

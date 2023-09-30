@@ -1,6 +1,6 @@
 import { Button, Text } from '../../UI';
 import { FC, MouseEventHandler } from 'react';
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import { TfiAngleLeft, TfiAngleRight } from 'react-icons/tfi';
 
 import styled from 'styled-components';
 
@@ -11,11 +11,11 @@ export const NavContainer = styled.div<{ gridArea: string }>`
   border-bottom: 1px solid ${({ theme }) => theme.palette.foreground.tertiary};
 `;
 
-const NavPreviousWeekIcon = styled(FaArrowLeft)`
+const NavPreviousWeekIcon = styled(TfiAngleLeft)`
   color: ${({ theme }) => theme.palette.foreground.primary};
 `;
 
-const NavNextWeekIcon = styled(FaArrowRight)`
+const NavNextWeekIcon = styled(TfiAngleRight)`
   color: ${({ theme }) => theme.palette.foreground.primary};
 `;
 

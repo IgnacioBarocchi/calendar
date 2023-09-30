@@ -9,6 +9,7 @@ const ongoingWeek = getWeekFrom(new Date());
 
 const initialState = {
   week: ongoingWeek,
+  selectedTheme: 'dark',
   weekEvents: [],
   eventCerationModalState: { isOpen: false },
   eventDetailsModalState: { isOpen: false },
@@ -65,6 +66,11 @@ export const reducer = (
       return {
         ...state,
         weekEvents: state.weekEvents.filter((event) => payload !== event.id),
+      };
+    case ActionTypes.TOGGLE_THEME:
+      return {
+        ...state,
+        selectedTheme: state.selectedTheme === 'light' ? 'dark' : 'light',
       };
     default:
       return state;

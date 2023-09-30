@@ -22,12 +22,13 @@ export const Text = styled.span<TextProps>`
 `;
 
 export const Button: FC<ButtonProps> = (props) => {
-  const { onClick, linkTo, label, Icon, border, size } = props;
+  const { onClick, linkTo, label, Icon, border, size, reversed } = props;
 
   return (
     <Pressable
       as={linkTo ? 'a' : 'button'}
       type="button"
+      reversed={reversed || false}
       onClick={(event: MouseEvent) => {
         if (linkTo) return;
         pressableInterceptor(event, onClick);

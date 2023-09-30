@@ -1,12 +1,13 @@
 import styled, { css } from 'styled-components';
 
-export const Pressable = styled.div<{ border: boolean }>`
+export const Pressable = styled.div<{ border: boolean; reversed?: boolean }>`
   outline: none;
   background: transparent;
   color: ${({ theme }) => theme.palette.foreground.primary};
   cursor: pointer;
   display: flex;
-  flex-direction: row;
+  flex-direction: ${({ reversed }) => (reversed ? 'row-reverse' : 'row')};
+  justify-content: ${({ reversed }) => (reversed ? 'flex-end' : 'normal')};
   align-items: center;
   ${({ theme, border }) =>
     border

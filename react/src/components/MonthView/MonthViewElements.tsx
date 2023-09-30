@@ -1,8 +1,8 @@
 import { Button, Text } from '../UI';
 import { FC, MouseEventHandler } from 'react';
+import styled, { css } from 'styled-components';
 
 import { nanoid } from 'nanoid';
-import styled from 'styled-components';
 
 export const MonthViewContainer = styled.div`
   display: grid;
@@ -20,14 +20,46 @@ const MonthViewItemContainer = styled.div`
   border-radius: 50%;
   color: ${({ theme }) => theme.palette.foreground.primary};
 `;
+// background: ${({ theme }) => theme.palette.background.secondary};
+
+const DateItem = styled(Button)<{ today: boolean }>`
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: ${({ theme, today }) =>
+    today ? theme.palette.brand : 'transparent'};
+
+  ${({ theme, today }) =>
+    today
+      ? css`
+          &:hover {
+            & span {
+              background: red;
+              text-decoration: none;
+            }
+          }
+        `
+      : css`
+          &:hover {
+            & span {
+              background: ${theme.palette.background.secondary};
+              text-decoration: none;
+            }
+          }
+        `}
+`;
 
 export const MonthViewItem: FC<{
   date: number;
+  today: boolean;
   handler: MouseEventHandler;
-}> = ({ date, handler }) => {
+}> = ({ date, today, handler }) => {
   return (
     <MonthViewItemContainer>
-      <Button onClick={handler} label={date} size={'s'} />
+      <DateItem onClick={handler} label={date} size={'s'} today={today} />
     </MonthViewItemContainer>
   );
 };

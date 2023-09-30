@@ -1,9 +1,11 @@
 import { ControlledDraftEvent } from '../../components/EventCreationModal/helper';
 import { Position } from '../../components/Modal';
+import theme from '../../constants/theme';
 
 export interface RootState {
   week: [Date, Date, Date, Date, Date, Date, Date];
   weekEvents: CalendarEvent[];
+  selectedTheme: keyof typeof theme;
   eventCerationModalState: {
     isOpen: boolean;
     initialFormValues: DraftEvent | ControlledDraftEvent;
@@ -22,6 +24,7 @@ export const ActionTypes = {
   UPDATE_EVENT_DETAILS_MODAL_STATE: 'UPDATE_EVENT_DETAILS_MODAL_STATE',
   FETCH_WEEK_EVENTS: 'FETCH_WEEK_EVENTS',
   DELETE_EVENT: 'DELETE_EVENT',
+  TOGGLE_THEME: 'TOGGLE_THEME',
 } as const;
 
 export interface DraftEvent {

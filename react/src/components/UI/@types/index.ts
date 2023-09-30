@@ -12,5 +12,6 @@ export interface ButtonProps extends TextProps, IconType {
   label?: string | boolean | number;
   Icon?: IconType;
   border?: boolean;
+  reversed?: boolean;
   linkTo?: string;
 }

@@ -36,9 +36,13 @@ const GlobalStyle = createGlobalStyle`
     }
     
     /* Custom CSS */
+    @font-face {
+        font-family: myFirstFont;
+        src: url(../public/fonts/Gambarino-Regular.otf);
+    }
+
     html,
     body {
-    font-family: 'Inter', sans-serif;
     background: ${({ theme }) => {
       return theme.palette.background.primary;
     }};
@@ -47,6 +51,10 @@ const GlobalStyle = createGlobalStyle`
     a {
         text-decoration: none;
         color: ${({ theme }) => theme.palette.foreground.primary};
+    }
+
+    *{
+        font-family: 'myFirstFont', 'Inter', sans-serif;
     }
 `;
 

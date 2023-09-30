@@ -2,20 +2,20 @@ import EventCreationModal from './components/EventCreationModal';
 import EventDetailsModal from './components/EventDetailsModal';
 import GlobalStyle from './GlobalStyle';
 import Layout from './components/Layout';
-import { Provider } from 'react-redux';
+import { RootState } from './store/@types';
 import { ThemeProvider } from 'styled-components';
-import store from './store';
 import theme from './constants/theme';
+import { useSelector } from 'react-redux';
 
 function App() {
+  const selectedTheme = useSelector((state: RootState) => state.selectedTheme);
+
   return (
-    <ThemeProvider theme={theme.dark}>
+    <ThemeProvider theme={theme[selectedTheme]}>
       <GlobalStyle />
-      <Provider store={store}>
-        <EventDetailsModal />
-        <EventCreationModal />
-        <Layout />
-      </Provider>
+      <EventDetailsModal />
+      <EventCreationModal />
+      <Layout />
     </ThemeProvider>
   );
 }
