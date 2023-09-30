@@ -46,6 +46,7 @@ const GlobalStyle = createGlobalStyle`
 
     a {
         text-decoration: none;
+        color: ${({ theme }) => theme.palette.foreground.primary};
     }
 `;
 

@@ -1,11 +1,18 @@
 import { ButtonProps, TextProps } from './@types';
+import {
+  DropdownHeader,
+  DropdownItem,
+  DropdownList,
+  DropdownWrapper,
+  Pressable,
+} from './DumbComponents';
 import { FC, MouseEvent, useState } from 'react';
 import { FaAngleDown, FaWindowClose } from 'react-icons/fa';
 
 import { ModalId } from '../Modal';
-import { Pressable } from './DumbComponents';
 import pressableInterceptor from '../../lib/pressable';
 import styled from 'styled-components';
+import theme from '../../constants/theme';
 
 export const Text = styled.span<TextProps>`
   color: ${({ theme, brand }) =>
@@ -15,40 +22,35 @@ export const Text = styled.span<TextProps>`
 `;
 
 export const Button: FC<ButtonProps> = (props) => {
-  const { onClick, label, Icon, border } = props;
+  const { onClick, linkTo, label, Icon, border, size } = props;
 
   return (
     <Pressable
+      as={linkTo ? 'a' : 'button'}
       type="button"
       onClick={(event: MouseEvent) => {
+        if (linkTo) return;
         pressableInterceptor(event, onClick);
       }}
       border={border || false}
+      href={linkTo ?? ''}
     >
-      {Icon ? <Icon {...props} /> : <Text {...props}> {label + ''}</Text>}
+      {Icon && label ? (
+        <>
+          <Text {...props}> {label + ''}</Text>
+          <Icon
+            style={{ marginLeft: '8px' }}
+            size={theme.dark.size.text[size ?? 'l']}
+          />
+        </>
+      ) : Icon ? (
+        <Icon size={theme.dark.size.text[size ?? 'l']} />
+      ) : (
+        <Text {...props}> {label + ''}</Text>
+      )}
     </Pressable>
   );
 };
-
-const CloseButtonContainer = styled(Button)`
-  border: none;
-  outline: none;
-  background: transparent;
-  color: ${({ theme }) => theme.palette.foreground.primary};
-  padding: 0;
-  font-size: auto;
-`;
-
-const CloseButtonIcon = styled(FaWindowClose)`
-  margin: 0;
-  padding: 0;
-`;
-
-const CloseButton: FC<{ close: () => void }> = ({ close }) => (
-  <CloseButtonContainer onClick={close}>
-    <CloseButtonIcon size={20} />
-  </CloseButtonContainer>
-);
 
 export const CalendarCell = styled.div<{
   location: 'header-row' | 'header-column' | 'body';
@@ -93,14 +95,14 @@ export const CalendarCell = styled.div<{
 
 export const Dialog = styled.dialog`
   z-index: 5;
-  position: relative;
+  position: absolute;
   background: ${({ theme }) => theme.palette.background.secondary};
   color: ${({ theme }) => theme.palette.foreground.primary};
   border: 1px solid ${({ theme }) => theme.palette.foreground.secondary};
   margin: 0;
   padding: 0;
-  border-radius: 4px;
   width: 35vw;
+  // border-radius: 4px;
 `;
 
 const DialogHeaderContainer = styled.div.attrs(({ className }) => ({
@@ -108,53 +110,21 @@ const DialogHeaderContainer = styled.div.attrs(({ className }) => ({
 }))`
   height: 24px;
   cursor: move;
+  display: flex;
+  align-items: center;
 `;
 
 export const DialogHeader: FC<{ modalId: ModalId; close: () => void }> = ({
   modalId,
   close,
 }) => {
-  console.log('show text based on modal id', modalId);
-
   return (
     <DialogHeaderContainer>
-      <CloseButton close={close} />
+      <Button onClick={close} Icon={FaWindowClose} size="s" />
+      <Text size="s">{`Event ${modalId}`}</Text>
     </DialogHeaderContainer>
   );
 };
-const DropdownWrapper = styled.div`
-  position: relative;
-  display: inline-block;
-`;
-
-const DropdownHeader = styled.div`
-  cursor: pointer;
-  color: white;
-`;
-
-const DropdownList = styled.ul<{ isOpen: boolean }>`
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-top: none;
-  border-radius: 0 0 4px 4px;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
-`;
-
-const DropdownItem = styled.li`
-  padding: 10px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #f0f0f0;
-  }
-`;
 
 export const Dropdown: FC<{
   options: string[];

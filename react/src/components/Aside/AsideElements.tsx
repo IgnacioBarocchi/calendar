@@ -1,4 +1,5 @@
-import { Text } from '../UI';
+import { Button } from '../UI';
+import { FaExternalLinkAlt } from 'react-icons/fa';
 import styled from 'styled-components';
 
 export const AsideContainer = styled.aside<{ gridArea: string }>`
@@ -10,14 +11,33 @@ export const AsideContainer = styled.aside<{ gridArea: string }>`
 export const AsideContentWrapper = styled.div`
   position: fixed;
   top: ${({ theme }) => theme.size.headerHeight};
+  height: ${({ theme }) => `calc(100vh - ${theme.size.headerHeight})`};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
-const AsideFooterContainer = styled.footer``;
+const AsideFooterContainer = styled.footer`
+  height: ${({ theme }) => `calc(${theme.size.headerHeight}/2)`};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+`;
 
 export const AsideFooter = () => (
   <AsideFooterContainer>
-    <a href="https://github.com/ignaciobwix/calendar">
-      <Text>Hola</Text>
-    </a>
+    <Button
+      size="m"
+      linkTo="https://ignaciob30.editorx.io/clndr"
+      Icon={FaExternalLinkAlt}
+      label={'Wix'}
+    />
+    <Button
+      size="m"
+      linkTo="https://github.com/ignaciobwix/calendar"
+      Icon={FaExternalLinkAlt}
+      label={'Github'}
+    />
   </AsideFooterContainer>
 );

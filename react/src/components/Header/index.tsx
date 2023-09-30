@@ -1,8 +1,10 @@
 import CalendarHeaderRow from './CalendarHeader';
 import EventCreationPanel from './EventCreationPanel';
 import Logo from './Logo';
+import { RootState } from '../../store/@types';
 import WeekViewNavigationBar from './WeekViewNavigationBar';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 
 const HeaderContainer = styled.header`
   width: 100%;
@@ -22,12 +24,17 @@ const HeaderContainer = styled.header`
 `;
 
 const Header = () => {
+  const week = useSelector((state: RootState) => state.week);
+
   return (
     <HeaderContainer>
       <Logo gridArea={'logo'} />
-      <WeekViewNavigationBar gridArea={'navigation'} />
+      <WeekViewNavigationBar
+        month={new Intl.DateTimeFormat('en', { month: 'long' }).format(week[6])}
+        gridArea={'navigation'}
+      />
       <EventCreationPanel gridArea={'create-event'} />
-      <CalendarHeaderRow gridArea={'calendar-header'} />
+      <CalendarHeaderRow week={week} gridArea={'calendar-header'} />
     </HeaderContainer>
   );
 };
