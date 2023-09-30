@@ -43,7 +43,7 @@ export const DropdownWrapper = styled.div`
 
 export const DropdownHeader = styled.div`
   cursor: pointer;
-  color: white;
+  color: red;
 `;
 
 export const DropdownList = styled.ul<{ isOpen: boolean }>`
@@ -51,8 +51,8 @@ export const DropdownList = styled.ul<{ isOpen: boolean }>`
   top: 100%;
   left: 0;
   right: 0;
-  background-color: #fff;
-  border: 1px solid #ccc;
+  background: ${({ theme }) => theme.palette.background.primary};
+  border: 1px solid ${({ theme }) => theme.palette.foreground.primary};
   border-top: none;
   border-radius: 0 0 4px 4px;
   padding: 0;

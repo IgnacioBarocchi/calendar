@@ -10,6 +10,7 @@ import { FC, MouseEvent, useState } from 'react';
 import { FaAngleDown, FaWindowClose } from 'react-icons/fa';
 
 import { ModalId } from '../Modal';
+import { nanoid } from 'nanoid';
 import pressableInterceptor from '../../lib/pressable';
 import styled from 'styled-components';
 import theme from '../../constants/theme';
@@ -103,7 +104,6 @@ export const Dialog = styled.dialog`
   margin: 0;
   padding: 0;
   width: 35vw;
-  // border-radius: 4px;
 `;
 
 const DialogHeaderContainer = styled.div.attrs(({ className }) => ({
@@ -146,16 +146,22 @@ export const Dropdown: FC<{
 
   return (
     <DropdownWrapper>
-      <DropdownHeader onClick={toggleDropdown}>
+      {/* <DropdownHeader onClick={toggleDropdown}>
         Create event
         <FaAngleDown />
-        {/* {selectedOption || 'Select an option'} */}
-      </DropdownHeader>
+      </DropdownHeader> */}
+      <Button
+        onClick={toggleDropdown}
+        Icon={FaAngleDown}
+        label={'Create event'}
+        size="m"
+      />
+
       <DropdownList isOpen={isOpen}>
         {options.map((option) => (
-          <DropdownItem key={option} onClick={() => handleOptionClick(option)}>
-            {option}
-          </DropdownItem>
+          <li key={nanoid()}>
+            <Button onClick={() => handleOptionClick(option)} label={option} />
+          </li>
         ))}
       </DropdownList>
     </DropdownWrapper>

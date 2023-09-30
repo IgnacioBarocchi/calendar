@@ -25,7 +25,7 @@ const theme = {
         primary: 'black',
         secondary: '#333333',
       },
-      brand: '#2563eb',
+      brand: '#496DDB',
     },
     ...desktopGeneric,
   },

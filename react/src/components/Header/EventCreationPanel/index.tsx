@@ -27,14 +27,14 @@ const EventCreationPanel: FC<{ gridArea: string }> = ({ gridArea }) => {
     <EventCreationPanelContainer gridArea={gridArea}>
       <Dropdown options={['Create event']} onSelect={handleOpenModal} />
       <Button
-        label="about"
+        label="About"
         size="m"
         onClick={() => {
           console.log('x');
         }}
       />
       <Button
-        label="toggle theme"
+        label="Toggle theme"
         size="m"
         onClick={() => {
           dispatch({ type: ActionTypes.TOGGLE_THEME });
