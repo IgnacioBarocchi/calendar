@@ -1,5 +1,6 @@
+import { ButtonHTMLAttributes, MouseEventHandler } from 'react';
+
 import { IconType } from 'react-icons';
-import { MouseEventHandler } from 'react';
 
 export interface TextProps {
   size?: 'l' | 'm' | 's';
@@ -7,7 +8,10 @@ export interface TextProps {
   brand?: boolean;
 }
 
-export interface ButtonProps extends TextProps, IconType {
+export interface ButtonProps
+  extends TextProps,
+    IconType,
+    ButtonHTMLAttributes<HTMLButtonElement> {
   onClick: MouseEventHandler;
   label?: string | boolean | number;
   Icon?: IconType;

@@ -49,15 +49,23 @@ export const TimeSlot: FC<{
   const dispatch = useDispatch();
 
   const handleOpenModalClick = (event: MouseEvent) => {
+    // alert(timeSlotDate);
     dispatch(getActionFrom(event, timeSlotDate));
   };
 
-  const handleOpenDetailsModalClick = (eventId: string) => {
+  const handleOpenDetailsModalClick = (
+    mouseEvent: MouseEvent,
+    calendarEventRecord: CalendarEvent,
+  ) => {
     dispatch({
       type: ActionTypes.UPDATE_EVENT_DETAILS_MODAL_STATE,
       payload: {
         isOpen: true,
-        eventId,
+        calendarEventRecord,
+        position: {
+          xRate: mouseEvent.clientX,
+          yRate: mouseEvent.clientY,
+        },
       },
     });
   };
@@ -71,7 +79,7 @@ export const TimeSlot: FC<{
             onClick={(mouseEvent: MouseEvent) =>
               pressableInterceptor(
                 mouseEvent,
-                handleOpenDetailsModalClick(calendarEventRecord.id),
+                handleOpenDetailsModalClick(mouseEvent, calendarEventRecord),
               )
             }
           >

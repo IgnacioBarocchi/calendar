@@ -25,7 +25,10 @@ const EventCreationPanel: FC<{ gridArea: string }> = ({ gridArea }) => {
   };
   return (
     <EventCreationPanelContainer gridArea={gridArea}>
-      <Dropdown options={['Create event']} onSelect={handleOpenModal} />
+      <Dropdown
+        options={['Create event', 'Focus time']}
+        onSelect={handleOpenModal}
+      />
       <Button
         label="About"
         size="m"

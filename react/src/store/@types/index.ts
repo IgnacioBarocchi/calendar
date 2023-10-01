@@ -2,16 +2,24 @@ import { ControlledDraftEvent } from '../../components/EventCreationModal/helper
 import { Position } from '../../components/Modal';
 import theme from '../../constants/theme';
 
+interface ModalAgnosticState {
+  isOpen: boolean;
+  position: Position;
+}
+
+interface EventCerationModalState extends ModalAgnosticState {
+  initialFormValues: DraftEvent | ControlledDraftEvent;
+}
+interface EventDetailsModalState extends ModalAgnosticState {
+  calendarEventRecord: CalendarEvent;
+}
+
 export interface RootState {
   week: [Date, Date, Date, Date, Date, Date, Date];
   weekEvents: CalendarEvent[];
   selectedTheme: keyof typeof theme;
-  eventCerationModalState: {
-    isOpen: boolean;
-    initialFormValues: DraftEvent | ControlledDraftEvent;
-    position: Position;
-  };
-  eventDetailsModalState: { isOpen: boolean; eventId: string };
+  eventCerationModalState: EventCerationModalState;
+  eventDetailsModalState: EventDetailsModalState;
 }
 
 export const ActionTypes = {
@@ -22,7 +30,7 @@ export const ActionTypes = {
   CREATE_EVENT: 'CREATE_EVENT',
   UPDATE_EVENT_CREATION_MODAL_STATE: 'UPDATE_EVENT_CREATION_MODAL_STATE',
   UPDATE_EVENT_DETAILS_MODAL_STATE: 'UPDATE_EVENT_DETAILS_MODAL_STATE',
-  FETCH_WEEK_EVENTS: 'FETCH_WEEK_EVENTS',
+  SET_WEEK_EVENTS: 'SET_WEEK_EVENTS',
   DELETE_EVENT: 'DELETE_EVENT',
   TOGGLE_THEME: 'TOGGLE_THEME',
 } as const;

@@ -5,6 +5,8 @@ import {
   getWeekFrom,
 } from '../lib/weekHelper';
 
+import { getWeekEvents } from '../services/events.service';
+
 const ongoingWeek = getWeekFrom(new Date());
 
 const initialState = {
@@ -57,7 +59,7 @@ export const reducer = (
         ...state,
         eventDetailsModalState: payload,
       };
-    case ActionTypes.FETCH_WEEK_EVENTS:
+    case ActionTypes.SET_WEEK_EVENTS:
       return {
         ...state,
         weekEvents: payload,

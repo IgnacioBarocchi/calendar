@@ -1,11 +1,5 @@
 import { ButtonProps, TextProps } from './@types';
-import {
-  DropdownHeader,
-  DropdownItem,
-  DropdownList,
-  DropdownWrapper,
-  Pressable,
-} from './DumbComponents';
+import { DropdownList, DropdownWrapper, Pressable } from './DumbComponents';
 import { FC, MouseEvent, useState } from 'react';
 import { FaAngleDown, FaWindowClose } from 'react-icons/fa';
 
@@ -73,8 +67,15 @@ export const CalendarCell = styled.div<{
         display: flex;
         justify-content: center;
         align-items: center;
+        border-left: none;
         &:first-child {
-          border-left: none;
+          background: linear-gradient(
+            ${theme.palette.background.primary},
+            ${theme.palette.background.primary}
+          )
+          50% 50% / calc(100% - 2px) calc(100% - 2px) no-repeat,
+          linear-gradient(90deg, transparent 0%, ${theme.palette.foreground.tertiary} 100%);
+          border:none;
         }
       `,
       'header-column': `
@@ -88,9 +89,8 @@ export const CalendarCell = styled.div<{
         border: none;
       `,
       body: `
-        &:nth-child(n + 186):nth-child(-n + 192) {
-          border-bottom: none;
-        }
+       border-bottom: none;
+       border-left: none;
       `,
     }[location])}
 `;
@@ -98,12 +98,13 @@ export const CalendarCell = styled.div<{
 export const Dialog = styled.dialog`
   z-index: 5;
   position: absolute;
-  background: ${({ theme }) => theme.palette.background.secondary};
+  background: ${({ theme }) => theme.palette.background.primary};
   color: ${({ theme }) => theme.palette.foreground.primary};
   border: 1px solid ${({ theme }) => theme.palette.foreground.secondary};
   margin: 0;
   padding: 0;
   width: 35vw;
+  height: ${({ theme }) => theme.size.headerHeight};
 `;
 
 const DialogHeaderContainer = styled.div.attrs(({ className }) => ({
@@ -113,6 +114,7 @@ const DialogHeaderContainer = styled.div.attrs(({ className }) => ({
   cursor: move;
   display: flex;
   align-items: center;
+  border-bottom: 1px solid ${({ theme }) => theme.palette.foreground.secondary};
 `;
 
 export const DialogHeader: FC<{ modalId: ModalId; close: () => void }> = ({
@@ -146,21 +148,22 @@ export const Dropdown: FC<{
 
   return (
     <DropdownWrapper>
-      {/* <DropdownHeader onClick={toggleDropdown}>
-        Create event
-        <FaAngleDown />
-      </DropdownHeader> */}
       <Button
         onClick={toggleDropdown}
         Icon={FaAngleDown}
-        label={'Create event'}
+        label={'Create'}
         size="m"
       />
 
       <DropdownList isOpen={isOpen}>
         {options.map((option) => (
-          <li key={nanoid()}>
-            <Button onClick={() => handleOptionClick(option)} label={option} />
+          <li key={nanoid()} style={{ marginBottom: '8px' }}>
+            <Button
+              onClick={() => handleOptionClick(option)}
+              label={option}
+              border={true}
+              size="m"
+            />
           </li>
         ))}
       </DropdownList>

@@ -19,10 +19,11 @@ const pressableInterceptor = (
   callback: (event: MouseEvent, ...rest: unknown[]) => void,
   delay: number = 500,
 ): void => {
+  console.count('pressableInterceptor');
   event.preventDefault();
   event.stopPropagation();
-  const debouncedCallback = debounce(callback, delay);
-  debouncedCallback(event, ...([] as unknown[]));
+  // const debouncedCallback = debounce(callback, delay);
+  debounce(callback, delay)(event, ...([] as unknown[]));
 };
 
 export default pressableInterceptor;

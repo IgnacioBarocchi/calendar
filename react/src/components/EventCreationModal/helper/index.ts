@@ -1,4 +1,9 @@
-import { DraftEvent } from '../../../store/@types';
+import { ActionTypes, CalendarEvent, DraftEvent } from '../../../store/@types';
+import { getWeekEvents, postEvent } from '../../../services/events.service';
+
+import { AnyAction } from 'redux';
+import { Dispatch } from 'react';
+import { Week } from '../../../lib/weekHelper';
 
 const isDate = (value: string | Date): boolean => value instanceof Date;
 
@@ -66,6 +71,55 @@ export const getDefaultDateTimeValue = (
   return formatDateToDateInputValue(date);
 };
 
+export const closeModal = (dispatch: Dispatch<AnyAction>) => {
+  dispatch({
+    type: ActionTypes.UPDATE_EVENT_CREATION_MODAL_STATE,
+    payload: {
+      isOpen: false,
+      initialFormValues: {
+        id: 'tmp',
+        title: '',
+        type: 'draft',
+        start: '',
+        end: '',
+        description: '',
+      },
+    },
+  });
+};
+
+export const fetchWeekEvents = async (
+  dispatch: Dispatch<AnyAction>,
+  week: Week,
+) => {
+  alert('dispatch events');
+  dispatch({
+    type: ActionTypes.SET_WEEK_EVENTS,
+    payload: await getWeekEvents(week),
+  });
+
+  closeModal(dispatch);
+};
+
+export const postCalendarEvent = async (
+  calendarEvent: CalendarEvent,
+  dispatch: Dispatch<AnyAction>,
+  week: Week,
+) => {
+  try {
+    const response = await postEvent(calendarEvent);
+
+    if (response?.id !== 'temp') {
+      alert('fething');
+      fetchWeekEvents(dispatch, week);
+    } else {
+      alert('failed');
+    }
+  } catch (error) {
+    // todo: use toast of something
+    console.error(error);
+  }
+};
 export interface Actions {
   type: string;
   payload: string | Date;

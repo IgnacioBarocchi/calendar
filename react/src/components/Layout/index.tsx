@@ -20,7 +20,7 @@ const Layout = () => {
 
     (async () => {
       dispatch({
-        type: ActionTypes.FETCH_WEEK_EVENTS,
+        type: ActionTypes.SET_WEEK_EVENTS,
         payload: await getWeekEvents(week),
       });
     })();

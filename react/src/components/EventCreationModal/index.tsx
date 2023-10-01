@@ -1,25 +1,15 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import {
-  ActionTypes,
-  CalendarEvent,
-  DraftEvent,
-  RootState,
-} from '../../store/@types';
 import {
   Actions,
+  closeModal,
   eventIsValid,
   formReducer,
   parseDateRecordValue,
+  postCalendarEvent,
 } from './helper';
+import { CalendarEvent, DraftEvent, RootState } from '../../store/@types';
+import { ChangeEvent, ChangeEventHandler, useReducer } from 'react';
 import {
-  ChangeEvent,
-  ChangeEventHandler,
-  MouseEvent,
-  useEffect,
-  useReducer,
-  useState,
-} from 'react';
-import {
+  DateFields,
   DateTimeField,
   DescriptionField,
   Form,
@@ -27,8 +17,7 @@ import {
   FormFields,
   FormFooter,
   TitleField,
-} from './EventCreationModal';
-import { getWeekEvents, postEvent } from '../../services/events.service';
+} from './EventCreationModalElements';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Button } from '../UI';
@@ -49,23 +38,6 @@ const EventCreationModal = () => {
     (state: DraftEvent, action: Actions) => DraftEvent
   >(formReducer, initialFormValues as DraftEvent);
 
-  const [shouldFetchEvents, setShouldFetchEvents] = useState(false);
-
-  useEffect(() => {
-    const dispatchNewEvents = async () => {
-      dispatch({
-        type: ActionTypes.FETCH_WEEK_EVENTS,
-        payload: await getWeekEvents(week),
-      });
-
-      setShouldFetchEvents(false);
-    };
-
-    if (shouldFetchEvents) {
-      dispatchNewEvents();
-    }
-  }, [shouldFetchEvents]);
-
   const handleInputChange:
     | ChangeEventHandler<HTMLInputElement>
     | ChangeEventHandler<HTMLTextAreaElement> = (
@@ -85,46 +57,27 @@ const EventCreationModal = () => {
     console.log(formData);
   };
 
-  const close = () => {
-    dispatch({
-      type: ActionTypes.UPDATE_EVENT_CREATION_MODAL_STATE,
-      payload: {
-        isOpen: false,
-        initialFormValues: {
-          title: '',
-          type: 'draft',
-          start: '',
-          end: '',
-          description: '',
-        },
-      },
-    });
-  };
-
   const handleSubmit = () => {
+    if (!isOpen) return;
     try {
+      console.count('submit');
       const parsedStartDateString = parseDateRecordValue(formData.start);
       const parsedEndDateString = parseDateRecordValue(formData.end);
+      const calendarEvent: CalendarEvent = {
+        ...formData,
+        type: 'upcoming',
+        start: parsedStartDateString,
+        end: parsedEndDateString,
+      } as unknown as CalendarEvent;
 
-      const shouldSubmit = eventIsValid(
-        formData.title,
-        parsedStartDateString,
-        parsedEndDateString,
-      );
-
-      console.log(shouldSubmit, formData);
-
-      if (shouldSubmit) {
-        postEvent({
-          ...formData,
-          type: 'upcoming',
-          start: parsedStartDateString,
-          end: parsedEndDateString,
-        } as CalendarEvent);
-
-        close();
-
-        setShouldFetchEvents(true);
+      if (
+        eventIsValid(
+          calendarEvent.title,
+          calendarEvent.start,
+          calendarEvent.end,
+        )
+      ) {
+        postCalendarEvent(calendarEvent, dispatch, week);
       }
     } catch (error) {
       // todo: use toast of something
@@ -135,11 +88,17 @@ const EventCreationModal = () => {
   if (!isOpen) return null;
 
   return (
-    <Modal modalId={'creation'} close={close} position={position}>
+    <Modal
+      modalId={'creation'}
+      close={() => closeModal(dispatch)}
+      position={position}
+    >
       <Form>
-        <FormFields>
-          <FormColumn>
-            <TitleField value={formData?.title} handler={handleInputChange} />
+        {/* <FormFields> */}
+        {/* <FormColumn> */}
+        <FormColumn>
+          <TitleField value={formData?.title} handler={handleInputChange} />
+          <DateFields>
             <DateTimeField
               name={'start'}
               defaultValue={String(initialFormValues?.start)}
@@ -152,18 +111,31 @@ const EventCreationModal = () => {
               value={formData?.end}
               handler={handleInputChange}
             />
-          </FormColumn>
+          </DateFields>
+        </FormColumn>
 
-          <FormColumn className="event-creation-form-column">
-            <DescriptionField
-              value={formData?.description}
-              handler={handleInputChange}
+        {/* </FormColumn> */}
+
+        {/* <FormColumn className="event-creation-form-column"> */}
+        <FormColumn>
+          <DescriptionField
+            value={formData?.description}
+            handler={handleInputChange}
+          />
+          {/* </FormColumn> */}
+          {/* </FormFields> */}
+          {/* <FormFooter> */}
+          <FormFooter>
+            <Button
+              onClick={handleSubmit}
+              label="Save"
+              border={true}
+              disabled={!isOpen}
             />
-          </FormColumn>
-        </FormFields>
-        <FormFooter>
-          <Button onClick={handleSubmit} label="Save"></Button>
-        </FormFooter>
+          </FormFooter>
+        </FormColumn>
+
+        {/* </FormFooter> */}
       </Form>
     </Modal>
   );

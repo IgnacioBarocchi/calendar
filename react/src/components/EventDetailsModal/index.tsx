@@ -3,9 +3,7 @@ import { deleteEventById, getWeekEvents } from '../../services/events.service';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
-import { Button } from '../UI';
-import { ButtonProps } from '../UI/@types';
-import { FaTrash } from 'react-icons/fa';
+import { DetailsView } from './EventDetailsModalElements';
 import Modal from '../Modal';
 
 const EventDetailsModal = () => {
@@ -13,7 +11,7 @@ const EventDetailsModal = () => {
 
   const {
     week,
-    eventDetailsModalState: { isOpen, eventId },
+    eventDetailsModalState: { isOpen, position, calendarEventRecord },
   } = useSelector((state: RootState) => ({
     week: state.week,
     eventDetailsModalState: state.eventDetailsModalState,
@@ -26,7 +24,7 @@ const EventDetailsModal = () => {
       type: ActionTypes.UPDATE_EVENT_DETAILS_MODAL_STATE,
       payload: {
         isOpen: false,
-        eventId: '',
+        calendarEventRecord: {},
       },
     });
   };
@@ -34,7 +32,7 @@ const EventDetailsModal = () => {
   useEffect(() => {
     const dispatchNewEvents = async () => {
       dispatch({
-        type: ActionTypes.FETCH_WEEK_EVENTS,
+        type: ActionTypes.SET_WEEK_EVENTS,
         payload: await getWeekEvents(week),
       });
 
@@ -46,23 +44,24 @@ const EventDetailsModal = () => {
     }
   }, [shouldFetchEvents]);
 
-  if (!isOpen || !eventId) return null;
+  if (!isOpen || !calendarEventRecord) return null;
 
   const handleDeleteEvent = async (): Promise<void> => {
-    const response = await deleteEventById(eventId);
+    const response = await deleteEventById(calendarEventRecord.id);
     if (response) {
-      alert('ok');
-      dispatch({ type: ActionTypes.DELETE_EVENT, payload: eventId });
+      dispatch({
+        type: ActionTypes.DELETE_EVENT,
+        payload: calendarEventRecord,
+      });
       closeModal();
       setShouldFetchEvents(true);
     }
   };
-
   return (
-    <Modal modalId={'details'} close={closeModal}>
-      <Button
-        onClick={handleDeleteEvent as ButtonProps['onClick']}
-        Icon={FaTrash}
+    <Modal modalId={'details'} close={closeModal} position={position}>
+      <DetailsView
+        record={calendarEventRecord}
+        handleDeleteEvent={handleDeleteEvent}
       />
     </Modal>
   );

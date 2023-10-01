@@ -54,11 +54,13 @@ export const DropdownList = styled.ul<{ isOpen: boolean }>`
   background: ${({ theme }) => theme.palette.background.primary};
   border: 1px solid ${({ theme }) => theme.palette.foreground.primary};
   border-top: none;
-  border-radius: 0 0 4px 4px;
+  border-right: none;
   padding: 0;
   margin: 0;
   list-style: none;
-  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
+  display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
+  flex-direction: column;
+  align-items: flex-end;
 `;
 
 export const DropdownItem = styled.li`

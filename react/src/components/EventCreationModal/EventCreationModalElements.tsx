@@ -4,9 +4,7 @@ import { formatDateToDateInputValue } from './helper';
 import styled from 'styled-components';
 
 export const Form = styled.form`
-  color: ${({ theme }) => theme.palette.foreground.primary};
-  background: ${({ theme }) => theme.palette.background.primary};
-  border-radius: 4px;
+  display: flex;
 `;
 
 export const FormFields = styled.div`
@@ -16,17 +14,15 @@ export const FormFields = styled.div`
 `;
 
 export const FormColumn = styled.div`
-  margin-top: 16px;
   display: flex;
   flex-direction: column;
-  width: 40%;
-  height: 100%;
+  padding: 1rem;
+  width: 50%;
 `;
 
 export const FormFooter = styled.footer`
-  display: flex;
-  justify-content: flex-end;
-  width: 96%;
+  width: fit-content;
+  align-self: end;
 `;
 
 const Label = styled.label`
@@ -39,7 +35,7 @@ const Input = styled.input`
   padding: 8px;
   border: 1px solid ${({ theme }) => theme.palette.foreground.secondary};
   border-radius: 4px;
-  background: ${({ theme }) => theme.palette.foreground.tertiary};
+  background: ${({ theme }) => theme.palette.background.secondary};
   color: ${({ theme }) => theme.palette.foreground.primary};
 `;
 
@@ -47,7 +43,7 @@ const Textarea = styled.textarea`
   padding: 8px;
   border: 1px solid ${({ theme }) => theme.palette.foreground.secondary};
   border-radius: 4px;
-  background: ${({ theme }) => theme.palette.foreground.tertiary};
+  background: ${({ theme }) => theme.palette.background.secondary};
   color: ${({ theme }) => theme.palette.foreground.primary};
 `;
 
@@ -68,6 +64,11 @@ export const TitleField: FC<{
     </Label>
   );
 };
+
+export const DateFields = styled.div`
+  width: 100%;
+  display: flex;
+`;
 
 export const DateTimeField: FC<{
   defaultValue: string;
