@@ -26,7 +26,7 @@ export const Button: FC<ButtonProps> = (props) => {
       reversed={reversed || false}
       onClick={(event: MouseEvent) => {
         if (linkTo) return;
-        pressableInterceptor(event, onClick);
+        pressableInterceptor(event, onClick ? onClick : () => {});
       }}
       border={border || false}
       href={linkTo ?? ''}

@@ -1,6 +1,5 @@
-import { FC, MouseEvent } from 'react';
-
 import { ActionTypes } from '../../store/@types';
+import { FC } from 'react';
 import { MonthViewItem } from '../../components/MonthView/MonthViewElements';
 import { nanoid } from 'nanoid';
 import { useDispatch } from 'react-redux';

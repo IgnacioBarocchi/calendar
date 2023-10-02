@@ -12,7 +12,7 @@ export interface ButtonProps
   extends TextProps,
     IconType,
     ButtonHTMLAttributes<HTMLButtonElement> {
-  onClick: MouseEventHandler;
+  onClick?: MouseEventHandler;
   label?: string | boolean | number;
   Icon?: IconType;
   border?: boolean;
