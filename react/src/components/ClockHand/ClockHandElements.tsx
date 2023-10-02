@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const HandStick = styled.div<ClockHandElementsProps>`
   top: ${({ top }) => top}px;
   left: ${({ left }) => left}px;
-  z-index: 400;
+  z-index: 3;
   position: absolute;
   height: 2px;
   width: ${({ width }) => width}px;
@@ -15,7 +15,7 @@ const HandStick = styled.div<ClockHandElementsProps>`
 const HandPoint = styled(FaCircle)<ClockHandElementsProps>`
   top: ${({ top }) => top - 7}px;
   left: ${({ left }) => left - 7}px;
-  z-index: 400;
+  z-index: 3;
   position: absolute;
   color: red;
 `;

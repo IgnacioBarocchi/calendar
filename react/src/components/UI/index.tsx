@@ -62,18 +62,26 @@ export const CalendarCell = styled.div<{
   ${({ theme, location }) =>
     ({
       'header-row': `
-        border-top: none;
+        /* border-top: none;*/
         height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
-        border-left: none;
+        /* border-left: none;*/
+        background: linear-gradient(
+          ${theme.palette.background.primary},
+          ${theme.palette.background.primary}
+        )
+        50% 50% / calc(100% - 1px) calc(100% - 1px) no-repeat,
+        linear-gradient(180deg, transparent 0%, ${theme.palette.foreground.tertiary} 100%);
+        border:none;
+        
         &:first-child {
           background: linear-gradient(
             ${theme.palette.background.primary},
             ${theme.palette.background.primary}
           )
-          50% 50% / calc(100% - 2px) calc(100% - 2px) no-repeat,
+          50% 50% / calc(100% - 1px) calc(100% - 1px) no-repeat,
           linear-gradient(90deg, transparent 0%, ${theme.palette.foreground.tertiary} 100%);
           border:none;
         }
@@ -83,7 +91,7 @@ export const CalendarCell = styled.div<{
           ${theme.palette.background.primary},
           ${theme.palette.background.primary}
         )
-        50% 50% / calc(100% - 2px) calc(100% - 2px) no-repeat,
+        50% 50% / calc(100% - 1px) calc(100% - 1px) no-repeat,
         linear-gradient(90deg, transparent 0%, ${theme.palette.foreground.tertiary} 100%);
         height: 100%;
         border: none;
