@@ -22,26 +22,26 @@ const getCordinatesOrigin = (): TopLeftPosition => {
   return [top, left];
 };
 
-const secondsPassedFrom = (today: Date) => {
-  const todayStart = new Date(
-    today.getFullYear(),
-    today.getMonth(),
-    today.getDate(),
+const secondsPassedFrom = (date: Date) => {
+  const dateStart = new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate(),
     0,
     0,
     0,
     0,
   );
 
-  const timeDifference = today.valueOf() - todayStart.valueOf();
+  const timeDifference = date.valueOf() - dateStart.valueOf();
   const secondsPassed = Math.floor(timeDifference / 1000);
   return secondsPassed;
 };
 
-export const getClockHandPosition = (week: Week): TopLeftPosition => {
+export const getClockHandData = (week: Week): ClockHandData | null => {
   const today = new Date();
   const indexOfTodayInWeek = indexOfDateInWeek(today, week);
-  if (!indexOfTodayInWeek) return [-1, -1];
+  if (!indexOfTodayInWeek) null;
 
   const timeSlotPixelsWidth = getTimeSlotPixelsWidth();
   const leftPad = timeSlotPixelsWidth * indexOfTodayInWeek;
@@ -57,5 +57,22 @@ export const getClockHandPosition = (week: Week): TopLeftPosition => {
 
   const pixelPerSecond = timeSlotPixelsHeight / 3600;
   const top = topOrigin + pixelPerSecond * nowSeconds;
-  return [top, left];
+
+  return {
+    position: {
+      top,
+      left,
+    },
+    width: getTimeSlotPixelsWidth(),
+    animationDuration: 86400 - nowSeconds,
+  };
 };
+
+export interface ClockHandData {
+  position: {
+    top: number;
+    left: number;
+  };
+  width: number;
+  animationDuration: number;
+}

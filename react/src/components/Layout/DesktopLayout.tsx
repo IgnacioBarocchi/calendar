@@ -24,12 +24,12 @@ const DesktopLayout = () => {
 
   return (
     <>
-      <ClockHand />
       <Header />
       <Main>
         <Aside gridArea="aside" />
         <CalendarBody gridArea="calendar" />
       </Main>
+      <ClockHand />
     </>
   );
 };

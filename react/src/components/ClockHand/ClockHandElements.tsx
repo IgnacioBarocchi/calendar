@@ -1,3 +1,63 @@
+import styled, { keyframes } from 'styled-components';
+
+import { ClockHandData } from './helper';
+import { FC } from 'react';
+import { FaCircle } from 'react-icons/fa';
+
+const HandPoint = styled(FaCircle)`
+  color: red;
+`;
+
+const HandStick = styled.div<{ width: number }>`
+  height: 2px;
+  width: ${({ width }) => width - 10}px;
+  background: red;
+`;
+
+const moveVertically = (top: number) => keyframes`
+  0% {
+    top: ${top}px;
+  }
+  100% {
+    top: ${top + (window.innerHeight + top)}px;
+  }
+`;
+
+const PartsWrapper = styled.div<{
+  top: number;
+  left: number;
+  animationDuration: number;
+}>`
+  display: flex;
+  align-items: center;
+  left: ${({ left }) => left - 7}px;
+  z-index: 3;
+  position: absolute;
+  animation-name: ${({ top }) => moveVertically(top - 7)};
+  animation-duration: ${({ animationDuration }) => `${animationDuration}`}s;
+  animation-timing-function: linear;
+`;
+
+export const ClockHandContainer: FC<ClockHandProps> = ({ clockHandData }) => {
+  const {
+    position: { top, left },
+    width,
+    animationDuration,
+  } = clockHandData;
+
+  return (
+    <PartsWrapper top={top} left={left} animationDuration={animationDuration}>
+      <HandPoint />
+      <HandStick width={width} />
+    </PartsWrapper>
+  );
+};
+
+interface ClockHandProps {
+  clockHandData: ClockHandData;
+}
+// !before
+/* 
 import { FC } from 'react';
 import { FaCircle } from 'react-icons/fa';
 import styled from 'styled-components';
@@ -37,3 +97,4 @@ interface ClockHandElementsProps {
   top: number;
   left: number;
 }
+*/
