@@ -13,6 +13,9 @@ const [headerSize, asideSize, timeCellSize] = [
 
 const calendarBodyRelativeViewportWidth = 100 - (asideSize + timeCellSize);
 
+export const getTimeSlotPixelsWidth = () =>
+  (calendarBodyRelativeViewportWidth * window.innerWidth) / 100 / 7;
+
 const getCordinatesOrigin = (): TopLeftPosition => {
   const top = (headerSize * window.innerHeight) / 100;
   const left = ((asideSize + timeCellSize) * window.innerWidth) / 100;
@@ -40,8 +43,7 @@ export const getClockHandPosition = (week: Week): TopLeftPosition => {
   const indexOfTodayInWeek = indexOfDateInWeek(today, week);
   if (!indexOfTodayInWeek) return [-1, -1];
 
-  const timeSlotPixelsWidth =
-    (calendarBodyRelativeViewportWidth * window.innerWidth) / 100 / 7;
+  const timeSlotPixelsWidth = getTimeSlotPixelsWidth();
   const leftPad = timeSlotPixelsWidth * indexOfTodayInWeek;
 
   const [topOrigin, leftOrigin] = getCordinatesOrigin();

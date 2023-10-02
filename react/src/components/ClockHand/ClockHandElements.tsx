@@ -7,14 +7,14 @@ const HandStick = styled.div<ClockHandElementsProps>`
   left: ${({ left }) => left}px;
   z-index: 400;
   position: absolute;
-  height: 30px;
-  width: 100px;
-  color: red;
+  height: 2px;
+  width: ${({ width }) => width}px;
+  background: red;
 `;
 
 const HandPoint = styled(FaCircle)<ClockHandElementsProps>`
-  top: ${({ top }) => top}px;
-  left: ${({ left }) => left}px;
+  top: ${({ top }) => top - 7}px;
+  left: ${({ left }) => left - 7}px;
   z-index: 400;
   position: absolute;
   color: red;
@@ -23,11 +23,12 @@ const HandPoint = styled(FaCircle)<ClockHandElementsProps>`
 export const ClockHandContainer: FC<ClockHandElementsProps> = ({
   top,
   left,
+  width,
 }) => {
   return (
     <>
       <HandPoint top={top} left={left} />
-      <HandStick top={top} left={left} />
+      <HandStick top={top} left={left} width={width} />
     </>
   );
 };
