@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Aside from '../Aside';
 import CalendarBody from '../CalendarBody';
+import ClockHand from '../ClockHand';
 import Header from '../Header';
 import Main from '../Main/Main';
 import { getWeekEvents } from '../../services/events.service';
@@ -23,6 +24,7 @@ const DesktopLayout = () => {
 
   return (
     <>
+      <ClockHand />
       <Header />
       <Main>
         <Aside gridArea="aside" />

@@ -14,7 +14,9 @@ const HeaderContainer = styled.header`
   z-index: 4;
   background: ${({ theme }) => theme.palette.background.primary};
   display: grid;
-  grid-template-columns: 0.2fr 1fr;
+  /*grid-template-columns: 0.2fr 1fr;*/
+  grid-template-columns: ${({ theme }) =>
+    `${theme.size.asideWidth} calc(100vw - ${theme.size.asideWidth})`};
   grid-template-rows: 0.5fr 1fr;
   gap: 0px 0px;
   grid-auto-flow: row;

@@ -2,31 +2,58 @@ import { Week, indexOfDateInWeek } from '../../../lib/weekHelper';
 
 import { desktopGeneric } from '../../../constants/theme';
 
-export const getClockHandPosition = (week: Week): [number, number] => {
-  const today = new Date();
+export type TopLeftPosition = [number, number];
+const { headerHeight, asideWidth, timeCellWidth } = desktopGeneric.size;
 
+const [headerSize, asideSize, timeCellSize] = [
+  headerHeight,
+  asideWidth,
+  timeCellWidth,
+].map((d) => Number(d.replace('vh', '').replace('vw', '')));
+
+const calendarBodyRelativeViewportWidth = 100 - (asideSize + timeCellSize);
+
+const getCordinatesOrigin = (): TopLeftPosition => {
+  const top = (headerSize * window.innerHeight) / 100;
+  const left = ((asideSize + timeCellSize) * window.innerWidth) / 100;
+  return [top, left];
+};
+
+const secondsPassedFrom = (today: Date) => {
+  const todayStart = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate(),
+    0,
+    0,
+    0,
+    0,
+  );
+
+  const timeDifference = today.valueOf() - todayStart.valueOf();
+  const secondsPassed = Math.floor(timeDifference / 1000);
+  return secondsPassed;
+};
+
+export const getClockHandPosition = (week: Week): TopLeftPosition => {
+  const today = new Date();
   const indexOfTodayInWeek = indexOfDateInWeek(today, week);
   if (!indexOfTodayInWeek) return [-1, -1];
-  // con esto podemos saber la cantidad de timeslots!!!
-  // por ejemplo si el index es 0 es el domingo.
-  // si posicionamos la mano dentro de los datos y el 0, 0 es el domingo a las 0 0,
-  // sabiendo el ancho podemos determinar "left"
 
-  const seconds = today.getSeconds();
-  const minutes = today.getSeconds();
-  console.log(seconds, minutes);
+  const timeSlotPixelsWidth =
+    (calendarBodyRelativeViewportWidth * window.innerWidth) / 100 / 7;
+  const leftPad = timeSlotPixelsWidth * indexOfTodayInWeek;
 
+  const [topOrigin, leftOrigin] = getCordinatesOrigin();
+
+  const left = leftOrigin + leftPad;
+
+  const nowSeconds = secondsPassedFrom(today);
   const viewportHeight = window.innerHeight;
 
-  const timeSlotPixelsHeight =
-    ((Number(desktopGeneric.size.headerHeight.replace('vh', '')) / 2) *
-      viewportHeight) /
-    100;
+  const timeSlotPixelsHeight = ((headerSize / 2) * viewportHeight) / 100;
 
   const pixelPerSecond = timeSlotPixelsHeight / 3600;
-  console.log(pixelPerSecond);
-
-  const top = 0;
-  const left = 0;
+  const top = topOrigin + pixelPerSecond * nowSeconds;
   return [top, left];
 };

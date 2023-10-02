@@ -7,7 +7,7 @@ import styled from 'styled-components';
 export const CalendarHeaderRowGrid = styled.div<{ gridArea: string }>`
   grid-area: ${({ gridArea }) => gridArea};
   display: grid;
-  grid-template-columns: 5rem 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: ${({ theme }) => theme.size.timeCellWidth} 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 `;
 
 export const WeekDayDetailsContainer = styled.div`

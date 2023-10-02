@@ -30,7 +30,7 @@ const TimeSlots = () => {
 
   return [...Array(24).keys()].map((timeIndex) => (
     <React.Fragment key={nanoid()}>
-      <TimeIndexItem key={nanoid()} timeIndex={timeIndex} />
+      <TimeIndexItem timeIndex={timeIndex} />
       {week.map((date) => {
         const normalizedSlotDateTime = new Date(
           date.setHours(timeIndex, 0, 0, 0),

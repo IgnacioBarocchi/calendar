@@ -4,6 +4,8 @@ export const desktopGeneric = {
   },
   size: {
     headerHeight: '20vh',
+    timeCellWidth: '4vw',
+    asideWidth: '16vw',
     circleRadius: '2.5rem',
     text: {
       l: '1.5rem',
