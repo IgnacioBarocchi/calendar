@@ -25,3 +25,8 @@ export const calculatePreviousWeek = (currentWeek: Week): Week => {
   firstDayOfCurrentWeek.setDate(firstDayOfCurrentWeek.getDate() - 1);
   return getWeekFrom(firstDayOfCurrentWeek);
 };
+
+export const indexOfDateInWeek = (date: Date, week: Week): number => {
+  const index = week.findIndex((day) => day.getTime() === date.getTime());
+  return index !== -1 ? index : -1;
+};

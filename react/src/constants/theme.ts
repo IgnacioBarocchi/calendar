@@ -1,4 +1,4 @@
-const desktopGeneric = {
+export const desktopGeneric = {
   padding: {
     aside: '1rem',
   },
