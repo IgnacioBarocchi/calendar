@@ -99,6 +99,7 @@ export const CalendarCell = styled.div<{
       body: `
        border-bottom: none;
        border-left: none;
+       position: relative;
       `,
     }[location])}
 `;

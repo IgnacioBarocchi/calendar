@@ -1,7 +1,8 @@
 import { ActionTypes, CalendarEvent } from '../../store/@types';
 import { CalendarCell, Text } from '../../components/UI';
-import { FC, MouseEvent } from 'react';
+import { FC, MouseEvent, useEffect, useRef, useState } from 'react';
 
+// import { desktopGeneric } from '../../constants/theme';
 import { getActionFrom } from './helper';
 import { nanoid } from 'nanoid';
 import pressableInterceptor from '../../lib/pressable';
@@ -25,7 +26,7 @@ export const TimeIndexItem: FC<{ timeIndex: number }> = ({ timeIndex }) => {
 };
 
 // todo: can be a dragable cmp. if we know the grid.
-const CalendarEventContainer = styled.div`
+const CalendarEventContainer = styled.div<{ top: number; height: number }>`
   color: ${({ theme }) => theme.palette.foreground.primary};
   background: ${({ theme }) => theme.palette.brand};
   text-align: left;
@@ -40,6 +41,12 @@ const CalendarEventContainer = styled.div`
   user-select: none;
   font-size: 0.7rem;
   width: calc(100% - 8px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: ${({ height }) => {
+    return height;
+  }}px;
 `;
 
 export const TimeSlot: FC<{
@@ -47,6 +54,13 @@ export const TimeSlot: FC<{
   calendarEvents?: CalendarEvent[];
 }> = ({ timeSlotDate, calendarEvents }) => {
   const dispatch = useDispatch();
+  const [timeSlotPixelsHeight, setTimeSlotPixelsHeight] = useState(0);
+  const elementRef = useRef<typeof CalendarCell & HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!elementRef?.current) return;
+    setTimeSlotPixelsHeight(elementRef.current.offsetHeight);
+  }, []);
 
   const handleOpenModalClick = (event: MouseEvent) => {
     // alert(timeSlotDate);
@@ -71,21 +85,41 @@ export const TimeSlot: FC<{
   };
 
   return (
-    <CalendarCell location={'body'} onClick={handleOpenModalClick}>
+    <CalendarCell
+      location={'body'}
+      onClick={handleOpenModalClick}
+      ref={elementRef}
+    >
       {calendarEvents?.length &&
-        calendarEvents.map((calendarEventRecord) => (
-          <CalendarEventContainer
-            key={nanoid()}
-            onClick={(mouseEvent: MouseEvent) =>
-              pressableInterceptor(
-                mouseEvent,
-                handleOpenDetailsModalClick(mouseEvent, calendarEventRecord),
-              )
-            }
-          >
-            {calendarEventRecord.title}
-          </CalendarEventContainer>
-        ))}
+        calendarEvents.map((calendarEventRecord) => {
+          const timeDifference =
+            new Date(calendarEventRecord.start).valueOf() -
+            new Date(calendarEventRecord.end).valueOf();
+
+          const secondsLong = Math.abs(Math.floor(timeDifference / 1000));
+          alert('seconds => ' + secondsLong);
+          const eventHeigth = (secondsLong * timeSlotPixelsHeight) / 3600;
+
+          return (
+            <CalendarEventContainer
+              top={1}
+              height={
+                eventHeigth < timeSlotPixelsHeight / 4
+                  ? timeSlotPixelsHeight / 4
+                  : eventHeigth
+              }
+              key={nanoid()}
+              onClick={(mouseEvent: MouseEvent) =>
+                pressableInterceptor(
+                  mouseEvent,
+                  handleOpenDetailsModalClick(mouseEvent, calendarEventRecord),
+                )
+              }
+            >
+              {calendarEventRecord.title}
+            </CalendarEventContainer>
+          );
+        })}
     </CalendarCell>
   );
 };

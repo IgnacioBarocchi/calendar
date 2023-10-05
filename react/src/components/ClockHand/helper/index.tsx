@@ -32,7 +32,7 @@ const secondsPassedFrom = (date: Date) => {
     0,
     0,
   );
-
+  //? new Date.now()
   const timeDifference = date.valueOf() - dateStart.valueOf();
   const secondsPassed = Math.floor(timeDifference / 1000);
   return secondsPassed;
@@ -55,8 +55,8 @@ export const getClockHandData = (week: Week): ClockHandData | null => {
 
   const timeSlotPixelsHeight = ((headerSize / 2) * viewportHeight) / 100;
 
-  const pixelPerSecond = timeSlotPixelsHeight / 3600;
-  const top = topOrigin + pixelPerSecond * nowSeconds;
+  const pixelsPerSecond = timeSlotPixelsHeight / 3600;
+  const top = topOrigin + pixelsPerSecond * nowSeconds;
 
   return {
     position: {
@@ -64,6 +64,7 @@ export const getClockHandData = (week: Week): ClockHandData | null => {
       left,
     },
     width: getTimeSlotPixelsWidth(),
+    // 24h -> 86400s
     animationDuration: 86400 - nowSeconds,
   };
 };
