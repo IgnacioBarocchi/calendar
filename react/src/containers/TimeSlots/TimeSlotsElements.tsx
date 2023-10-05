@@ -4,6 +4,7 @@ import { FC, MouseEvent, useEffect, useRef, useState } from 'react';
 
 // import { desktopGeneric } from '../../constants/theme';
 import { getActionFrom } from './helper';
+import { log } from 'xstate/lib/actions';
 import { nanoid } from 'nanoid';
 import pressableInterceptor from '../../lib/pressable';
 import styled from 'styled-components';
@@ -26,9 +27,19 @@ export const TimeIndexItem: FC<{ timeIndex: number }> = ({ timeIndex }) => {
 };
 
 // todo: can be a dragable cmp. if we know the grid.
-const CalendarEventContainer = styled.div<{ top: number; height: number }>`
-  color: ${({ theme }) => theme.palette.foreground.primary};
-  background: ${({ theme }) => theme.palette.brand};
+const CalendarEventContainer = styled.div<{
+  top: number;
+  height: number;
+  index: number;
+}>`
+  color: ${({ theme, index }) =>
+    Number.isInteger(index / 2)
+      ? theme.palette.foreground.primary
+      : theme.palette.brand};
+  background: ${({ theme, index }) =>
+    Number.isInteger(index / 2)
+      ? theme.palette.brand
+      : theme.palette.foreground.primary};
   text-align: left;
   padding: 4px;
   border-radius: 4px;
@@ -40,15 +51,18 @@ const CalendarEventContainer = styled.div<{ top: number; height: number }>`
   cursor: pointer;
   user-select: none;
   font-size: 0.7rem;
-  width: calc(100% - 8px);
+  width: calc(100% - ${({ index }) => index * 10}%);
   position: absolute;
-  top: 0;
-  left: 0;
-  height: ${({ height }) => {
-    return height;
-  }}px;
+  top: ${({ top }) => top}%;
+  left: ${({ index }) => index * 10}%;
+  height: ${({ height }) => height}%;
+  z-index: ${({ index }) => index};
+  border: 1px solid ${({ theme }) => theme.palette.brand};
 `;
 
+// height: ${({ height }) => {
+//   return height;
+// }}px;
 export const TimeSlot: FC<{
   timeSlotDate: Date;
   calendarEvents?: CalendarEvent[];
@@ -91,23 +105,28 @@ export const TimeSlot: FC<{
       ref={elementRef}
     >
       {calendarEvents?.length &&
-        calendarEvents.map((calendarEventRecord) => {
+        calendarEvents.map((calendarEventRecord, i) => {
+          // todo: move component to other file and use useMemo(()=>{cmp height}, [ window.innerHeight? || add resize event listener? ])
+          const startDateTime = new Date(calendarEventRecord.start);
+
           const timeDifference =
-            new Date(calendarEventRecord.start).valueOf() -
+            startDateTime.valueOf() -
             new Date(calendarEventRecord.end).valueOf();
 
           const secondsLong = Math.abs(Math.floor(timeDifference / 1000));
-          alert('seconds => ' + secondsLong);
-          const eventHeigth = (secondsLong * timeSlotPixelsHeight) / 3600;
+          const eventHeightPercentage =
+            ((secondsLong * 100) / (3600 * timeSlotPixelsHeight)) * 100;
 
+          const timeDifferenceMinutes =
+            (startDateTime.valueOf() - timeSlotDate.valueOf()) / (1000 * 60);
+
+          const eventTopPosition =
+            timeDifferenceMinutes < 0 ? 0 : (timeDifferenceMinutes / 60) * 100;
           return (
             <CalendarEventContainer
-              top={1}
-              height={
-                eventHeigth < timeSlotPixelsHeight / 4
-                  ? timeSlotPixelsHeight / 4
-                  : eventHeigth
-              }
+              top={eventTopPosition}
+              height={eventHeightPercentage < 20 ? 20 : eventHeightPercentage}
+              index={i}
               key={nanoid()}
               onClick={(mouseEvent: MouseEvent) =>
                 pressableInterceptor(
