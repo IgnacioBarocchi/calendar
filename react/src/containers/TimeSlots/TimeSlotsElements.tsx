@@ -1,10 +1,11 @@
+// todo:q? refactor this component
 import { ActionTypes, CalendarEvent } from '../../store/@types';
 import { CalendarCell, Text } from '../../components/UI';
 import { FC, MouseEvent, useEffect, useRef, useState } from 'react';
 
-// import { desktopGeneric } from '../../constants/theme';
+// todo:q? ask rejus how to calculate the calendar event size and position
+//? import { desktopGeneric } from '../../constants/theme';
 import { getActionFrom } from './helper';
-import { log } from 'xstate/lib/actions';
 import { nanoid } from 'nanoid';
 import pressableInterceptor from '../../lib/pressable';
 import styled from 'styled-components';
@@ -51,7 +52,7 @@ const CalendarEventContainer = styled.div<{
   cursor: pointer;
   user-select: none;
   font-size: 0.7rem;
-  width: calc(100% - ${({ index }) => index * 10}%);
+  width: calc(85% - ${({ index }) => index * 10}%);
   position: absolute;
   top: ${({ top }) => top}%;
   left: ${({ index }) => index * 10}%;
@@ -60,9 +61,6 @@ const CalendarEventContainer = styled.div<{
   border: 1px solid ${({ theme }) => theme.palette.brand};
 `;
 
-// height: ${({ height }) => {
-//   return height;
-// }}px;
 export const TimeSlot: FC<{
   timeSlotDate: Date;
   calendarEvents?: CalendarEvent[];
@@ -122,6 +120,7 @@ export const TimeSlot: FC<{
 
           const eventTopPosition =
             timeDifferenceMinutes < 0 ? 0 : (timeDifferenceMinutes / 60) * 100;
+
           return (
             <CalendarEventContainer
               top={eventTopPosition}
@@ -129,10 +128,9 @@ export const TimeSlot: FC<{
               index={i}
               key={nanoid()}
               onClick={(mouseEvent: MouseEvent) =>
-                pressableInterceptor(
-                  mouseEvent,
-                  handleOpenDetailsModalClick(mouseEvent, calendarEventRecord),
-                )
+                pressableInterceptor(mouseEvent, () => {
+                  handleOpenDetailsModalClick(mouseEvent, calendarEventRecord);
+                })
               }
             >
               {calendarEventRecord.title}

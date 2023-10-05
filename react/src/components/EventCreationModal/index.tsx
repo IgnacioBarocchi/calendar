@@ -14,7 +14,6 @@ import {
   DescriptionField,
   Form,
   FormColumn,
-  FormFields,
   FormFooter,
   TitleField,
 } from './EventCreationModalElements';
@@ -60,14 +59,20 @@ const EventCreationModal = () => {
   const handleSubmit = () => {
     if (!isOpen) return;
     try {
-      console.count('submit');
-      const parsedStartDateString = parseDateRecordValue(formData.start);
-      const parsedEndDateString = parseDateRecordValue(formData.end);
+      //? get default values from useRef in this release.
+      // todo: 2nd release => pick fixed values from dropdown
+
       const calendarEvent: CalendarEvent = {
         ...formData,
+        start:
+          formData.start instanceof Date
+            ? parseDateRecordValue(formData.start)
+            : parseDateRecordValue(initialFormValues.start),
+        end:
+          formData.end instanceof Date
+            ? parseDateRecordValue(formData.end)
+            : parseDateRecordValue(initialFormValues.end),
         type: 'upcoming',
-        start: parsedStartDateString,
-        end: parsedEndDateString,
       } as unknown as CalendarEvent;
 
       if (
@@ -94,8 +99,6 @@ const EventCreationModal = () => {
       position={position}
     >
       <Form>
-        {/* <FormFields> */}
-        {/* <FormColumn> */}
         <FormColumn>
           <TitleField value={formData?.title} handler={handleInputChange} />
           <DateFields>
@@ -114,17 +117,11 @@ const EventCreationModal = () => {
           </DateFields>
         </FormColumn>
 
-        {/* </FormColumn> */}
-
-        {/* <FormColumn className="event-creation-form-column"> */}
         <FormColumn>
           <DescriptionField
             value={formData?.description}
             handler={handleInputChange}
           />
-          {/* </FormColumn> */}
-          {/* </FormFields> */}
-          {/* <FormFooter> */}
           <FormFooter>
             <Button
               onClick={handleSubmit}
@@ -134,8 +131,6 @@ const EventCreationModal = () => {
             />
           </FormFooter>
         </FormColumn>
-
-        {/* </FormFooter> */}
       </Form>
     </Modal>
   );

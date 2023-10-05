@@ -7,11 +7,11 @@ export const Form = styled.form`
   display: flex;
 `;
 
-export const FormFields = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
-`;
+// export const FormFields = styled.div`
+//   display: flex;
+//   justify-content: space-around;
+//   align-items: flex-start;
+// `;
 
 export const FormColumn = styled.div`
   display: flex;

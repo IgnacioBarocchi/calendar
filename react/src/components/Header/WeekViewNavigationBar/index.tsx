@@ -1,3 +1,5 @@
+// todo: rename this component.
+// todo:q? move nav to another component, pass props & react.memo props to avoid rerendering
 import { FC, memo } from 'react';
 import {
   MonthLabel,
