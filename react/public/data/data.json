@@ -1,0 +1,26 @@
+{
+  "events": [
+    {
+      "title": "d",
+      "start": "2023-10-02T01:00:00.000Z",
+      "end": "2023-10-02T01:30:00.000Z",
+      "type": "upcoming",
+      "id": "SpOuJU7wGKV79QPnx_MiR"
+    },
+    {
+      "title": "x",
+      "start": "2023-10-03T00:00:00.000Z",
+      "end": "2023-10-03T00:30:00.000Z",
+      "type": "upcoming",
+      "id": "OUeL02zHrtDkkIvtcVXh-"
+    },
+    {
+      "title": "d",
+      "start": "2023-10-04T00:00:00.000Z",
+      "end": "2023-10-04T00:30:00.000Z",
+      "type": "upcoming",
+      "id": "hGQqJFq_9XGYHJIPAL3UK"
+    }
+  ],
+  "holidays": []
+}

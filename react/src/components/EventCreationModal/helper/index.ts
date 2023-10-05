@@ -92,7 +92,6 @@ export const fetchWeekEvents = async (
   dispatch: Dispatch<AnyAction>,
   week: Week,
 ) => {
-  alert('dispatch events');
   dispatch({
     type: ActionTypes.SET_WEEK_EVENTS,
     payload: await getWeekEvents(week),
@@ -110,10 +109,7 @@ export const postCalendarEvent = async (
     const response = await postEvent(calendarEvent);
 
     if (response?.id !== 'temp') {
-      alert('fething');
       fetchWeekEvents(dispatch, week);
-    } else {
-      alert('failed');
     }
   } catch (error) {
     // todo: use toast of something

@@ -28,3 +28,26 @@ export const getMapKeyFrom = (date: Date) => {
 
   return matchingStartTime.toISOString();
 };
+
+export const getEventCSSValues = (
+  start: Date,
+  end: Date,
+  timeSlotDate: Date,
+  parentHeight: number,
+): [number, number] => {
+  const startDateTime = new Date(start);
+
+  const timeDifference = startDateTime.valueOf() - new Date(end).valueOf();
+
+  const secondsLong = Math.abs(Math.floor(timeDifference / 1000));
+  const eventHeightPercentage =
+    ((secondsLong * 100) / (3600 * parentHeight)) * 100;
+
+  const timeDifferenceMinutes =
+    (startDateTime.valueOf() - timeSlotDate.valueOf()) / (1000 * 60);
+
+  const eventTopPosition =
+    timeDifferenceMinutes < 0 ? 0 : (timeDifferenceMinutes / 60) * 100;
+
+  return [eventHeightPercentage, eventTopPosition];
+};

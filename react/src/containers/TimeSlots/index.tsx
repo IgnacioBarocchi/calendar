@@ -1,7 +1,8 @@
 import { CalendarEvent, RootState } from '../../store/@types';
 import React, { useMemo } from 'react';
-import { TimeIndexItem, TimeSlot } from './TimeSlotsElements';
 
+import { TimeIndexItem } from './TimeSlotsElements';
+import { TimeSlot } from './TimeSlot';
 import { getMapKeyFrom } from './helper';
 import { nanoid } from 'nanoid';
 import { useSelector } from 'react-redux';

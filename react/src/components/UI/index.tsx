@@ -26,6 +26,8 @@ export const Button: FC<ButtonProps> = (props) => {
       reversed={reversed || false}
       onClick={(event: MouseEvent) => {
         if (linkTo) return;
+        event.preventDefault();
+        event.stopPropagation();
         pressableInterceptor(event, onClick ? onClick : () => {});
       }}
       border={border || false}
@@ -33,7 +35,7 @@ export const Button: FC<ButtonProps> = (props) => {
     >
       {Icon && label ? (
         <>
-          <Text {...props}> {label + ''}</Text>
+          <Text size={size}> {label + ''}</Text>
           <Icon
             style={{ marginLeft: '8px' }}
             size={theme.dark.size.text[size ?? 'l']}
@@ -42,7 +44,7 @@ export const Button: FC<ButtonProps> = (props) => {
       ) : Icon ? (
         <Icon size={theme.dark.size.text[size ?? 'l']} />
       ) : (
-        <Text {...props}> {label + ''}</Text>
+        <Text size={size}> {label + ''}</Text>
       )}
     </Pressable>
   );

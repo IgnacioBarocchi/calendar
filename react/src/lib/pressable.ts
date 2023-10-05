@@ -20,9 +20,7 @@ const pressableInterceptor = (
   delay: number = 500,
 ): void => {
   console.count('pressableInterceptor');
-  event.preventDefault();
-  event.stopPropagation();
-  // const debouncedCallback = debounce(callback, delay);
+  // callback(event);
   debounce(callback, delay)(event, ...([] as unknown[]));
 };
 
