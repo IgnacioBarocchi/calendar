@@ -1,7 +1,7 @@
 // todo: support touch events
 import { MouseEvent } from 'react';
 
-const debounce = (
+export const debounce = (
   func: (event: MouseEvent, ...args: unknown[]) => void,
   delay: number,
 ) => {

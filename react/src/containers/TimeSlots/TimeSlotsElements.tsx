@@ -1,8 +1,8 @@
 import { CalendarCell, Text } from '../../components/UI';
+import styled, { css } from 'styled-components';
 
 import Draggable from 'react-draggable';
 import { FC } from 'react';
-import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
 export const TimeIndexItem: FC<{ timeIndex: number }> = ({ timeIndex }) => {
@@ -29,6 +29,7 @@ export const CalendarEventContainer = styled.div<{
   top: number;
   height: number;
   index: number;
+  shouldHighlight: boolean;
 }>`
   color: ${({ theme }) => theme.palette.foreground.primary};
   background: ${({ theme }) => theme.palette.brand};
@@ -51,4 +52,11 @@ export const CalendarEventContainer = styled.div<{
   border: 1px solid
     ${({ theme, index }) =>
       index === 0 ? theme.palette.brand : theme.palette.foreground.primary};
+
+  ${({ theme, shouldHighlight }) =>
+    shouldHighlight
+      ? css`
+          box-shadow: 0 0 70px 18px ${theme.palette.foreground.tertiary};
+        `
+      : ''}
 `;

@@ -69,6 +69,7 @@ export const TimeSlot: FC<{
               timeSlotDate={timeSlotDate}
               calendarEventRecord={calendarEventRecord}
               index={i}
+              maxIndex={calendarEvents.length}
               key={nanoid()}
               onClick={(event: MouseEvent<Element, globalThis.MouseEvent>) => {
                 handleOpenDetailsModalClick(event, calendarEventRecord);
