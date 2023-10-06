@@ -1,3 +1,5 @@
+import './i18n';
+
 import App from './App.tsx';
 import { Provider } from 'react-redux';
 import React from 'react';

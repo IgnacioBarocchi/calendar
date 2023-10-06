@@ -6,6 +6,7 @@ import WeekViewNavigationBar from './WeekViewNavigationBar';
 import styled from 'styled-components';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 const HeaderContainer = styled.header`
   width: 100%;
@@ -27,6 +28,7 @@ const HeaderContainer = styled.header`
 `;
 
 const Header = () => {
+  const { t, i18n } = useTranslation();
   const { week, holidays } = useSelector((state: RootState) => ({
     week: state.week,
     holidays: state.holidays,
@@ -47,7 +49,9 @@ const Header = () => {
     <HeaderContainer>
       <Logo gridArea={'logo'} />
       <WeekViewNavigationBar
-        month={new Intl.DateTimeFormat('en', { month: 'long' }).format(week[6])}
+        month={new Intl.DateTimeFormat(t('locale'), { month: 'long' }).format(
+          week[6],
+        )}
         gridArea={'navigation'}
       />
       <EventCreationPanel gridArea={'create-event'} />

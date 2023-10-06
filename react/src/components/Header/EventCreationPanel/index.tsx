@@ -5,8 +5,11 @@ import { EventCreationPanelContainer } from './EventCreationPanelElements';
 import { FC } from 'react';
 import { getDefaultDateTimeValue } from '../../EventCreationModal/helper';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 const EventCreationPanel: FC<{ gridArea: string }> = ({ gridArea }) => {
+  const { t, i18n } = useTranslation();
+
   const dispatch = useDispatch();
   const handleOpenModal = () => {
     dispatch({
@@ -30,14 +33,14 @@ const EventCreationPanel: FC<{ gridArea: string }> = ({ gridArea }) => {
         onSelect={handleOpenModal}
       />
       <Button
-        label="About"
+        label={t('language.label')}
         size="m"
         onClick={() => {
-          console.log('x');
+          i18n.changeLanguage(t('language.key'));
         }}
       />
       <Button
-        label="Toggle theme"
+        label={t('tlgTheme')}
         size="m"
         onClick={() => {
           dispatch({ type: ActionTypes.TOGGLE_THEME });

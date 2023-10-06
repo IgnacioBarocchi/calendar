@@ -2,12 +2,15 @@ import { CalendarCell, Text } from '../../components/UI';
 
 import { FC } from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 export const TimeIndexItem: FC<{ timeIndex: number }> = ({ timeIndex }) => {
+  const { t } = useTranslation();
+
   const time = new Date();
   time.setHours(timeIndex, 0, 0);
 
-  const normalizedTimeIndex = time.toLocaleString('en-US', {
+  const normalizedTimeIndex = time.toLocaleString(t('locale'), {
     hour: 'numeric',
     hour12: true,
   });

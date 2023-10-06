@@ -11,9 +11,11 @@ import {
 import { ActionTypes } from '../../../store/@types';
 import { Button } from '../../UI';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 const WeekViewNavigationBar: FC<{ gridArea: string; month: string }> = memo(
   ({ gridArea, month }) => {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
 
     const handleNextWeekClick = () => {
@@ -33,7 +35,7 @@ const WeekViewNavigationBar: FC<{ gridArea: string; month: string }> = memo(
         <nav style={{ display: 'flex' }}>
           <PrevWeekButton onClick={handlePreviousWeekClick} />
           <NextWeekButton onClick={handleNextWeekClick} />
-          <Button onClick={handleTodayClick} label="today" border={true} />
+          <Button onClick={handleTodayClick} label={t('today')} border={true} />
         </nav>
         <MonthLabel size="l" weight="bold">
           {month}

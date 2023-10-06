@@ -3,6 +3,7 @@ import { FC, MouseEventHandler } from 'react';
 import styled, { css } from 'styled-components';
 
 import { nanoid } from 'nanoid';
+import { useTranslation } from 'react-i18next';
 
 export const MonthViewContainer = styled.div`
   display: grid;
@@ -65,12 +66,16 @@ export const MonthViewItem: FC<{
 };
 
 export const MonthDatesHeader: FC<{ week: Date[] }> = ({ week }) => {
+  const { t } = useTranslation();
+
   return (
     <>
       {week.map((date) => (
         <MonthViewItemContainer key={nanoid()}>
           <Text size="s" weight="bold">
-            {date.toLocaleDateString('en-US', { weekday: 'short' })}
+            {date.toLocaleDateString(t('locale'), {
+              weekday: 'short',
+            })}
           </Text>
         </MonthViewItemContainer>
       ))}

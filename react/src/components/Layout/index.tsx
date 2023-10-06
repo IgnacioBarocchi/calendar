@@ -9,7 +9,7 @@ import { getWeekEvents } from '../../services/events.service';
 
 const Layout = () => {
   const dispatch = useDispatch();
-  const { week, holidays } = useSelector((state: RootState) => ({
+  const { week } = useSelector((state: RootState) => ({
     week: state.week,
     holidays: state.holidays,
   }));
@@ -22,19 +22,15 @@ const Layout = () => {
 
     setIsSmallDevice(isSmall);
     (async () => {
-      if (!week?.length) {
-        dispatch({
-          type: ActionTypes.SET_WEEK_EVENTS,
-          payload: await getWeekEvents(week),
-        });
-      }
+      dispatch({
+        type: ActionTypes.SET_WEEK_EVENTS,
+        payload: await getWeekEvents(week),
+      });
 
-      if (!holidays) {
-        dispatch({
-          type: ActionTypes.SET_HOLIDAYS,
-          payload: await getLocalHolidays(week),
-        });
-      }
+      dispatch({
+        type: ActionTypes.SET_HOLIDAYS,
+        payload: await getLocalHolidays(week),
+      });
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

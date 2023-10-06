@@ -8,6 +8,7 @@ import { FC, memo } from 'react';
 import { Holiday } from '../../../store/@types';
 import { Week } from '../../../lib/weekHelper';
 import { nanoid } from 'nanoid';
+import { useTranslation } from 'react-i18next';
 
 const areEqual = (
   prevProps: CalendarHeaderRowProps,
@@ -20,9 +21,9 @@ const areEqual = (
     nextProps.weekWithHolidays[0]?.date.toDateString()
   );
 };
-
 const CalendarHeaderRow: FC<CalendarHeaderRowProps> = memo(
   ({ gridArea, weekWithHolidays }) => {
+    const { t, i18n } = useTranslation();
     if (!weekWithHolidays) return null;
 
     return (
@@ -36,8 +37,14 @@ const CalendarHeaderRow: FC<CalendarHeaderRowProps> = memo(
               key={nanoid()}
               today={new Date().toDateString() === date.toDateString()}
               dateNumber={date.getDate()}
-              weekDay={date.toLocaleDateString('en-US', { weekday: 'short' })}
-              folderEventText={holiday?.name}
+              weekDay={date.toLocaleDateString(t('locale'), {
+                weekday: 'short',
+              })}
+              folderEventText={
+                holiday
+                  ? holiday[i18n.language === 'en' ? 'name' : 'localName']
+                  : undefined
+              }
             ></DayOfWeekItem>
           );
         })}
@@ -50,9 +57,10 @@ const CalendarHeaderRow: FC<CalendarHeaderRowProps> = memo(
 export default CalendarHeaderRow;
 
 interface CalendarHeaderRowProps {
+  locale: string;
   gridArea: string;
   week: Week;
-  weekWithHolidays: {
+  weekWithHolidays?: {
     date: Date;
     holiday?: Holiday;
   }[];

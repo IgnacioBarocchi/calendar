@@ -18,9 +18,7 @@ const getPublicHolidays = async (
   year: number,
 ): Promise<Holiday[] | undefined> => {
   try {
-    const response = await fetch(
-      getPublicHolidaysURL<Holiday[] | undefined>(year, 'LT'),
-    );
+    const response = await fetch(getPublicHolidaysURL(year, 'LT'));
 
     if (response.ok) return await response.json();
   } catch (error) {
