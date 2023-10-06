@@ -35,16 +35,17 @@ export const DateNumberContainer = styled(Text)<{
 }
 `;
 
-export const FoldedEventContainer = styled(Marquee)`
+export const FoldedEventContainer = styled(Marquee)<{ shouldRender: boolean }>`
   padding: 4px;
   border-radius: 4px;
   width: 90%;
+  visibility: ${({ shouldRender }) => (shouldRender ? 'auto' : 'hidden')};
+  background: ${({ theme }) => theme.palette.brandVariant};
 `;
 
-export const FoldedEventText = styled.span<{ shouldRender: boolean }>`
-  background: ${({ theme }) => theme.palette.background.primary};
-  visibility: ${({ shouldRender }) => (shouldRender ? 'auto' : 'hidden')};
+export const FoldedEventText = styled.span`
   width: 100%;
+  color: ${({ theme }) => theme.palette.background.primary};
 `;
 
 export const DayOfWeekItem: FC<{
@@ -63,13 +64,8 @@ export const DayOfWeekItem: FC<{
           <Text size="m">{dateNumber}</Text>
         </DateNumberContainer>
 
-        {/* //todo: remove redundant logic */}
-        <FoldedEventContainer>
-          {folderEventText && (
-            <FoldedEventText shouldRender={!!folderEventText}>
-              {folderEventText}
-            </FoldedEventText>
-          )}
+        <FoldedEventContainer shouldRender={!!folderEventText}>
+          <FoldedEventText>{folderEventText}</FoldedEventText>
         </FoldedEventContainer>
       </WeekDayDetailsContainer>
     </CalendarCell>

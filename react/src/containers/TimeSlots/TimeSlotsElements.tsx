@@ -35,7 +35,6 @@ export const CalendarEventContainer = styled.div<{
   text-align: left;
   padding: 4px;
   border-radius: 4px;
-  top: 0;
   z-index: 2;
   word-wrap: break-word;
   overflow: hidden;

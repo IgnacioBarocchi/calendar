@@ -1,4 +1,7 @@
-const getResponseFrom = async (url: string, options: RequestInit) => {
+const getParsedResponseFrom = async <T>(
+  url: string,
+  options: RequestInit,
+): Promise<T> => {
   try {
     const response = await fetch(url, options);
 
@@ -11,4 +14,4 @@ const getResponseFrom = async (url: string, options: RequestInit) => {
   }
 };
 
-export default getResponseFrom;
+export default getParsedResponseFrom;

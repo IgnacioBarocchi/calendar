@@ -4,11 +4,15 @@ import { useEffect, useState } from 'react';
 
 import DesktopLayout from './DesktopLayout';
 import SmallDeviceLayout from './SmallDeviceLayout';
+import { getLocalHolidays } from '../../services/holidays.service';
 import { getWeekEvents } from '../../services/events.service';
 
 const Layout = () => {
   const dispatch = useDispatch();
-  const week = useSelector((state: RootState) => state.week);
+  const { week, holidays } = useSelector((state: RootState) => ({
+    week: state.week,
+    holidays: state.holidays,
+  }));
 
   const [isSmallDevice, setIsSmallDevice] = useState(false);
 
@@ -17,12 +21,20 @@ const Layout = () => {
     const isSmall = screenWidth < 768;
 
     setIsSmallDevice(isSmall);
-
     (async () => {
-      dispatch({
-        type: ActionTypes.SET_WEEK_EVENTS,
-        payload: await getWeekEvents(week),
-      });
+      if (!week?.length) {
+        dispatch({
+          type: ActionTypes.SET_WEEK_EVENTS,
+          payload: await getWeekEvents(week),
+        });
+      }
+
+      if (!holidays) {
+        dispatch({
+          type: ActionTypes.SET_HOLIDAYS,
+          payload: await getLocalHolidays(week),
+        });
+      }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

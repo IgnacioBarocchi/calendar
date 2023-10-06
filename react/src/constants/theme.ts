@@ -28,6 +28,8 @@ const theme = {
         secondary: '#333333',
       },
       brand: '#496DDB',
+      // brandVariant: '#E899DC',
+      brandVariant: '#679436',
     },
     ...desktopGeneric,
   },

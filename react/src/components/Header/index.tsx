@@ -4,6 +4,7 @@ import Logo from './Logo';
 import { RootState } from '../../store/@types';
 import WeekViewNavigationBar from './WeekViewNavigationBar';
 import styled from 'styled-components';
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 const HeaderContainer = styled.header`
@@ -26,7 +27,21 @@ const HeaderContainer = styled.header`
 `;
 
 const Header = () => {
-  const week = useSelector((state: RootState) => state.week);
+  const { week, holidays } = useSelector((state: RootState) => ({
+    week: state.week,
+    holidays: state.holidays,
+  }));
+
+  const weekWithHolidays = useMemo(() => {
+    if (!week?.length || !holidays?.length) return;
+
+    return week.map((date) => ({
+      date,
+      holiday: holidays.find((h) => {
+        return h.date === date.toISOString().substring(0, 10);
+      }),
+    }));
+  }, [week, holidays]);
 
   return (
     <HeaderContainer>
@@ -36,7 +51,11 @@ const Header = () => {
         gridArea={'navigation'}
       />
       <EventCreationPanel gridArea={'create-event'} />
-      <CalendarHeaderRow week={week} gridArea={'calendar-header'} />
+      <CalendarHeaderRow
+        week={week}
+        gridArea={'calendar-header'}
+        weekWithHolidays={weekWithHolidays}
+      />
     </HeaderContainer>
   );
 };

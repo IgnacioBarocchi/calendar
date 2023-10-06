@@ -17,6 +17,7 @@ interface EventDetailsModalState extends ModalAgnosticState {
 export interface RootState {
   week: [Date, Date, Date, Date, Date, Date, Date];
   weekEvents: CalendarEvent[];
+  holidays: Holiday[];
   selectedTheme: keyof typeof theme;
   eventCerationModalState: EventCerationModalState;
   eventDetailsModalState: EventDetailsModalState;
@@ -33,6 +34,7 @@ export const ActionTypes = {
   SET_WEEK_EVENTS: 'SET_WEEK_EVENTS',
   DELETE_EVENT: 'DELETE_EVENT',
   TOGGLE_THEME: 'TOGGLE_THEME',
+  SET_HOLIDAYS: 'SET_HOLIDAYS',
 } as const;
 
 export interface DraftEvent {
@@ -50,4 +52,15 @@ export interface CalendarEvent extends DraftEvent {
 export interface Action {
   payload?: { calendarEvent?: CalendarEvent; date?: Date; isOpen?: boolean };
   type: string;
+}
+export interface Holiday {
+  date: string;
+  localName: string;
+  name: string;
+  countryCode: string;
+  fixed: boolean | null;
+  global: boolean | null;
+  counties: boolean | null;
+  launchYear: boolean | null;
+  types: ['Public' | 'Private'];
 }

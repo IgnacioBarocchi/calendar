@@ -20,7 +20,218 @@
       "end": "2023-10-04T00:30:00.000Z",
       "type": "upcoming",
       "id": "hGQqJFq_9XGYHJIPAL3UK"
+    },
+    {
+      "title": "x",
+      "start": "2023-10-02T22:00:00.000Z",
+      "end": "2023-10-02T22:30:00.000Z",
+      "type": "upcoming",
+      "id": "-t8AXnGWjt60HJ4_smual"
+    },
+    {
+      "title": "xsad",
+      "start": "2023-10-02T22:15:00.000Z",
+      "end": "2023-10-03T00:30:00.000Z",
+      "type": "upcoming",
+      "id": "GkhQ9gDNFsTlKE6FP3BME"
     }
   ],
-  "holidays": []
+  "holidays": [
+    {
+      "date": "2023-07-06",
+      "localName": "Valstybės diena",
+      "name": "Statehood Day",
+      "countryCode": "LT",
+      "fixed": true,
+      "global": true,
+      "counties": null,
+      "launchYear": null,
+      "types": [
+        "Public"
+      ],
+      "id": 1
+    },
+    {
+      "date": "2023-01-01",
+      "localName": "Naujieji metai",
+      "name": "New Year's Day",
+      "countryCode": "LT",
+      "fixed": true,
+      "global": true,
+      "counties": null,
+      "launchYear": null,
+      "types": [
+        "Public"
+      ],
+      "id": 2
+    },
+    {
+      "date": "2023-04-10",
+      "localName": "Antroji Velykų diena",
+      "name": "Easter Monday",
+      "countryCode": "LT",
+      "fixed": false,
+      "global": true,
+      "counties": null,
+      "launchYear": null,
+      "types": [
+        "Public"
+      ],
+      "id": 3
+    },
+    {
+      "date": "2023-05-01",
+      "localName": "Tarptautinė darbo diena",
+      "name": "International Working Day",
+      "countryCode": "LT",
+      "fixed": true,
+      "global": true,
+      "counties": null,
+      "launchYear": null,
+      "types": [
+        "Public"
+      ],
+      "id": 4
+    },
+    {
+      "date": "2023-06-24",
+      "localName": "Joninės, Rasos",
+      "name": "St. John's Day",
+      "countryCode": "LT",
+      "fixed": true,
+      "global": true,
+      "counties": null,
+      "launchYear": null,
+      "types": [
+        "Public"
+      ],
+      "id": 5
+    },
+    {
+      "date": "2023-08-15",
+      "localName": "Žolinė",
+      "name": "Assumption Day",
+      "countryCode": "LT",
+      "fixed": true,
+      "global": true,
+      "counties": null,
+      "launchYear": null,
+      "types": [
+        "Public"
+      ],
+      "id": 6
+    },
+    {
+      "date": "2023-11-01",
+      "localName": "Visų šventųjų diena",
+      "name": "All Saints' Day",
+      "countryCode": "LT",
+      "fixed": true,
+      "global": true,
+      "counties": null,
+      "launchYear": null,
+      "types": [
+        "Public"
+      ],
+      "id": 7
+    },
+    {
+      "date": "2023-02-16",
+      "localName": "Lietuvos valstybės atkūrimo diena",
+      "name": "The Day of Restoration of the State of Lithuania",
+      "countryCode": "LT",
+      "fixed": true,
+      "global": true,
+      "counties": null,
+      "launchYear": null,
+      "types": [
+        "Public"
+      ],
+      "id": 8
+    },
+    {
+      "date": "2023-11-02",
+      "localName": "Vėlinės",
+      "name": "All Souls' Day",
+      "countryCode": "LT",
+      "fixed": true,
+      "global": true,
+      "counties": null,
+      "launchYear": 2020,
+      "types": [
+        "Public"
+      ],
+      "id": 9
+    },
+    {
+      "date": "2023-12-24",
+      "localName": "Šv. Kūčios",
+      "name": "Christmas Eve",
+      "countryCode": "LT",
+      "fixed": true,
+      "global": true,
+      "counties": null,
+      "launchYear": null,
+      "types": [
+        "Public"
+      ],
+      "id": 10
+    },
+    {
+      "date": "2023-12-25",
+      "localName": "Šv. Kalėdos",
+      "name": "Christmas Day",
+      "countryCode": "LT",
+      "fixed": true,
+      "global": true,
+      "counties": null,
+      "launchYear": null,
+      "types": [
+        "Public"
+      ],
+      "id": 11
+    },
+    {
+      "date": "2023-12-26",
+      "localName": "Šv. Kalėdos",
+      "name": "St. Stephen's Day",
+      "countryCode": "LT",
+      "fixed": true,
+      "global": true,
+      "counties": null,
+      "launchYear": null,
+      "types": [
+        "Public"
+      ],
+      "id": 12
+    },
+    {
+      "date": "2023-01-01",
+      "localName": "Naujieji metai",
+      "name": "New Year's Day",
+      "countryCode": "LT",
+      "fixed": true,
+      "global": true,
+      "counties": null,
+      "launchYear": null,
+      "types": [
+        "Public"
+      ],
+      "id": 13
+    },
+    {
+      "date": "2023-03-11",
+      "localName": "Lietuvos nepriklausomybės atkūrimo diena",
+      "name": "Day of Restoration of Independence of Lithuania",
+      "countryCode": "LT",
+      "fixed": true,
+      "global": true,
+      "counties": null,
+      "launchYear": null,
+      "types": [
+        "Public"
+      ],
+      "id": 14
+    }
+  ]
 }

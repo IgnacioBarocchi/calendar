@@ -1,7 +1,7 @@
 import { CalendarEvent } from '../store/@types';
 import { EVENTS_BASE_URL } from '../constants/endpoints';
 import { Week } from '../lib/weekHelper';
-import getResponseFrom from '../lib/getResponseFrom';
+import getParsedResponseFrom from '../lib/getResponseFrom';
 import { nanoid } from 'nanoid';
 
 export const getWeekEvents = async (week: Week): Promise<CalendarEvent[]> => {
@@ -16,7 +16,7 @@ export const getWeekEvents = async (week: Week): Promise<CalendarEvent[]> => {
   const queryString = `?start_gte=${referenceSundayValue}&start_lte=${referenceSaturdayValue}`;
   const url = new URL(queryString, EVENTS_BASE_URL);
 
-  return getResponseFrom(url.toString(), {});
+  return getParsedResponseFrom<CalendarEvent[]>(url.toString(), {});
 };
 
 export const postEvent = async (
@@ -35,7 +35,7 @@ export const postEvent = async (
     }),
   };
 
-  return getResponseFrom(EVENTS_BASE_URL, options);
+  return getParsedResponseFrom<CalendarEvent>(EVENTS_BASE_URL, options);
 };
 
 export const deleteEventById = async (eventId: string): Promise<null> => {
@@ -43,5 +43,5 @@ export const deleteEventById = async (eventId: string): Promise<null> => {
     method: 'DELETE',
   };
 
-  return getResponseFrom(`${EVENTS_BASE_URL}/${eventId}`, options);
+  return getParsedResponseFrom<null>(`${EVENTS_BASE_URL}/${eventId}`, options);
 };
