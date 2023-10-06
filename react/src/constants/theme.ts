@@ -29,7 +29,7 @@ const theme = {
       },
       brand: '#496DDB',
       // brandVariant: '#E899DC',
-      brandVariant: '#679436',
+      brandVariant: '#E899DC',
     },
     ...desktopGeneric,
   },
@@ -51,8 +51,3 @@ const theme = {
 };
 
 export default theme;
-//'#52525b',
-// theme.fontSize}px
-// theme.lineHeight}px
-// theme.palettepalette.background}
-// theme.palettepalette.foreground}

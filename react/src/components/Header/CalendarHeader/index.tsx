@@ -23,7 +23,7 @@ const areEqual = (
 
 const CalendarHeaderRow: FC<CalendarHeaderRowProps> = memo(
   ({ gridArea, weekWithHolidays }) => {
-    console.log('weekWithHolidays', weekWithHolidays);
+    if (!weekWithHolidays) return null;
 
     return (
       <CalendarHeaderRowGrid gridArea={gridArea}>
