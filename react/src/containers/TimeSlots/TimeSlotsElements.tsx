@@ -1,5 +1,6 @@
 import { CalendarCell, Text } from '../../components/UI';
 
+import Draggable from 'react-draggable';
 import { FC } from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
@@ -22,19 +23,15 @@ export const TimeIndexItem: FC<{ timeIndex: number }> = ({ timeIndex }) => {
   );
 };
 
+export const DragabbleWrapper = styled(Draggable)``;
+
 export const CalendarEventContainer = styled.div<{
   top: number;
   height: number;
   index: number;
 }>`
-  color: ${({ theme, index }) =>
-    Number.isInteger(index / 2)
-      ? theme.palette.foreground.primary
-      : theme.palette.brand};
-  background: ${({ theme, index }) =>
-    Number.isInteger(index / 2)
-      ? theme.palette.brand
-      : theme.palette.foreground.primary};
+  color: ${({ theme }) => theme.palette.foreground.primary};
+  background: ${({ theme }) => theme.palette.brand};
   text-align: left;
   padding: 4px;
   border-radius: 4px;
@@ -51,5 +48,7 @@ export const CalendarEventContainer = styled.div<{
   left: ${({ index }) => index * 10}%;
   height: ${({ height }) => height}%;
   z-index: ${({ index }) => index};
-  border: 1px solid ${({ theme }) => theme.palette.brand};
+  border: 1px solid
+    ${({ theme, index }) =>
+      index === 0 ? theme.palette.brand : theme.palette.foreground.primary};
 `;

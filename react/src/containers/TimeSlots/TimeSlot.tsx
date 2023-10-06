@@ -13,14 +13,19 @@ export const TimeSlot: FC<{
 }> = ({ timeSlotDate, calendarEvents }) => {
   const dispatch = useDispatch();
   const [timeSlotPixelsHeight, setTimeSlotPixelsHeight] = useState(0);
+  const [timeSlotPixelsWidth, setTimeSlotPixelsWidth] = useState(0);
+
   const elementRef = useRef<typeof CalendarCell & HTMLDivElement>(null);
 
   const handleResize = () => {
     if (!elementRef?.current) return;
     setTimeSlotPixelsHeight(elementRef.current.offsetHeight);
+    setTimeSlotPixelsWidth(elementRef.current.offsetWidth);
   };
 
   useEffect(() => {
+    handleResize();
+
     window.addEventListener('resize', handleResize);
 
     return () => {
@@ -60,6 +65,7 @@ export const TimeSlot: FC<{
           return (
             <CalendarEventView
               parentHeight={timeSlotPixelsHeight}
+              parentWidth={timeSlotPixelsWidth}
               timeSlotDate={timeSlotDate}
               calendarEventRecord={calendarEventRecord}
               index={i}
