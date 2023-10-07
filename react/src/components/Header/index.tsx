@@ -28,7 +28,7 @@ const HeaderContainer = styled.header`
 `;
 
 const Header = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { week, holidays } = useSelector((state: RootState) => ({
     week: state.week,
     holidays: state.holidays,

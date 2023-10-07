@@ -1,27 +1,35 @@
 import { CalendarCell, Text } from '../../components/UI';
+import { FC, memo, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 
 import Draggable from 'react-draggable';
-import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-export const TimeIndexItem: FC<{ timeIndex: number }> = ({ timeIndex }) => {
-  const { t } = useTranslation();
+export const TimeIndexItem: FC<{ timeIndex: number }> = memo(
+  ({ timeIndex }) => {
+    const { t, i18n } = useTranslation();
 
-  const time = new Date();
-  time.setHours(timeIndex, 0, 0);
+    const label = useMemo(() => {
+      const time = new Date();
+      time.setHours(timeIndex, 0, 0);
 
-  const normalizedTimeIndex = time.toLocaleString(t('locale'), {
-    hour: 'numeric',
-    hour12: true,
-  });
+      const normalizedTimeIndex = time.toLocaleString(t('locale'), {
+        hour: 'numeric',
+        hour12: true,
+      });
+      return normalizedTimeIndex;
+    }, [i18n.language, timeIndex]);
 
-  return (
-    <CalendarCell location={'header-column'}>
-      <Text size="m">{normalizedTimeIndex}</Text>
-    </CalendarCell>
-  );
-};
+    return (
+      <CalendarCell location={'header-column'}>
+        <Text size="m">{label}</Text>
+      </CalendarCell>
+    );
+  },
+  (prevProps, nextProps) => {
+    return prevProps.timeIndex === nextProps.timeIndex;
+  },
+);
 
 export const DragabbleWrapper = styled(Draggable)``;
 

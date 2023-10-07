@@ -29,7 +29,9 @@ const TimeSlots = () => {
     return newEventsMap;
   }, [weekEvents]);
 
-  return [...Array(24).keys()].map((timeIndex) => (
+  const hours = [...Array(24).keys()];
+
+  return hours.map((timeIndex) => (
     <React.Fragment key={nanoid()}>
       <TimeIndexItem timeIndex={timeIndex} />
       {week.map((date) => {

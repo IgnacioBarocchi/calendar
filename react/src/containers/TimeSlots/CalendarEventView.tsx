@@ -1,8 +1,9 @@
 import { CalendarEventContainer, DragabbleWrapper } from './TimeSlotsElements';
-import { FC, MouseEvent, useMemo, useState } from 'react';
+import { FC, MouseEvent, useEffect, useMemo, useRef, useState } from 'react';
 
-import { CAN_DRAG_EVENT } from '../../constants/experimentalFeatures';
 import { CalendarEvent } from '../../store/@types';
+import { Text } from '../../components/UI';
+import { debounce } from 'lodash';
 import { getEventCSSValues } from './helper';
 
 const CalendarEventView: FC<{
@@ -24,6 +25,18 @@ const CalendarEventView: FC<{
 }) => {
   const [shouldHighlight, setShouldHighlight] = useState(false);
 
+  const debouncedHover = useRef(
+    debounce(async (value) => {
+      setShouldHighlight(value);
+    }, 300),
+  ).current;
+
+  useEffect(() => {
+    return () => {
+      debouncedHover.cancel();
+    };
+  }, [debouncedHover]);
+
   const [eventHeightPercentage, eventTopPosition] = useMemo(() => {
     return getEventCSSValues(
       calendarEventRecord.start,
@@ -38,42 +51,29 @@ const CalendarEventView: FC<{
     timeSlotDate,
   ]);
 
-  // if (CAN_DRAG_EVENT)
   return (
-    <DragabbleWrapper
-      grid={[parentWidth, parentHeight]}
-      onStop={() => {
-        alert('update record');
-      }}
-    >
+    <DragabbleWrapper grid={[parentWidth, parentHeight / 4]}>
       <CalendarEventContainer
+        shouldHighlight={shouldHighlight && maxIndex > 1}
         top={eventTopPosition}
+        index={shouldHighlight ? maxIndex : index}
         height={Math.max(20, eventHeightPercentage)}
-        index={index}
+        onMouseOver={() => {
+          if (maxIndex > 1) {
+            debouncedHover(true);
+          }
+        }}
+        onMouseOut={() => {
+          if (maxIndex > 1) {
+            debouncedHover(false);
+          }
+        }}
         onClick={onClick}
       >
-        {calendarEventRecord.title}
+        <Text size="m">{calendarEventRecord.title}</Text>
       </CalendarEventContainer>
     </DragabbleWrapper>
   );
-  //   );
-
-  // return (
-  //   <CalendarEventContainer
-  //     top={eventTopPosition}
-  //     height={Math.max(20, eventHeightPercentage)}
-  //     index={shouldHighlight ? maxIndex : index}
-  //     onClick={onClick}
-  //     onMouseOver={() => {
-  //       setShouldHighlight(true);
-  //     }}
-  //     onMouseOut={() => {
-  //       setShouldHighlight(false);
-  //     }}
-  //   >
-  //     {calendarEventRecord.title}
-  //   </CalendarEventContainer>
-  // );
 };
 
 export default CalendarEventView;

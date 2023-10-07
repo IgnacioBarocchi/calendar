@@ -18,7 +18,6 @@ export const WeekDayDetailsContainer = styled.div`
   justify-content: space-around;
   align-content: center;
   align-items: center;
-}
 `;
 
 export const DateNumberContainer = styled(Text)<{
@@ -41,6 +40,7 @@ export const FoldedEventContainer = styled(Marquee)<{ shouldRender: boolean }>`
   width: 90%;
   visibility: ${({ shouldRender }) => (shouldRender ? 'auto' : 'hidden')};
   background: ${({ theme }) => theme.palette.brandVariant};
+  min-height: 1rem;
 `;
 
 export const FoldedEventText = styled.span`
@@ -57,11 +57,13 @@ export const DayOfWeekItem: FC<{
   return (
     <CalendarCell location={'header-row'}>
       <WeekDayDetailsContainer>
-        <Text size="m" weight="bold">
+        <Text fade={true} size="m" weight="bold">
           {weekDay}
         </Text>
         <DateNumberContainer today={today}>
-          <Text size="m">{dateNumber}</Text>
+          <Text fade={true} size="m">
+            {dateNumber}
+          </Text>
         </DateNumberContainer>
 
         <FoldedEventContainer shouldRender={!!folderEventText}>

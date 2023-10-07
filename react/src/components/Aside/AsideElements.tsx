@@ -1,4 +1,5 @@
-import { Button } from '../UI';
+import { Button, Link } from '../UI';
+
 import { FaExternalLinkAlt } from 'react-icons/fa';
 import styled from 'styled-components';
 
@@ -22,20 +23,19 @@ const AsideFooterContainer = styled.footer`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-}
 `;
 
 export const AsideFooter = () => (
   <AsideFooterContainer>
-    <Button
+    <Link
       size="m"
-      linkTo="https://ignaciob30.editorx.io/clndr"
+      to="https://ignaciob30.editorx.io/clndr"
       Icon={FaExternalLinkAlt}
       label={'Wix'}
     />
-    <Button
+    <Link
       size="m"
-      linkTo="https://github.com/ignaciobwix/calendar"
+      to="https://github.com/ignaciobwix/calendar"
       Icon={FaExternalLinkAlt}
       label={'Github'}
     />

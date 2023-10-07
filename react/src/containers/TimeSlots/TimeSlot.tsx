@@ -1,11 +1,20 @@
 import { ActionTypes, CalendarEvent } from '../../store/@types';
-import { FC, MouseEvent, useEffect, useRef, useState } from 'react';
+import { CalendarCell, Text } from '../../components/UI';
+import {
+  FC,
+  MouseEvent,
+  Suspense,
+  lazy,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
-import { CalendarCell } from '../../components/UI';
-import CalendarEventView from './CalendarEventView';
 import { getActionFrom } from './helper';
 import { nanoid } from 'nanoid';
 import { useDispatch } from 'react-redux';
+
+const CalendarEventView = lazy(() => import('./CalendarEventView'));
 
 export const TimeSlot: FC<{
   timeSlotDate: Date;
@@ -63,20 +72,70 @@ export const TimeSlot: FC<{
       {calendarEvents?.length &&
         calendarEvents.map((calendarEventRecord, i) => {
           return (
-            <CalendarEventView
-              parentHeight={timeSlotPixelsHeight}
-              parentWidth={timeSlotPixelsWidth}
-              timeSlotDate={timeSlotDate}
-              calendarEventRecord={calendarEventRecord}
-              index={i}
-              maxIndex={calendarEvents.length}
+            <Suspense
+              fallback={<Text size="m">[{calendarEventRecord.title}]</Text>}
               key={nanoid()}
-              onClick={(event: MouseEvent<Element, globalThis.MouseEvent>) => {
-                handleOpenDetailsModalClick(event, calendarEventRecord);
-              }}
-            />
+            >
+              <CalendarEventView
+                parentHeight={timeSlotPixelsHeight}
+                parentWidth={timeSlotPixelsWidth}
+                timeSlotDate={timeSlotDate}
+                calendarEventRecord={calendarEventRecord}
+                index={i}
+                maxIndex={calendarEvents.length}
+                onClick={(
+                  event: MouseEvent<Element, globalThis.MouseEvent>,
+                ) => {
+                  handleOpenDetailsModalClick(event, calendarEventRecord);
+                }}
+              />
+            </Suspense>
           );
         })}
     </CalendarCell>
   );
 };
+
+// import { ActionTypes, CalendarEvent } from '../../store/@types';
+// import { FC, MouseEvent, useEffect, useRef, useState } from 'react';
+
+// import { CalendarCell } from '../../components/UI';
+// import { getActionFrom } from './helper';
+// import { nanoid } from 'nanoid';
+// import { useDispatch } from 'react-redux';
+
+// const CalendarEventView = React.lazy(() => import('./CalendarEventView'));
+
+// export const TimeSlot: FC<{
+//   timeSlotDate: Date;
+//   calendarEvents?: CalendarEvent[];
+// }> = ({ timeSlotDate, calendarEvents }) => {
+//   // ... (rest of your component code)
+
+//   return (
+//     <CalendarCell
+//       location={'body'}
+//       onClick={handleOpenModalClick}
+//       ref={elementRef}
+//     >
+//       {calendarEvents?.length &&
+//         calendarEvents.map((calendarEventRecord, i) => {
+//           return (
+//             <React.Suspense fallback={<div>Loading...</div>} key={nanoid()}>
+//               <CalendarEventView
+//                 parentHeight={timeSlotPixelsHeight}
+//                 parentWidth={timeSlotPixelsWidth}
+//                 timeSlotDate={timeSlotDate}
+//                 calendarEventRecord={calendarEventRecord}
+//                 index={i}
+//                 maxIndex={calendarEvents.length}
+//                 onClick={(event: MouseEvent<Element, globalThis.MouseEvent>) => {
+//                   handleOpenDetailsModalClick(event, calendarEventRecord);
+//                 }}
+//               />
+//             </React.Suspense>
+//           );
+//         })}
+//     </CalendarCell>
+//   );
+// };

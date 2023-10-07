@@ -1,51 +1,89 @@
-import { ButtonProps, TextProps } from './@types';
+import {
+  ButtonProps,
+  LinkProps,
+  PressableContentProps,
+  TextProps,
+} from './@types';
 import { DropdownList, DropdownWrapper, Pressable } from './DumbComponents';
 import { FC, MouseEvent, useState } from 'react';
 import { FaAngleDown, FaWindowClose } from 'react-icons/fa';
+import styled, { css, keyframes } from 'styled-components';
 
 import { ModalId } from '../Modal';
+import { desktopGeneric } from '../../constants/theme';
 import { nanoid } from 'nanoid';
 import pressableInterceptor from '../../lib/pressable';
-import styled from 'styled-components';
-import theme from '../../constants/theme';
 
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
 export const Text = styled.span<TextProps>`
   color: ${({ theme, brand }) =>
     theme.palette.foreground[brand ? 'brand' : 'primary']};
   font-size: ${({ theme, size }) => theme.size.text[size ?? 'l']};
   font-weight: ${({ weight }) => weight ?? 'regular'};
+  ${({ fade }) =>
+    fade
+      ? css`
+          animation: ${fadeIn} 500ms ease-in;
+        `
+      : ''}
 `;
 
+const PressableContent: FC<PressableContentProps> = ({ label, Icon, size }) => {
+  if (!Icon) return <Text size={size}> {label + ''}</Text>;
+
+  const selected: 'l' | 'm' | 's' = size ?? 'l';
+  const sizeValue = desktopGeneric.size.text[selected];
+
+  if (Icon && label) {
+    return (
+      <>
+        <Text size={size}> {label + ''}</Text>
+        <Icon style={{ marginLeft: '8px' }} size={sizeValue} />
+      </>
+    );
+  }
+
+  if (Icon) return <Icon size={sizeValue} />;
+
+  return <Text size={size}> {label + ''}</Text>;
+};
+
 export const Button: FC<ButtonProps> = (props) => {
-  const { onClick, linkTo, label, Icon, border, size, reversed } = props;
+  const { onClick, label, Icon, border, size, reversed } = props;
 
   return (
     <Pressable
-      as={linkTo ? 'a' : 'button'}
+      as="button"
       type="button"
       reversed={reversed || false}
       onClick={(event: MouseEvent) => {
-        if (linkTo) return;
-        event.preventDefault();
-        event.stopPropagation();
-        pressableInterceptor(event, onClick ? onClick : () => {});
+        pressableInterceptor(event, onClick);
       }}
       border={border || false}
-      href={linkTo ?? ''}
     >
-      {Icon && label ? (
-        <>
-          <Text size={size}> {label + ''}</Text>
-          <Icon
-            style={{ marginLeft: '8px' }}
-            size={theme.dark.size.text[size ?? 'l']}
-          />
-        </>
-      ) : Icon ? (
-        <Icon size={theme.dark.size.text[size ?? 'l']} />
-      ) : (
-        <Text size={size}> {label + ''}</Text>
-      )}
+      <PressableContent label={label} Icon={Icon} size={size} />
+    </Pressable>
+  );
+};
+
+export const Link: FC<LinkProps> = (props) => {
+  const { to, label, Icon, border, size, reversed } = props;
+
+  return (
+    <Pressable
+      as="a"
+      reversed={reversed || false}
+      border={border || false}
+      href={to}
+    >
+      <PressableContent label={label} Icon={Icon} size={size} />
     </Pressable>
   );
 };

@@ -15,12 +15,14 @@ const areEqual = (
   nextProps: CalendarHeaderRowProps,
 ) => {
   if (!prevProps.weekWithHolidays) return false;
+  if (!nextProps.weekWithHolidays) return false;
 
   return (
-    prevProps.weekWithHolidays[0]?.date.toDateString() ===
-    nextProps.weekWithHolidays[0]?.date.toDateString()
+    prevProps.weekWithHolidays[0].date.toDateString() ===
+    nextProps.weekWithHolidays[0].date.toDateString()!
   );
 };
+
 const CalendarHeaderRow: FC<CalendarHeaderRowProps> = memo(
   ({ gridArea, weekWithHolidays }) => {
     const { t, i18n } = useTranslation();
@@ -57,7 +59,6 @@ const CalendarHeaderRow: FC<CalendarHeaderRowProps> = memo(
 export default CalendarHeaderRow;
 
 interface CalendarHeaderRowProps {
-  locale: string;
   gridArea: string;
   week: Week;
   weekWithHolidays?: {
