@@ -41,7 +41,7 @@ const secondsPassedFrom = (date: Date) => {
 export const getClockHandData = (week: Week): ClockHandData | null => {
   const today = new Date();
   const indexOfTodayInWeek = indexOfDateInWeek(today, week);
-  if (!indexOfTodayInWeek) null;
+  if (indexOfTodayInWeek === -1) return null;
 
   const timeSlotPixelsWidth = getTimeSlotPixelsWidth();
   const leftPad = timeSlotPixelsWidth * indexOfTodayInWeek;

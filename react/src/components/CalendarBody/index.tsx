@@ -2,9 +2,12 @@ import { CalendarBodyContainer } from './CalendarBodyELements';
 import { FC } from 'react';
 import TimeSlots from '../../containers/TimeSlots';
 
-const CalendarBody: FC<{ gridArea: string }> = ({ gridArea }) => {
+const CalendarBody: FC<{ gridArea: string; asideIsHidden: boolean }> = ({
+  gridArea,
+  asideIsHidden,
+}) => {
   return (
-    <CalendarBodyContainer gridArea={gridArea}>
+    <CalendarBodyContainer asideIsHidden={asideIsHidden} gridArea={gridArea}>
       <TimeSlots />
     </CalendarBodyContainer>
   );

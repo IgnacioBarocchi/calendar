@@ -18,12 +18,14 @@ export interface RootState {
   week: [Date, Date, Date, Date, Date, Date, Date];
   weekEvents: CalendarEvent[];
   holidays: Holiday[];
+  asideIsHidden: boolean;
   selectedTheme: keyof typeof theme;
   eventCerationModalState: EventCerationModalState;
   eventDetailsModalState: EventDetailsModalState;
 }
 
 export const ActionTypes = {
+  UPDATE_ASIDE_STATE: 'UPDATE_ASIDE_STATE',
   GET_NEXT_WEEK: 'GET_NEXT_WEEK',
   GET_PREVIOUS_WEEK: 'GET_PREVIOUS_WEEK',
   GET_ONGOING_WEEK: 'GET_ONGOING_WEEK',

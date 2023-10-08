@@ -8,6 +8,7 @@ export const AsideContainer = styled.aside<{ gridArea: string }>`
   background: ${({ theme }) => theme.palette.background.primary};
   grid-area: ${({ gridArea }) => gridArea};
   padding: ${({ theme }) => theme.padding.aside};
+  border-right: 1px solid ${({ theme }) => theme.palette.background.secondary};
 `;
 
 export const AsideContentWrapper = styled.div`

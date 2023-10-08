@@ -1,7 +1,12 @@
+import { Button, Link } from '../../UI';
+
+import { ActionTypes } from '../../../store/@types';
 import { FC } from 'react';
 import { Fonts } from '../../../constants/theme';
-import { Link } from '../../UI';
+import { GiHamburgerMenu } from 'react-icons/gi';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+
 //styled(Button).attrs(({ className }) => ({}))`
 // border-bottom: 1px solid ${({ theme }) => theme.palette.foreground.tertiary};
 
@@ -13,8 +18,13 @@ const LogoContainer = styled.div<{ gridArea: string }>`
 `;
 
 const Logo: FC<{ gridArea: string }> = ({ gridArea }) => {
+  const dispatch = useDispatch();
   return (
     <LogoContainer gridArea={gridArea}>
+      <Button
+        Icon={GiHamburgerMenu}
+        onClick={() => dispatch({ type: ActionTypes.UPDATE_ASIDE_STATE })}
+      />
       <Link
         to="https://main--cerulean-gingersnap-166563.netdivfy.app/"
         label="Calendar."

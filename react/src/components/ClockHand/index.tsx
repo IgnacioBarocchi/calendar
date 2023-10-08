@@ -6,8 +6,14 @@ import { useSelector } from 'react-redux';
 
 const ClockHand = () => {
   const week = useSelector((state: RootState) => state.week);
-  const clockHandData = useMemo(() => getClockHandData(week), [week]);
-  if (!clockHandData) return null;
+  const clockHandData = useMemo(
+    () => getClockHandData(week),
+    [week[0].toDateString()],
+  );
+
+  if (!clockHandData) {
+    return null;
+  }
 
   return <ClockHandContainer clockHandData={clockHandData} />;
 };

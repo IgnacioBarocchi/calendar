@@ -24,11 +24,14 @@ const areEqual = (
 };
 
 const CalendarHeaderRow: FC<CalendarHeaderRowProps> = memo(
-  ({ gridArea, weekWithHolidays }) => {
+  ({ gridArea, asideIsHidden, weekWithHolidays }) => {
     const { t, i18n } = useTranslation();
     if (!weekWithHolidays)
       return (
-        <CalendarHeaderRowGrid gridArea={gridArea}>
+        <CalendarHeaderRowGrid
+          gridArea={gridArea}
+          asideIsHidden={asideIsHidden}
+        >
           <TimeZoneOffsetItem />
           {[...Array(7).keys()].map((dayNumber) => {
             return (
@@ -50,7 +53,7 @@ const CalendarHeaderRow: FC<CalendarHeaderRowProps> = memo(
       );
 
     return (
-      <CalendarHeaderRowGrid gridArea={gridArea}>
+      <CalendarHeaderRowGrid gridArea={gridArea} asideIsHidden={asideIsHidden}>
         <TimeZoneOffsetItem />
         {weekWithHolidays.map((record) => {
           const { date, holiday } = record;
@@ -83,6 +86,7 @@ export default CalendarHeaderRow;
 
 interface CalendarHeaderRowProps {
   gridArea: string;
+  asideIsHidden: boolean;
   week: Week;
   weekWithHolidays?: {
     date: Date;

@@ -11,6 +11,7 @@ const initialState = {
   week: ongoingWeek,
   selectedTheme: 'dark',
   weekEvents: [],
+  asideIsHidden: false,
   eventCerationModalState: {
     isOpen: false,
   },
@@ -85,6 +86,11 @@ export const reducer = (
       return {
         ...state,
         selectedTheme: state.selectedTheme === 'light' ? 'dark' : 'light',
+      };
+    case ActionTypes.UPDATE_ASIDE_STATE:
+      return {
+        ...state,
+        asideIsHidden: !state.asideIsHidden,
       };
     default:
       return state;

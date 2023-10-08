@@ -1,14 +1,15 @@
+import styled, { css } from 'styled-components';
+
 import CalendarHeaderRow from './CalendarHeader';
 import EventCreationPanel from './EventCreationPanel';
 import Logo from './Logo';
 import { RootState } from '../../store/@types';
 import WeekViewNavigationBar from './WeekViewNavigationBar';
-import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { weekWithHolidaysSelector } from '../../store/selectors';
 
-const HeaderContainer = styled.header`
+const HeaderContainer = styled.header<{ asideIsHidden: boolan }>`
   width: 100%;
   height: ${({ theme }) => theme.size.headerHeight};
   position: fixed;
@@ -16,9 +17,10 @@ const HeaderContainer = styled.header`
   z-index: 4;
   background: ${({ theme }) => theme.palette.background.primary};
   display: grid;
-  /*grid-template-columns: 0.2fr 1fr;*/
-  grid-template-columns: ${({ theme }) =>
-    `${theme.size.asideWidth} calc(100vw - ${theme.size.asideWidth})`};
+  grid-template-columns: ${({ theme, asideIsHidden }) =>
+    `${asideIsHidden ? 0 : theme.size.asideWidth} calc(100vw - ${
+      theme.size.asideWidth
+    })`};
   grid-template-rows: 0.5fr 1fr;
   gap: 0px 0px;
   grid-auto-flow: row;
@@ -29,13 +31,16 @@ const HeaderContainer = styled.header`
 
 const Header = () => {
   const { t } = useTranslation();
-  const { week, weekWithHolidays } = useSelector((state: RootState) => ({
-    week: state.week,
-    weekWithHolidays: weekWithHolidaysSelector(state),
-  }));
+  const { week, weekWithHolidays, asideIsHidden } = useSelector(
+    (state: RootState) => ({
+      week: state.week,
+      weekWithHolidays: weekWithHolidaysSelector(state),
+      asideIsHidden: state.asideIsHidden,
+    }),
+  );
 
   return (
-    <HeaderContainer>
+    <HeaderContainer asideIsHidden={asideIsHidden}>
       <Logo gridArea="logo" />
       <WeekViewNavigationBar
         month={new Intl.DateTimeFormat(t('locale'), { month: 'long' }).format(
@@ -44,11 +49,12 @@ const Header = () => {
         year={week[6].getFullYear()}
         gridArea={'navigation'}
       />
-      <EventCreationPanel gridArea={'create-event'} />
+      {asideIsHidden ? null : <EventCreationPanel gridArea={'create-event'} />}
       <CalendarHeaderRow
         week={week}
         gridArea={'calendar-header'}
         weekWithHolidays={weekWithHolidays}
+        asideIsHidden={asideIsHidden}
       />
     </HeaderContainer>
   );

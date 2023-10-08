@@ -1,16 +1,25 @@
 import { CalendarCell, Text } from '../../UI';
 import ReactTextTransition, { presets } from 'react-text-transition';
+import styled, { css } from 'styled-components';
 
 import { FC } from 'react';
 import { Fonts } from '../../../constants/theme';
 import Marquee from 'react-fast-marquee';
-import { block } from 'million/react';
-import styled from 'styled-components';
 
-export const CalendarHeaderRowGrid = styled.div<{ gridArea: string }>`
-  grid-area: ${({ gridArea }) => gridArea};
+export const CalendarHeaderRowGrid = styled.div<{
+  gridArea: string;
+  asideIsHidden: boolean;
+}>`
   display: grid;
   grid-template-columns: ${({ theme }) => theme.size.timeCellWidth} 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  ${({ gridArea, asideIsHidden }) =>
+    asideIsHidden
+      ? css`
+          grid-area: ${gridArea};
+        `
+      : css`
+          width: 100vw;
+        `};
 `;
 
 export const WeekDayDetailsContainer = styled.div`
