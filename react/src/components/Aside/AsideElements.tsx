@@ -1,6 +1,7 @@
 import { Button, Link } from '../UI';
 
-import { FaExternalLinkAlt } from 'react-icons/fa';
+import { Fonts } from '../../constants/theme';
+import { TbArrowUpRight } from 'react-icons/tb';
 import styled from 'styled-components';
 
 export const AsideContainer = styled.aside<{ gridArea: string }>`
@@ -30,14 +31,16 @@ export const AsideFooter = () => (
     <Link
       size="m"
       to="https://ignaciob30.editorx.io/clndr"
-      Icon={FaExternalLinkAlt}
+      Icon={TbArrowUpRight}
       label={'Wix'}
+      font={Fonts.SupremeBold}
     />
     <Link
       size="m"
       to="https://github.com/ignaciobwix/calendar"
-      Icon={FaExternalLinkAlt}
+      Icon={TbArrowUpRight}
       label={'Github'}
+      font={Fonts.SupremeBold}
     />
   </AsideFooterContainer>
 );

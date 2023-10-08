@@ -2,6 +2,7 @@ import { CalendarEventContainer, DragabbleWrapper } from './TimeSlotsElements';
 import { FC, MouseEvent, useEffect, useMemo, useRef, useState } from 'react';
 
 import { CalendarEvent } from '../../store/@types';
+import { Fonts } from '../../constants/theme';
 import { Text } from '../../components/UI';
 import { debounce } from 'lodash';
 import { getEventCSSValues } from './helper';
@@ -54,10 +55,13 @@ const CalendarEventView: FC<{
   return (
     <DragabbleWrapper grid={[parentWidth, parentHeight / 4]}>
       <CalendarEventContainer
-        shouldHighlight={shouldHighlight && maxIndex > 1}
+        shouldHighlight={
+          shouldHighlight && maxIndex > 1 ? shouldHighlight : false
+        }
         top={eventTopPosition}
         index={shouldHighlight ? maxIndex : index}
         height={Math.max(20, eventHeightPercentage)}
+        onClick={onClick}
         onMouseOver={() => {
           if (maxIndex > 1) {
             debouncedHover(true);
@@ -68,9 +72,10 @@ const CalendarEventView: FC<{
             debouncedHover(false);
           }
         }}
-        onClick={onClick}
       >
-        <Text size="m">{calendarEventRecord.title}</Text>
+        <Text size="m" font={Fonts.SupremeExtrabold}>
+          {calendarEventRecord.title}
+        </Text>
       </CalendarEventContainer>
     </DragabbleWrapper>
   );

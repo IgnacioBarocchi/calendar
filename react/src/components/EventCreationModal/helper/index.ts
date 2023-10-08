@@ -62,10 +62,10 @@ export const formatDateToDateInputValue = (value: string | Date): string => {
 
 export const getDefaultDateTimeValue = (
   date: Date,
-  add30: boolean = false,
+  add15: boolean = false,
 ): string => {
-  if (add30) {
-    date.setHours(date.getHours(), 30, 0);
+  if (add15) {
+    date.setHours(date.getHours(), 15, 0);
   }
 
   return formatDateToDateInputValue(date);

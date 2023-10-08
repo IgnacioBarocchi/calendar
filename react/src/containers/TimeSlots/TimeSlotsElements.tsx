@@ -3,6 +3,7 @@ import { FC, memo, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 
 import Draggable from 'react-draggable';
+import { Fonts } from '../../constants/theme';
 import { useTranslation } from 'react-i18next';
 
 export const TimeIndexItem: FC<{ timeIndex: number }> = memo(
@@ -22,7 +23,9 @@ export const TimeIndexItem: FC<{ timeIndex: number }> = memo(
 
     return (
       <CalendarCell location={'header-column'}>
-        <Text size="m">{label}</Text>
+        <Text size="m" font={Fonts.SupremeBold}>
+          {label}
+        </Text>
       </CalendarCell>
     );
   },

@@ -1,14 +1,18 @@
 import styled, { css } from 'styled-components';
 
-export const Pressable = styled.div<{ border: boolean; reversed?: boolean }>`
+import { PressableContentProps } from './@types';
+
+export const Pressable = styled.div<PressableContentProps>`
   outline: none;
   background: transparent;
   color: ${({ theme }) => theme.palette.foreground.primary};
   cursor: pointer;
   display: flex;
   flex-direction: ${({ reversed }) => (reversed ? 'row-reverse' : 'row')};
-  justify-content: ${({ reversed }) => (reversed ? 'flex-end' : 'normal')};
+  justify-content: ${({ reversed, safeSpace }) =>
+    reversed ? 'flex-end' : `${safeSpace ? 'center' : 'normal'}`};
   align-items: center;
+
   ${({ theme, border }) =>
     border
       ? css`
@@ -29,6 +33,11 @@ export const Pressable = styled.div<{ border: boolean; reversed?: boolean }>`
           }
           border: none;
         `}
+
+  width: ${({ theme, safeSpace }) =>
+    safeSpace ? theme.size.todayButtonWidth : 'fit-content'};
+  height: ${({ theme, safeSpace }) =>
+    safeSpace ? theme.size.todayButtonHeight : 'fit-content'};
 `;
 
 export const TodayCircle = styled.div`

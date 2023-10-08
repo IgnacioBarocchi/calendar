@@ -1,3 +1,4 @@
+import { Fonts } from '../../../constants/theme';
 import { IconType } from 'react-icons';
 import { MouseEventHandler } from 'react';
 
@@ -6,17 +7,19 @@ export interface TextProps {
   weight?: 'bold' | 'regular';
   brand?: boolean;
   fade?: boolean;
+  font?: keyof typeof Fonts;
 }
 
 export interface PressableContentProps extends TextProps {
   label?: string | boolean | number;
   Icon?: IconType;
+  safeSpace?: boolean;
+  reversed?: boolean;
+  border?: boolean;
 }
 
 export interface ButtonProps extends PressableContentProps {
   onClick: MouseEventHandler;
-  border?: boolean;
-  reversed?: boolean;
 }
 
 export interface LinkProps extends Omit<ButtonProps, 'onClick'> {

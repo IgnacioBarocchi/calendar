@@ -2,6 +2,9 @@ import { TfiAngleLeft, TfiAngleRight } from 'react-icons/tfi';
 
 import { ActionTypes } from '../../../store/@types';
 import { Button } from '../../UI';
+import { Fonts } from '../../../constants/theme';
+import { NavContainer } from './NavElements';
+import { block } from 'million/react';
 import { useDispatch } from 'react-redux';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -25,16 +28,19 @@ const Nav = () => {
   };
 
   return (
-    <nav style={{ display: 'flex' }}>
-      <Button onClick={handlePreviousWeekClick} Icon={TfiAngleLeft} />
-      <Button onClick={handleNextWeekClick} Icon={TfiAngleRight} />
+    <NavContainer>
       <Button
         onClick={handleTodayClick}
         label={todayButtonLabel}
         border={true}
+        safeSpace={true}
+        font={Fonts.SupremeBold}
+        size={'m'}
       />
-    </nav>
+      <Button onClick={handlePreviousWeekClick} Icon={TfiAngleLeft} />
+      <Button onClick={handleNextWeekClick} Icon={TfiAngleRight} />
+    </NavContainer>
   );
 };
 
-export default Nav;
+export default block(Nav);

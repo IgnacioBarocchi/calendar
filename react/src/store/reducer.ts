@@ -11,8 +11,17 @@ const initialState = {
   week: ongoingWeek,
   selectedTheme: 'dark',
   weekEvents: [],
-  eventCerationModalState: { isOpen: false },
-  eventDetailsModalState: { isOpen: false },
+  eventCerationModalState: {
+    isOpen: false,
+  },
+  eventDetailsModalState: {
+    isOpen: false,
+    calendarEventRecord: {},
+    position: {
+      xRate: 0,
+      yRate: 0,
+    },
+  },
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment

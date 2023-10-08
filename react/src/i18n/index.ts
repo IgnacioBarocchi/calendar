@@ -19,7 +19,8 @@ i18n
       en: {
         translation: {
           locale: 'en-US',
-          language: { label: 'Lietuviski', key: 'lt' },
+          language: { label: 'LT', key: 'lt' },
+          // language: { label: 'Lietuviski', key: 'lt' },
           today: 'today',
           tlgTheme: 'Toggle theme',
         },
@@ -27,7 +28,8 @@ i18n
       lt: {
         translation: {
           locale: 'lt-LT',
-          language: { label: 'English', key: 'en' },
+          language: { label: 'EN', key: 'en' },
+          // language: { label: 'English', key: 'en' },
           today: 'šiandien',
           tlgTheme: 'Pakeisti temą',
         },

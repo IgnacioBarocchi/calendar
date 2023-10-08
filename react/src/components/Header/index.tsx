@@ -4,9 +4,9 @@ import Logo from './Logo';
 import { RootState } from '../../store/@types';
 import WeekViewNavigationBar from './WeekViewNavigationBar';
 import styled from 'styled-components';
-import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { weekWithHolidaysSelector } from '../../store/selectors';
 
 const HeaderContainer = styled.header`
   width: 100%;
@@ -29,29 +29,19 @@ const HeaderContainer = styled.header`
 
 const Header = () => {
   const { t } = useTranslation();
-  const { week, holidays } = useSelector((state: RootState) => ({
+  const { week, weekWithHolidays } = useSelector((state: RootState) => ({
     week: state.week,
-    holidays: state.holidays,
+    weekWithHolidays: weekWithHolidaysSelector(state),
   }));
-
-  const weekWithHolidays = useMemo(() => {
-    if (!week?.length || !holidays?.length) return;
-
-    return week.map((date) => ({
-      date,
-      holiday: holidays.find((h) => {
-        return h.date === date.toISOString().substring(0, 10);
-      }),
-    }));
-  }, [week, holidays]);
 
   return (
     <HeaderContainer>
-      <Logo gridArea={'logo'} />
+      <Logo gridArea="logo" />
       <WeekViewNavigationBar
         month={new Intl.DateTimeFormat(t('locale'), { month: 'long' }).format(
           week[6],
         )}
+        year={week[6].getFullYear()}
         gridArea={'navigation'}
       />
       <EventCreationPanel gridArea={'create-event'} />
@@ -63,4 +53,5 @@ const Header = () => {
     </HeaderContainer>
   );
 };
+
 export default Header;

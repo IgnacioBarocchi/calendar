@@ -5,12 +5,12 @@ import {
   TextProps,
 } from './@types';
 import { DropdownList, DropdownWrapper, Pressable } from './DumbComponents';
-import { FC, MouseEvent, useState } from 'react';
+import { FC, MouseEvent, memo, useState } from 'react';
 import { FaAngleDown, FaWindowClose } from 'react-icons/fa';
+import { Fonts, desktopGeneric } from '../../constants/theme';
 import styled, { css, keyframes } from 'styled-components';
 
 import { ModalId } from '../Modal';
-import { desktopGeneric } from '../../constants/theme';
 import { nanoid } from 'nanoid';
 import pressableInterceptor from '../../lib/pressable';
 
@@ -27,6 +27,7 @@ export const Text = styled.span<TextProps>`
     theme.palette.foreground[brand ? 'brand' : 'primary']};
   font-size: ${({ theme, size }) => theme.size.text[size ?? 'l']};
   font-weight: ${({ weight }) => weight ?? 'regular'};
+  font-family: ${({ font }) => (font ? font : 'auto')};
   ${({ fade }) =>
     fade
       ? css`
@@ -35,8 +36,18 @@ export const Text = styled.span<TextProps>`
       : ''}
 `;
 
-const PressableContent: FC<PressableContentProps> = ({ label, Icon, size }) => {
-  if (!Icon) return <Text size={size}> {label + ''}</Text>;
+const PressableContent: FC<PressableContentProps> = ({
+  label,
+  font,
+  Icon,
+  size,
+}) => {
+  if (!Icon)
+    return (
+      <Text size={size} font={font}>
+        {label + ''}
+      </Text>
+    );
 
   const selected: 'l' | 'm' | 's' = size ?? 'l';
   const sizeValue = desktopGeneric.size.text[selected];
@@ -44,7 +55,10 @@ const PressableContent: FC<PressableContentProps> = ({ label, Icon, size }) => {
   if (Icon && label) {
     return (
       <>
-        <Text size={size}> {label + ''}</Text>
+        <Text size={size} font={font}>
+          {' '}
+          {label + ''}
+        </Text>
         <Icon style={{ marginLeft: '8px' }} size={sizeValue} />
       </>
     );
@@ -52,38 +66,58 @@ const PressableContent: FC<PressableContentProps> = ({ label, Icon, size }) => {
 
   if (Icon) return <Icon size={sizeValue} />;
 
-  return <Text size={size}> {label + ''}</Text>;
-};
-
-export const Button: FC<ButtonProps> = (props) => {
-  const { onClick, label, Icon, border, size, reversed } = props;
-
   return (
-    <Pressable
-      as="button"
-      type="button"
-      reversed={reversed || false}
-      onClick={(event: MouseEvent) => {
-        pressableInterceptor(event, onClick);
-      }}
-      border={border || false}
-    >
-      <PressableContent label={label} Icon={Icon} size={size} />
-    </Pressable>
+    <Text size={size} font={font}>
+      {label + ''}
+    </Text>
   );
 };
 
+export const Button: FC<ButtonProps> = memo(
+  (props) => {
+    const { onClick, label, Icon, border, size, reversed, font, safeSpace } =
+      props;
+
+    return (
+      <Pressable
+        as="button"
+        type="button"
+        reversed={reversed || false}
+        onClick={(event: MouseEvent) => {
+          pressableInterceptor(event, onClick);
+        }}
+        /*If you used to conditionally omit it with 
+      border={condition && value}, 
+      pass border={condition ? value : undefined} instead.*/
+
+        border={border ? border : undefined}
+        safeSpace={safeSpace ? safeSpace : undefined}
+      >
+        <PressableContent
+          label={label}
+          Icon={Icon}
+          size={size}
+          font={Fonts.SupremeBold}
+        />
+      </Pressable>
+    );
+  },
+  (prevProps, nextProps) => {
+    return prevProps.label === nextProps.label;
+  },
+);
+
 export const Link: FC<LinkProps> = (props) => {
-  const { to, label, Icon, border, size, reversed } = props;
+  const { to, label, Icon, border, size, reversed, font } = props;
 
   return (
     <Pressable
       as="a"
       reversed={reversed || false}
-      border={border || false}
+      border={border ? border : undefined}
       href={to}
     >
-      <PressableContent label={label} Icon={Icon} size={size} />
+      <PressableContent label={label} Icon={Icon} size={size} font={font} />
     </Pressable>
   );
 };
@@ -112,7 +146,7 @@ export const CalendarCell = styled.div<{
           ${theme.palette.background.primary},
           ${theme.palette.background.primary}
         )
-        50% 50% / calc(100% - 1px) calc(100% - 1px) no-repeat,
+        50% 50% / calc(100% - 2px) calc(100% - 2px) no-repeat,
         linear-gradient(180deg, transparent 0%, ${theme.palette.foreground.tertiary} 100%);
         border:none;
         
@@ -121,7 +155,7 @@ export const CalendarCell = styled.div<{
             ${theme.palette.background.primary},
             ${theme.palette.background.primary}
           )
-          50% 50% / calc(100% - 1px) calc(100% - 1px) no-repeat,
+          50% 50% / calc(100% - 2px) calc(100% - 2px) no-repeat,
           linear-gradient(90deg, transparent 0%, ${theme.palette.foreground.tertiary} 100%);
           border:none;
         }
@@ -131,7 +165,7 @@ export const CalendarCell = styled.div<{
           ${theme.palette.background.primary},
           ${theme.palette.background.primary}
         )
-        50% 50% / calc(100% - 1px) calc(100% - 1px) no-repeat,
+        50% 50% / calc(100% - 2px) calc(100% - 2px) no-repeat,
         linear-gradient(90deg, transparent 0%, ${theme.palette.foreground.tertiary} 100%);
         height: 100%;
         border: none;
@@ -154,6 +188,8 @@ export const Dialog = styled.dialog`
   padding: 0;
   width: 35vw;
   height: ${({ theme }) => theme.size.headerHeight};
+  background: red;
+  opacity: 0.5;
 `;
 
 const DialogHeaderContainer = styled.div.attrs(({ className }) => ({
@@ -166,13 +202,22 @@ const DialogHeaderContainer = styled.div.attrs(({ className }) => ({
   border-bottom: 1px solid ${({ theme }) => theme.palette.foreground.secondary};
 `;
 
-export const DialogHeader: FC<{ modalId: ModalId; close: () => void }> = ({
-  modalId,
-  close,
-}) => {
+export const DialogHeader: FC<{
+  modalId: ModalId;
+  close: () => void;
+  dialog: HTMLDialogElement | null;
+}> = ({ modalId, dialog, close }) => {
   return (
     <DialogHeaderContainer>
-      <Button onClick={close} Icon={FaWindowClose} size="s" />
+      <Button
+        onClick={() => {
+          alert(dialog);
+          dialog?.close();
+          close();
+        }}
+        Icon={FaWindowClose}
+        size="s"
+      />
       <Text size="s">{`Event ${modalId}`}</Text>
     </DialogHeaderContainer>
   );

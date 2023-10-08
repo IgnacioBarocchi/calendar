@@ -3,6 +3,7 @@ import Dropdown, { Button } from '../../UI';
 import { ActionTypes } from '../../../store/@types';
 import { EventCreationPanelContainer } from './EventCreationPanelElements';
 import { FC } from 'react';
+import { Fonts } from '../../../constants/theme';
 import { getDefaultDateTimeValue } from '../../EventCreationModal/helper';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -31,20 +32,6 @@ const EventCreationPanel: FC<{ gridArea: string }> = ({ gridArea }) => {
       <Dropdown
         options={['Create event', 'Focus time']}
         onSelect={handleOpenModal}
-      />
-      <Button
-        label={t('language.label')}
-        size="m"
-        onClick={() => {
-          i18n.changeLanguage(t('language.key'));
-        }}
-      />
-      <Button
-        label={t('tlgTheme')}
-        size="m"
-        onClick={() => {
-          dispatch({ type: ActionTypes.TOGGLE_THEME });
-        }}
       />
     </EventCreationPanelContainer>
   );

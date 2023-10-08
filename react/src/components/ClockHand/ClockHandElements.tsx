@@ -5,13 +5,13 @@ import { FC } from 'react';
 import { FaCircle } from 'react-icons/fa';
 
 const HandPoint = styled(FaCircle)`
-  color: ${({ theme }) => theme.palette.foreground.tertiary};
+  color: ${({ theme }) => theme.palette.foreground.secondary};
 `;
 
 const HandStick = styled.div<{ width: number }>`
   height: 2px;
   width: ${({ width }) => width - 10}px;
-  background: ${({ theme }) => theme.palette.foreground.tertiary};
+  background: ${({ theme }) => theme.palette.foreground.secondary};
 `;
 
 const moveVertically = (top: number) => keyframes`

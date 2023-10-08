@@ -1,24 +1,26 @@
-import { Button } from '../../UI';
 import { FC } from 'react';
-import { TiPointOfInterestOutline } from 'react-icons/ti';
+import { Fonts } from '../../../constants/theme';
+import { Link } from '../../UI';
 import styled from 'styled-components';
 //styled(Button).attrs(({ className }) => ({}))`
+// border-bottom: 1px solid ${({ theme }) => theme.palette.foreground.tertiary};
+
 const LogoContainer = styled.div<{ gridArea: string }>`
   grid-area: ${({ gridArea }) => gridArea};
-  border-bottom: 1px solid ${({ theme }) => theme.palette.foreground.tertiary};
   display: flex;
+  align-items: center;
+  margin-left: 1rem;
 `;
 
 const Logo: FC<{ gridArea: string }> = ({ gridArea }) => {
   return (
     <LogoContainer gridArea={gridArea}>
-      <Button
-        linkTo="https://main--cerulean-gingersnap-166563.netdivfy.app/"
-        Icon={TiPointOfInterestOutline}
-        label="CLRD"
+      <Link
+        to="https://main--cerulean-gingersnap-166563.netdivfy.app/"
+        label="Calendar."
         size="l"
         weight="bold"
-        reversed={true}
+        font={Fonts.TechnorBlack}
       />
     </LogoContainer>
   );

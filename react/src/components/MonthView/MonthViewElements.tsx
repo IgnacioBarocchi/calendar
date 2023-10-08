@@ -2,6 +2,7 @@ import { Button, Text } from '../UI';
 import { FC, MouseEventHandler } from 'react';
 import styled, { css } from 'styled-components';
 
+import { Fonts } from '../../constants/theme';
 import { nanoid } from 'nanoid';
 import { useTranslation } from 'react-i18next';
 
@@ -72,10 +73,12 @@ export const MonthDatesHeader: FC<{ week: Date[] }> = ({ week }) => {
     <>
       {week.map((date) => (
         <MonthViewItemContainer key={nanoid()}>
-          <Text size="s" weight="bold">
-            {date.toLocaleDateString(t('locale'), {
-              weekday: 'short',
-            })}
+          <Text size="s" weight="bold" font={Fonts.SupremeBold}>
+            {date
+              .toLocaleDateString(t('locale'), {
+                weekday: 'short',
+              })
+              .toUpperCase()}
           </Text>
         </MonthViewItemContainer>
       ))}

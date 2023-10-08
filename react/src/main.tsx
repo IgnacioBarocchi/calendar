@@ -1,3 +1,4 @@
+import './fonts.css';
 import './i18n';
 
 import App from './App.tsx';

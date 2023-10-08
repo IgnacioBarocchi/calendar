@@ -1,4 +1,3 @@
-import { Text } from '../../UI';
 import styled from 'styled-components';
 
 export const NavContainer = styled.div<{ gridArea: string }>`
@@ -6,6 +5,9 @@ export const NavContainer = styled.div<{ gridArea: string }>`
   align-items: center;
   grid-area: ${({ gridArea }) => gridArea};
   border-bottom: 1px solid ${({ theme }) => theme.palette.foreground.tertiary};
+  & * {
+    margin-right: 8px;
+  }
 `;
 
 export const WeekNavBar = styled.nav`
@@ -13,11 +15,4 @@ export const WeekNavBar = styled.nav`
   height: 100%;
   justify-content: space-between;
   align-items: center;
-`;
-
-export const MonthLabel = styled(Text)`
-  margin-left: 8px;
-  &:first-letter {
-    text-transform: uppercase;
-  }
 `;

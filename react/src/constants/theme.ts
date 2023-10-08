@@ -1,8 +1,19 @@
+export const Fonts = {
+  SupremeBold: 'Supreme-Bold',
+  SupremeBoldItalic: 'Supreme-BoldItalic',
+  SupremeExtrabold: 'Supreme-Extrabold',
+  SupremeExtraboldItalic: 'Supreme-ExtraboldItalic',
+  TechnorBlack: 'Technor-Black',
+  TechnorBold: 'Technor-Bold',
+} as const;
+
 export const desktopGeneric = {
   padding: {
     aside: '1rem',
   },
   size: {
+    todayButtonWidth: '8rem',
+    todayButtonHeight: '2.5rem',
     headerHeight: '20vh',
     timeCellWidth: '4vw',
     asideWidth: '16vw',
@@ -21,7 +32,7 @@ const theme = {
       foreground: {
         primary: '#ffffe3',
         secondary: '#71717a',
-        tertiary: '#E3E3FF',
+        tertiary: '#30302b',
       },
       background: {
         primary: 'black',

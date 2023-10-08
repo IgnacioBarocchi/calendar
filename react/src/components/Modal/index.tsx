@@ -1,6 +1,6 @@
 import { Dialog, DialogHeader } from '../UI';
 import Draggable, { DraggableData, DraggableEvent } from 'react-draggable';
-import { FC, useState } from 'react';
+import { FC, useRef, useState } from 'react';
 
 export type Position = {
   xRate: number;
@@ -16,7 +16,7 @@ const Modal: FC<{
   close: () => void;
 }> = ({ modalId, children, close, position }) => {
   const [currentPosition, setCurrentPosition] = useState<Position>(position);
-
+  const dialogRef = useRef<HTMLDialogElement>(null);
   const onDrag = (_: DraggableEvent, data: DraggableData) => {
     setCurrentPosition({ xRate: data.lastX, yRate: data.lastY });
   };
@@ -30,11 +30,17 @@ const Modal: FC<{
       }}
       onDrag={onDrag}
     >
-      <Dialog open>
-        <div className="modal-dialog">
-          <DialogHeader close={close} modalId={modalId} />
+      <Dialog ref={dialogRef} open>
+        {/* <div className="modal-dialog"> */}
+        <>
+          <DialogHeader
+            close={close}
+            dialog={dialogRef?.current}
+            modalId={modalId}
+          />
           {children}
-        </div>
+        </>
+        {/* </div> */}
       </Dialog>
     </Draggable>
   );

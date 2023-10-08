@@ -1,5 +1,11 @@
 {
   "compilerOptions": {
+    "plugins": [
+      {
+          "name": "@styled/typescript-styled-plugin",
+          "tags": ["styled", "css", "sty"]
+      }
+  ],
     "target": "ES2020",
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],

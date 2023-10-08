@@ -1,0 +1,54 @@
+@font-face {
+  font-family: myFirstFont;
+  src: url('../public/fonts/Gambarino-Regular.otf');
+}
+
+/* Custom CSS */
+
+/* Supreme Fonts */
+@font-face {
+  font-family: 'Supreme-Bold';
+  src: url('../public/fonts/Supreme-Bold.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Supreme-BoldItalic';
+  src: url('../public/fonts/Supreme-BoldItalic.otf') format('opentype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Supreme-Extrabold';
+  src: url('../public/fonts/Supreme-Extrabold.otf') format('opentype');
+  font-weight: 800; /* Extrabold */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Supreme-ExtraboldItalic';
+  src: url('../public/fonts/Supreme-ExtraboldItalic.otf') format('opentype');
+  font-weight: 800; /* Extrabold */
+  font-style: italic;
+}
+
+/* Repeat the above @font-face declarations for the other Supreme fonts */
+
+/* Technor Fonts */
+@font-face {
+  font-family: 'Technor-Black';
+  src: url('../public/fonts/Technor-Black.otf') format('opentype');
+  font-weight: 900; /* Black */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Technor-Bold';
+  src: url('../public/fonts/Technor-Bold.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+/* Repeat the above @font-face declarations for the other Technor fonts */

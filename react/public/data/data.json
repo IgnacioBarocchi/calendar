@@ -279,6 +279,146 @@
         "Public"
       ],
       "id": 14
+    },
+    {
+      "date": "2024-01-01",
+      "localName": "Naujieji metai",
+      "name": "New Year's Day",
+      "countryCode": "LT",
+      "fixed": true,
+      "global": true,
+      "counties": null,
+      "launchYear": null,
+      "types": [
+        "Public"
+      ],
+      "id": 15
+    },
+    {
+      "date": "2024-12-24",
+      "localName": "Šv. Kūčios",
+      "name": "Christmas Eve",
+      "countryCode": "LT",
+      "fixed": true,
+      "global": true,
+      "counties": null,
+      "launchYear": null,
+      "types": [
+        "Public"
+      ],
+      "id": 16
+    },
+    {
+      "date": "2024-12-25",
+      "localName": "Šv. Kalėdos",
+      "name": "Christmas Day",
+      "countryCode": "LT",
+      "fixed": true,
+      "global": true,
+      "counties": null,
+      "launchYear": null,
+      "types": [
+        "Public"
+      ],
+      "id": 17
+    },
+    {
+      "date": "2024-03-11",
+      "localName": "Lietuvos nepriklausomybės atkūrimo diena",
+      "name": "Day of Restoration of Independence of Lithuania",
+      "countryCode": "LT",
+      "fixed": true,
+      "global": true,
+      "counties": null,
+      "launchYear": null,
+      "types": [
+        "Public"
+      ],
+      "id": 18
+    },
+    {
+      "date": "2024-12-26",
+      "localName": "Šv. Kalėdos",
+      "name": "St. Stephen's Day",
+      "countryCode": "LT",
+      "fixed": true,
+      "global": true,
+      "counties": null,
+      "launchYear": null,
+      "types": [
+        "Public"
+      ],
+      "id": 19
+    },
+    {
+      "date": "2024-02-16",
+      "localName": "Lietuvos valstybės atkūrimo diena",
+      "name": "The Day of Restoration of the State of Lithuania",
+      "countryCode": "LT",
+      "fixed": true,
+      "global": true,
+      "counties": null,
+      "launchYear": null,
+      "types": [
+        "Public"
+      ],
+      "id": 20
+    },
+    {
+      "date": "2024-03-31",
+      "localName": "Velykos",
+      "name": "Easter Sunday",
+      "countryCode": "LT",
+      "fixed": false,
+      "global": true,
+      "counties": null,
+      "launchYear": null,
+      "types": [
+        "Public"
+      ],
+      "id": 21
+    },
+    {
+      "date": "2024-05-01",
+      "localName": "Tarptautinė darbo diena",
+      "name": "International Working Day",
+      "countryCode": "LT",
+      "fixed": true,
+      "global": true,
+      "counties": null,
+      "launchYear": null,
+      "types": [
+        "Public"
+      ],
+      "id": 22
+    },
+    {
+      "date": "2024-04-01",
+      "localName": "Antroji Velykų diena",
+      "name": "Easter Monday",
+      "countryCode": "LT",
+      "fixed": false,
+      "global": true,
+      "counties": null,
+      "launchYear": null,
+      "types": [
+        "Public"
+      ],
+      "id": 23
+    },
+    {
+      "date": "2024-06-24",
+      "localName": "Joninės, Rasos",
+      "name": "St. John's Day",
+      "countryCode": "LT",
+      "fixed": true,
+      "global": true,
+      "counties": null,
+      "launchYear": null,
+      "types": [
+        "Public"
+      ],
+      "id": 24
     }
   ]
 }

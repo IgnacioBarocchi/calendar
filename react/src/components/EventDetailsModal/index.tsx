@@ -5,12 +5,13 @@ import { useEffect, useState } from 'react';
 
 import { DetailsView } from './EventDetailsModalElements';
 import Modal from '../Modal';
+import { weekSelector } from '../../store/selectors';
 
 const EventDetailsModal = () => {
   const dispatch = useDispatch();
+  const week = useSelector((state: RootState) => weekSelector(state));
 
   const {
-    week,
     eventDetailsModalState: { isOpen, position, calendarEventRecord },
   } = useSelector((state: RootState) => ({
     week: state.week,
@@ -25,6 +26,10 @@ const EventDetailsModal = () => {
       payload: {
         isOpen: false,
         calendarEventRecord: {},
+        position: {
+          xRate: 0,
+          yRate: 0,
+        },
       },
     });
   };
