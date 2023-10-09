@@ -1,6 +1,4 @@
-bugs: clockhand, event creation.
-
-quality: remove unused dependencies, transform helpers into custom redux selectors. eg.: getMonthDatesFrom(week).
+quality transform helpers into custom redux selectors. eg.: getMonthDatesFrom(week).
 
 new: update record api, handle click and drag events for the calendar events
 

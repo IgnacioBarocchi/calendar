@@ -16,6 +16,9 @@ const calendarBodyRelativeViewportWidth = 100 - (asideSize + timeCellSize);
 export const getTimeSlotPixelsWidth = () =>
   (calendarBodyRelativeViewportWidth * window.innerWidth) / 100 / 7;
 
+export const gettimeCellWidthPixelsWidth = () =>
+  (timeCellSize * window.innerWidth) / 100;
+
 const getCordinatesOrigin = (): TopLeftPosition => {
   const top = (headerSize * window.innerHeight) / 100;
   const left = ((asideSize + timeCellSize) * window.innerWidth) / 100;
@@ -42,13 +45,15 @@ export const getClockHandData = (week: Week): ClockHandData | null => {
   const today = new Date();
   const indexOfTodayInWeek = indexOfDateInWeek(today, week);
   if (indexOfTodayInWeek === -1) return null;
-
+  debugger;
   const timeSlotPixelsWidth = getTimeSlotPixelsWidth();
-  const leftPad = timeSlotPixelsWidth * indexOfTodayInWeek;
+  const timeCellSizePixelsWidth = gettimeCellWidthPixelsWidth();
+  // const leftPad = timeSlotPixelsWidth * indexOfTodayInWeek;
 
-  const [topOrigin, leftOrigin] = getCordinatesOrigin();
-
-  const left = leftOrigin + leftPad;
+  const [topOrigin, leftOrigin] = [0, 0]; //getCordinatesOrigin();
+  const noPad = timeSlotPixelsWidth * indexOfTodayInWeek;
+  const left =
+    noPad > 0 ? noPad + timeCellSizePixelsWidth : timeCellSizePixelsWidth; //leftOrigin; //+ leftPad;
 
   const nowSeconds = secondsPassedFrom(today);
   const viewportHeight = window.innerHeight;

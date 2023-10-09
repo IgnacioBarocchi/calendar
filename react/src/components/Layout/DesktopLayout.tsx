@@ -22,7 +22,6 @@ const DesktopLayout = () => {
         )}
         <CalendarBody asideIsHidden={asideIsHidden} gridArea="calendar" />
       </Main>
-      <ClockHand />
     </>
   );
 };

@@ -1,8 +1,7 @@
-import styled, { keyframes } from 'styled-components';
-
 import { ClockHandData } from './helper';
 import { FC } from 'react';
 import { FaCircle } from 'react-icons/fa';
+import styled from 'styled-components';
 
 const HandPoint = styled(FaCircle)`
   color: ${({ theme }) => theme.palette.foreground.secondary};
@@ -14,16 +13,6 @@ const HandStick = styled.div<{ width: number }>`
   background: ${({ theme }) => theme.palette.foreground.secondary};
 `;
 
-const moveVertically = (top: number) => keyframes`
-  0% {
-    top: ${top}px;
-  }
-  100% {
-    top: ${top + (window.innerHeight + top)}px;
-    display: none;
-  }
-`;
-
 const PartsWrapper = styled.div<{
   top: number;
   left: number;
@@ -31,13 +20,28 @@ const PartsWrapper = styled.div<{
 }>`
   display: flex;
   align-items: center;
-  left: ${({ left }) => left - 7}px;
-  z-index: 3;
   position: absolute;
-  animation-name: ${({ top }) => moveVertically(top - 7)};
-  animation-duration: ${({ animationDuration }) => `${animationDuration}`}s;
-  animation-timing-function: linear;
+  z-index: 3;
+  left: ${({ left }) => left - 7}px;
+  top: ${({ top }) => {
+    /* alert(top); */
+    return top;
+  }}px;
 `;
+
+// const moveVertically = (top: number) => keyframes`
+//   0% {
+//     top: ${top}px;
+//   }
+//   100% {
+//     top: ${top + (window.innerHeight + top)}px;
+//     display: none;
+//   }
+// `;
+
+/* animation-name: ${({ top }) => moveVertically(top - 7)};
+  animation-duration: ${({ animationDuration }) => `${animationDuration}`}s;
+  animation-timing-function: linear; */
 
 export const ClockHandContainer: FC<ClockHandProps> = ({ clockHandData }) => {
   const {

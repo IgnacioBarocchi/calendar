@@ -42,7 +42,6 @@ const WeekViewNavigationBar: FC<WeekNavigationBarProps> = ({
             size="l"
             label="Experiments"
             onClick={() => {
-              alert(experimentalFeatures);
               toggleExperiments(); // Call the bound action creator
             }}
           />

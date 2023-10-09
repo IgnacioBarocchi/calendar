@@ -16,4 +16,5 @@ export const CalendarBodyContainer = styled.div<{
       : css`
           grid-area: ${gridArea};
         `};
+  position: relative;
 `;

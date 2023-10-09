@@ -11,4 +11,5 @@ export const MainContainer = styled.main`
   gap: 0px 0px;
   grid-auto-flow: row;
   grid-template-areas: 'aside calendar';
+  overflow: hidden;
 `;
