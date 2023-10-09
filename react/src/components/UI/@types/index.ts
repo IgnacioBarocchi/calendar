@@ -1,4 +1,4 @@
-import { Fonts } from '../../../constants/theme';
+import { FontValues } from '../../../constants/theme';
 import { IconType } from 'react-icons';
 import { MouseEventHandler } from 'react';
 
@@ -7,7 +7,7 @@ export interface TextProps {
   weight?: 'bold' | 'regular';
   brand?: boolean;
   fade?: boolean;
-  font?: keyof typeof Fonts;
+  font?: FontValues;
 }
 
 export interface PressableContentProps extends TextProps {

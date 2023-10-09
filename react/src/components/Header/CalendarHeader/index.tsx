@@ -3,36 +3,14 @@ import {
   DayOfWeekItem,
   TimeZoneOffsetItem,
 } from './CalendarHeaderElements';
+import {
+  CalendarHeaderRowProps,
+  shouldCalendarHeaderRowPreventRender,
+} from './helper';
 import { FC, memo } from 'react';
 
-import { Holiday } from '../../../store/@types';
-import { Week } from '../../../lib/weekHelper';
 import { nanoid } from 'nanoid';
 import { useTranslation } from 'react-i18next';
-
-const areEqual = (
-  prevProps: CalendarHeaderRowProps,
-  nextProps: CalendarHeaderRowProps,
-) => {
-  const props = [
-    prevProps.weekWithHolidays,
-    nextProps.weekWithHolidays,
-    nextProps.asideIsHidden,
-    nextProps.asideIsHidden,
-  ];
-
-  if (props.every((value) => value === undefined)) return false;
-
-  if (!prevProps.weekWithHolidays) return false;
-  if (!nextProps.weekWithHolidays) return false;
-
-  const weekDidntChange =
-    prevProps.weekWithHolidays[0].date.toDateString() ===
-    nextProps.weekWithHolidays[0].date.toDateString()!;
-
-  const layoutDidntChange = prevProps.asideIsHidden === nextProps.asideIsHidden;
-  return weekDidntChange && layoutDidntChange;
-};
 
 const CalendarHeaderRow: FC<CalendarHeaderRowProps> = memo(
   ({ gridArea, asideIsHidden, weekWithHolidays }) => {
@@ -68,11 +46,11 @@ const CalendarHeaderRow: FC<CalendarHeaderRowProps> = memo(
         <TimeZoneOffsetItem />
         {weekWithHolidays.map((record) => {
           const { date, holiday } = record;
-
+          const today = new Date().toDateString() === date.toDateString();
           return (
             <DayOfWeekItem
               key={nanoid()}
-              today={new Date().toDateString() === date.toDateString()}
+              today={today}
               dateNumber={date.getDate()}
               weekDay={date
                 .toLocaleDateString(t('locale'), {
@@ -90,17 +68,7 @@ const CalendarHeaderRow: FC<CalendarHeaderRowProps> = memo(
       </CalendarHeaderRowGrid>
     );
   },
-  areEqual,
+  shouldCalendarHeaderRowPreventRender,
 );
 
 export default CalendarHeaderRow;
-
-interface CalendarHeaderRowProps {
-  gridArea: string;
-  asideIsHidden: boolean;
-  week: Week;
-  weekWithHolidays?: {
-    date: Date;
-    holiday?: Holiday;
-  }[];
-}

@@ -7,6 +7,9 @@ export const Fonts = {
   TechnorBold: 'Technor-Bold',
 } as const;
 
+type Keys = keyof typeof Fonts;
+export type FontValues = (typeof Fonts)[Keys];
+
 export const desktopGeneric = {
   padding: {
     aside: '1rem',
@@ -39,7 +42,6 @@ const theme = {
         secondary: '#333333',
       },
       brand: '#496DDB',
-      // brandVariant: '#E899DC',
       brandVariant: '#E899DC',
     },
     ...desktopGeneric,
@@ -47,18 +49,20 @@ const theme = {
   light: {
     palette: {
       foreground: {
-        primary: 'black',
+        primary: '#000000',
         secondary: '#71717a',
-        tertiary: '#52525b',
+        tertiary: '#e8e8cf',
       },
       background: {
-        primary: '#ffffff',
+        primary: '#ffffe3',
         secondary: '#f5f5f5',
       },
-      brand: '#2563eb',
+      brand: '#496DDB',
+      brandVariant: '#E899DC',
     },
     ...desktopGeneric,
   },
 };
 
 export default theme;
+// brandVariant: '#E899DC',

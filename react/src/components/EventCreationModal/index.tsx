@@ -123,12 +123,7 @@ const EventCreationModal = () => {
             handler={handleInputChange}
           />
           <FormFooter>
-            <Button
-              onClick={handleSubmit}
-              label="Save"
-              border={true}
-              disabled={!isOpen}
-            />
+            <Button onClick={handleSubmit} label="Save" border={true} />
           </FormFooter>
         </FormColumn>
       </Form>

@@ -1,33 +1,17 @@
-import { CalendarEvent, RootState } from '../../store/@types';
-import React, { useMemo } from 'react';
-
+import React from 'react';
+import { RootState } from '../../store/@types';
 import { TimeIndexItem } from './TimeSlotsElements';
 import { TimeSlot } from './TimeSlot';
-import { getMapKeyFrom } from './helper';
 import { nanoid } from 'nanoid';
+import { newEventsMapSelector } from '../../store/selectors';
 import { useSelector } from 'react-redux';
 
 const TimeSlots = () => {
-  const { week, weekEvents } = useSelector((state: RootState) => ({
+  const { week, eventsMap } = useSelector((state: RootState) => ({
     week: state.week,
     weekEvents: state.weekEvents,
+    eventsMap: newEventsMapSelector(state),
   }));
-
-  const eventsMap = useMemo(() => {
-    const newEventsMap = new Map<string, CalendarEvent[]>();
-
-    weekEvents.forEach((event) => {
-      const key = getMapKeyFrom(event.start);
-
-      if (!newEventsMap.has(key)) {
-        newEventsMap.set(key, []);
-      }
-
-      newEventsMap.get(key)?.push(event);
-    });
-
-    return newEventsMap;
-  }, [weekEvents]);
 
   const hours = [...Array(24).keys()];
 
@@ -54,3 +38,23 @@ const TimeSlots = () => {
 };
 
 export default TimeSlots;
+
+/*
+  import React, { useMemo } from 'react';
+
+  const eventsMap = useMemo(() => {
+    const newEventsMap = new Map<string, CalendarEvent[]>();
+
+    weekEvents.forEach((event) => {
+      const key = getMapKeyFrom(event.start);
+
+      if (!newEventsMap.has(key)) {
+        newEventsMap.set(key, []);
+      }
+
+      newEventsMap.get(key)?.push(event);
+    });
+
+    return newEventsMap;
+  }, [weekEvents]);
+*/

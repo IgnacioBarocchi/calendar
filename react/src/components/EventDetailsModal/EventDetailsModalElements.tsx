@@ -1,7 +1,7 @@
 import { Button, Text } from '../UI';
+import { FC, MouseEventHandler } from 'react';
 
 import { CalendarEvent } from '../../store/@types';
-import { FC } from 'react';
 import styled from 'styled-components';
 
 const DetailsViewContainer = styled.div`
@@ -18,7 +18,7 @@ const DetailsViewContainer = styled.div`
 
 export const DetailsView: FC<{
   record: CalendarEvent;
-  handleDeleteEvent: MouseEvent;
+  handleDeleteEvent: MouseEventHandler;
 }> = ({ record, handleDeleteEvent }) => {
   return (
     <DetailsViewContainer>

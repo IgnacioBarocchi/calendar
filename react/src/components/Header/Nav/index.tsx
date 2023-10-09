@@ -4,7 +4,7 @@ import { ActionTypes } from '../../../store/@types';
 import { Button } from '../../UI';
 import { Fonts } from '../../../constants/theme';
 import { NavContainer } from './NavElements';
-import { block } from 'million/react';
+// import { block } from 'million/react';
 import { useDispatch } from 'react-redux';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';

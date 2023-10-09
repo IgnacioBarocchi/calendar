@@ -1,5 +1,9 @@
 import { Button, Text } from '../../UI';
 import { FC, memo } from 'react';
+import {
+  WeekNavigationBarProps,
+  shouldWeekViewNavigationBarPreventRender,
+} from './helper';
 
 import { ActionTypes } from '../../../store/@types';
 import { Fonts } from '../../../constants/theme';
@@ -12,12 +16,7 @@ import i18n from '../../../i18n';
 import { t } from 'i18next';
 import { useDispatch } from 'react-redux';
 
-const WeekViewNavigationBar: FC<{
-  gridArea: string;
-  month: string;
-  year: number;
-  shouldDisplayLogo: boolean;
-}> = memo(
+const WeekViewNavigationBar: FC<WeekNavigationBarProps> = memo(
   ({ gridArea, month, year, shouldDisplayLogo }) => {
     const dispatch = useDispatch();
 
@@ -63,13 +62,7 @@ const WeekViewNavigationBar: FC<{
       </NavContainer>
     );
   },
-  (oldProps, nextProps) => {
-    const monthsAreEqual = oldProps.month === nextProps.month;
-    const yearsAreEqual = oldProps.year === nextProps.year;
-    const logoLayoutDidNotChange =
-      oldProps.shouldDisplayLogo === nextProps.shouldDisplayLogo;
-    return monthsAreEqual && yearsAreEqual && logoLayoutDidNotChange;
-  },
+  shouldWeekViewNavigationBarPreventRender,
 );
 
 // export default block(WeekViewNavigationBar);

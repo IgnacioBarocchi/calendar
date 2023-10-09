@@ -3,20 +3,8 @@ import { FC, memo } from 'react';
 import { ActionTypes } from '../../store/@types';
 import { MonthViewItem } from '../../components/MonthView/MonthViewElements';
 import { nanoid } from 'nanoid';
+import { shouldMonthDatesPreventRender } from './helper';
 import { useDispatch } from 'react-redux';
-
-const areEqual = (
-  prevProps: { monthDates: Date[] },
-  nextProps: { monthDates: Date[] },
-) => {
-  if (!prevProps.monthDates) return false;
-  if (!nextProps.monthDates) return false;
-
-  return (
-    prevProps.monthDates[0].toDateString() ===
-    nextProps.monthDates[0].toDateString()!
-  );
-};
 
 const MonthDates: FC<{
   monthDates: Date[];
@@ -31,19 +19,20 @@ const MonthDates: FC<{
   return (
     <>
       {monthDates.map((date: Date) => {
+        const today = new Date().toDateString() === date.toDateString();
         return (
           <MonthViewItem
             key={nanoid()}
             date={date.getDate()}
-            today={date.toDateString() === new Date().toDateString()}
+            today={today}
             handler={() => {
               handleUpdateWeek(date);
             }}
-          ></MonthViewItem>
+          />
         );
       })}
     </>
   );
-}, areEqual);
+}, shouldMonthDatesPreventRender);
 
 export default MonthDates;

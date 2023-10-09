@@ -18,7 +18,7 @@ export const CalendarHeaderRowGrid = styled.div<{
     if (asideIsHidden) {
       return css`
         width: 100vw;
-        background: red;
+        /* background: red; */
         opacity: 0.5;
       `;
     }
@@ -41,14 +41,14 @@ export const WeekDayDetailsContainer = styled.div`
 `;
 
 export const DateNumberContainer = styled(Text)<{ today: boolean }>`
-  background: ${({ theme, today }) =>
-    `${today ? theme.palette.brand : theme.palette.background.primary}`};
   border-radius: 50%;
   width: 3rem;
   height: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: ${({ theme, today }) =>
+    today ? theme.palette.brand : theme.palette.background.primary};
 `;
 
 export const FoldedEventContainer = styled(Marquee)<{ shouldRender: boolean }>`

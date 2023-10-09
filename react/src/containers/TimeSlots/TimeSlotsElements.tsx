@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 
 export const TimeIndexItem: FC<{ timeIndex: number }> = memo(
   ({ timeIndex }) => {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     const label = useMemo(() => {
       const time = new Date();
@@ -19,7 +19,7 @@ export const TimeIndexItem: FC<{ timeIndex: number }> = memo(
         hour12: true,
       });
       return normalizedTimeIndex;
-    }, [i18n.language, timeIndex]);
+    }, [t, timeIndex]);
 
     return (
       <CalendarCell location={'header-column'}>

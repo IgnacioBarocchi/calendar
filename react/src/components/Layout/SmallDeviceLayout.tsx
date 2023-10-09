@@ -26,7 +26,7 @@ const SmallDeviceLayout = () => {
       <Header />
       <Main>
         <Aside gridArea="aside" />
-        <CalendarBody gridArea="calendar" />
+        <CalendarBody asideIsHidden={true} gridArea="calendar" />
       </Main>
     </>
   );

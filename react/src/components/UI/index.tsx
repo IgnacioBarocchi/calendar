@@ -77,8 +77,7 @@ const PressableContent: FC<PressableContentProps> = ({
 
 export const Button: FC<ButtonProps> = memo(
   (props) => {
-    const { onClick, label, Icon, border, size, reversed, font, safeSpace } =
-      props;
+    const { onClick, label, Icon, border, size, reversed, safeSpace } = props;
 
     return (
       <Pressable
@@ -229,7 +228,8 @@ export const Dropdown: FC<{
   options: string[];
   onSelect: (val: string) => void;
 }> = ({ options, onSelect }) => {
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_, setSelectedOption] = useState<string | null>(null);
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
