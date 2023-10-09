@@ -170,6 +170,8 @@ export const CalendarCell = styled.div<{
         linear-gradient(90deg, transparent 0%, ${theme.palette.foreground.tertiary} 100%);
         height: 100%;
         border: none; */
+        height: 100%;
+
       `,
       body: `
        border-bottom: none;
@@ -187,7 +189,7 @@ export const Dialog = styled.dialog`
   border: 1px solid ${({ theme }) => theme.palette.foreground.secondary};
   margin: 0;
   padding: 0;
-  width: 35vw;
+  width: ${({ theme }) => theme.size.modalWidth};
   height: ${({ theme }) => theme.size.modalHeight};
 `;
 
@@ -210,8 +212,7 @@ export const DialogHeader: FC<{
     <DialogHeaderContainer>
       <Button
         onClick={() => {
-          alert(dialog);
-          dialog?.close();
+          /* dialog?.close(); */
           close();
         }}
         Icon={FaWindowClose}

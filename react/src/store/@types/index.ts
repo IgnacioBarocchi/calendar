@@ -6,11 +6,10 @@ interface ModalAgnosticState {
   isOpen: boolean;
   position: Position;
 }
-
-interface EventCerationModalState extends ModalAgnosticState {
+export interface EventCerationModalState extends ModalAgnosticState {
   initialFormValues: DraftEvent | ControlledDraftEvent;
 }
-interface EventDetailsModalState extends ModalAgnosticState {
+export interface EventDetailsModalState extends ModalAgnosticState {
   calendarEventRecord: CalendarEvent;
 }
 

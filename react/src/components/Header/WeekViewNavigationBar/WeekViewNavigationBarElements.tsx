@@ -4,7 +4,6 @@ export const NavContainer = styled.div<{ gridArea: string }>`
   display: flex;
   align-items: center;
   grid-area: ${({ gridArea }) => gridArea};
-  border-bottom: 1px solid ${({ theme }) => theme.palette.foreground.tertiary};
   & * {
     margin-right: 8px;
   }

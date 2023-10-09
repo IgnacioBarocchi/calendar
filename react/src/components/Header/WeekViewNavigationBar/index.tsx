@@ -5,7 +5,6 @@ import {
   shouldWeekViewNavigationBarPreventRender,
 } from './helper';
 
-import { ActionTypes } from '../../../store/@types';
 import { Fonts } from '../../../constants/theme';
 import Logo from '../Logo';
 import Nav from '../Nav';
@@ -14,6 +13,7 @@ import { VscColorMode } from 'react-icons/vsc';
 // import { block } from 'million/react';
 import i18n from '../../../i18n';
 import { t } from 'i18next';
+import { toggleTheme } from '../../../store/actions';
 import { useDispatch } from 'react-redux';
 
 const WeekViewNavigationBar: FC<WeekNavigationBarProps> = memo(
@@ -54,7 +54,7 @@ const WeekViewNavigationBar: FC<WeekNavigationBarProps> = memo(
               size="l"
               font={Fonts.SupremeBold}
               onClick={() => {
-                dispatch({ type: ActionTypes.TOGGLE_THEME });
+                dispatch(toggleTheme());
               }}
             />
           </div>

@@ -1,4 +1,5 @@
 import { ActionTypes, RootState } from '../../store/@types';
+import { deleteEvent, setWeekEvents } from '../../store/actions';
 import { deleteEventById, getWeekEvents } from '../../services/events.service';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -36,10 +37,7 @@ const EventDetailsModal = () => {
 
   useEffect(() => {
     const dispatchNewEvents = async () => {
-      dispatch({
-        type: ActionTypes.SET_WEEK_EVENTS,
-        payload: await getWeekEvents(week),
-      });
+      dispatch(setWeekEvents(await getWeekEvents(week)));
 
       setShouldFetchEvents(false);
     };
@@ -54,10 +52,7 @@ const EventDetailsModal = () => {
   const handleDeleteEvent = async (): Promise<void> => {
     const response = await deleteEventById(calendarEventRecord.id);
     if (response) {
-      dispatch({
-        type: ActionTypes.DELETE_EVENT,
-        payload: calendarEventRecord,
-      });
+      dispatch(deleteEvent(calendarEventRecord));
       closeModal();
       setShouldFetchEvents(true);
     }

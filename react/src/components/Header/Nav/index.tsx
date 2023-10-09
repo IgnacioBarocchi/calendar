@@ -10,9 +10,9 @@ import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const Nav = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
-  const todayButtonLabel = useMemo(() => t('today'), [i18n.language]);
+  const todayButtonLabel = useMemo(() => t('today'), [t]);
   const dispatch = useDispatch();
 
   const handleNextWeekClick = () => {

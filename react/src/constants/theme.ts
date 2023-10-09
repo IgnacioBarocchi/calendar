@@ -22,6 +22,8 @@ export const desktopGeneric = {
     asideWidth: '16vw',
     circleRadius: '2.5rem',
     modalHeight: '20vh',
+    modalWidth: '35vw',
+
     text: {
       l: '1.5rem',
       m: '1rem',

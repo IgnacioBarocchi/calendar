@@ -1,14 +1,15 @@
-import { FC, useMemo } from 'react';
+import { FC, useMemo, useRef } from 'react';
 
-import { ActionTypes } from '../../../store/@types';
 import Dropdown from '../../UI';
 import { EventCreationPanelContainer } from './EventCreationPanelElements';
 import { desktopGeneric } from '../../../constants/theme';
 import { getDefaultDateTimeValue } from '../../EventCreationModal/helper';
+import { updateEventCreationModalState } from '../../../store/actions';
 import { useDispatch } from 'react-redux';
 
 const EventCreationPanel: FC<{ gridArea: string }> = ({ gridArea }) => {
   const dispatch = useDispatch();
+  const panelRef = useRef(null);
 
   const position = useMemo(() => {
     return {
@@ -19,28 +20,31 @@ const EventCreationPanel: FC<{ gridArea: string }> = ({ gridArea }) => {
       yRate:
         (Number(desktopGeneric.size.headerHeight.replace('vh', '')) *
           window.innerHeight) /
-        100,
+        100 /
+        1.618,
     };
   }, []);
 
   const handleOpenModal = () => {
-    dispatch({
-      type: ActionTypes.UPDATE_EVENT_CREATION_MODAL_STATE,
-      payload: {
-        isOpen: true,
-        position,
-        initialFormValues: {
-          title: `no title ${new Date().getHours()}`,
-          type: 'draft',
-          start: getDefaultDateTimeValue(new Date()),
-          end: getDefaultDateTimeValue(new Date(), true),
-          description: '',
+    dispatch(
+      updateEventCreationModalState(
+        {
+          isOpen: true,
+          position,
+          initialFormValues: {
+            title: `no title ${new Date().getHours()}`,
+            type: 'draft',
+            start: getDefaultDateTimeValue(new Date()),
+            end: getDefaultDateTimeValue(new Date(), true),
+            description: '',
+          },
         },
-      },
-    });
+        true,
+      ),
+    );
   };
   return (
-    <EventCreationPanelContainer gridArea={gridArea}>
+    <EventCreationPanelContainer ref={panelRef} gridArea={gridArea}>
       <Dropdown
         options={['Create event', 'Focus time']}
         onSelect={handleOpenModal}

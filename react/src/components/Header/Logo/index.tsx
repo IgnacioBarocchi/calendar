@@ -1,10 +1,10 @@
 import { Button, Link } from '../../UI';
 
-import { ActionTypes } from '../../../store/@types';
 import { FC } from 'react';
 import { Fonts } from '../../../constants/theme';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import styled from 'styled-components';
+import { updateAsideState } from '../../../store/actions';
 import { useDispatch } from 'react-redux';
 
 const LogoContainer = styled.div<{ gridArea: string }>`
@@ -12,7 +12,8 @@ const LogoContainer = styled.div<{ gridArea: string }>`
   display: flex;
   align-items: center;
   margin-left: 1.5rem;
-  border-right: 1px solid ${({ theme }) => theme.palette.foreground.tertiary};
+  /* border-bottom: 1px solid ${({ theme }) =>
+    theme.palette.foreground.tertiary}; */
 `;
 
 const Logo: FC<{ gridArea: string }> = ({ gridArea }) => {
@@ -21,7 +22,7 @@ const Logo: FC<{ gridArea: string }> = ({ gridArea }) => {
     <LogoContainer gridArea={gridArea}>
       <Button
         Icon={GiHamburgerMenu}
-        onClick={() => dispatch({ type: ActionTypes.UPDATE_ASIDE_STATE })}
+        onClick={() => dispatch(updateAsideState())}
       />
       <Link
         to="https://main--cerulean-gingersnap-166563.netdivfy.app/"

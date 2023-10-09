@@ -1,5 +1,9 @@
-import { ActionTypes, CalendarEvent, DraftEvent } from '../../../store/@types';
+import { CalendarEvent, DraftEvent } from '../../../store/@types';
 import { getWeekEvents, postEvent } from '../../../services/events.service';
+import {
+  setWeekEvents,
+  updateEventCreationModalState,
+} from '../../../store/actions';
 
 import { AnyAction } from 'redux';
 import { Dispatch } from 'react';
@@ -72,31 +76,35 @@ export const getDefaultDateTimeValue = (
 };
 
 export const closeModal = (dispatch: Dispatch<AnyAction>) => {
-  dispatch({
-    type: ActionTypes.UPDATE_EVENT_CREATION_MODAL_STATE,
-    payload: {
-      isOpen: false,
-      initialFormValues: {
-        id: 'tmp',
-        title: '',
-        type: 'draft',
-        start: '',
-        end: '',
-        description: '',
+  const initialFormValues = {
+    id: 'tmp',
+    title: '',
+    type: 'draft',
+    start: '',
+    end: '',
+    description: '',
+  } as unknown as DraftEvent;
+
+  dispatch(
+    updateEventCreationModalState(
+      {
+        isOpen: false,
+        initialFormValues,
+        position: {
+          xRate: 0,
+          yRate: 0,
+        },
       },
-    },
-  });
+      false,
+    ),
+  );
 };
 
 export const fetchWeekEvents = async (
   dispatch: Dispatch<AnyAction>,
   week: Week,
 ) => {
-  dispatch({
-    type: ActionTypes.SET_WEEK_EVENTS,
-    payload: await getWeekEvents(week),
-  });
-
+  dispatch(setWeekEvents(await getWeekEvents(week)));
   closeModal(dispatch);
 };
 
