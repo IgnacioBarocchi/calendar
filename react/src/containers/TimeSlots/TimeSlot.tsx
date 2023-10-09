@@ -47,7 +47,10 @@ export const TimeSlot: FC<{
   }, []);
 
   const handleOpenModalClick = (event: MouseEvent) => {
-    dispatch(getActionFrom(event, timeSlotDate));
+    const p = getActionFrom(event, timeSlotDate);
+    console.log('this will populate form data', p);
+
+    dispatch(p);
   };
 
   const handleOpenDetailsModalClick = (

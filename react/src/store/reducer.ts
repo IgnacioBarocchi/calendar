@@ -15,6 +15,7 @@ const initialState = {
   asideIsHidden: false,
   eventCerationModalState: {
     isOpen: false,
+    initialFormValues: {},
   },
   eventDetailsModalState: {
     isOpen: false,

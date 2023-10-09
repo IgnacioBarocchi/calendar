@@ -53,17 +53,17 @@ const EventCreationModal = () => {
     };
 
     dispatchFormData(action);
-    console.log(formData);
   };
 
   const handleSubmit = () => {
     if (!isOpen) return;
+
     try {
       //? get default values from useRef in this release.
       // todo: 2nd release => pick fixed values from dropdown
 
       const calendarEvent: CalendarEvent = {
-        ...formData,
+        ...(Object.keys(formData).length ? formData : initialFormValues),
         start:
           formData?.start instanceof Date
             ? parseDateRecordValue(formData.start)
@@ -85,7 +85,6 @@ const EventCreationModal = () => {
         postCalendarEvent(calendarEvent, dispatch, week);
       }
     } catch (error) {
-      // todo: use toast of something
       console.error(error);
     }
   };
