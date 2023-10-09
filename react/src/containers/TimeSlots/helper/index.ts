@@ -1,19 +1,20 @@
 import { ActionTypes } from '../../../store/@types';
 import { MouseEvent } from 'react';
+import { desktopGeneric } from '../../../constants/theme';
 import { getDefaultDateTimeValue } from '../../../components/EventCreationModal/helper';
 
 export const getActionFrom = (event: MouseEvent, timeSlotDate: Date) => {
-  JSON.stringify({
-    xRate: event.clientX,
-    yRate: event.clientY,
-  });
   return {
     type: ActionTypes.UPDATE_EVENT_CREATION_MODAL_STATE,
     payload: {
       isOpen: true,
       position: {
         xRate: event.clientX,
-        yRate: event.clientY,
+        yRate:
+          event.clientY -
+          (Number(desktopGeneric.size.modalHeight.replace('vh', '')) *
+            window.innerHeight) /
+            100,
       },
       initialFormValues: {
         title: `no title ${timeSlotDate.getHours()}`,

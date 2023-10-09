@@ -10,6 +10,7 @@ import {
   useState,
 } from 'react';
 
+import { desktopGeneric } from '../../constants/theme';
 import { getActionFrom } from './helper';
 import { nanoid } from 'nanoid';
 import { useDispatch } from 'react-redux';
@@ -57,7 +58,11 @@ export const TimeSlot: FC<{
         calendarEventRecord,
         position: {
           xRate: mouseEvent.clientX,
-          yRate: mouseEvent.clientY,
+          yRate:
+            mouseEvent.clientY -
+            (Number(desktopGeneric.size.modalHeight.replace('vh', '')) *
+              window.innerHeight) /
+              100,
         },
       },
     });

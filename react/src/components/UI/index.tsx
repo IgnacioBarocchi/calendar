@@ -188,9 +188,7 @@ export const Dialog = styled.dialog`
   margin: 0;
   padding: 0;
   width: 35vw;
-  height: ${({ theme }) => theme.size.headerHeight};
-  background: red;
-  opacity: 0.5;
+  height: ${({ theme }) => theme.size.modalHeight};
 `;
 
 const DialogHeaderContainer = styled.div.attrs(({ className }) => ({

@@ -19,7 +19,7 @@ export const CalendarHeaderRowGrid = styled.div<{
       return css`
         width: 100vw;
         /* background: red; */
-        opacity: 0.5;
+        /* opacity: 0.5; */
       `;
     }
 

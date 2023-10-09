@@ -21,6 +21,7 @@ export const desktopGeneric = {
     timeCellWidth: '4vw',
     asideWidth: '16vw',
     circleRadius: '2.5rem',
+    modalHeight: '20vh',
     text: {
       l: '1.5rem',
       m: '1rem',
