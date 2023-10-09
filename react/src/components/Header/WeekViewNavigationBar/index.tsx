@@ -1,25 +1,27 @@
-import { Button, Text } from '../../UI';
+import { BsToggleOff, BsToggleOn } from 'react-icons/bs';
+import {
+  Buttons,
+  MonthAndYearContent,
+  NavContainer,
+} from './WeekViewNavigationBarElements';
 import { FC, memo } from 'react';
 import {
   WeekNavigationBarProps,
   shouldWeekViewNavigationBarPreventRender,
 } from './helper';
-import { toggleExperiments, toggleTheme } from '../../../store/actions';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { Fonts } from '../../../constants/theme';
-import { GiDrippingTube } from 'react-icons/gi';
 import Logo from '../Logo';
 import Nav from '../Nav';
-import { NavContainer } from './WeekViewNavigationBarElements';
-import { VscColorMode } from 'react-icons/vsc';
-// import { block } from 'million/react';
-import i18n from '../../../i18n';
-import { t } from 'i18next';
-import { useDispatch } from 'react-redux';
+import { RootState } from '../../../store/@types';
 
 const WeekViewNavigationBar: FC<WeekNavigationBarProps> = memo(
   ({ gridArea, month, year, shouldDisplayLogo }) => {
     const dispatch = useDispatch();
+
+    const experimentalFeatures = useSelector(
+      (state: RootState) => state.experimentalFeatures,
+    );
 
     return (
       <NavContainer gridArea={gridArea}>
@@ -33,37 +35,11 @@ const WeekViewNavigationBar: FC<WeekNavigationBarProps> = memo(
             width: '100%',
           }}
         >
-          <div style={{ display: 'flex' }}>
-            <Text size="l" weight="bold" font={Fonts.SupremeBold}>
-              {month}
-            </Text>
-            <Text size="l" weight="bold" font={Fonts.SupremeBold}>
-              {year}
-            </Text>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <Button
-              label={t('language.label')}
-              size="l"
-              onClick={() => {
-                i18n.changeLanguage(t('language.key'));
-              }}
-            />
-            <Button
-              Icon={VscColorMode}
-              size="l"
-              onClick={() => {
-                dispatch(toggleTheme());
-              }}
-            />
-            <Button
-              Icon={GiDrippingTube}
-              size="l"
-              onClick={() => {
-                dispatch(toggleExperiments());
-              }}
-            />
-          </div>
+          <MonthAndYearContent year={year} month={month} />
+          <Buttons
+            SelectedIcon={experimentalFeatures ? BsToggleOn : BsToggleOff}
+            dispatch={dispatch}
+          />
         </div>
       </NavContainer>
     );
@@ -71,5 +47,8 @@ const WeekViewNavigationBar: FC<WeekNavigationBarProps> = memo(
   shouldWeekViewNavigationBarPreventRender,
 );
 
-// export default block(WeekViewNavigationBar);
 export default WeekViewNavigationBar;
+
+// import { block } from 'million/react';
+// export default block(WeekViewNavigationBar);
+//

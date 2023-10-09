@@ -16,6 +16,7 @@ export interface PressableContentProps extends TextProps {
   safeSpace?: boolean;
   reversed?: boolean;
   border?: boolean;
+  brand?: boolean;
 }
 
 export interface ButtonProps extends PressableContentProps {

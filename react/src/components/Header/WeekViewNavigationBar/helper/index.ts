@@ -3,6 +3,8 @@ export interface WeekNavigationBarProps {
   month: string;
   year: number;
   shouldDisplayLogo: boolean;
+  experimentalFeatures: boolean;
+  mapDispatchToProps: () => void;
 }
 
 export const shouldWeekViewNavigationBarPreventRender = (
@@ -13,5 +15,13 @@ export const shouldWeekViewNavigationBarPreventRender = (
   const yearsAreEqual = oldProps.year === nextProps.year;
   const logoLayoutDidNotChange =
     oldProps.shouldDisplayLogo === nextProps.shouldDisplayLogo;
-  return monthsAreEqual && yearsAreEqual && logoLayoutDidNotChange;
+  const experimentsDidNotChange =
+    oldProps.experimentalFeatures === nextProps.experimentalFeatures;
+
+  return (
+    monthsAreEqual &&
+    yearsAreEqual &&
+    logoLayoutDidNotChange &&
+    experimentsDidNotChange
+  );
 };

@@ -5,7 +5,8 @@ import { PressableContentProps } from './@types';
 export const Pressable = styled.div<PressableContentProps>`
   outline: none;
   background: transparent;
-  color: ${({ theme }) => theme.palette.foreground.primary};
+  color: ${({ theme, brand }) =>
+    brand ? theme.palette.brand : theme.palette.foreground.primary};
   cursor: pointer;
   display: flex;
   flex-direction: ${({ reversed }) => (reversed ? 'row-reverse' : 'row')};

@@ -46,69 +46,42 @@ const CalendarEventView: FC<CalendarEventViewProps> = ({
   ]);
 
   const dateTimeString = useMemo(
-    () => getDateTimeString(calendarEventRecord),
-    [calendarEventRecord.end, calendarEventRecord.start],
+    () => getDateTimeString(calendarEventRecord.start, calendarEventRecord.end),
+    [calendarEventRecord.start, calendarEventRecord.end],
   );
 
-  if (use_experimental_drag_events)
-    return (
-      <DragabbleWrapper grid={[parentWidth, parentHeight / 4]}>
-        <CalendarEventContainer
-          shouldHighlight={
-            shouldHighlight && maxIndex > 1 ? shouldHighlight : false
-          }
-          top={eventTopPosition}
-          index={shouldHighlight ? maxIndex : index}
-          height={Math.max(20, eventHeightPercentage)}
-          onClick={onClick}
-          onMouseOver={() => {
-            if (maxIndex > 1) {
-              debouncedHover(true);
-            }
-          }}
-          onMouseOut={() => {
-            if (maxIndex > 1) {
-              debouncedHover(false);
-            }
-          }}
-        >
-          <Text size="m" font={Fonts.SupremeExtrabold}>
-            {calendarEventRecord.title}
-          </Text>
-          <Text size="m" font={Fonts.SupremeBold}>
-            {dateTimeString}
-          </Text>
-        </CalendarEventContainer>
-      </DragabbleWrapper>
-    );
-
   return (
-    <CalendarEventContainer
-      shouldHighlight={
-        shouldHighlight && maxIndex > 1 ? shouldHighlight : false
-      }
-      top={eventTopPosition}
-      index={shouldHighlight ? maxIndex : index}
-      height={Math.max(20, eventHeightPercentage)}
-      onClick={onClick}
-      onMouseOver={() => {
-        if (maxIndex > 1) {
-          debouncedHover(true);
-        }
-      }}
-      onMouseOut={() => {
-        if (maxIndex > 1) {
-          debouncedHover(false);
-        }
-      }}
+    <DragabbleWrapper
+      grid={[parentWidth, parentHeight / 4]}
+      disabled={!use_experimental_drag_events}
     >
-      <Text size="m" font={Fonts.SupremeExtrabold}>
-        {calendarEventRecord.title}
-      </Text>
-      <Text size="m" font={Fonts.SupremeBold}>
-        {dateTimeString}
-      </Text>
-    </CalendarEventContainer>
+      <CalendarEventContainer
+        shouldHighlight={
+          shouldHighlight && maxIndex > 1 ? shouldHighlight : false
+        }
+        top={eventTopPosition}
+        index={shouldHighlight ? maxIndex : index}
+        height={Math.max(20, eventHeightPercentage)}
+        onClick={onClick}
+        onMouseOver={() => {
+          if (maxIndex > 1) {
+            debouncedHover(true);
+          }
+        }}
+        onMouseOut={() => {
+          if (maxIndex > 1) {
+            debouncedHover(false);
+          }
+        }}
+      >
+        <Text size="m" font={Fonts.SupremeExtrabold}>
+          {calendarEventRecord.title}
+        </Text>
+        <Text size="m" font={Fonts.SupremeBold}>
+          {dateTimeString}
+        </Text>
+      </CalendarEventContainer>
+    </DragabbleWrapper>
   );
 };
 

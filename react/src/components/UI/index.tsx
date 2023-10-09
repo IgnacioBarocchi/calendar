@@ -77,7 +77,8 @@ const PressableContent: FC<PressableContentProps> = ({
 
 export const Button: FC<ButtonProps> = memo(
   (props) => {
-    const { onClick, label, Icon, border, size, reversed, safeSpace } = props;
+    const { onClick, label, Icon, border, size, reversed, safeSpace, brand } =
+      props;
 
     return (
       <Pressable
@@ -88,11 +89,12 @@ export const Button: FC<ButtonProps> = memo(
           pressableInterceptor(event, onClick);
         }}
         /*If you used to conditionally omit it with 
-      border={condition && value}, 
-      pass border={condition ? value : undefined} instead.*/
+        border={condition && value}, 
+        pass border={condition ? value : undefined} instead.*/
 
         border={border ? border : undefined}
         safeSpace={safeSpace ? safeSpace : undefined}
+        brand={brand ? brand : undefined}
       >
         <PressableContent
           label={label}
@@ -104,7 +106,9 @@ export const Button: FC<ButtonProps> = memo(
     );
   },
   (prevProps, nextProps) => {
-    return prevProps.label === nextProps.label;
+    return (
+      prevProps.label === nextProps.label && prevProps.Icon === nextProps.Icon
+    );
   },
 );
 
@@ -206,8 +210,7 @@ const DialogHeaderContainer = styled.div.attrs(({ className }) => ({
 export const DialogHeader: FC<{
   modalId: ModalId;
   close: () => void;
-  dialog: HTMLDialogElement | null;
-}> = ({ modalId, dialog, close }) => {
+}> = ({ modalId, close }) => {
   return (
     <DialogHeaderContainer>
       <Button

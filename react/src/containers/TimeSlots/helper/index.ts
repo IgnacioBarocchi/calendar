@@ -1,4 +1,3 @@
-import { CalendarEvent } from '../../../store/@types';
 import { MouseEvent } from 'react';
 import { getDefaultDateTimeValue } from '../../../components/EventCreationModal/helper';
 import { updateEventCreationModalState } from '../../../store/actions';
@@ -46,9 +45,9 @@ export const getEventCSSValues = (
   return [eventHeightPercentage, eventTopPosition];
 };
 
-export const getDateTimeString = (calendarEventRecord: CalendarEvent) => {
-  const startDate = new Date(calendarEventRecord.start);
-  const endDate = new Date(calendarEventRecord.end);
+export const getDateTimeString = (start: string | Date, end: string | Date) => {
+  const startDate = new Date(start);
+  const endDate = new Date(end);
 
   const startTimeString = `${startDate.getHours()}:${String(
     startDate.getMinutes(),

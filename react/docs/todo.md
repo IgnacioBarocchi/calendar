@@ -1,9 +1,10 @@
-fix modals
-transform helpers into custom redux selectors. eg.: getMonthDatesFrom(week)
-add calendar events that override the starting date
-    check if start !== end.
-add drag and drop calendar event
+bugs: clockhand, event creation.
+
+quality: remove unused dependencies, transform helpers into custom redux selectors. eg.: getMonthDatesFrom(week).
+
+new: update record api, handle click and drag events for the calendar events
+
+nth: add calendar events that override the starting date
+    check if start !== end,
 use html modal features. add modal backdrop
-handle click and drag events for the calendar events
-add update record api
-remove unused dependencies
+

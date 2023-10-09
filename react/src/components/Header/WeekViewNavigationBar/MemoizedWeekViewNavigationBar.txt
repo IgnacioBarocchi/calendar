@@ -1,0 +1,87 @@
+const WeekViewNavigationBar: FC<WeekNavigationBarProps> = ({
+  gridArea,
+  month,
+  year,
+  shouldDisplayLogo,
+  experimentalFeatures,
+  toggleExperiments,
+  toggleTheme,
+}) => {
+  // const dispatch = useDispatch();
+
+  return (
+    <NavContainer gridArea={gridArea}>
+      {shouldDisplayLogo ? <Logo gridArea="" /> : null}
+      <Nav />
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          width: '100%',
+        }}
+      >
+        <div style={{ display: 'flex' }}>
+          <Text size="l" weight="bold" font={Fonts.SupremeBold}>
+            {month}
+          </Text>
+          <Text size="l" weight="bold" font={Fonts.SupremeBold}>
+            {year}
+          </Text>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <Button
+            label={t('language.label')}
+            size="l"
+            onClick={() => {
+              i18n.changeLanguage(t('language.key'));
+            }}
+          />
+          <Button
+            Icon={experimentalFeatures ? BsToggleOn : BsToggleOff}
+            size="l"
+            label="Experiments"
+            onClick={() => {
+              alert(experimentalFeatures);
+              toggleExperiments(); // Call the bound action creator
+            }}
+          />
+          <Button
+            Icon={VscColorMode}
+            size="l"
+            onClick={() => {
+              toggleTheme(); // Call the bound action creator
+            }}
+          />
+        </div>
+      </div>
+    </NavContainer>
+  );
+};
+
+const mapStateToProps = (state: RootState) => ({
+  experimentalFeatures: state.experimentalFeatures,
+});
+
+// const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => {
+//   const payload = toggleExperiments();
+//   return dispatch(payload);
+// };
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleExperiments: () => {
+      dispatch(toggleExperiments());
+    },
+    toggleTheme: () => {
+      dispatch(toggleTheme());
+    },
+  };
+};
+
+const MemoizedWeekViewNavigationBar = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(memo(WeekViewNavigationBar, shouldWeekViewNavigationBarPreventRender));
+
+export default MemoizedWeekViewNavigationBar;
