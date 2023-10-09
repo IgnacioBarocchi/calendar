@@ -14,13 +14,26 @@ const areEqual = (
   prevProps: CalendarHeaderRowProps,
   nextProps: CalendarHeaderRowProps,
 ) => {
+  // const rerender = [
+  //   prevProps.weekWithHolidays,
+  //   nextProps.weekWithHolidays,
+  //   nextProps.asideIsHidden,
+  //   nextProps.asideIsHidden,
+  // ].some((value) => !value);
+  // if (rerender) return false;
+
   if (!prevProps.weekWithHolidays) return false;
   if (!nextProps.weekWithHolidays) return false;
+  if (!nextProps.asideIsHidden) return false;
+  if (!nextProps.asideIsHidden) return false;
 
-  return (
+  const weekDidntChange =
     prevProps.weekWithHolidays[0].date.toDateString() ===
-    nextProps.weekWithHolidays[0].date.toDateString()!
-  );
+    nextProps.weekWithHolidays[0].date.toDateString()!;
+
+  const layoutDidntChange = prevProps.asideIsHidden === nextProps.asideIsHidden;
+  alert(layoutDidntChange);
+  return weekDidntChange || layoutDidntChange;
 };
 
 const CalendarHeaderRow: FC<CalendarHeaderRowProps> = memo(

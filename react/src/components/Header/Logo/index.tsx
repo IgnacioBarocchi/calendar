@@ -7,14 +7,12 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 
-//styled(Button).attrs(({ className }) => ({}))`
-// border-bottom: 1px solid ${({ theme }) => theme.palette.foreground.tertiary};
-
 const LogoContainer = styled.div<{ gridArea: string }>`
   grid-area: ${({ gridArea }) => gridArea};
   display: flex;
   align-items: center;
   margin-left: 1rem;
+  border-right: 1px solid ${({ theme }) => theme.palette.foreground.tertiary};
 `;
 
 const Logo: FC<{ gridArea: string }> = ({ gridArea }) => {

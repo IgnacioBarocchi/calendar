@@ -1,16 +1,11 @@
-import Dropdown, { Button } from '../../UI';
-
 import { ActionTypes } from '../../../store/@types';
+import Dropdown from '../../UI';
 import { EventCreationPanelContainer } from './EventCreationPanelElements';
 import { FC } from 'react';
-import { Fonts } from '../../../constants/theme';
 import { getDefaultDateTimeValue } from '../../EventCreationModal/helper';
 import { useDispatch } from 'react-redux';
-import { useTranslation } from 'react-i18next';
 
 const EventCreationPanel: FC<{ gridArea: string }> = ({ gridArea }) => {
-  const { t, i18n } = useTranslation();
-
   const dispatch = useDispatch();
   const handleOpenModal = () => {
     dispatch({

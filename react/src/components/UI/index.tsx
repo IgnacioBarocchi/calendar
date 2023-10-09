@@ -10,6 +10,7 @@ import { FaAngleDown, FaWindowClose } from 'react-icons/fa';
 import { Fonts, desktopGeneric } from '../../constants/theme';
 import styled, { css, keyframes } from 'styled-components';
 
+import { BsPlusCircleFill } from 'react-icons/bs';
 import { ModalId } from '../Modal';
 import { nanoid } from 'nanoid';
 import pressableInterceptor from '../../lib/pressable';
@@ -241,27 +242,32 @@ export const Dropdown: FC<{
   };
 
   return (
-    <DropdownWrapper>
-      <Button
-        onClick={toggleDropdown}
-        Icon={FaAngleDown}
-        label={'Create'}
-        size="m"
-      />
+    <>
+      <DropdownWrapper>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <Button onClick={toggleDropdown} Icon={BsPlusCircleFill} size="l" />
+          <Button
+            onClick={toggleDropdown}
+            Icon={FaAngleDown}
+            label={'Create'}
+            size="m"
+          />
+        </div>
 
-      <DropdownList isOpen={isOpen}>
-        {options.map((option) => (
-          <li key={nanoid()} style={{ marginBottom: '8px' }}>
-            <Button
-              onClick={() => handleOptionClick(option)}
-              label={option}
-              border={true}
-              size="m"
-            />
-          </li>
-        ))}
-      </DropdownList>
-    </DropdownWrapper>
+        <DropdownList isOpen={isOpen}>
+          {options.map((option) => (
+            <li key={nanoid()} style={{ marginBottom: '8px' }}>
+              <Button
+                onClick={() => handleOptionClick(option)}
+                label={option}
+                border={true}
+                size="m"
+              />
+            </li>
+          ))}
+        </DropdownList>
+      </DropdownWrapper>
+    </>
   );
 };
 

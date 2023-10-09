@@ -8,4 +8,5 @@ export const EventCreationPanelContainer = styled.div<{ gridArea: string }>`
   flex-wrap: wrap;
   flex-direction: column;
   padding: ${({ theme }) => theme.padding.aside};
+  border-right: 1px solid ${({ theme }) => theme.palette.foreground.tertiary};
 `;

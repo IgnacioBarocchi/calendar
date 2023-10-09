@@ -12,14 +12,22 @@ export const CalendarHeaderRowGrid = styled.div<{
 }>`
   display: grid;
   grid-template-columns: ${({ theme }) => theme.size.timeCellWidth} 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  ${({ gridArea, asideIsHidden }) =>
-    asideIsHidden
-      ? css`
-          grid-area: ${gridArea};
-        `
-      : css`
-          width: 100vw;
-        `};
+
+  ${({ gridArea, asideIsHidden }) => {
+    // alert(asideIsHidden);
+    if (asideIsHidden) {
+      return css`
+        width: 100vw;
+        background: red;
+        opacity: 0.5;
+      `;
+    }
+
+    return css`
+      grid-area: ${gridArea};
+      background: green;
+    `;
+  }};
 `;
 
 export const WeekDayDetailsContainer = styled.div`
