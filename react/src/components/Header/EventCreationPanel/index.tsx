@@ -2,6 +2,7 @@ import { ActionTypes } from '../../../store/@types';
 import Dropdown from '../../UI';
 import { EventCreationPanelContainer } from './EventCreationPanelElements';
 import { FC } from 'react';
+import { desktopGeneric } from '../../../constants/theme';
 import { getDefaultDateTimeValue } from '../../EventCreationModal/helper';
 import { useDispatch } from 'react-redux';
 
@@ -12,6 +13,16 @@ const EventCreationPanel: FC<{ gridArea: string }> = ({ gridArea }) => {
       type: ActionTypes.UPDATE_EVENT_CREATION_MODAL_STATE,
       payload: {
         isOpen: true,
+        position: {
+          xRate:
+            (Number(desktopGeneric.size.asideWidth.replace('vw', '')) *
+              window.innerWidth) /
+            100,
+          yRate:
+            (Number(desktopGeneric.size.headerHeight.replace('vh', '')) *
+              window.innerHeight) /
+            100,
+        },
         initialFormValues: {
           title: `no title ${new Date().getHours()}`,
           type: 'draft',
