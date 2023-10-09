@@ -1,6 +1,5 @@
-import { Button, Link } from '../UI';
-
 import { Fonts } from '../../constants/theme';
+import { Link } from '../UI';
 import { TbArrowUpRight } from 'react-icons/tb';
 import styled from 'styled-components';
 
@@ -8,6 +7,7 @@ export const AsideContainer = styled.aside<{ gridArea: string }>`
   background: ${({ theme }) => theme.palette.background.primary};
   grid-area: ${({ gridArea }) => gridArea};
   padding: ${({ theme }) => theme.padding.aside};
+  padding-left: 1.5rem;
   border-right: 1px solid ${({ theme }) => theme.palette.background.secondary};
 `;
 

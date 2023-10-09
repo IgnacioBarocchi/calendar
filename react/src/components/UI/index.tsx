@@ -23,6 +23,7 @@ const fadeIn = keyframes`
     opacity: 1;
   }
 `;
+
 export const Text = styled.span<TextProps>`
   color: ${({ theme, brand }) =>
     theme.palette.foreground[brand ? 'brand' : 'primary']};
@@ -142,8 +143,8 @@ export const CalendarCell = styled.div<{
         display: flex;
         justify-content: center;
         align-items: center;
-        /* border-left: none;*/
-        background: linear-gradient(
+        border-left: none;
+        /* background: linear-gradient(
           ${theme.palette.background.primary},
           ${theme.palette.background.primary}
         )
@@ -158,18 +159,18 @@ export const CalendarCell = styled.div<{
           )
           50% 50% / calc(100% - 2px) calc(100% - 2px) no-repeat,
           linear-gradient(90deg, transparent 0%, ${theme.palette.foreground.tertiary} 100%);
-          border:none;
+          border:none; */
         }
       `,
       'header-column': `
-        background: linear-gradient(
+        /* background: linear-gradient(
           ${theme.palette.background.primary},
           ${theme.palette.background.primary}
         )
         50% 50% / calc(100% - 2px) calc(100% - 2px) no-repeat,
         linear-gradient(90deg, transparent 0%, ${theme.palette.foreground.tertiary} 100%);
         height: 100%;
-        border: none;
+        border: none; */
       `,
       body: `
        border-bottom: none;

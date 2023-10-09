@@ -43,4 +43,5 @@ const Nav = () => {
   );
 };
 
-export default block(Nav);
+// export default block(Nav);
+export default Nav;

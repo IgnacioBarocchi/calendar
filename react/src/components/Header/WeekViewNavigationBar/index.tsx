@@ -3,10 +3,11 @@ import { FC, memo } from 'react';
 
 import { ActionTypes } from '../../../store/@types';
 import { Fonts } from '../../../constants/theme';
+import Logo from '../Logo';
 import Nav from '../Nav';
 import { NavContainer } from './WeekViewNavigationBarElements';
 import { VscColorMode } from 'react-icons/vsc';
-import { block } from 'million/react';
+// import { block } from 'million/react';
 import i18n from '../../../i18n';
 import { t } from 'i18next';
 import { useDispatch } from 'react-redux';
@@ -15,12 +16,14 @@ const WeekViewNavigationBar: FC<{
   gridArea: string;
   month: string;
   year: number;
+  shouldDisplayLogo: boolean;
 }> = memo(
-  ({ gridArea, month, year }) => {
+  ({ gridArea, month, year, shouldDisplayLogo }) => {
     const dispatch = useDispatch();
 
     return (
       <NavContainer gridArea={gridArea}>
+        {shouldDisplayLogo ? <Logo gridArea="" /> : null}
         <Nav />
         <div
           style={{
@@ -60,8 +63,14 @@ const WeekViewNavigationBar: FC<{
       </NavContainer>
     );
   },
-  (oldProps, nextProps) =>
-    oldProps.month === nextProps.month && oldProps.year === nextProps.year,
+  (oldProps, nextProps) => {
+    const monthsAreEqual = oldProps.month === nextProps.month;
+    const yearsAreEqual = oldProps.year === nextProps.year;
+    const logoLayoutDidNotChange =
+      oldProps.shouldDisplayLogo === nextProps.shouldDisplayLogo;
+    return monthsAreEqual && yearsAreEqual && logoLayoutDidNotChange;
+  },
 );
 
-export default block(WeekViewNavigationBar);
+// export default block(WeekViewNavigationBar);
+export default WeekViewNavigationBar;

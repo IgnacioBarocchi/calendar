@@ -25,7 +25,7 @@ export const CalendarHeaderRowGrid = styled.div<{
 
     return css`
       grid-area: ${gridArea};
-      background: green;
+      /* background: green; */
     `;
   }};
 `;

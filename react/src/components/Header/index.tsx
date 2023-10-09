@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { weekWithHolidaysSelector } from '../../store/selectors';
 
-const HeaderContainer = styled.header<{ asideIsHidden: boolan }>`
+const HeaderContainer = styled.header<{ asideIsHidden: boolean }>`
   width: 100%;
   height: ${({ theme }) => theme.size.headerHeight};
   position: fixed;
@@ -24,9 +24,21 @@ const HeaderContainer = styled.header<{ asideIsHidden: boolan }>`
   grid-template-rows: 0.5fr 1fr;
   gap: 0px 0px;
   grid-auto-flow: row;
-  grid-template-areas:
-    'logo navigation'
-    'create-event calendar-header';
+
+  ${({ asideIsHidden }) => {
+    return asideIsHidden
+      ? css`
+          grid-template-columns: 0 100vw;
+          grid-template-areas:
+            'navigation navigation'
+            'calendar-header calendar-header';
+        `
+      : css`
+          grid-template-areas:
+            'logo navigation'
+            'create-event calendar-header';
+        `;
+  }}
 `;
 
 const Header = () => {
@@ -41,13 +53,15 @@ const Header = () => {
 
   return (
     <HeaderContainer asideIsHidden={asideIsHidden}>
-      <Logo gridArea="logo" />
+      {asideIsHidden ? null : <Logo gridArea="logo" />}
+
       <WeekViewNavigationBar
         month={new Intl.DateTimeFormat(t('locale'), { month: 'long' }).format(
           week[6],
         )}
         year={week[6].getFullYear()}
         gridArea={'navigation'}
+        shouldDisplayLogo={asideIsHidden}
       />
       {asideIsHidden ? null : <EventCreationPanel gridArea={'create-event'} />}
       <CalendarHeaderRow
