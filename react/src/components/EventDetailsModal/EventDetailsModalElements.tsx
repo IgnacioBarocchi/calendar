@@ -38,7 +38,12 @@ export const DetailsView: FC<{
           <Text size="m">{record.description}</Text>
         </p>
       )}
-      <Button onClick={handleDeleteEvent} border={true} label="Delete" />
+      <Button
+        onClick={handleDeleteEvent}
+        border={true}
+        label="Delete"
+        safeSpace={true}
+      />
     </DetailsViewContainer>
   );
 };

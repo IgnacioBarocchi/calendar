@@ -21,6 +21,7 @@ export interface RootState {
   selectedTheme: keyof typeof theme;
   eventCerationModalState: EventCerationModalState;
   eventDetailsModalState: EventDetailsModalState;
+  experimentalFeatures: boolean;
 }
 
 export const ActionTypes = {
@@ -35,6 +36,7 @@ export const ActionTypes = {
   SET_WEEK_EVENTS: 'SET_WEEK_EVENTS',
   DELETE_EVENT: 'DELETE_EVENT',
   TOGGLE_THEME: 'TOGGLE_THEME',
+  TOGGLE_EXPERIMENTAL_FEATURES: 'TOGGLE_EXPERIMENTAL_FETURES',
   SET_HOLIDAYS: 'SET_HOLIDAYS',
 } as const;
 

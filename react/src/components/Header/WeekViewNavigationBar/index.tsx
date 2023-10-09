@@ -4,8 +4,10 @@ import {
   WeekNavigationBarProps,
   shouldWeekViewNavigationBarPreventRender,
 } from './helper';
+import { toggleExperiments, toggleTheme } from '../../../store/actions';
 
 import { Fonts } from '../../../constants/theme';
+import { GiDrippingTube } from 'react-icons/gi';
 import Logo from '../Logo';
 import Nav from '../Nav';
 import { NavContainer } from './WeekViewNavigationBarElements';
@@ -13,7 +15,6 @@ import { VscColorMode } from 'react-icons/vsc';
 // import { block } from 'million/react';
 import i18n from '../../../i18n';
 import { t } from 'i18next';
-import { toggleTheme } from '../../../store/actions';
 import { useDispatch } from 'react-redux';
 
 const WeekViewNavigationBar: FC<WeekNavigationBarProps> = memo(
@@ -44,7 +45,6 @@ const WeekViewNavigationBar: FC<WeekNavigationBarProps> = memo(
             <Button
               label={t('language.label')}
               size="l"
-              font={Fonts.SupremeBold}
               onClick={() => {
                 i18n.changeLanguage(t('language.key'));
               }}
@@ -52,9 +52,15 @@ const WeekViewNavigationBar: FC<WeekNavigationBarProps> = memo(
             <Button
               Icon={VscColorMode}
               size="l"
-              font={Fonts.SupremeBold}
               onClick={() => {
                 dispatch(toggleTheme());
+              }}
+            />
+            <Button
+              Icon={GiDrippingTube}
+              size="l"
+              onClick={() => {
+                dispatch(toggleExperiments());
               }}
             />
           </div>

@@ -1,3 +1,4 @@
+import { CalendarEvent } from '../../../store/@types';
 import { MouseEvent } from 'react';
 import { getDefaultDateTimeValue } from '../../../components/EventCreationModal/helper';
 import { updateEventCreationModalState } from '../../../store/actions';
@@ -22,15 +23,6 @@ export const getActionFrom = (event: MouseEvent, timeSlotDate: Date) => {
   );
 };
 
-export const getMapKeyFrom = (date: Date) => {
-  const matchingStartTime = new Date(date);
-  matchingStartTime.setMinutes(0);
-  matchingStartTime.setSeconds(0);
-  matchingStartTime.setMilliseconds(0);
-
-  return matchingStartTime.toISOString();
-};
-
 export const getEventCSSValues = (
   start: Date,
   end: Date,
@@ -52,4 +44,21 @@ export const getEventCSSValues = (
     timeDifferenceMinutes < 0 ? 0 : (timeDifferenceMinutes / 60) * 100;
 
   return [eventHeightPercentage, eventTopPosition];
+};
+
+export const getDateTimeString = (calendarEventRecord: CalendarEvent) => {
+  const startDate = new Date(calendarEventRecord.start);
+  const endDate = new Date(calendarEventRecord.end);
+
+  const startTimeString = `${startDate.getHours()}:${String(
+    startDate.getMinutes(),
+  ).padStart(2, '0')}`;
+
+  const endHours = endDate.getHours();
+
+  const endTimeString = `${endDate.getHours()}:${String(
+    endDate.getMinutes(),
+  ).padStart(2, '0')}${endHours >= 12 ? 'pm' : 'am'}`;
+
+  return `, ${startTimeString} - ${endTimeString}`;
 };

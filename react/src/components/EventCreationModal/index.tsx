@@ -65,11 +65,11 @@ const EventCreationModal = () => {
       const calendarEvent: CalendarEvent = {
         ...formData,
         start:
-          formData.start instanceof Date
+          formData?.start instanceof Date
             ? parseDateRecordValue(formData.start)
             : parseDateRecordValue(initialFormValues.start),
         end:
-          formData.end instanceof Date
+          formData?.end instanceof Date
             ? parseDateRecordValue(formData.end)
             : parseDateRecordValue(initialFormValues.end),
         type: 'upcoming',
@@ -123,7 +123,12 @@ const EventCreationModal = () => {
             handler={handleInputChange}
           />
           <FormFooter>
-            <Button onClick={handleSubmit} label="Save" border={true} />
+            <Button
+              onClick={handleSubmit}
+              label="Save"
+              border={true}
+              safeSpace={true}
+            />
           </FormFooter>
         </FormColumn>
       </Form>

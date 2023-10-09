@@ -1,4 +1,5 @@
 import { CalendarCell, Text } from '../../components/UI';
+import { CalendarEvent, RootState } from '../../store/@types';
 import {
   FC,
   MouseEvent,
@@ -8,12 +9,11 @@ import {
   useRef,
   useState,
 } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { CalendarEvent } from '../../store/@types';
 import { getActionFrom } from './helper';
 import { nanoid } from 'nanoid';
 import { updateEventDetailsModalState } from '../../store/actions';
-import { useDispatch } from 'react-redux';
 
 const CalendarEventView = lazy(() => import('./CalendarEventView'));
 
@@ -21,6 +21,9 @@ export const TimeSlot: FC<{
   timeSlotDate: Date;
   calendarEvents?: CalendarEvent[];
 }> = ({ timeSlotDate, calendarEvents }) => {
+  const experimentalFeatures = useSelector(
+    (state: RootState) => state.experimentalFeatures,
+  );
   const dispatch = useDispatch();
   const [timeSlotPixelsHeight, setTimeSlotPixelsHeight] = useState(0);
   const [timeSlotPixelsWidth, setTimeSlotPixelsWidth] = useState(0);
@@ -80,6 +83,7 @@ export const TimeSlot: FC<{
               key={nanoid()}
             >
               <CalendarEventView
+                use_experimental_drag_events={experimentalFeatures}
                 parentHeight={timeSlotPixelsHeight}
                 parentWidth={timeSlotPixelsWidth}
                 timeSlotDate={timeSlotDate}

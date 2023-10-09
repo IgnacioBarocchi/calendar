@@ -79,6 +79,10 @@ export const toggleTheme = () => ({
   type: ActionTypes.TOGGLE_THEME,
 });
 
+export const toggleExperiments = () => ({
+  type: ActionTypes.TOGGLE_EXPERIMENTAL_FEATURES,
+});
+
 export const setHolidays = (holidays: Holiday[] | undefined) => ({
   type: ActionTypes.SET_HOLIDAYS,
   payload: holidays,

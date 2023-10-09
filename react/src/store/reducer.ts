@@ -11,6 +11,7 @@ const initialState = {
   week: ongoingWeek,
   selectedTheme: 'dark',
   weekEvents: [],
+  experimentalFeatures: false,
   asideIsHidden: false,
   eventCerationModalState: {
     isOpen: false,
@@ -86,6 +87,12 @@ export const reducer = (
       return {
         ...state,
         selectedTheme: state.selectedTheme === 'light' ? 'dark' : 'light',
+      };
+
+    case ActionTypes.TOGGLE_EXPERIMENTAL_FEATURES:
+      return {
+        ...state,
+        experimentalFeatures: !state.experimentalFeatures,
       };
     case ActionTypes.UPDATE_ASIDE_STATE:
       return {
